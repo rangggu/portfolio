@@ -1,6 +1,6 @@
 export default function Main() {
   return (
-    <div className="w-full h-dvh bg-red-300">
+    <div className="w-full h-screen">
       <h1>Main Section</h1>
     </div>
   )

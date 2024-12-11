@@ -5,6 +5,7 @@ import { scrollToSection } from "@/utils/scrollUtils"
 import { useScrollObserver } from "@/hooks/useScrollObserver"
 import Main from "@/components/main/Main"
 import Prologue from "@/components/prologue/Prologue"
+import Background from "@/components/_common/Background"
 
 const sections = [
   { id: "main", component: Main },
@@ -14,9 +15,9 @@ const sections = [
 export default function Page() {
   const sectionsRef = useRef<(HTMLDivElement | null)[]>([])
 
-  // URL 리다이렉트 및 초기 섹션 스크롤
+  // @NOTE: 리다이렉트 설정 및 기존 section으로 스크롤
   useEffect(() => {
-    const targetId = window.location.pathname.slice(1) || "main" // 현재 경로 추출
+    const targetId = window.location.pathname.slice(1) || "main" // 기존 경로 추출
     if (window.location.pathname !== "/") {
       window.history.replaceState(null, "", "/")
     }
@@ -24,7 +25,7 @@ export default function Page() {
     scrollToSection(targetId, sectionsRef.current)
   }, [])
 
-  // 스크롤 이벤트로 URL 업데이트
+  // @NOTE: 해당 section이 표시될 때 마다 url 업데이트
   useScrollObserver(sectionsRef.current, (newUrl) => {
     if (window.location.pathname !== newUrl) {
       window.history.replaceState(null, "", newUrl)
@@ -32,16 +33,14 @@ export default function Page() {
   })
 
   return (
-    <main>
+    <main className="relative">
+      <Background />
       {sections.map(({ id, component: Component }, index) => (
         <section
           key={id}
           ref={(el: any) => (sectionsRef.current[index] = el)}
           id={id}
-          style={{
-            height: "100vh",
-            width: "100%",
-          }}
+          className="w-full h-screen"
         >
           <Component />
         </section>
