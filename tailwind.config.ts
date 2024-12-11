@@ -8,7 +8,27 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {},
+      colors: {
+        yellow500: "#FEB925",
+        gray300: "#AFAFAF",
+        gray700: "#6B6B6B",
+      },
+      fontSize: {
+        h1: ["72px", "135%"],
+        h2: ["60px", "135%"],
+        h3: ["48px", "135%"],
+        title1: ["44px", "135%"],
+        title2: ["42px", "135%"],
+        title3: ["40px", "135%"],
+        title4: ["38px", "135%"],
+        subtitle1: ["36px", "135%"],
+        subtitle2: ["32px", "135%"],
+        subtitle3: ["28px", "135%"],
+        body1: ["20px", "150%"],
+        body2: ["18px", "150%"],
+        body3: ["16px", "150%"],
+        caption1: ["16px", "135%"],
+      },
     },
   },
   plugins: [],
