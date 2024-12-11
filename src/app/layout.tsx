@@ -4,6 +4,9 @@ import "@/styles/globals.css"
 export const metadata: Metadata = {
   title: "Lily Portfolio",
   description: "프론트엔드 개발자 김규리를 소개해요.",
+  icons: {
+    icon: "/favicons/favicon.ico",
+  },
 }
 
 export default function RootLayout({
