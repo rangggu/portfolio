@@ -1,6 +1,9 @@
 import { useEffect } from "react"
 
-export const useScrollObserver = (sectionsRef: (HTMLDivElement | null)[], updateUrl: (newUrl: string) => void) => {
+export const useScrollObserver = (
+  sectionsRef: (HTMLDivElement | null)[],
+  updateUrl: (newUrl: string) => void,
+) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
