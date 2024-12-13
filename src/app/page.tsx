@@ -1,11 +1,13 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { scrollToSection } from "@/utils/scrollUtils"
 import { useScrollObserver } from "@/hooks/useScrollObserver"
 import Main from "@/components/main/Main"
 import Prologue from "@/components/prologue/Prologue"
 import Background from "@/components/_common/Background"
+import Header from "@/components/_common/Header"
+import { TAB } from "@/types"
 
 const sections = [
   { id: "main", component: Main },
@@ -13,38 +15,43 @@ const sections = [
 ]
 
 export default function Page() {
+  const [tab, setTab] = useState<TAB>(TAB.MAIN)
   const sectionsRef = useRef<(HTMLDivElement | null)[]>([])
 
   // @NOTE: 리다이렉트 설정 및 기존 section으로 스크롤
   useEffect(() => {
-    const targetId = window.location.pathname.slice(1) || "main" // 기존 경로 추출
+    const sectionId = (window.location.pathname.slice(1) as TAB) || TAB.MAIN // 기존 경로 추출
     if (window.location.pathname !== "/") {
       window.history.replaceState(null, "", "/")
     }
-
-    scrollToSection(targetId, sectionsRef.current)
+    scrollToSection(sectionId, sectionsRef.current)
+    setTab(sectionId)
   }, [])
 
   // @NOTE: 해당 section이 표시될 때 마다 url 업데이트
-  useScrollObserver(sectionsRef.current, (newUrl) => {
+  useScrollObserver(sectionsRef.current, (sectionId, newUrl) => {
     if (window.location.pathname !== newUrl) {
       window.history.replaceState(null, "", newUrl)
+      setTab(sectionId)
     }
   })
 
   return (
-    <main className="relative">
+    <main className="relative text-white">
       <Background />
-      {sections.map(({ id, component: Component }, index) => (
-        <section
-          key={id}
-          ref={(el: any) => (sectionsRef.current[index] = el)}
-          id={id}
-          className="w-full h-screen"
-        >
-          <Component />
-        </section>
-      ))}
+      <div className="w-full h-screen">
+        <Header tab={tab} />
+        {sections.map(({ id, component: Component }, index) => (
+          <section
+            key={id}
+            ref={(el: any) => (sectionsRef.current[index] = el)}
+            id={id}
+            className="relative w-full h-screen px-10"
+          >
+            <Component />
+          </section>
+        ))}
+      </div>
     </main>
   )
 }

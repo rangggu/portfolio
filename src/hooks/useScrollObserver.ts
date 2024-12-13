@@ -1,17 +1,18 @@
+import { TAB } from "@/types"
 import { useEffect } from "react"
 
 export const useScrollObserver = (
   sectionsRef: (HTMLDivElement | null)[],
-  updateUrl: (newUrl: string) => void,
+  updateUrl: (sectionId: TAB, newUrl: string) => void,
 ) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const sectionId = entry.target.id
-            const newUrl = sectionId === "main" ? "/" : `/${sectionId}`
-            updateUrl(newUrl)
+            const sectionId = entry.target.id as TAB
+            const newUrl = sectionId === TAB.MAIN ? "/" : `/${sectionId}`
+            updateUrl(sectionId, newUrl)
           }
         })
       },

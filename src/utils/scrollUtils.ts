@@ -1,7 +1,11 @@
 export const scrollToSection = (sectionId: string, sectionsRef: (HTMLDivElement | null)[]) => {
   const targetSection = sectionsRef.find((section) => section?.id === sectionId)
   if (targetSection) {
-    targetSection.scrollIntoView({ behavior: "smooth" })
+    const sectionTop = targetSection.getBoundingClientRect().top + window.pageYOffset - 80
+    window.scrollTo({
+      top: sectionTop,
+      behavior: "smooth",
+    })
   }
 }
 
