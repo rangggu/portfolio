@@ -31,7 +31,7 @@ export default function Page() {
   }, [])
 
   // @NOTE: 해당 section이 표시될 때 마다 url 업데이트
-  useScrollObserver(sectionsRef.current, (sectionId, newUrl) => {
+  useScrollObserver((sectionId, newUrl) => {
     if (window.location.pathname !== newUrl) {
       window.history.replaceState(null, "", newUrl)
       setTab(sectionId)
@@ -46,8 +46,8 @@ export default function Page() {
         {sections.map(({ id, component: Component }, index) => (
           <section
             key={id}
-            ref={(el: any) => (sectionsRef.current[index] = el)}
             id={id}
+            ref={(el: any) => (sectionsRef.current[index] = el)}
             className="relative w-full h-screen px-20"
           >
             <Component />

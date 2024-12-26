@@ -1,10 +1,10 @@
-import { TAB } from "@/types"
 import { useEffect } from "react"
+import { useSectionsContext } from "@/contexts/SectionContext"
+import { TAB } from "@/types"
 
-export const useScrollObserver = (
-  sectionsRef: (HTMLDivElement | null)[],
-  updateUrl: (sectionId: TAB, newUrl: string) => void,
-) => {
+export const useScrollObserver = (updateUrl: (sectionId: TAB, newUrl: string) => void) => {
+  const { sectionsRef } = useSectionsContext() // Context에서 sectionsRef 가져오기
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -23,12 +23,12 @@ export const useScrollObserver = (
       },
     )
 
-    sectionsRef.forEach((section) => {
+    sectionsRef.current.forEach((section) => {
       if (section) observer.observe(section)
     })
 
     return () => {
-      sectionsRef.forEach((section) => {
+      sectionsRef.current.forEach((section) => {
         if (section) observer.unobserve(section)
       })
     }
