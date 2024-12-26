@@ -13,6 +13,7 @@ export default {
       },
       colors: {
         yellow500: "#FEB925",
+        gray100: "#dadada",
         gray300: "#AFAFAF",
         gray700: "#6B6B6B",
         blue700: "#011B2F",
