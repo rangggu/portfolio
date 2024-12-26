@@ -1,34 +1,25 @@
+import { useSectionsContext } from "@/contexts/SectionContext"
 import { TAB } from "@/types"
 import { cn } from "@/utils/commonUtils"
-import { scrollToSection } from "@/utils/scrollUtils"
-import { ForwardedRef, forwardRef } from "react"
+import { memo } from "react"
 
 interface HeaderProps {
   tab: TAB
 }
 
-export default forwardRef(function Header(
-  props: HeaderProps,
-  ref: ForwardedRef<(HTMLDivElement | null)[]>,
-) {
+export default memo(function Header(props: HeaderProps) {
   const { tab } = props
+  const { scrollToSection } = useSectionsContext()
 
   // @NOTE: 각 탭 정의
   const tabs = [
-    { label: "PROLOGUE", section: "prologue", activeTab: TAB.PROLOGUE },
-    { label: "PROFILE", section: "profile", activeTab: TAB.PROFILE },
-    { label: "SKILL", section: "skill", activeTab: TAB.SKILL },
-    { label: "CAREER", section: "career", activeTab: TAB.CAREER },
-    { label: "PROJECT", section: "project", activeTab: TAB.PROJECT },
-    { label: "ABOUT ME", section: "aboutme", activeTab: TAB.ABOUTME },
+    { label: "PROLOGUE", activeTab: TAB.PROLOGUE },
+    { label: "PROFILE", activeTab: TAB.PROFILE },
+    { label: "SKILL", activeTab: TAB.SKILL },
+    { label: "CAREER", activeTab: TAB.CAREER },
+    { label: "PROJECT", activeTab: TAB.PROJECT },
+    { label: "ABOUT ME", activeTab: TAB.ABOUTME },
   ]
-
-  // @NOTE: 공통 클릭 핸들러 함수
-  const handleScroll = (section: string) => {
-    if (ref && "current" in ref && ref.current) {
-      scrollToSection(section, ref.current)
-    }
-  }
 
   return (
     <header
@@ -39,11 +30,11 @@ export default forwardRef(function Header(
           : "opacity-100 bg-blue700",
       )}
     >
-      {tabs.map(({ label, section, activeTab }) => (
+      {tabs.map(({ label, activeTab }) => (
         <button
-          key={section}
+          key={activeTab}
           className={cn("text-gray700 font-semibold", tab === activeTab && "text-white")}
-          onClick={() => handleScroll(section)}
+          onClick={() => scrollToSection(activeTab)}
         >
           {label}
         </button>

@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { scrollToSection } from "@/utils/scrollUtils"
 import { useScrollObserver } from "@/hooks/useScrollObserver"
 import Main from "@/components/main/Main"
 import Prologue from "@/components/prologue/Prologue"
@@ -9,6 +8,7 @@ import Background from "@/components/_common/Background"
 import Header from "@/components/_common/Header"
 import { TAB } from "@/types"
 import Profile from "@/components/profile/Profile"
+import { useSectionsContext } from "@/contexts/SectionContext"
 
 const sections = [
   { id: "main", component: Main },
@@ -18,15 +18,15 @@ const sections = [
 
 export default function Page() {
   const [tab, setTab] = useState<TAB>(TAB.MAIN)
-  const sectionsRef = useRef<(HTMLDivElement | null)[]>([])
+  const { sectionsRef, scrollToSection } = useSectionsContext()
 
-  // @NOTE: 리다이렉트 설정 및 기존 section으로 스크롤
+  // @NOTE: 리다이렉트시 기존 section으로 스크롤
   useEffect(() => {
     const sectionId = (window.location.pathname.slice(1) as TAB) || TAB.MAIN // 기존 경로 추출
     if (window.location.pathname !== "/") {
       window.history.replaceState(null, "", "/")
     }
-    scrollToSection(sectionId, sectionsRef.current)
+    scrollToSection(sectionId)
     setTab(sectionId)
   }, [])
 
@@ -42,7 +42,7 @@ export default function Page() {
     <main className="relative text-white">
       <Background />
       <div className="w-full h-screen">
-        <Header tab={tab} ref={sectionsRef} />
+        <Header tab={tab} />
         {sections.map(({ id, component: Component }, index) => (
           <section
             key={id}

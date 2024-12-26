@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import localFont from "next/font/local"
 import "@/styles/globals.css"
 import { cn } from "@/utils/commonUtils"
+import { SectionsProvider } from "@/contexts/SectionContext"
 
 const pretendard = localFont({
   src: "../fonts/PretendardVariable.woff2",
@@ -25,7 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={cn("font-pretendard", pretendard.variable)}>{children}</body>
+      <body className={cn("font-pretendard", pretendard.variable)}>
+        <SectionsProvider>{children}</SectionsProvider>
+      </body>
     </html>
   )
 }
