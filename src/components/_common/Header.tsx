@@ -1,13 +1,34 @@
 import { TAB } from "@/types"
 import { cn } from "@/utils/commonUtils"
-import { memo } from "react"
+import { scrollToSection } from "@/utils/scrollUtils"
+import { ForwardedRef, forwardRef } from "react"
 
 interface HeaderProps {
   tab: TAB
 }
 
-export default memo(function Header(props: HeaderProps) {
+export default forwardRef(function Header(
+  props: HeaderProps,
+  ref: ForwardedRef<(HTMLDivElement | null)[]>,
+) {
   const { tab } = props
+
+  // @NOTE: 각 탭 정의
+  const tabs = [
+    { label: "PROLOGUE", section: "prologue", activeTab: TAB.PROLOGUE },
+    { label: "PROFILE", section: "profile", activeTab: TAB.PROFILE },
+    { label: "SKILL", section: "skill", activeTab: TAB.SKILL },
+    { label: "CAREER", section: "career", activeTab: TAB.CAREER },
+    { label: "PROJECT", section: "project", activeTab: TAB.PROJECT },
+    { label: "ABOUT ME", section: "aboutme", activeTab: TAB.ABOUTME },
+  ]
+
+  // @NOTE: 공통 클릭 핸들러 함수
+  const handleScroll = (section: string) => {
+    if (ref && "current" in ref && ref.current) {
+      scrollToSection(section, ref.current)
+    }
+  }
 
   return (
     <header
@@ -18,12 +39,15 @@ export default memo(function Header(props: HeaderProps) {
           : "opacity-100 bg-blue700",
       )}
     >
-      <span>PROLOGUE</span>
-      <span>PROFILE</span>
-      <span>SKILL</span>
-      <span>CAREER</span>
-      <span>PROJECT</span>
-      <span>ABOUT ME</span>
+      {tabs.map(({ label, section, activeTab }) => (
+        <button
+          key={section}
+          className={cn("text-gray700 font-semibold", tab === activeTab && "text-white")}
+          onClick={() => handleScroll(section)}
+        >
+          {label}
+        </button>
+      ))}
     </header>
   )
 })

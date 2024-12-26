@@ -8,10 +8,12 @@ import Prologue from "@/components/prologue/Prologue"
 import Background from "@/components/_common/Background"
 import Header from "@/components/_common/Header"
 import { TAB } from "@/types"
+import Profile from "@/components/profile/Profile"
 
 const sections = [
   { id: "main", component: Main },
   { id: "prologue", component: Prologue },
+  { id: "profile", component: Profile },
 ]
 
 export default function Page() {
@@ -40,7 +42,7 @@ export default function Page() {
     <main className="relative text-white">
       <Background />
       <div className="w-full h-screen">
-        <Header tab={tab} />
+        <Header tab={tab} ref={sectionsRef} />
         {sections.map(({ id, component: Component }, index) => (
           <section
             key={id}
