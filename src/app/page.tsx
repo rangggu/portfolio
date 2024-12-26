@@ -46,7 +46,7 @@ export default function Page() {
             key={id}
             ref={(el: any) => (sectionsRef.current[index] = el)}
             id={id}
-            className="relative w-full h-screen px-10"
+            className="relative w-full h-screen px-20"
           >
             <Component />
           </section>
