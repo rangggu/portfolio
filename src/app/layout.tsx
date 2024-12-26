@@ -1,5 +1,14 @@
 import type { Metadata } from "next"
+import localFont from "next/font/local"
 import "@/styles/globals.css"
+import { cn } from "@/utils/commonUtils"
+
+const pretendard = localFont({
+  src: "../fonts/PretendardVariable.woff2",
+  display: "swap",
+  weight: "45 920",
+  variable: "--font-pretendard",
+})
 
 export const metadata: Metadata = {
   title: "Lily Portfolio",
@@ -16,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body className={cn("font-pretendard", pretendard.variable)}>{children}</body>
     </html>
   )
 }

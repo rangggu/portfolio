@@ -8,10 +8,14 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        pretendard: ["var(--font-pretendard)"],
+      },
       colors: {
         yellow500: "#FEB925",
         gray300: "#AFAFAF",
         gray700: "#6B6B6B",
+        blue700: "#011B2F",
       },
       fontSize: {
         h1: ["72px", "135%"],
