@@ -1,8 +1,16 @@
+import { useAnimation } from "@/hooks/useAnimation"
+import { useSectionVisibility } from "@/hooks/useSectionVisibility"
 import { useTyping } from "@/hooks/useTyping"
-import { mainHeadingVariants } from "@/styles/animations/variants"
+import { bottomButtonVariants, mainHeadingVariants } from "@/styles/animations/variants"
+import { TAB } from "@/types"
+import { cn } from "@/utils/commonUtils"
 import { motion } from "framer-motion"
+import { RiArrowDownDoubleFill } from "react-icons/ri"
 
 export default function Main() {
+  const { isInView } = useSectionVisibility(TAB.MAIN)
+  const bottomButtonAnimation = useAnimation(isInView, bottomButtonVariants)
+
   return (
     <div className="relative flex items-center justify-center w-full h-full py-20">
       <div className="absolute top-20 left-0 flex items-center justify-between w-full">
@@ -23,6 +31,21 @@ export default function Main() {
           <motion.span variants={mainHeadingVariants(2)}>김규리입니다.</motion.span>
         </motion.h1>
       </div>
+      <motion.div
+        {...bottomButtonAnimation}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 w-12 h-12 text-gray300"
+        transition={{
+          type: "spring",
+          bounce: 0.25,
+        }}
+      >
+        <RiArrowDownDoubleFill
+          className={cn(
+            "w-full h-full  transition-all duration-300",
+            isInView ? "opacity-100" : "opacity-0",
+          )}
+        />
+      </motion.div>
     </div>
   )
 }

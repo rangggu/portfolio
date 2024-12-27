@@ -73,3 +73,18 @@ export const buttonVariants = (delay = 0) => {
     },
   }
 }
+
+export const bottomButtonVariants = {
+  initial: { y: 0 },
+  animate: {
+    y: ["-10px", "10px", "-10px"], // 바운스 효과
+    transition: {
+      y: {
+        duration: 1.3, // 애니메이션 전체 시간
+        repeat: Infinity, // 무한 반복
+        repeatType: "loop", // 반복되는 애니메이션 방식
+        ease: "easeInOut", // 애니메이션의 easing 효과
+      },
+    },
+  },
+}
