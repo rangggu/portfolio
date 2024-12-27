@@ -1,16 +1,3 @@
 export default function Profile() {
-  return (
-    <div className="w-full h-screen">
-      <h1>Profile Section</h1>
-      <h1>Profile Section</h1>
-      <h1>Profile Section</h1>
-      <h1>Profile Section</h1>
-      <h1>Profile Section</h1>
-      <h1>Profile Section</h1>
-      <h1>Profile Section</h1>
-      <h1>Profile Section</h1>
-      <h1>Profile Section</h1>
-      <h1>Profile Section</h1>
-    </div>
-  )
+  return <div className="flex flex-col items-center justify-center w-full h-full"></div>
 }

@@ -1,9 +1,9 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { useScrollObserver } from "@/hooks/useScrollObserver"
-import Main from "@/components/main/Main"
-import Prologue from "@/components/prologue/Prologue"
+import Main from "@/components/main"
+import Prologue from "@/components/prologue"
 import Background from "@/components/_common/Background"
 import Header from "@/components/_common/Header"
 import { TAB } from "@/types"
