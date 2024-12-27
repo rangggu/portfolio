@@ -38,7 +38,7 @@ export const childVariants = {
   animate: { opacity: 1, y: 0 },
 }
 
-export const moreButtonVariants = (delay = 0) => {
+export const buttonVariants = (delay = 0) => {
   return {
     initial: { opacity: 0 },
     animate: {
