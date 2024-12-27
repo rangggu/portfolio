@@ -7,7 +7,7 @@ import Prologue from "@/components/prologue"
 import Background from "@/components/_common/Background"
 import Header from "@/components/_common/Header"
 import { TAB } from "@/types"
-import Profile from "@/components/profile/Profile"
+import Profile from "@/components/profile"
 import { useSectionsContext } from "@/contexts/SectionContext"
 
 const sections = [

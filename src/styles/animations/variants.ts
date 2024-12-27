@@ -33,6 +33,30 @@ export const prologuePgVariants = {
   },
 }
 
+export const profileInfoVariants = {
+  initial: { opacity: 0, x: -40, y: 0 },
+  animate: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: {
+      opacity: { duration: 0.5 },
+    },
+  },
+}
+
+export const profileDescVariants = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    transition: {
+      opacity: { duration: 0.5 },
+      staggerChildren: 0.5,
+      delayChildren: 0.7,
+    },
+  },
+}
+
 export const childVariants = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },

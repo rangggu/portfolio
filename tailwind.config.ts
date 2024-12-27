@@ -29,6 +29,7 @@ export default {
         subtitle1: ["36px", "135%"],
         subtitle2: ["32px", "135%"],
         subtitle3: ["28px", "135%"],
+        subtitle4: ["24px", "135%"],
         body1: ["20px", "150%"],
         body2: ["18px", "150%"],
         body3: ["16px", "150%"],

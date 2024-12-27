@@ -62,6 +62,8 @@ export default function Paragraph({ isVisible }: Props) {
         </motion.p>
       </motion.div>
       <TextButton
+        right={12}
+        bottom={12}
         text="more"
         delay={4}
         isVisible={isVisible}
