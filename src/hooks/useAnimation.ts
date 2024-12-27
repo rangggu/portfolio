@@ -1,6 +1,4 @@
 import { useMemo } from "react"
-import { useSectionVisibility } from "@/hooks/useSectionVisibility"
-import { TAB } from "@/types"
 
 export const useAnimation = (isVisible: boolean, variants: any) => {
   return useMemo(
