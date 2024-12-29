@@ -24,7 +24,7 @@ export const SectionsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const scrollToSection = (sectionId: TAB) => {
     const targetSection = sectionsRef.current.find((section) => section?.id === sectionId)
     if (targetSection) {
-      const sectionTop = targetSection.getBoundingClientRect().top + window.pageYOffset - 80
+      const sectionTop = targetSection.getBoundingClientRect().top + window.pageYOffset
       window.scrollTo({
         top: sectionTop,
         behavior: "smooth",
