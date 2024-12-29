@@ -9,11 +9,13 @@ import Header from "@/components/_common/Header"
 import { TAB } from "@/types"
 import Profile from "@/components/profile"
 import { useSectionsContext } from "@/contexts/SectionContext"
+import Skill from "@/components/skill"
 
 const sections = [
   { id: "main", component: Main },
   { id: "prologue", component: Prologue },
   { id: "profile", component: Profile },
+  { id: "skill", component: Skill },
 ]
 
 export default function Page() {
