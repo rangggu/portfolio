@@ -65,7 +65,7 @@ export default function Paragraph({ isVisible }: Props) {
         right={12}
         bottom={12}
         text="more"
-        delay={4}
+        delay={2.3}
         isVisible={isVisible}
         onClick={() => scrollToSection(TAB.ABOUTME)}
       />

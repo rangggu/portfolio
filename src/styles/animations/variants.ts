@@ -13,7 +13,7 @@ export const prologueHeadingVariants = {
   animate: {
     opacity: 1,
     transition: {
-      staggerChildren: 1,
+      staggerChildren: 0.4,
       delayChildren: 0.5,
     },
   },
@@ -26,9 +26,9 @@ export const prologuePgVariants = {
     backgroundColor: "rgba(0, 0, 0, 0.15)",
     transition: {
       opacity: { duration: 0.5 },
-      backgroundColor: { duration: 0.5, delay: 1.6 },
-      staggerChildren: 0.4,
-      delayChildren: 1.6,
+      backgroundColor: { duration: 0.2, delay: 1.2 },
+      staggerChildren: 0.2,
+      delayChildren: 1,
     },
   },
 }
@@ -60,6 +60,17 @@ export const profileDescVariants = {
 export const skillLabelVariants = {
   initial: { opacity: 0, x: -15 },
   animate: { opacity: 1, x: 0 },
+}
+
+export const skillVariants = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    transition: {
+      opacity: { duration: 0.4 },
+      staggerChildren: 0.2,
+    },
+  },
 }
 
 export const childVariants = {
