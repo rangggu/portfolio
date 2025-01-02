@@ -22,13 +22,13 @@ export default function Language() {
         />
         <IconButton
           disabled={true}
-          src="/images/icon/javascript.png"
+          src="/images/icon/js.png"
           text="JavaScript"
           desc="ES6+의 최신 문법을 활용하여 더 간결하고 효율적인 JavaScript 코드를 작성할 수 있습니다."
         />
         <IconButton
           disabled={true}
-          src="/images/icon/typescript.png"
+          src="/images/icon/ts.png"
           text="TypeScript"
           desc="JavaScript의 동적 타이핑 이슈를 보완할 수 있는 TypeScript의 정적 타입 시스템에 대해 이해하고 있으며, 
             이를 통해 안정적인 코드를 작성할 수 있습니다."

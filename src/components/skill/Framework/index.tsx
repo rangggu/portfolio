@@ -36,7 +36,7 @@ export default function Framework() {
         />
         <IconButton
           disabled={true}
-          src="/images/icon/nodejs.png"
+          src="/images/icon/node.png"
           text="Node.js"
           desc="Node.js 프로젝트를 파악하여 소스코드를 효율적으로 개선할 수 있습니다."
         />
