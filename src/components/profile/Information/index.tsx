@@ -26,10 +26,11 @@ export default function Information({ isVisible }: Props) {
       </motion.div>
       <motion.div className="relative w-[290px] h-[350px] rounded-3xl overflow-hidden">
         <Image
+          className="object-cover"
           src="/images/headshot.jpg"
           alt="프로필 사진"
-          layout="fill"
-          objectFit="cover"
+          width={290}
+          height={350}
           quality={100}
           priority
         />
