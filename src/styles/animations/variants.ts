@@ -73,6 +73,17 @@ export const skillVariants = {
   },
 }
 
+export const careerVariants = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    transition: {
+      opacity: { duration: 0.4 },
+      staggerChildren: 0.4,
+    },
+  },
+}
+
 export const childVariants = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },

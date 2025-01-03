@@ -33,6 +33,7 @@ export default {
         body1: ["20px", "150%"],
         body2: ["18px", "150%"],
         body3: ["16px", "150%"],
+        body4: ["14px", "150%"],
         caption1: ["16px", "135%"],
       },
     },

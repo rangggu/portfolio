@@ -10,12 +10,14 @@ import { TAB } from "@/types"
 import Profile from "@/components/profile"
 import { useSectionsContext } from "@/contexts/SectionContext"
 import Skill from "@/components/skill"
+import Career from "@/components/career"
 
 const sections = [
   { id: "main", component: Main },
   { id: "prologue", component: Prologue },
   { id: "profile", component: Profile },
   { id: "skill", component: Skill },
+  { id: "career", component: Career },
 ]
 
 export default function Page() {
