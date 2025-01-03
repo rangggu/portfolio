@@ -1,18 +1,18 @@
 import { useAnimation } from "@/hooks/useAnimation"
-import { profileInfoVariants } from "@/styles/animations/variants"
 import Image from "next/image"
 import Link from "next/link"
 import { BsFillTelephoneFill } from "react-icons/bs"
 import { FaGithub } from "react-icons/fa"
 import { IoIosSend } from "react-icons/io"
 import { motion } from "framer-motion"
+import { infoVariants } from "@/styles/animations/profile"
 
 interface Props {
   isVisible: boolean
 }
 
 export default function Information({ isVisible }: Props) {
-  const infoAnimation = useAnimation(isVisible, profileInfoVariants)
+  const infoAnimation = useAnimation(isVisible, infoVariants)
 
   return (
     <motion.div

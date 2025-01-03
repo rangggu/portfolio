@@ -1,4 +1,4 @@
-import { skillLabelVariants } from "@/styles/animations/variants"
+import { labelVariants } from "@/styles/animations/skill"
 import { cn } from "@/utils/commonUtils"
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
@@ -27,7 +27,7 @@ export default function IconButton({ src, text, desc }: Props) {
           <motion.label
             key={desc}
             className="absolute -bottom-[120%] left-0 flex items-center w-auto py-1.5 pl-3 text-gray300 font-light whitespace-nowrap"
-            variants={skillLabelVariants}
+            variants={labelVariants}
             initial="initial"
             animate="animate"
             exit="exit"

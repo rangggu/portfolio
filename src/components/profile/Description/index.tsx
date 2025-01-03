@@ -1,9 +1,10 @@
 import { TAB } from "@/types"
 import { useSectionsContext } from "@/contexts/SectionContext"
-import { childVariants, profileDescVariants } from "@/styles/animations/variants"
+import { childVariants } from "@/styles/animations/_common"
 import { useAnimation } from "@/hooks/useAnimation"
 import { motion } from "framer-motion"
 import MoreButton from "@/components/_common/MoreButton"
+import { descVariants } from "@/styles/animations/profile"
 
 interface Props {
   isVisible: boolean
@@ -11,7 +12,7 @@ interface Props {
 
 export default function Description({ isVisible }: Props) {
   const { scrollToSection } = useSectionsContext()
-  const descAnimation = useAnimation(isVisible, profileDescVariants)
+  const descAnimation = useAnimation(isVisible, descVariants)
 
   return (
     <motion.div {...descAnimation} className="flex flex-col justify-between w-[860px] h-[88%] py-1">

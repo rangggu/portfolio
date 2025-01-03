@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import Task from "./Task"
 import Skill from "./Skill"
 import Project from "./Project"
-import { childVariants } from "@/styles/animations/variants"
+import { childVariants } from "@/styles/animations/_common"
 
 export default function Description() {
   return (

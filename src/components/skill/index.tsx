@@ -1,13 +1,13 @@
 import { TAB } from "@/types"
 import { useSectionVisibility } from "@/hooks/useSectionVisibility"
 import { useAnimation } from "@/hooks/useAnimation"
-import { skillVariants } from "@/styles/animations/variants"
 import { motion } from "framer-motion"
 import Language from "./Language"
 import Framework from "./Framework"
 import Library from "./Library"
 import Style from "./Style"
 import Tool from "./Tool"
+import { skillVariants } from "@/styles/animations/skill"
 
 export default function Skill() {
   const { isVisible } = useSectionVisibility(TAB.SKILL)

@@ -1,7 +1,4 @@
-import { skillLabelVariants } from "@/styles/animations/variants"
 import { cn } from "@/utils/commonUtils"
-import { motion, AnimatePresence } from "framer-motion"
-import { useState } from "react"
 
 interface Props {
   src: string

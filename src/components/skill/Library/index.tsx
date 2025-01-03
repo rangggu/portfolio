@@ -1,4 +1,4 @@
-import { childVariants } from "@/styles/animations/variants"
+import { childVariants } from "@/styles/animations/_common"
 import { motion } from "framer-motion"
 import IconButton from "../IconButton"
 

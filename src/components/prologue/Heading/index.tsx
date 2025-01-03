@@ -1,5 +1,6 @@
 import { useAnimation } from "@/hooks/useAnimation"
-import { childVariants, prologueHeadingVariants } from "@/styles/animations/variants"
+import { headingVariants } from "@/styles/animations/prologue"
+import { childVariants } from "@/styles/animations/_common"
 import { motion } from "framer-motion"
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
 }
 
 export default function Heading({ isVisible }: Props) {
-  const headingAnimation = useAnimation(isVisible, prologueHeadingVariants)
+  const headingAnimation = useAnimation(isVisible, headingVariants)
 
   return (
     <motion.div {...headingAnimation} className="flex flex-col items-center gap-5">

@@ -2,7 +2,8 @@ import { motion } from "framer-motion"
 import { useAnimation } from "@/hooks/useAnimation"
 import { useSectionVisibility } from "@/hooks/useSectionVisibility"
 import { TAB } from "@/types"
-import { careerVariants, childVariants } from "@/styles/animations/variants"
+import { childVariants } from "@/styles/animations/_common"
+import { careerVariants } from "@/styles/animations/career"
 import Description from "./Description"
 
 export default function Career() {

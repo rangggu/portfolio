@@ -1,5 +1,5 @@
 import { useAnimation } from "@/hooks/useAnimation"
-import { buttonVariants } from "@/styles/animations/variants"
+import { buttonVariants } from "@/styles/animations/_common"
 import { motion } from "framer-motion"
 import { MouseEventHandler } from "react"
 import { MdKeyboardArrowRight } from "react-icons/md"

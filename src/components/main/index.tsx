@@ -1,7 +1,8 @@
 import { useAnimation } from "@/hooks/useAnimation"
 import { useSectionVisibility } from "@/hooks/useSectionVisibility"
 import { useTyping } from "@/hooks/useTyping"
-import { bottomButtonVariants, mainHeadingVariants } from "@/styles/animations/variants"
+import { headingVariants } from "@/styles/animations/main"
+import { bounceVariants } from "@/styles/animations/_common"
 import { TAB } from "@/types"
 import { cn } from "@/utils/commonUtils"
 import { motion } from "framer-motion"
@@ -9,7 +10,7 @@ import { RiArrowDownDoubleFill } from "react-icons/ri"
 
 export default function Main() {
   const { isInView } = useSectionVisibility(TAB.MAIN)
-  const bottomButtonAnimation = useAnimation(isInView, bottomButtonVariants)
+  const bounceAnimation = useAnimation(isInView, bounceVariants)
 
   return (
     <div className="relative flex items-center justify-center w-full h-full py-20">
@@ -22,17 +23,17 @@ export default function Main() {
           {useTyping("Turning ideas to reality", 50)}
         </h2>
         <motion.h1 className="text-h1" initial="initial" animate="animate">
-          <motion.span variants={mainHeadingVariants()}>
+          <motion.span variants={headingVariants()}>
             <strong>아이디어</strong>를 <strong>현실</strong>로
           </motion.span>
           <br />
-          <motion.span variants={mainHeadingVariants(1)}>연결하는 프론트엔드 개발자,</motion.span>
+          <motion.span variants={headingVariants(1)}>연결하는 프론트엔드 개발자,</motion.span>
           <br />
-          <motion.span variants={mainHeadingVariants(2)}>김규리입니다.</motion.span>
+          <motion.span variants={headingVariants(2)}>김규리입니다.</motion.span>
         </motion.h1>
       </div>
       <motion.div
-        {...bottomButtonAnimation}
+        {...bounceAnimation}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 w-12 h-12 text-gray300"
         transition={{
           type: "spring",
