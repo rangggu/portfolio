@@ -1,26 +1,23 @@
 import { skillLabelVariants } from "@/styles/animations/variants"
 import { cn } from "@/utils/commonUtils"
 import { motion, AnimatePresence } from "framer-motion"
-import { forwardRef, useRef, useState } from "react"
+import { useState } from "react"
 
 interface Props {
   src: string
   text: string
-  disabled?: boolean
   desc: string
 }
 
-export default function IconButton({ src, disabled = false, text, desc }: Props) {
+export default function IconButton({ src, text, desc }: Props) {
   const [hover, setHover] = useState(false)
 
   return (
     <div onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)}>
       <button
         className={cn(
-          "flex items-center gap-1.5 py-1.5 px-3 bg-black bg-opacity-20 rounded-xl hover:bg-white hover:bg-opacity-5 transition-colors duration-150",
-          disabled && "cursor-default",
+          "flex items-center gap-1.5 py-1.5 px-3 bg-black bg-opacity-20 rounded-xl hover:bg-white hover:bg-opacity-5 transition-colors duration-150 cursor-default",
         )}
-        disabled={disabled}
       >
         <img src={src} alt="icon" width={28} height={28} />
         <span className="text-body3 font-semibold">{text}</span>
