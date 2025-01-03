@@ -1,4 +1,4 @@
-import TextButton from "@/components/_common/TextButton"
+import MoreButton from "@/components/_common/MoreButton"
 import { useSectionsContext } from "@/contexts/SectionContext"
 import { useAnimation } from "@/hooks/useAnimation"
 import {
@@ -61,10 +61,9 @@ export default function Paragraph({ isVisible }: Props) {
           쌓아가고 싶습니다.
         </motion.p>
       </motion.div>
-      <TextButton
+      <MoreButton
         right={12}
         bottom={12}
-        text="more"
         delay={2.3}
         isVisible={isVisible}
         onClick={() => scrollToSection(TAB.ABOUTME)}

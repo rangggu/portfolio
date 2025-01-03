@@ -5,9 +5,8 @@ import { MouseEventHandler } from "react"
 import { MdKeyboardArrowRight } from "react-icons/md"
 
 interface Props {
-  text: string
-  delay: number
-  isVisible: boolean
+  delay?: number
+  isVisible?: boolean
   onClick: MouseEventHandler<HTMLButtonElement>
   left?: number | string
   right?: number | string
@@ -15,8 +14,8 @@ interface Props {
   bottom?: number | string
 }
 
-export default function TextButton(props: Props) {
-  const { text, delay, isVisible = true, onClick, left, right, top, bottom } = props
+export default function MoreButton(props: Props) {
+  const { delay = 0, isVisible = true, onClick, left, right, top, bottom } = props
   const buttonAnimation = useAnimation(isVisible, buttonVariants(delay))
 
   return (
@@ -31,7 +30,7 @@ export default function TextButton(props: Props) {
         bottom: bottom,
       }}
     >
-      {text}
+      more
       <MdKeyboardArrowRight className="w-5 h-5" />
     </motion.button>
   )

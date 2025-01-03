@@ -1,9 +1,9 @@
 import { TAB } from "@/types"
-import TextButton from "@/components/_common/TextButton"
 import { useSectionsContext } from "@/contexts/SectionContext"
 import { childVariants, profileDescVariants } from "@/styles/animations/variants"
 import { useAnimation } from "@/hooks/useAnimation"
 import { motion } from "framer-motion"
+import MoreButton from "@/components/_common/MoreButton"
 
 interface Props {
   isVisible: boolean
@@ -18,14 +18,11 @@ export default function Description({ isVisible }: Props) {
       <motion.div className="flex flex-col gap-3.5" variants={childVariants}>
         <div className="relative flex items-center justify-between w-full">
           <h3 className="text-subtitle2 font-semibold text-yellow500">Career</h3>
-          <TextButton
+          <MoreButton
             right={0}
-            text="more"
-            delay={0}
             onClick={() => {
               scrollToSection(TAB.CAREER)
             }}
-            isVisible={true}
           />
         </div>
         <div className="flex justify-between w-full">
