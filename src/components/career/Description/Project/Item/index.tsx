@@ -16,10 +16,10 @@ export default function Item({ title, subtitle, desc, project, setProject }: Pro
   return (
     <motion.div
       className={cn(
-        "flex flex-col gap-4 w-full h-20 px-5 py-5 rounded-lg bg-black bg-opacity-15 font-light cursor-pointer transition-all duration-500 overflow-hidden",
+        "flex flex-col gap-4 w-full h-20 px-5 py-5 rounded-lg bg-black bg-opacity-15 font-light cursor-default transition-all duration-500 overflow-hidden",
         active ? "h-auto max-h-[203px] bg-opacity-25" : "h-auto max-h-[67px]",
       )}
-      onClick={() => setProject(title)}
+      onMouseOver={() => setProject(title)}
     >
       <ul className="flex flex-col gap-1">
         <p>{title}</p>
