@@ -28,7 +28,7 @@ export default function Project() {
       ],
     },
     {
-      title: "기업/행사 정보 안내 서비스",
+      title: "기업/행사 정보 안내 프로그램",
       subtitle: "다양한 정보를 표시/제공하는 키오스크 전용 데스크톱 앱",
       desc: [
         "Electron을 통한 데스크톱 앱 구현",
