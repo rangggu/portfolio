@@ -65,7 +65,7 @@ export default function Project() {
     {
       title: "말랑트립",
       subtitle: "택시 카풀 여행 플랫폼",
-      background: "/images/project/mallang.png",
+      background: "/images/project/mallangTrip.png",
       desc: [
         "개발팀(FE 2명, BE 3명) 프론트엔드 팀원",
         "초기 스타트업 프로세스를 경험",
@@ -99,7 +99,7 @@ export default function Project() {
     {
       title: "MineSweeper Game",
       subtitle: "지뢰찾기 게임",
-      background: "/images/project/minesweeper.png",
+      background: "/images/project/mine.png",
       desc: ["1人 개인 프로젝트", "게임 디자인 및 개발", "재귀 및 스택을 통한 지뢰 찾기 로직 설계"],
       date: "@2024. 10.",
       tag: "개인",
