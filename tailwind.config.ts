@@ -17,6 +17,7 @@ export default {
         gray300: "#AFAFAF",
         gray700: "#6B6B6B",
         blue700: "#011B2F",
+        blue900: "#071520",
       },
       fontSize: {
         h1: ["68px", "135%"],

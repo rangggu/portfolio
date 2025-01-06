@@ -11,6 +11,7 @@ import Profile from "@/components/profile"
 import { useSectionsContext } from "@/contexts/SectionContext"
 import Skill from "@/components/skill"
 import Career from "@/components/career"
+import Project from "@/components/project"
 
 const sections = [
   { id: "main", component: Main },
@@ -18,6 +19,7 @@ const sections = [
   { id: "profile", component: Profile },
   { id: "skill", component: Skill },
   { id: "career", component: Career },
+  { id: "project", component: Project },
 ]
 
 export default function Page() {
