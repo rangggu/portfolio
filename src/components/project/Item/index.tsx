@@ -1,9 +1,17 @@
 import { cn } from "@/utils/commonUtils"
 import Image from "next/image"
 import { memo, useState } from "react"
-import { ProjectCardType } from ".."
 
-export default memo(function Item(props: ProjectCardType) {
+interface Props {
+  title: string
+  subtitle: string
+  background: string
+  desc: string[]
+  date: string
+  tag: "직장" | "사이드" | "개인"
+}
+
+export default memo(function Item(props: Props) {
   const { title, subtitle, background, desc, date, tag } = props
   const [hover, setHover] = useState<boolean>(false)
 
