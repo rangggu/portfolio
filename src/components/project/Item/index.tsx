@@ -1,18 +1,20 @@
 import { cn } from "@/utils/commonUtils"
 import Image from "next/image"
-import { memo, useState } from "react"
+import { Dispatch, memo, SetStateAction, useState } from "react"
 
 interface Props {
+  index: number
   title: string
   subtitle: string
   background: string
   desc: string[]
   date: string
   tag: "직장" | "사이드" | "개인"
+  setModal: Dispatch<SetStateAction<number>>
 }
 
 export default memo(function Item(props: Props) {
-  const { title, subtitle, background, desc, date, tag } = props
+  const { index, title, subtitle, background, desc, date, tag, setModal } = props
   const [hover, setHover] = useState<boolean>(false)
 
   return (
@@ -56,6 +58,7 @@ export default memo(function Item(props: Props) {
           "flex justify-center items-center w-full h-12 text-body4 bg-blue900 bg-opacity-50 rounded-md",
           hover ? "opacity-100" : "opacity-0 delay-200",
         )}
+        onClick={() => setModal(index)}
       >
         자세히 보기
       </button>

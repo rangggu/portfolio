@@ -1,14 +1,16 @@
 import { useSectionsContext } from "@/contexts/SectionContext"
 import { TAB } from "@/types"
 import { cn } from "@/utils/commonUtils"
-import { memo } from "react"
+import { Dispatch, memo, SetStateAction } from "react"
 
 interface HeaderProps {
   tab: TAB
+  modal: number
+  setModal: Dispatch<SetStateAction<number>>
 }
 
 export default memo(function Header(props: HeaderProps) {
-  const { tab } = props
+  const { tab, modal, setModal } = props
   const { scrollToSection } = useSectionsContext()
 
   // @NOTE: 각 탭 정의
@@ -34,7 +36,10 @@ export default memo(function Header(props: HeaderProps) {
         <button
           key={activeTab}
           className={cn("text-gray700 font-semibold", tab === activeTab && "text-white")}
-          onClick={() => scrollToSection(activeTab)}
+          onClick={() => {
+            scrollToSection(activeTab)
+            !!modal && setModal(0)
+          }}
         >
           {label}
         </button>
