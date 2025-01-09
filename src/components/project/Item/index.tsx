@@ -11,7 +11,7 @@ export default memo(function Item(props: ProjectCardType) {
     <div
       className={cn(
         "relative flex flex-col gap-6 w-full p-5 bg-black bg-opacity-15 rounded-xl duration-500 transition-all hover:bg-white hover:bg-opacity-5 overflow-hidden",
-        hover ? "h-auto max-h-96" : "h-auto max-h-44",
+        hover ? "h-auto max-h-96" : "h-auto max-h-48",
       )}
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
