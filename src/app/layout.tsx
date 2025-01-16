@@ -17,6 +17,20 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicons/favicon.ico",
   },
+  openGraph: {
+    title: "Lily Portfolio",
+    description: "프론트엔드 개발자 김규리를 소개해요.",
+    url: "https://www.lily-developer.me/",
+    type: "website",
+    images: [
+      {
+        url: "/images/metadata/image.png", // 실제 이미지 URL
+        width: 1440,
+        height: 1024,
+        alt: "Lily Portfolio",
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
