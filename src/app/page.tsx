@@ -15,6 +15,8 @@ import Project from "@/components/project"
 import Modal from "@/components/project/Modal"
 import Portal from "@/components/_common/Portal"
 import Aboutme from "@/components/aboutme"
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock"
+import { useFullPageScroll } from "@/hooks/useFullPageScroll"
 
 interface SectionsType {
   id: string
@@ -25,6 +27,7 @@ export default function Page() {
   const { sectionsRef, scrollToSection } = useSectionsContext()
   const [tab, setTab] = useState<TAB>(TAB.MAIN)
   const [modal, setModal] = useState<number>(0)
+  const isScrollingRef = useRef(false)
 
   const sections: SectionsType[] = useMemo(
     () => [
@@ -39,7 +42,7 @@ export default function Page() {
     [],
   )
 
-  // @NOTE: 리다이렉트시 기존 section으로 스크롤
+  // @NOTE: 리다이렉트시 URL 세션 유지
   useEffect(() => {
     const sectionId = (window.location.pathname.slice(1) as TAB) || TAB.MAIN // 기존 경로 추출
     if (window.location.pathname !== "/") {
@@ -56,6 +59,12 @@ export default function Page() {
       setTab(sectionId)
     }
   })
+
+  // @NOTE: 모달 열려 있으면 body 스크롤 막기
+  useBodyScrollLock(modal > 0)
+
+  // @NOTE: 풀페이지 스크롤
+  useFullPageScroll(modal, tab, setTab, sections, scrollToSection)
 
   return (
     <main className="relative text-white">
