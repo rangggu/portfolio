@@ -1,10 +1,9 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { useScrollObserver } from "@/hooks/useScrollObserver"
 import { TAB } from "@/types"
 import { useSectionsContext } from "@/contexts/SectionContext"
-import usePreventScroll from "@/hooks/usePreventScroll"
 import Main from "@/components/main"
 import Prologue from "@/components/prologue"
 import Background from "@/components/_common/Background"
@@ -14,6 +13,7 @@ import Skill from "@/components/skill"
 import Career from "@/components/career"
 import Project from "@/components/project"
 import Modal from "@/components/project/Modal"
+import Portal from "@/components/_common/Portal"
 
 interface SectionsType {
   id: string
@@ -25,7 +25,6 @@ export default function Page() {
   const [tab, setTab] = useState<TAB>(TAB.MAIN)
   const [modal, setModal] = useState<number>(0)
 
-  const prevent = useMemo(() => (!!modal ? true : false), [modal])
   const sections: SectionsType[] = useMemo(
     () => [
       { id: "main", component: Main },
@@ -48,7 +47,7 @@ export default function Page() {
     setTab(sectionId)
   }, [])
 
-  // @NOTE: 해당 section이 표시될 때 마다 url 업데이트
+  // @NOTE: 해당 section이 표시될 때마다 url 업데이트
   useScrollObserver((sectionId, newUrl) => {
     if (window.location.pathname !== newUrl) {
       window.history.replaceState(null, "", newUrl)
@@ -56,13 +55,10 @@ export default function Page() {
     }
   })
 
-  // @NOTE: modal 여부에 따른 스크롤 이벤트 차단
-  usePreventScroll(prevent)
-
   return (
     <main className="relative text-white">
       <Background />
-      <div className="w-full h-screen">
+      <div className="w-full">
         <Header tab={tab} modal={modal} setModal={setModal} />
         {sections.map(({ id, component: Component }, index) => (
           <section
@@ -74,7 +70,9 @@ export default function Page() {
             <Component setModal={id === "project" ? setModal : undefined} />
           </section>
         ))}
-        <Modal modal={modal} setModal={setModal} />
+        <Portal>
+          <Modal modal={modal} setModal={setModal} />
+        </Portal>
       </div>
     </main>
   )

@@ -27,7 +27,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={cn("font-pretendard", pretendard.variable)}>
-        <SectionsProvider>{children}</SectionsProvider>
+        <SectionsProvider>
+          <div id="portal" />
+          {children}
+        </SectionsProvider>
       </body>
     </html>
   )

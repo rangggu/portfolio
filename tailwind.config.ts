@@ -11,11 +11,16 @@ export default {
       fontFamily: {
         pretendard: ["var(--font-pretendard)"],
       },
+      boxShadow: {
+        total: "0 0 16px 1px #05121b",
+      },
       colors: {
         yellow500: "#FEB925",
         gray100: "#dadada",
         gray300: "#AFAFAF",
         gray700: "#6B6B6B",
+        blue500: "#123550",
+        blue600: "#192935",
         blue700: "#011B2F",
         blue900: "#071520",
       },

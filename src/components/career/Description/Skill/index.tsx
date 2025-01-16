@@ -1,4 +1,4 @@
-import IconButton from "../../IconButton"
+import IconButton from "../../../_common/IconButton"
 
 export default function Skill() {
   return (
