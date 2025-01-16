@@ -14,6 +14,7 @@ import Career from "@/components/career"
 import Project from "@/components/project"
 import Modal from "@/components/project/Modal"
 import Portal from "@/components/_common/Portal"
+import Aboutme from "@/components/aboutme"
 
 interface SectionsType {
   id: string
@@ -33,6 +34,7 @@ export default function Page() {
       { id: "skill", component: Skill },
       { id: "career", component: Career },
       { id: "project", component: Project },
+      { id: "aboutme", component: Aboutme },
     ],
     [],
   )
