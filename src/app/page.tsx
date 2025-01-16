@@ -27,7 +27,6 @@ export default function Page() {
   const { sectionsRef, scrollToSection } = useSectionsContext()
   const [tab, setTab] = useState<TAB>(TAB.MAIN)
   const [modal, setModal] = useState<number>(0)
-  const isScrollingRef = useRef(false)
 
   const sections: SectionsType[] = useMemo(
     () => [
