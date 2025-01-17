@@ -33,7 +33,7 @@ export const groupedIntroduce = (result: IntroduceType[]) => {
   const groupSize = Math.ceil(result.length / 2)
   return result.reduce((result: IntroduceType[][], current, index) => {
     if (index % groupSize === 0) result.push([])
-    result[result.length - 1].push(current)
+    result[result.length - 1].push({ ...current, idx: index + 1 })
     return result
   }, [])
 }
