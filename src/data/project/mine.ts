@@ -8,6 +8,7 @@ export const MINE: ProjectType = {
   desc: ["1人 개인 프로젝트", "게임 디자인 및 개발", "재귀 및 스택을 통한 지뢰 찾기 로직 설계"],
   date: "@2024. 10.",
   tag: "개인",
+  contribution: 100,
   overview: {
     problem: [
       "비즈니스 로직을 잘 설계해보고 싶어요 😶",

@@ -8,6 +8,7 @@ export const WHAT: ProjectType = {
   desc: ["1人 개인 프로젝트", "기존 프로젝트 리팩토링 경험", "반응형 디자인 설계"],
   date: "@2023. 07.",
   tag: "개인",
+  contribution: 100,
   overview: {
     problem: [
       "처음 작성한 코드의 유지보수가 어렵다고 느껴져요 😕",

@@ -13,6 +13,7 @@ export const DYNAMIC: ProjectType = {
   ],
   date: "@2023. 09 ~ 2024. 12",
   tag: "직장",
+  contribution: 40,
   overview: {
     problem: [
       "사용자가 오프라인에서 결과를 활용하기 어려워요 😩",

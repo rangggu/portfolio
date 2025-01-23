@@ -13,6 +13,7 @@ export const MALLANG: ProjectType = {
   ],
   date: "@2024. 11 ~ ing",
   tag: "사이드",
+  contribution: 20,
   overview: {
     problem: [
       `저는 뚜벅이라서 여행갈 때 불편한 점이 많아요 😕`,

@@ -13,6 +13,7 @@ export const HEYTOSSME: ProjectType = {
   ],
   date: "@2023. 02 ~ 2023. 04",
   tag: "사이드",
+  contribution: 30,
   overview: {
     problem: [
       "전국구의 못쓰게 된 서비스 거래만 모아둔 곳 없을까? 😕",

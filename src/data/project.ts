@@ -15,6 +15,7 @@ interface CommonType {
   background: string
   desc: string[]
   date: string
+  contribution: number
   overview?: { problem: string[]; solution: string[] }
   preview?: PreviewType
   skill?: { src?: string; name: string }[]

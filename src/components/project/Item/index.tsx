@@ -10,11 +10,12 @@ interface Props {
   desc: string[]
   date: string
   tag: "직장" | "사이드" | "개인"
+  contribution: number
   setModal: Dispatch<SetStateAction<number>>
 }
 
 export default memo(function Item(props: Props) {
-  const { index, title, subtitle, background, desc, date, tag, setModal } = props
+  const { index, title, subtitle, background, desc, date, tag, contribution, setModal } = props
   const [hover, setHover] = useState<boolean>(false)
 
   return (
@@ -39,6 +40,9 @@ export default memo(function Item(props: Props) {
         <div className="flex items-center gap-2 text-body4">
           <span className="text-gray300">{date}</span>
           <span className="font-semibold px-1.5 py-0.5 text-xs bg-blue700 rounded-md">{tag}</span>
+          <span className="font-semibold px-1.5 py-0.5 text-xs bg-blue700 rounded-md text-gray100">
+            기여도 {contribution}%
+          </span>
         </div>
       </div>
       <ul

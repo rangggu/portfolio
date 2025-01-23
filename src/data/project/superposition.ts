@@ -13,6 +13,7 @@ export const SUPERPOSITION: ProjectType = {
   ],
   date: "@2023. 11 ~ 2024. 08",
   tag: "사이드",
+  contribution: 40,
   overview: {
     problem: [
       "여러 작가의 예술 작품들을 더 많은 일상에서 볼 수 없을까? 😕",

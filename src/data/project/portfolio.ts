@@ -12,6 +12,7 @@ export const PORTFOLIO: ProjectType = {
   ],
   date: "@2024. 12 ~ ing",
   tag: "개인",
+  contribution: 100,
   overview: {
     problem: [
       "기존 사용하던 Notion 포트폴리오는 디자인이 일관돼요 😕",

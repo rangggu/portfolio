@@ -12,6 +12,7 @@ export const ELECTRON: ProjectType = {
   ],
   date: "@2024. 01.",
   tag: "직장",
+  contribution: 100,
   overview: {
     problem: [
       "프로그램 내에 올려질 이미지를 매달 변경하고 싶어요 😶",
