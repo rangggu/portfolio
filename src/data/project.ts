@@ -21,16 +21,7 @@ interface CommonType {
   skill?: { src?: string; name: string }[]
   context?: string[]
   result?: { title: string; desc: string[] }[]
-  function?: {
-    image?: {
-      url: string
-      landscape: boolean
-    }
-    name: string
-    icon: string
-    info?: { title?: string; desc: string }[]
-    code?: string[]
-  }[]
+
   meaning?: string[]
   link?: {
     web?: string
@@ -42,10 +33,30 @@ interface CommonType {
 interface CareerType extends CommonType {
   tag: "직장"
   summary: string
+  function?: {
+    image?: {
+      url: string
+      landscape: boolean
+    }
+    name: string
+    icon: string
+    info?: { title?: string; desc: string }[]
+    code?: string[]
+  }[]
 }
 
 interface NotCareerType extends CommonType {
   tag: "개인" | "사이드"
+  function?: {
+    image?: {
+      url: string
+      landscape: boolean
+    }
+    name: string
+    icon: string
+    info?: { title?: string; desc: string; contribution?: number }[]
+    code?: string[]
+  }[]
 }
 
 export type PreviewType = { type: "youtube"; link: string } | { type: "image"; link: string[] }

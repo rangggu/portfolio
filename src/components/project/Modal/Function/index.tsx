@@ -8,7 +8,7 @@ interface Props {
   functions?: {
     name: string
     icon: string
-    info?: { title?: string; desc: string }[]
+    info?: { title?: string; desc: string; contribution?: number }[]
     code?: string[]
     image?: {
       url: string
@@ -24,6 +24,13 @@ export default function Function(props: Props) {
 
   return (
     <div className="relative flex flex-col items-center w-full bg-blue600">
+      <p className="absolute -top-7 right-2 text-body3 text-gray300">
+        {tag === "직장"
+          ? "📢제가 직접 담당하고 진행한 업무만 나열했어요."
+          : tag === "사이드"
+          ? "📢기능별 상세 기여도는 각 기능을 클릭하면 확인할 수 있어요."
+          : "📢제가 직접 기획하고 개발한 기능만 나열했어요."}
+      </p>
       <h4 className="w-full py-5 text-center text-body1 font-semibold bg-blue600">
         {tag === "직장" ? "상세 업무" : "주요 기능"}
       </h4>
@@ -79,7 +86,7 @@ export default function Function(props: Props) {
                     />
                   </div>
                 )}
-                {info?.map(({ title, desc }, idx) => (
+                {info?.map(({ title, desc, contribution }, idx) => (
                   <div
                     key={idx}
                     className={cn(
@@ -87,7 +94,12 @@ export default function Function(props: Props) {
                       index === func ? "opacity-100 delay-200" : "opacity-0 delay-200",
                     )}
                   >
-                    {title && <h5 className="font-semibold">{title}</h5>}
+                    <div className="flex items-center justify-between w-full">
+                      {title && <h5 className="font-semibold">{title}</h5>}
+                      {contribution && (
+                        <h5 className="text-body3 text-gray300">기여도 {contribution}%</h5>
+                      )}
+                    </div>
                     <p
                       className="text-body3 font-light text-gray100 px-3 py-1.5 rounded-lg bg-white bg-opacity-10"
                       dangerouslySetInnerHTML={{ __html: desc }}

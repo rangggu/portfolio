@@ -81,6 +81,7 @@ export const MALLANG: ProjectType = {
             구현했습니다. 여행지 순서는 드래그 앤 드롭 방식으로 자유롭게 
             변경할 수 있도록 react-beautiful-dnd 라이브러리를 사용해 
             사용자 편의성을 높였습니다.`,
+          contribution: 50,
         },
         {
           title: "동행 모집",
@@ -112,6 +113,7 @@ export const MALLANG: ProjectType = {
           desc: `사용자가 결제, 예약, 
             작성한 글 등의 활동 내역을 한눈에 확인할 수 있도록 
             인터페이스를 설계했습니다.`,
+          contribution: 50,
         },
       ],
     },
@@ -123,6 +125,7 @@ export const MALLANG: ProjectType = {
           title: "프로모션 코드 지원",
           desc: `프로모션 코드 시스템은 프로모션 코드가 입력되면 
             즉시 유효성을 검증하도록 설계되었고, UI에도 즉각 반영되도록 구현되었습니다.`,
+          contribution: 100,
         },
         {
           title: "결제 프로세스",
@@ -157,6 +160,7 @@ export const MALLANG: ProjectType = {
           title: "드라이버 및 사용자 권한 관리",
           desc: `드라이버, 사용자, 관리자 간의 권한을 명확히 구분하고, 
             각 권한에 맞는 인터페이스를 제공했습니다.`,
+          contribution: 50,
         },
         {
           title: "사용자 데이터 관리",
@@ -176,11 +180,13 @@ export const MALLANG: ProjectType = {
             연동하여 플랫폼 내 사용자 행동 데이터를 수집하고 분석했습니다. 
             이를 통해 사용자 흐름과 주요 이용 패턴을 파악하고, 데이터를 기반으로 
             서비스 개선에 기여했습니다.`,
+          contribution: 50,
         },
         {
           title: "데이터 기반 의사결정 지원",
           desc: `수집된 데이터를 운영팀과 공유하여 의사결정 과정에서 실질적인 
             참고 자료로 활용했습니다.`,
+          contribution: 100,
         },
       ],
     },

@@ -72,12 +72,14 @@ export const HEYTOSSME: ProjectType = {
           desc: `필터 조건들을 전역 상태로 관리하기 위해 Redux-Toolkit을 사용했습니다. 
             카테고리, 지역, 날짜, 키워드, 마감임박 등의 필터 조건을 설정하고, 
             사용자가 선택한 값들이 state에 반영되도록 구현했습니다.`,
+          contribution: 100,
         },
         {
           title: "실시간 검색 및 데이터 동기화",
           desc: `사용자가 검색어를 입력하거나 필터 조건을 변경할 때마다 해당 상태를 반영해 
             상품 조회 API를 호출했습니다. 이를 통해 실시간으로 업데이트된 상품 목록을 
             사용자에게 제공하여 검색 경험을 개선했습니다.`,
+          contribution: 50,
         },
       ],
     },
@@ -94,11 +96,13 @@ export const HEYTOSSME: ProjectType = {
           desc: `사용자가 로그인을 시도할 때 알림 권한 허용을 요청하고, FCM 서버로부터 
             발급받은 디바이스 토큰을 서버로 전달했습니다. 이를 통해 알림을 보낼 
             디바이스를 식별하고 관리할 수 있도록 구현했습니다.`,
+          contribution: 100,
         },
         {
           title: "알림 전송 및 FCM 서버 연동",
           desc: `관심 키워드와 관련된 상품이 등록되거나, 북마크 처리 및 거래 완료와 같은 이벤트가 발생할 때, 
             해당 디바이스 토큰으로 알림을 전송하여 사용자에게 실시간 알림을 제공했습니다.`,
+          contribution: 50,
         },
       ],
     },
@@ -114,11 +118,13 @@ export const HEYTOSSME: ProjectType = {
           title: "이미지 업로드 미리보기",
           desc: `유저가 프로필 사진이나 상품 이미지를 업로드할 때, 업로드한 이미지를 
             미리 확인할 수 있도록 미리보기 기능을 구현했습니다. `,
+          contribution: 100,
         },
         {
           title: "이미지 용량 최적화",
           desc: `서버의 부하를 최소화하기 위해 Browser Image Compression을 활용하여 
             업로드 전 이미지의 용량과 크기를 압축했습니다.`,
+          contribution: 50,
         },
       ],
     },
@@ -134,11 +140,13 @@ export const HEYTOSSME: ProjectType = {
           title: "WebSocket을 활용한 실시간 통신",
           desc: `구매자와 판매자 간의 잦은 데이터 송수신을 위해 WebSocket 기술을 활용했습니다. 
             실시간으로 데이터를 주고받아 원활한 채팅 경험을 제공할 수 있도록 구현했습니다.`,
+          contribution: 33,
         },
         {
           title: "실시간 메시지 처리",
           desc: `stompJS를 사용해 메시지 구독 및 발행 로직을 구현했으며, 메시지는 실시간으로 state에 저장되어 
             별도의 API 요청 없이 화면에 바로 노출됩니다.`,
+          contribution: 50,
         },
       ],
     },
@@ -149,11 +157,13 @@ export const HEYTOSSME: ProjectType = {
       },
       name: "KaKao 소셜 로그인",
       icon: "🙍‍♂️",
+
       info: [
         {
           title: "카카오 계정을 이용한 간편 로그인",
           desc: `카카오톡을 활용해 사용자들이 친숙하게 계정을 연결하고 로그인할 수 있도록 구현했습니다. 
             로그인 요청 시 카카오에서 제공하는 code 값을 서버로 전송해 사용자 인증을 진행했습니다.`,
+          contribution: 50,
         },
       ],
     },
@@ -171,12 +181,14 @@ export const HEYTOSSME: ProjectType = {
             또한, 페이지 새로고침으로 인한 데이터 손실을 방지하기 위해 Redux Persist를 사용해 
             유저 ID를 스토리지에 저장했습니다. 이를 통해 사용자 경험을 저해하지 않고 안정적으로 
             토큰 만료 및 재발급 과정을 처리했습니다.`,
+          contribution: 100,
         },
         {
           title: "Axios Interceptors를 통한 자동 토큰 재발급",
           desc: `모든 API 요청에서 401 error(토큰 만료)가 발생하면, 스토리지에 저장된 유저 ID를 사용해 
             토큰 재발급 요청을 보내고, 기요청된 API를 재요청하도록 Axios Interceptors를 설정했습니다. 
             반면, 405 error(리프레시 토큰 만료)가 발생하면 로그아웃 처리하여 보안을 강화했습니다.`,
+          contribution: 50,
         },
       ],
     },

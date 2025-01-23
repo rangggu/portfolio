@@ -65,6 +65,7 @@ export const SUPERPOSITION: ProjectType = {
             구성했습니다. 이를 통해 사용자들이 저희 온라인 페이지로 더욱 쉽게 
             유입될 수 있었으며, 트래픽 분석 결과, QR 코드 도입을 통해 기존 
             대비 약 30% 더 많은 사용자 유입이라는 의미 있는 성과를 달성할 수 있었습니다.`,
+          contribution: 50,
         },
         {
           title: "데이터 기반 사용자 분석",
@@ -72,6 +73,7 @@ export const SUPERPOSITION: ProjectType = {
             횟수를 CSV 파일로 저장하는 시스템을 구축했습니다. 운영진은 이를 
             바탕으로 관람객의 선호도와 조회수를 분석할 수 있었으며, 수집된 
             데이터를 활용해 전시 운영의 효율성을 높이는 데 기여했습니다.`,
+          contribution: 100,
         },
       ],
       code: [
@@ -98,12 +100,14 @@ export const SUPERPOSITION: ProjectType = {
             로그인 요청 시 카카오에서 제공한 code 값을 서버로 전송하여 사용자 인증을
             진행합니다. 인증 성공 시 발급된 accessToken을 쿠키에 저장해 로그인된 세션을
             유지하고, 미들웨어를 통해 사용자의 접근 권한을 제어하도록 했습니다.`,
+          contribution: 100,
         },
         {
           title: "회원가입 리다이렉트 처리",
           desc: `카카오 계정 로그인을 실행했으나 회원이 아닌 사용자의 경우, 회원가입 페이지로
             리다이렉트 처리했으며, 탈퇴한 지 3개월 이내인 사용자는 재가입이 제한됨을
             안내하는 메시지를 표시했습니다.`,
+          contribution: 50,
         },
       ],
       code: [
@@ -162,6 +166,7 @@ export const SUPERPOSITION: ProjectType = {
           인터페이스가 필요하다고 판단했습니다. 이를 위해 UX에 기반한 디자인을 
           적용했으며, 실제 운영진의 피드백을 적극적으로 반영하여 지속적으로 
           개선하고자 했습니다.`,
+          contribution: 100,
         },
         {
           title: "체계적인 설계와 모듈화",
@@ -169,6 +174,7 @@ export const SUPERPOSITION: ProjectType = {
             체계적인 설계가 중요하다는 점을 인식했습니다. 이를 해결하기 위해 
             재사용성이 높은 컴포넌트 기반 설계를 도입하고, 적절한 모듈화 구조를 
             적용하여 유지보수성과 확장성을 높이는 데 중점을 두었습니다.`,
+          contribution: 100,
         },
       ],
     },
@@ -187,12 +193,14 @@ export const SUPERPOSITION: ProjectType = {
           title: "전시, 작품, 작가 데이터",
           desc: `변경이 적은 전시 관련 데이터는 Next.js의 정적 
             생성(getStaticProps)을 활용해 미리 렌더링함으로써 성능을 최적화했습니다.`,
+          contribution: 100,
         },
         {
           title: "사용자 데이터",
           desc: `실시간 처리가 필요한 사용자 데이터는 클라이언트 사이드 
             렌더링(CSR) 방식을 적용했으며, React Query를 사용해 데이터 페칭과 
             상태 관리를 효율적으로 구현했습니다.`,
+          contribution: 50,
         },
       ],
       code: [
@@ -235,6 +243,7 @@ export const SUPERPOSITION: ProjectType = {
         좋아요를 추가하거나 삭제하며, handleFollow 함수는 로그인된 상태에서 
         follow 여부에 따라 팔로우를 추가하거나 삭제합니다. <br/>
         두 함수 모두 사용자가 로그인하지 않은 상태에서는 로그인 팝업을 띄웁니다.`,
+          contribution: 100,
         },
         {
           desc: `좋아요 및 팔로우 처리 로직은 useMutation 훅을 활용하여 
@@ -296,6 +305,7 @@ const handleFollow = useCallback(() => {
             불규칙한 크기의 아이템을 조밀하게 배열하고자 했습니다. 이를 통해 
             화면에 더 많은 콘텐츠를 표시할 수 있게 하며, 스크롤을 최소화하는 
             효과를 얻을 수 있었습니다.`,
+          contribution: 100,
         },
         {
           title: "풀 페이지 스크롤",
@@ -303,6 +313,7 @@ const handleFollow = useCallback(() => {
             구현했으며, 마우스 휠과 페이지네이션을 이용한 사용자의 액션이 
             일어난 경우에만 동작하도록 조건부 적용했습니다.
             `,
+          contribution: 33,
         },
       ],
     },
