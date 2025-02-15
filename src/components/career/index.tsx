@@ -15,7 +15,7 @@ export default function Career() {
   return (
     <motion.div
       {...careerAnimation}
-      className="flex flex-col items-center justify-center gap-14 w-[70%] h-full mx-auto pt-20"
+      className="flex flex-col items-center justify-center gap-14 2xl:w-[70%] w-[80%] h-full mx-auto pt-20"
     >
       <motion.div className="flex items-center gap-2 w-full" variants={childVariants}>
         <h2 className="text-title4 whitespace-nowrap text-yellow500 font-semibold">{company}</h2>

@@ -6,7 +6,7 @@ export default function Style() {
   return (
     <motion.div className="flex flex-col gap-5 w-full" variants={childVariants}>
       <h2 className="text-subtitle3 font-semibold text-yellow500">Style</h2>
-      <div className="relative flex items-center gap-4">
+      <div className="relative flex flex-wrap items-center gap-4">
         <IconButton
           src="/images/icon/sass.png"
           text="SCSS"

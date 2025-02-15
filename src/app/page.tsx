@@ -69,13 +69,13 @@ export default function Page() {
     <main className="relative text-white">
       <Background />
       <div className="w-full">
-        <Header tab={tab} modal={modal} setModal={setModal} />
+        {/* <Header tab={tab} modal={modal} setModal={setModal} /> */}
         {sections.map(({ id, component: Component }, index) => (
           <section
             key={id}
             id={id}
             ref={(el: any) => (sectionsRef.current[index] = el)}
-            className="relative w-full h-screen px-20"
+            className="relative w-full h-screen lg:px-20 px-6"
           >
             <Component setModal={id === "project" ? setModal : undefined} />
           </section>

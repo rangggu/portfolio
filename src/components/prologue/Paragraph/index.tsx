@@ -17,9 +17,12 @@ export default function Paragraph({ isVisible }: Props) {
   return (
     <motion.div
       {...pgAnimation}
-      className="relative flex gap-12 w-[70%] h-[450px] p-14 text-gray100 rounded-3xl font-normal text-body1"
+      className="relative flex lg:flex-row flex-col lg:gap-12 gap-7 2xl:w-[66%] lg:w-[80%] w-full lg:h-[490px] h-[75%] lg:p-14 p-6 text-gray100 rounded-3xl font-normal lg:text-body1 text-body4"
     >
-      <motion.div className="flex flex-col justify-between w-1/2 h-full" variants={headingVariants}>
+      <motion.div
+        className="flex flex-col justify-between lg:w-1/2 w-full h-full"
+        variants={headingVariants}
+      >
         <motion.p variants={childVariants}>
           학부 시절 간단한 코드 구현 실습을 하면서 코드를 작성하고, 그 결과가 화면에 자유롭게
           구성되는 과정에서 큰 매력을 느꼈습니다. 이 경험을 통해 프론트엔드 직무에 대해 큰 관심을
@@ -37,7 +40,10 @@ export default function Paragraph({ isVisible }: Props) {
           것을 목표로 삼고 있습니다.
         </motion.p>
       </motion.div>
-      <motion.div className="flex flex-col justify-between w-1/2 h-full" variants={headingVariants}>
+      <motion.div
+        className="flex flex-col justify-between lg:w-1/2 w-full h-full"
+        variants={headingVariants}
+      >
         <motion.p variants={childVariants}>
           개발에서 <strong className="text-white font-semibold"> 커뮤니케이션</strong>은 매우
           중요하다고 생각합니다. 원활한 소통으로 기획의 의도나 문제의 원인을 파악할 수 있으며,

@@ -19,7 +19,10 @@ export default function Description({ isVisible }: Props) {
   const { company, period, position, task } = CAREER
 
   return (
-    <motion.div {...descAnimation} className="flex flex-col justify-between w-[860px] h-[88%] py-1">
+    <motion.div
+      {...descAnimation}
+      className="flex flex-col justify-between 2xl:w-[850px] w-[calc(100%-320px)] h-[88%] py-1"
+    >
       <motion.div className="flex flex-col gap-3.5" variants={childVariants}>
         <div className="relative flex items-center justify-between w-full">
           <h3 className="text-subtitle2 font-semibold text-yellow500">Career</h3>

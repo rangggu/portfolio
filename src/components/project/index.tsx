@@ -13,7 +13,7 @@ export default function Project({ setModal }: Props) {
 
   return (
     <>
-      <div className="flex items-center justify-center gap-6 w-[70%] h-full mx-auto pt-20">
+      <div className="flex items-center justify-center gap-6 2xl:w-[70%] w-[80%] h-full mx-auto pt-20">
         <div className="flex flex-col flex-1 items-center justify-center gap-6 w-full h-full">
           {LEFT_PROJECT.map((item) => (
             <Item {...item} key={item.index} setModal={setModal} />

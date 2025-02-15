@@ -21,7 +21,7 @@ export default function MoreButton(props: Props) {
   return (
     <motion.button
       {...buttonAnimation}
-      className="absolute flex items-center text-caption1 font-light text-gray300"
+      className="absolute flex items-center lg:text-caption1 text-caption3 font-light text-gray300"
       onClick={onClick}
       style={{
         left: left,
@@ -31,7 +31,7 @@ export default function MoreButton(props: Props) {
       }}
     >
       more
-      <MdKeyboardArrowRight className="w-5 h-5" />
+      <MdKeyboardArrowRight className="lg:w-5 lg:h-5 w-3 h-3" />
     </motion.button>
   )
 }

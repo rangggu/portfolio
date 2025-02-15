@@ -13,40 +13,44 @@ export default function Main() {
   const bounceAnimation = useAnimation(isInView, bounceVariants)
 
   return (
-    <div className="relative flex items-center justify-center w-full h-full py-20">
-      <div className="absolute top-20 left-0 flex items-center justify-between w-full">
-        <h3 className="text-caption1">FRONTEND DEVELOPER</h3>
-        <menu className="text-caption1">KIM GYU RI</menu>
+    <div className="relative flex items-center justify-center w-full h-full lg:py-20 py-6">
+      <div className="absolute left-0 flex items-center justify-between w-full lg:top-20 top-6">
+        <h3 className="lg:text-caption1 text-caption3">FRONTEND DEVELOPER</h3>
+        <menu className="lg:text-caption1 text-caption3">KIM GYU RI</menu>
       </div>
-      <div className="flex flex-col w-full">
-        <h2 className="text-subtitle3 text-yellow500">
+      <div className="flex flex-col w-full lg:gap-0 gap-2">
+        <h2 className="text-subtitle5 text-yellow500">
           {useTyping("Turning ideas to reality", 50)}
         </h2>
-        <motion.h1 className="text-h1" initial="initial" animate="animate">
+        <motion.h1 className="lg:text-h1 text-h4" initial="initial" animate="animate">
           <motion.span variants={headingVariants()}>
             <strong>아이디어</strong>를 <strong>현실</strong>로
           </motion.span>
           <br />
-          <motion.span variants={headingVariants(1)}>연결하는 프론트엔드 개발자,</motion.span>
+          <motion.span variants={headingVariants(1)} className="lg:tracking-normal tracking-tight">
+            연결하는 프론트엔드 개발자,
+          </motion.span>
           <br />
           <motion.span variants={headingVariants(2)}>김규리입니다.</motion.span>
         </motion.h1>
       </div>
-      <motion.div
-        {...bounceAnimation}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 w-12 h-12 text-gray300"
-        transition={{
-          type: "spring",
-          bounce: 0.25,
-        }}
-      >
-        <RiArrowDownDoubleFill
-          className={cn(
-            "w-full h-full  transition-all duration-300",
-            isInView ? "opacity-100" : "opacity-0",
-          )}
-        />
-      </motion.div>
+      <div className="absolute bottom-6 flex items-center justify-center w-full">
+        <motion.div
+          {...bounceAnimation}
+          className="lg:w-12 lg:h-12 w-10 h-10 text-gray300"
+          transition={{
+            type: "spring",
+            bounce: 0.25,
+          }}
+        >
+          <RiArrowDownDoubleFill
+            className={cn(
+              "w-full h-full transition-all duration-300",
+              isInView ? "opacity-100" : "opacity-0",
+            )}
+          />
+        </motion.div>
+      </div>
     </div>
   )
 }

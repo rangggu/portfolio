@@ -20,7 +20,7 @@ export default function Item(props: Props) {
     <motion.div
       className={cn(
         "flex flex-col gap-4 w-full h-20 px-5 py-7 rounded-lg bg-black bg-opacity-15 font-light cursor-default transition-all duration-500 overflow-hidden",
-        active ? "h-auto max-h-[219px] bg-opacity-25" : "h-auto max-h-[83px]",
+        active ? "h-auto max-h-[280px] bg-opacity-25" : "h-auto max-h-[83px]",
       )}
       onMouseOver={() => setProject(index)}
     >

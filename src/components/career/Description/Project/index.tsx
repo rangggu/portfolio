@@ -22,7 +22,7 @@ export default function Project() {
           }}
         />
       </div>
-      <div className="flex flex-col gap-3 w-full h-[422px] text-body2">
+      <div className="flex flex-col gap-3 w-full 2xl:h-[419px] h-[480px] text-body2">
         {CAREER_PROJECT.map((item) => (
           <Item {...item} key={item.index} project={project} setProject={setProject} />
         ))}
