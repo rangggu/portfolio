@@ -19,7 +19,7 @@ export default function Item(props: Props) {
   return (
     <motion.div
       className={cn(
-        "flex flex-col gap-4 w-full h-20 px-5 py-7 rounded-lg bg-black bg-opacity-15 font-light cursor-default transition-all duration-500 overflow-hidden",
+        "flex flex-col gap-3 w-full h-20 px-5 py-7 rounded-lg bg-black bg-opacity-15 font-light cursor-default transition-all duration-500 overflow-hidden",
         active ? "h-auto max-h-[280px] bg-opacity-25" : "h-auto max-h-[83px]",
       )}
       onMouseOver={() => setProject(index)}
@@ -32,7 +32,7 @@ export default function Item(props: Props) {
       </ul>
       <ul
         className={cn(
-          "flex flex-col gap-1 text-gray300 ml-6",
+          "flex flex-col gap-1 text-body3 ml-6",
           active ? "opacity-100" : "opacity-0 delay-500",
         )}
       >

@@ -8,8 +8,8 @@ export const BITLIGHT: ProjectType = {
   background: "/images/project/bitlight.png",
   desc: [
     "10+ 공공기관 및 기업 대상으로 안정적 서비스 제공",
-    "리액트 마이그레이션 후 안정성 향상 및 장애 발생률 50% 감소",
-    "AI 기술 도입을 주도하여 서비스의 품질 향상",
+    "리액트, 타입스크립트 마이그레이션을 주도하여 장애 문의 50% 이상 감소, 신규 기능 추가 속도를 평균 2일가량 단축",
+    "UI/UX 개선으로 사용자 만족도 40% 상승을 달성",
   ],
   date: "@2023. 09 ~ 2024. 12",
   tag: "직장",
@@ -48,40 +48,44 @@ export const BITLIGHT: ProjectType = {
     {
       title: "사용자 경험 대폭 개선",
       desc: [
-        "UX 향상을 위해 에디터에 새롭고 다양한 기능을 추가하여 사용자 편의성 향상",
-        `긴급 알림 기능을 통해 각종 재난 상황에서 <strong class="font-semibold text-yellow500">50+건 이상의 알림</strong>을 실시간 전송`,
-        `PC, 태블릿, 모바일 등 다양한 기기에서 <strong class="font-semibold text-yellow500">반응형 웹</strong> 구현`,
+        '콘텐츠 에디터 내 UX 개선을 통해 평균 콘텐츠 제작 시간을 8분 → <strong class="font-semibold text-yellow500">4.5분</strong>으로 <strong class="font-semibold text-yellow500">단축</strong>',
+        `긴급 알림 프로세스를 기존 5번 클릭 → <strong class=\"font-semibold text-yellow500\">3번</strong> 클릭으로 <strong class=\"font-semibold text-yellow500\">간소화</strong>`,
+        `입사후 진행한 반기별 설문조사 결과 전년 대비 <strong class=\"font-semibold text-yellow500\">‘만족/긍정적 요소’</strong> 키워드가 <strong class=\"font-semibold text-yellow500\">40% 증가</strong>`,
+        `PC, 태블릿, 모바일 등 다양한 기기에서 반응형 웹 구현`,
       ],
     },
     {
-      title: "서비스 품질 및 신뢰성 향상",
+      title: "신규 기술 및 기능 도입",
       desc: [
-        `Dall-e 이미지 생성과 GCP STT 등의 <strong class="font-semibold text-yellow500">AI 기술 도입</strong>을 주도하여 서비스 업그레이드`,
-        "7가지 위젯(기상청 데이터, 뉴스, 웹뷰 등) 추가로 정보 제공의 폭 확장",
-        `실시간 LED 모니터링 기능 추가로 재난 상황에 빠른 대처 가능과 서비스 신뢰도 증가`,
-        `<strong class="font-semibold text-yellow500">10+</strong> 공공기관과 기업에 서비스를 안정적으로 제공하여 신뢰도 향상`,
-        `<strong class="font-semibold text-yellow500">기술 인증</strong> (CSAP, GS, 성능 인증 등)증명에 참여하여 서비스 신뢰성 향상에 기여`,
+        `<strong class=\"font-semibold text-yellow500\">사용자 요청 사항을 반영</strong>해 테마 및 프레임 기능을 추가`,
+        `DALL·E 이미지 생성 및 GCP STT 등 <strong class=\"font-semibold text-yellow500\">AI 기술</strong>을 적극 도입`,
+        '기상청 데이터, 뉴스, 웹뷰 등 7가지 <strong class="font-semibold text-yellow500">위젯</strong> 기능 추가',
+        `<strong class=\"font-semibold text-yellow500\">실시간</strong> LED 모니터링 & 위험 발생 시 <strong class=\"font-semibold text-yellow500\">이메일 알림</strong> 기능 도입`,
       ],
     },
     {
       title: "마이그레이션 및 개발 효율성 강화",
       desc: [
-        `React와 TypeScript로 전환해 장애 발생 건수 <strong class="font-semibold text-yellow500">50% 이상 감소</strong>`,
-        "컴포넌트를 재설계하여 개발 속도 기존 대비 향상",
-        "Notion 매뉴얼 작성으로 팀원 10명의 협업 및 업무가 원활하도록 기여",
+        `React와 TypeScript로 전환하며 <strong class=\"font-semibold text-yellow500\">코드 구조를 전면 개편(마이그레이션)</strong>하는 업무 수행`,
+        '마이그레이션 이후, 신규 기능 추가 작업 소요 시간이 평균 <strong class="font-semibold text-yellow500">2일</strong>가량 <strong class="font-semibold text-yellow500">단축</strong>',
+        `마이그레이션 이후, 불편/장애 관련 문의 건수가 <strong class=\"font-semibold text-yellow500\">50%</strong> 이상 <strong class=\"font-semibold text-yellow500\">감소</strong>`,
+        `중복되는 로직 및 UI를 컴포넌트, 유틸 함수, 커스텀 훅 등으로 분리`,
+        "Notion 매뉴얼 작성을 제안해 팀원 6명의 협업을 원활히 지원",
       ],
     },
     {
-      title: "배포 관리 및 장애 해결",
+      title: "운영·배포 및 장애 해결",
       desc: [
-        "내부 서버 업데이트 자동화로 배포 시간을 절약",
-        `CS 팀과 협력해 <strong class="font-semibold text-yellow500">30+</strong>건의 장애를 신속히 해결하여 서비스 중단 시간을 감소`,
+        `<strong class=\"font-semibold text-yellow500\">10+</strong> 공공기관 및 기업에 서버·프로그램을 안정적으로 구축`,
+        '배포 자동화 시스템을 구축해 배포 시간을 20분 → <strong class="font-semibold text-yellow500">2분</strong>으로 <strong class="font-semibold text-yellow500">단축</strong> 및 프로세스 <strong class="font-semibold text-yellow500">간소화</strong>',
+        `기술 인증(CSAP, GS, 혁신, 성능 인증 등) 심사에 참여해 <strong class=\"font-semibold text-yellow500\">인증 획득</strong>`,
+        `CS 팀과 협력해 <strong class=\"font-semibold text-yellow500\">30+</strong>건의 장애를 신속히 해결`,
       ],
     },
   ],
   function: [
     {
-      name: "레거시 시스템 개편 및 리팩토링",
+      name: "레거시 시스템 개편 및 유지보수",
       icon: "🔧",
       info: [
         {
@@ -94,8 +98,8 @@ export const BITLIGHT: ProjectType = {
         {
           title: "TypeScript와 React로 개편",
           desc: `기존 프로젝트를 TypeScript와 React 기반으로 전환해 개발 효율성과 
-            안정성을 높였습니다. 리액트 마이그레이션 후 장애 발생률이 50% 줄어들어 
-            안정성이 크게 향상되었습니다.`,
+            안정성을 높였습니다. 리액트 마이그레이션 후 불편/장애 문의 건수가 50% 
+            이상 줄어들었고, 유지보수 속도도 빨라졌습니다.`,
         },
         {
           title: "UI/UX 리뉴얼",
@@ -106,13 +110,13 @@ export const BITLIGHT: ProjectType = {
         {
           title: "콘텐츠 편집 기능 개선",
           desc: `사용자가 콘텐츠를 쉽게 편집할 수 있도록 에디터 기능을 
-            개선했습니다. drag&drop, 콘텐츠 회전, 확대/축소, 그룹화 같은 
-            실용적인 기능을 추가해 사용자 만족도를 높였습니다.`,
+            개선했습니다. drag&drop, 콘텐츠 회전, 확대/축소, 스냅, 그룹화 같은 
+            실용적인 기능을 추가했습니다.`,
         },
       ],
     },
     {
-      name: "실시간 데이터 및 모니터링 기능 개발",
+      name: "실시간 기능 개발",
       icon: "📊",
       info: [
         {
@@ -137,7 +141,7 @@ export const BITLIGHT: ProjectType = {
       ],
     },
     {
-      name: "반응형 웹 및 사용자 편의 기능 개발",
+      name: "사용자 편의 기능 개발",
       icon: "💻",
       info: [
         {
@@ -168,7 +172,7 @@ export const BITLIGHT: ProjectType = {
       ],
     },
     {
-      name: "AI 및 음성인식 기술 도입",
+      name: "AI 기술 도입",
       icon: "🤖",
       info: [
         {
@@ -192,7 +196,7 @@ export const BITLIGHT: ProjectType = {
         {
           title: "데이터베이스 관리",
           desc: `HeidiSql을 이용해 쿼리를 생성하고 MariaDB를 업데이트하여 
-            데이터베이스 운영을 관리했습니다.`,
+            데이터베이스 관리를 서포트했습니다.`,
         },
         {
           title: "서버 업데이트 및 관리",
@@ -201,13 +205,18 @@ export const BITLIGHT: ProjectType = {
         },
         {
           title: "프로그램 설치",
-          desc: `고객사 PC에 필요한 프로그램을 설치하고 설정 작업을 
+          desc: `고객사 PC에 필요한 프로그램을 설치하고 기본 설정 작업을 
             수행했습니다.`,
         },
         {
           title: "SSL 인증서 갱신",
           desc: `서비스 보안을 강화하기 위해 SSL 인증서를 정기적으로 
             갱신했습니다.`,
+        },
+        {
+          title: "배포 자동화",
+          desc: `Git Actions을 이용하여 배포 자동화 시스템을 구축해 배포 시간을 
+          20분에서 2분으로 단축시켰습니다.`,
         },
       ],
     },
@@ -244,14 +253,14 @@ export const BITLIGHT: ProjectType = {
       장기적으로 사용하기에는 한계가 있을 것이라고 판단했습니다. 이에 GCP STT를 
       포함해 다양한 STT API를 조사하고 테스트해 보았습니다. 여러 플랫폼을 비교한 
       결과, GCP STT API가 구현이 간단하면서도 인식률이 가장 뛰어나다는 점을 
-      확인했고, 최종적으로 이를 도입할 수 있었습니다. 이렇게 기존 기술의 문제점을 
-      인지하고 대체 기술을 탐구하며 직접 적용해보며 큰 보람을 느꼈습니다.`,
-    `DALL-E를 활용한 AI 이미지 생성 기능 추가도 의미 있는 도전이었습니다. 
-      처음에는 API 연동 과정에서 예상치 못한 오류들이 발생해 어려움을 겪었지만, 
-      문제를 하나씩 해결한 끝에 결국 안정적으로 구현할 수 있었습니다. 이를 통해
-      기술적인 시행착오가 있을지라도 개발자로서의 성장하는 데에 충분한 밑거름이 
-      된다는 것을 체감할 수 있었습니다. 결과적으로 해당 기술 도입으로 서비스의 
-      가능성이 한층 더 열린 거 같아 보람을 느꼈던 업무 중 하나입니다.`,
+      확인했고, 최종적으로 이를 도입할 수 있었습니다. 이렇게 직접 구현한 기술의 
+      문제점을 스스로 파악해보고, 보완된 다른 기술로 변경해보면서 유지보수 업무의 
+      프로세스를 경험할 수 있었습니다.`,
+    `DALL-E를 활용한 AI 이미지 생성 기능 추가도 의미 있었던 도전이었습니다. 
+     OpenAI의 API를 처음 사용하다 보니 자동 결제를 연동할 때 살짝 헤매기도 했지만 
+     차근차근 해결하여 결국 안정적으로 구현할 수 있었습니다. 결과적으로 해당 기술 
+     도입으로 서비스의 가능성이 한층 더 열린 거 같아 보람을 느꼈던 
+     업무 중 하나입니다.`,
     `반면, 프로젝트를 진행하며 예상치 못한 아쉬움과 팀 내 갈등도 겪었지만 이 과정에서도 
       많은 것을 배울 수 있었습니다. 공공기관과 기업을 주요 
       대상으로 하는 프로젝트 특성상, 보안을 최우선으로 고려해야 했기에 내부망 
@@ -261,14 +270,16 @@ export const BITLIGHT: ProjectType = {
       보안 정책으로 인해 이를 시도할 수 없었던 점이 가장 아쉬웠습니다. 
       그럼에도 제한된 환경 속에서 가능한 최선을 다해 사용자 중심의 기능을 구현하며 
       의미 있는 결과를 만들어낼 수 있었습니다.`,
-    `뿐만 아니라, UX가 고려된 기능을 추가하는 과정에서 구조적 한계를 마주하기도 
-      했습니다. 기존 시스템에서 해당 기능을 적용하려면 일부 구조를 수정해야 
-      했지만, 팀 내부에서는 이에 대한 우려와 신중한 접근을 요구하는 목소리가 
-      있었습니다. 하지만 저는 이 변경이 사용자 경험을 위해 반드시 필요하다고 
-      판단했고, 이를 설득하기 위해 다양한 레퍼런스와 사례를 조사해 자료를 
-      준비했습니다. 결과적으로 기존 구조를 최소한으로 변경하면서도 필요한 
-      기능을 구현할 수 있었고, 사용자 만족도를 높이는 데 기여했습니다. 
-      이를 통해 기술적 성취를 넘어 제한적인 상황 속에서도 최적의 
-      해결책을 찾는 경험을 해볼 수 있었습니다.`,
+    `이처럼 사용자 행동 데이터를 직접 수집하기 어려운 환경적 제약을 보완하기 
+      위해, 반기 설문조사를 실시하자고 제안했습니다. 설문 문항에는 
+      “최근 도입된 AI 및 모니터링 기능에 대한 만족도”, “콘텐츠 제작 소요 시간”, 
+      그리고 “추가로 원하는 기능” 등을 포함해 구체적인 사용자 반응을 파악하고자 
+      했습니다. 실제로 설문 결과, 전년 대비 만족/긍정적 요소 키워드가 약 40% 증가
+      했으며, 콘텐츠 제작 시간 역시 전년 평균 8분에서 4.5분으로 단축된 사실을 
+      확인할 수 있었습니다. 또한 사용자가 가장 원하는 기능을 파악해 실제 서비스에 
+      반영할 수 있었고, 이를 통해 추가·개선된 부분들이 실질적으로 가치를 
+      제공한다는 점을 재확인했습니다. 이러한 결과는 향후 개선 방향을 수립하는 
+      데에도 큰 도움이 되었습니다.
+     `,
   ],
 }
