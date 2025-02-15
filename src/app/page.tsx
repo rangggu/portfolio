@@ -69,7 +69,7 @@ export default function Page() {
     <main className="relative text-white">
       <Background />
       <div className="w-full">
-        {/* <Header tab={tab} modal={modal} setModal={setModal} /> */}
+        <Header tab={tab} modal={modal} setModal={setModal} />
         {sections.map(({ id, component: Component }, index) => (
           <section
             key={id}
