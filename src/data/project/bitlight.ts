@@ -48,9 +48,9 @@ export const BITLIGHT: ProjectType = {
     {
       title: "사용자 경험 대폭 개선",
       desc: [
-        '콘텐츠 에디터 내 UX 개선을 통해 평균 콘텐츠 제작 시간을 8분 → <strong class="font-semibold text-yellow500">4.5분</strong>으로 <strong class="font-semibold text-yellow500">단축</strong>',
-        `긴급 알림 프로세스를 기존 5번 클릭 → <strong class=\"font-semibold text-yellow500\">3번</strong> 클릭으로 <strong class=\"font-semibold text-yellow500\">간소화</strong>`,
-        `입사후 진행한 반기별 설문조사 결과 전년 대비 <strong class=\"font-semibold text-yellow500\">‘만족/긍정적 요소’</strong> 키워드가 <strong class=\"font-semibold text-yellow500\">40% 증가</strong>`,
+        '콘텐츠 에디터 내 UX 개선을 통해 평균 콘텐츠 제작 시간을 8분 → <strong class="font-semibold text-yellow500">4.5분</strong>으로 단축',
+        `긴급 알림 프로세스를 기존 5번 클릭 → <strong class=\"font-semibold text-yellow500\">3번</strong> 클릭으로 간소화`,
+        `입사후 진행한 반기별 설문조사 결과 전년 대비 <strong class=\"font-semibold text-yellow500\">‘만족/긍정적 요소’</strong> 키워드가 <strong class=\"font-semibold text-yellow500\">40%</strong> 증가`,
         `PC, 태블릿, 모바일 등 다양한 기기에서 반응형 웹 구현`,
       ],
     },
@@ -60,15 +60,15 @@ export const BITLIGHT: ProjectType = {
         `<strong class=\"font-semibold text-yellow500\">사용자 요청 사항을 반영</strong>해 테마 및 프레임 기능을 추가`,
         `DALL·E 이미지 생성 및 GCP STT 등 <strong class=\"font-semibold text-yellow500\">AI 기술</strong>을 적극 도입`,
         '기상청 데이터, 뉴스, 웹뷰 등 7가지 <strong class="font-semibold text-yellow500">위젯</strong> 기능 추가',
-        `<strong class=\"font-semibold text-yellow500\">실시간</strong> LED 모니터링 & 위험 발생 시 <strong class=\"font-semibold text-yellow500\">이메일 알림</strong> 기능 도입`,
+        `실시간 LED <strong class=\"font-semibold text-yellow500\">모니터링</strong> & 위험 발생 시 <strong class=\"font-semibold text-yellow500\">이메일 알림</strong> 기능 도입`,
       ],
     },
     {
       title: "마이그레이션 및 개발 효율성 강화",
       desc: [
-        `React와 TypeScript로 전환하며 <strong class=\"font-semibold text-yellow500\">코드 구조를 전면 개편(마이그레이션)</strong>하는 업무 수행`,
-        '마이그레이션 이후, 신규 기능 추가 작업 소요 시간이 평균 <strong class="font-semibold text-yellow500">2일</strong>가량 <strong class="font-semibold text-yellow500">단축</strong>',
-        `마이그레이션 이후, 불편/장애 관련 문의 건수가 <strong class=\"font-semibold text-yellow500\">50%</strong> 이상 <strong class=\"font-semibold text-yellow500\">감소</strong>`,
+        `React와 TypeScript로 전환하며 코드 구조를 전면 <strong class=\"font-semibold text-yellow500\">개편(마이그레이션)</strong>하는 업무 수행`,
+        '마이그레이션 이후, 신규 기능 추가 작업 소요 시간이 평균 <strong class="font-semibold text-yellow500">2일</strong>가량 단축',
+        `마이그레이션 이후, 불편/장애 관련 문의 건수가 <strong class=\"font-semibold text-yellow500\">50%</strong> 이상 감소`,
         `중복되는 로직 및 UI를 컴포넌트, 유틸 함수, 커스텀 훅 등으로 분리`,
         "Notion 매뉴얼 작성을 제안해 팀원 6명의 협업을 원활히 지원",
       ],
@@ -77,7 +77,7 @@ export const BITLIGHT: ProjectType = {
       title: "운영·배포 및 장애 해결",
       desc: [
         `<strong class=\"font-semibold text-yellow500\">10+</strong> 공공기관 및 기업에 서버·프로그램을 안정적으로 구축`,
-        '배포 자동화 시스템을 구축해 배포 시간을 20분 → <strong class="font-semibold text-yellow500">2분</strong>으로 <strong class="font-semibold text-yellow500">단축</strong> 및 프로세스 <strong class="font-semibold text-yellow500">간소화</strong>',
+        '배포 자동화 시스템을 구축해 배포 시간을 20분 → <strong class="font-semibold text-yellow500">2분</strong>으로 단축 및 프로세스 <strong class="font-semibold text-yellow500">간소화</strong>',
         `기술 인증(CSAP, GS, 혁신, 성능 인증 등) 심사에 참여해 <strong class=\"font-semibold text-yellow500\">인증 획득</strong>`,
         `CS 팀과 협력해 <strong class=\"font-semibold text-yellow500\">30+</strong>건의 장애를 신속히 해결`,
       ],
@@ -238,15 +238,20 @@ export const BITLIGHT: ProjectType = {
     },
   ],
   meaning: [
-    `이 프로젝트는 제가 처음으로 직장에서 주도적으로 맡아 진행한 일이었기에 
-      더욱 애정이 가고 특별한 의미가 있습니다. v1.0이 완성된 시점에 입사하여 
-      이후 버전업을 맡아 진행했는데, 새로운 기능들을 추가하고 리액트, 
-      타입스크립트로 마이그레이션을 처음 진행해 보면서
-      프로젝트뿐만 아니라 제 스스로도 성장하고 있다는 것을 느낄 수 있었습니다. 
-      특히, 높은 안정성과 신뢰성이 요구되는 프로젝트였던 만큼 작은 디테일 
-      하나하나에 신경 써서 구현해야 했습니다. 그 과정이 쉽지는 않았지만 그만큼 
-      개발자로서 한층 더 성숙해질 수 있었던 값진 경험이었습니다.`,
-    `또한, 이 프로젝트를 진행하며 여러 가지의 새로운 기술을 배우고 적용해볼 수 있었습니다. 
+    `React와 TypeScript로의 전환은 프로젝트의 기초를 새롭게 다지는 것부터 
+    시작했습니다. 기존 JavaScript 코드베이스의 
+    한계를 극복하고 전체적인 코드 품질과 유지보수성을 높이기 위해 먼저 기존 
+    코드에 타입 정의를 추가하여 타입 안정성을 확보했습니다. 또한, 중복되는 로직은 
+    유틸 함수나 커스텀 훅으로 분리하여 재사용을 높이고자 했고, 공통 UI 컴포넌트는 
+    별도의 common 폴더에 배치해 생산성을 높이는 데 주력했습니다. 작동 자체는 
+    레거시 환경에서도 문제가 없었지만, 기존 동작이 그대로 유지되어야 했기 
+    때문에 작업에 시간이 많이 소요되기도 했습니다. 하지만 마이그레이션 이후, 
+    신규 기능 추가 소요 시간이 평균 2일가량 단축되었고, 코드 품질 향상으로 
+    인해 불편/장애 관련 문의 건수가 50% 이상 감소하는 유의미한 성과를 
+    달성할 수 있었습니다. 이 과정에서 저는 기술적인 마이그레이션이 
+    단순히 코드를 최신 상태로 만드는 것 이상의 의미가 있음을 몸소 체감할 수 
+    있었습니다.`,
+    `계속해서 프로젝트를 담당하면서 여러 가지의 새로운 기술들도 배우고 적용해볼 수 있었습니다. 
       처음에는 빠르게 기능을 구현하는 것이 목표였기 때문에, 라이브러리 중 하나인
       React-speech-recognition을 사용해 실시간 음성인식 기능을 구현했습니다. 
       하지만 이 기술이 이미 업데이트가 종료된 레거시 기술이라는 점을 알게 되었고, 
@@ -256,30 +261,27 @@ export const BITLIGHT: ProjectType = {
       확인했고, 최종적으로 이를 도입할 수 있었습니다. 이렇게 직접 구현한 기술의 
       문제점을 스스로 파악해보고, 보완된 다른 기술로 변경해보면서 유지보수 업무의 
       프로세스를 경험할 수 있었습니다.`,
+    ``,
     `DALL-E를 활용한 AI 이미지 생성 기능 추가도 의미 있었던 도전이었습니다. 
      OpenAI의 API를 처음 사용하다 보니 자동 결제를 연동할 때 살짝 헤매기도 했지만 
      차근차근 해결하여 결국 안정적으로 구현할 수 있었습니다. 결과적으로 해당 기술 
      도입으로 서비스의 가능성이 한층 더 열린 거 같아 보람을 느꼈던 
      업무 중 하나입니다.`,
-    `반면, 프로젝트를 진행하며 예상치 못한 아쉬움과 팀 내 갈등도 겪었지만 이 과정에서도 
-      많은 것을 배울 수 있었습니다. 공공기관과 기업을 주요 
+    `반면, 프로젝트를 진행하며 예상치 못한 아쉬움을 겪기도 했습니다. 공공기관과 기업을 주요 
       대상으로 하는 프로젝트 특성상, 보안을 최우선으로 고려해야 했기에 내부망 
       서버를 사용해야 했습니다. 이로 인해 페이지 클릭 이벤트나 체류 시간 같은 
       사용자 데이터를 수집하거나 분석할 기회가 부족했습니다. 이러한 데이터를 
       활용할 수 있었다면 사용자 경험을 더욱 세밀하게 개선할 수 있었을 텐데, 
-      보안 정책으로 인해 이를 시도할 수 없었던 점이 가장 아쉬웠습니다. 
-      그럼에도 제한된 환경 속에서 가능한 최선을 다해 사용자 중심의 기능을 구현하며 
-      의미 있는 결과를 만들어낼 수 있었습니다.`,
-    `이처럼 사용자 행동 데이터를 직접 수집하기 어려운 환경적 제약을 보완하기 
-      위해, 반기 설문조사를 실시하자고 제안했습니다. 설문 문항에는 
-      “최근 도입된 AI 및 모니터링 기능에 대한 만족도”, “콘텐츠 제작 소요 시간”, 
-      그리고 “추가로 원하는 기능” 등을 포함해 구체적인 사용자 반응을 파악하고자 
-      했습니다. 실제로 설문 결과, 전년 대비 만족/긍정적 요소 키워드가 약 40% 증가
-      했으며, 콘텐츠 제작 시간 역시 전년 평균 8분에서 4.5분으로 단축된 사실을 
-      확인할 수 있었습니다. 또한 사용자가 가장 원하는 기능을 파악해 실제 서비스에 
-      반영할 수 있었고, 이를 통해 추가·개선된 부분들이 실질적으로 가치를 
-      제공한다는 점을 재확인했습니다. 이러한 결과는 향후 개선 방향을 수립하는 
-      데에도 큰 도움이 되었습니다.
+      보안 정책으로 인해 이를 시도할 수 없었던 점이 가장 아쉬웠습니다.`,
+    `이러한 한계를 극복하기 위해, 사용자 행동을 간접적으로 파악할 수 있는 방안으로 
+    반기 설문조사를 제안했습니다. 설문은 ‘최근 도입된 AI 및 모니터링 기능에 대한 
+    만족도’, ‘콘텐츠 제작 소요 시간’, ‘추가로 원하는 기능’ 등을 포함하여 구체적인 
+    사용자 반응을 수집하는 데 중점을 두었습니다. 실제 설문 결과, 전년 대비 
+    만족/긍정적 요소 키워드가 약 40% 증가했으며, 콘텐츠 제작 시간 역시 전년 
+    콘텐츠 제작 시간이 평균 8분에서 4.5분으로 단축되는 등 뚜렷한 개선 효과를 
+    확인할 수 있었습니다. 이를 통해 전년 대비 추가되고 개선된 부분들이 
+    실질적인 가치를 제공한다는 점을 재확인할 수 있었고, 향후 개선 방향 
+    수립에도 큰 도움이 되었습니다.
      `,
   ],
 }
