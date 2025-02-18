@@ -17,7 +17,7 @@ export default function Paragraph({ isVisible }: Props) {
   return (
     <motion.div
       {...pgAnimation}
-      className="relative flex lg:flex-row flex-col lg:gap-12 gap-7 2xl:w-[66%] lg:w-[80%] w-full lg:h-[490px] h-[75%] lg:p-14 p-6 text-gray100 rounded-3xl font-normal lg:text-body1 text-body4"
+      className="relative flex lg:flex-row flex-col lg:gap-12 gap-7 2xl:w-[66%] lg:w-[80%] w-full lg:h-[50%] h-[75%] lg:p-14 p-6 text-gray100 rounded-3xl font-normal lg:text-body2 text-body4"
     >
       <motion.div
         className="flex flex-col justify-between lg:w-1/2 w-full h-full"
