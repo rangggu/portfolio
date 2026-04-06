@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useSectionsContext } from "@/contexts/SectionContext"
-import { TAB } from "@/types"
+import { TAB } from "@/libs/constants"
 
 export const useScrollObserver = (updateUrl: (sectionId: TAB, newUrl: string) => void) => {
   const { sectionsRef } = useSectionsContext() // Context에서 sectionsRef 가져오기

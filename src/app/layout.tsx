@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
 import "@/styles/globals.css"
-import { cn } from "@/utils/commonUtils"
+import { cn } from "@/libs/utils"
 import { SectionsProvider } from "@/contexts/SectionContext"
 
 const pretendard = localFont({

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useSectionsContext } from "@/contexts/SectionContext"
-import { TAB } from "@/types"
+import { TAB } from "@/libs/constants"
 
 export const useSectionVisibility = (sectionId: TAB, threshold = 0.5) => {
   const { sectionsRef } = useSectionsContext()

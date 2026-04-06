@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import { TAB } from "@/types"
+import { TAB } from "@/libs/constants"
 
 interface SectionsType {
   id: string

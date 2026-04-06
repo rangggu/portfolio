@@ -1,6 +1,6 @@
 "use client"
 
-import { TAB } from "@/types"
+import { TAB } from "@/libs/constants"
 import React, { createContext, useContext, useRef } from "react"
 
 type SectionsContextType = {
