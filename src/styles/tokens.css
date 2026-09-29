@@ -1,0 +1,312 @@
+/* =============================================================
+ * Design Tokens
+ * primitive → semantic 2계층. 컴포넌트는 semantic 토큰을 참조한다.
+ * 색상 값은 초안이며, 디자인 확정 시 primitive 값만 교체한다.
+ * data-theme 속성은 <html>에 붙인다.
+ * ============================================================= */
+
+/* ---------- Primitive: Color ---------- */
+:root {
+  --color-gray-0: #ffffff;
+  --color-gray-50: #f8f9fa;
+  --color-gray-100: #f1f3f5;
+  --color-gray-200: #e4e7eb;
+  --color-gray-300: #d0d5db;
+  --color-gray-400: #adb4bd;
+  --color-gray-500: #8a929c;
+  --color-gray-600: #69717c;
+  --color-gray-700: #4c535d;
+  --color-gray-800: #30353c;
+  --color-gray-900: #1b1e23;
+  --color-gray-950: #111316;
+
+  --color-blue-50: #eef5ff;
+  --color-blue-100: #d9e8ff;
+  --color-blue-300: #7fb0ff;
+  --color-blue-400: #5595fb;
+  --color-blue-500: #2f7bf5;
+  --color-blue-600: #1f66dd;
+  --color-blue-700: #1a52b3;
+
+  --color-violet-500: #7a5cf5;
+  --color-red-400: #f87171;
+  --color-red-500: #e5484d;
+  --color-green-400: #4ade80;
+  --color-green-500: #2f9e5b;
+
+  --color-black-alpha-40: rgb(0 0 0 / 0.4);
+  --color-black-alpha-60: rgb(0 0 0 / 0.6);
+  --color-white-alpha-72: rgb(255 255 255 / 0.72);
+  --color-gray-950-alpha-72: rgb(17 19 22 / 0.72);
+}
+
+/* ---------- Primitive: Typography ---------- */
+:root {
+  /* --font-pretendard는 next/font/local의 variable 옵션으로 주입 */
+  --font-family-sans: var(--font-pretendard), -apple-system, BlinkMacSystemFont,
+    system-ui, sans-serif;
+  --font-family-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --font-size-12: 0.75rem;
+  --font-size-13: 0.8125rem;
+  --font-size-14: 0.875rem;
+  --font-size-16: 1rem;
+  --font-size-18: 1.125rem;
+  --font-size-20: 1.25rem;
+  --font-size-24: 1.5rem;
+  --font-size-32: 2rem;
+  --font-size-40: 2.5rem;
+  --font-size-56: 3.5rem;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.4;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.75;
+
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.02em;
+}
+
+/* ---------- Primitive: Spacing / Radius / Border ---------- */
+:root {
+  --spacing-2: 0.125rem;
+  --spacing-4: 0.25rem;
+  --spacing-6: 0.375rem;
+  --spacing-8: 0.5rem;
+  --spacing-12: 0.75rem;
+  --spacing-16: 1rem;
+  --spacing-20: 1.25rem;
+  --spacing-24: 1.5rem;
+  --spacing-32: 2rem;
+  --spacing-40: 2.5rem;
+  --spacing-48: 3rem;
+  --spacing-64: 4rem;
+  --spacing-80: 5rem;
+  --spacing-120: 7.5rem;
+
+  --radius-4: 4px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-24: 24px;
+  --radius-round: 9999px;
+
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+
+  --blur-header: 12px;
+  --blur-overlay: 4px;
+
+  --opacity-disabled: 0.4;
+}
+
+/* ---------- Layout ---------- */
+:root {
+  --layout-prose-max: 720px;
+  --layout-page-max: 1200px;
+  --layout-gutter: var(--spacing-20);
+  --layout-header-height: 56px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --layout-gutter: var(--spacing-40);
+    --layout-header-height: 64px;
+  }
+}
+
+/* ---------- Motion: 기본 ---------- */
+:root {
+  --duration-instant: 100ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  /* 스프링 곡선: linear-easing-generator로 생성한 값으로 교체 가능 */
+  --ease-spring-gentle: linear(0, 0.19 4%, 0.54 10%, 0.85 18%, 1.02 28%,
+    1.05 34%, 1.03 44%, 1 60%, 1);
+  --ease-spring-bounce: linear(0, 0.009, 0.035 2.1%, 0.141, 0.281 6.7%,
+    0.723 12.9%, 0.938 16.7%, 1.017, 1.077, 1.121, 1.149 24.3%, 1.159,
+    1.163, 1.161, 1.154 29.9%, 1.129 32.8%, 1.051 39.6%, 1.017 43.1%,
+    0.991, 0.977 51%, 0.974 53.8%, 0.975 57.1%, 0.997 69.8%, 1.003 76.9%, 1);
+}
+
+/* ---------- Motion: 애니메이션별 ---------- */
+:root {
+  /* 누름 피드백 */
+  --motion-press-scale: 0.97;
+  --motion-press-duration: var(--duration-instant);
+  --motion-release-duration: var(--duration-slow);
+  --motion-release-ease: var(--ease-spring-bounce);
+
+  /* 카드 hover */
+  --motion-hover-lift: -2px;
+  --motion-hover-duration: var(--duration-fast);
+
+  /* 스크롤 헤더 */
+  --motion-header-duration: var(--duration-normal);
+  --motion-header-ease: var(--ease-standard);
+
+  /* 페이지 전환 (View Transitions) */
+  --motion-page-duration: var(--duration-slow);
+  --motion-page-ease: var(--ease-out);
+
+  /* 테마 원형 확산 */
+  --motion-theme-reveal-duration: var(--duration-slower);
+  --motion-theme-reveal-ease: var(--ease-in);
+
+  /* 다이얼로그 */
+  --motion-dialog-duration: var(--duration-normal);
+  --motion-dialog-ease: var(--ease-out);
+  --motion-dialog-scale-from: 0.96;
+
+  /* 바텀시트 */
+  --motion-sheet-duration: var(--duration-slow);
+  --motion-sheet-ease: var(--ease-spring-gentle);
+
+  /* 토스트 */
+  --motion-toast-duration: var(--duration-normal);
+
+  /* 레이아웃 모핑 인디케이터 */
+  --motion-indicator-duration: var(--duration-normal);
+  --motion-indicator-ease: var(--ease-spring-gentle);
+}
+
+/* reduced motion: 움직임은 제거하고 페이드만 남긴다 */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-press-scale: 1;
+    --motion-hover-lift: 0;
+    --motion-dialog-scale-from: 1;
+    --motion-release-ease: var(--ease-standard);
+    --motion-sheet-ease: var(--ease-standard);
+    --motion-indicator-ease: var(--ease-standard);
+    --motion-theme-reveal-duration: 0ms;
+    --motion-page-duration: var(--duration-fast);
+  }
+}
+
+/* ---------- z-index ---------- */
+:root {
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 100;
+  --z-dropdown: 200;
+  --z-overlay: 300;
+  --z-toast: 400;
+  /* <dialog>는 top layer에 뜨므로 z-index 대상 아님 */
+}
+
+/* ---------- Semantic: Light (기본) ---------- */
+:root {
+  --color-text-primary: var(--color-gray-900);
+  --color-text-secondary: var(--color-gray-600);
+  --color-text-tertiary: var(--color-gray-500);
+  --color-text-disabled: var(--color-gray-400);
+  --color-text-inverse: var(--color-gray-0);
+  --color-text-accent: var(--color-blue-600);
+  --color-text-on-accent: var(--color-gray-0);
+  --color-text-danger: var(--color-red-500);
+  --color-text-success: var(--color-green-500);
+
+  --color-bg-base: var(--color-gray-0);
+  --color-bg-subtle: var(--color-gray-50);
+  --color-bg-muted: var(--color-gray-100);
+  --color-bg-elevated: var(--color-gray-0);
+  --color-bg-inverse: var(--color-gray-900);
+  --color-bg-accent: var(--color-blue-500);
+  --color-bg-accent-hover: var(--color-blue-600);
+  --color-bg-accent-subtle: var(--color-blue-50);
+  --color-bg-header: var(--color-white-alpha-72);
+  --color-bg-dim: var(--color-black-alpha-40);
+  --color-bg-code: var(--color-gray-50);
+
+  --color-border-default: var(--color-gray-200);
+  --color-border-subtle: var(--color-gray-100);
+  --color-border-strong: var(--color-gray-400);
+  --color-border-focus: var(--color-blue-500);
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.12);
+  --shadow-overlay: 0 24px 64px rgb(0 0 0 / 0.18);
+
+  --gradient-accent: linear-gradient(
+    135deg,
+    var(--color-blue-500),
+    var(--color-violet-500)
+  );
+  --gradient-hero-glow: radial-gradient(
+    60% 50% at 50% 0%,
+    var(--color-blue-100),
+    transparent
+  );
+  --gradient-fade-bottom: linear-gradient(to bottom, transparent, var(--color-bg-base));
+  --gradient-skeleton: linear-gradient(
+    90deg,
+    var(--color-bg-muted) 0%,
+    var(--color-bg-subtle) 50%,
+    var(--color-bg-muted) 100%
+  );
+}
+
+/* ---------- Semantic: Dark ---------- */
+[data-theme='dark'] {
+  --color-text-primary: var(--color-gray-50);
+  --color-text-secondary: var(--color-gray-400);
+  --color-text-tertiary: var(--color-gray-500);
+  --color-text-disabled: var(--color-gray-700);
+  --color-text-inverse: var(--color-gray-900);
+  --color-text-accent: var(--color-blue-300);
+  --color-text-on-accent: var(--color-gray-0);
+  --color-text-danger: var(--color-red-400);
+  --color-text-success: var(--color-green-400);
+
+  --color-bg-base: var(--color-gray-950);
+  --color-bg-subtle: var(--color-gray-900);
+  --color-bg-muted: var(--color-gray-800);
+  --color-bg-elevated: var(--color-gray-900);
+  --color-bg-inverse: var(--color-gray-50);
+  --color-bg-accent: var(--color-blue-500);
+  --color-bg-accent-hover: var(--color-blue-400);
+  --color-bg-accent-subtle: rgb(47 123 245 / 0.16);
+  --color-bg-header: var(--color-gray-950-alpha-72);
+  --color-bg-dim: var(--color-black-alpha-60);
+  --color-bg-code: var(--color-gray-900);
+
+  --color-border-default: var(--color-gray-800);
+  --color-border-subtle: var(--color-gray-900);
+  --color-border-strong: var(--color-gray-600);
+  --color-border-focus: var(--color-blue-400);
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.5);
+  --shadow-overlay: 0 24px 64px rgb(0 0 0 / 0.6);
+
+  --gradient-hero-glow: radial-gradient(
+    60% 50% at 50% 0%,
+    rgb(47 123 245 / 0.24),
+    transparent
+  );
+  --gradient-fade-bottom: linear-gradient(to bottom, transparent, var(--color-bg-base));
+  --gradient-skeleton: linear-gradient(
+    90deg,
+    var(--color-bg-muted) 0%,
+    var(--color-bg-subtle) 50%,
+    var(--color-bg-muted) 100%
+  );
+}
