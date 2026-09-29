@@ -1,0 +1,50 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-css-modules"],
+  "plugins": ["stylelint-declaration-strict-value"],
+  "rules": {
+    "color-no-hex": true,
+    "color-named": "never",
+    "value-keyword-case": ["lower", { "ignoreKeywords": ["currentColor"] }],
+    "selector-class-pattern": [
+      "^[a-z][a-zA-Z0-9]+$",
+      { "message": "Expected class selector to be camelCase" }
+    ],
+    "scale-unlimited/declaration-strict-value": [
+      [
+        "color",
+        "background-color",
+        "border-color",
+        "outline-color",
+        "fill",
+        "z-index",
+        "transition-duration",
+        "transition-timing-function",
+        "animation-duration",
+        "animation-timing-function",
+        "box-shadow"
+      ],
+      {
+        "ignoreValues": ["currentColor", "inherit", "transparent", "none", "0"],
+        "disableFix": true,
+        "message": "Expected variable for \"${property}\". Use a design token from tokens.css"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["src/styles/tokens.css", "src/app/globals.css"],
+      "rules": {
+        "color-no-hex": null,
+        "color-named": null,
+        "scale-unlimited/declaration-strict-value": null,
+        "no-duplicate-selectors": null,
+        "custom-property-empty-line-before": null,
+        "comment-empty-line-before": null,
+        "alpha-value-notation": null,
+        "color-hex-length": null,
+        "value-keyword-case": null,
+        "media-feature-range-notation": null
+      }
+    }
+  ]
+}
