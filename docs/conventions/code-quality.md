@@ -15,22 +15,31 @@
 
 ## ESLint
 
-`next/core-web-vitals`, `@typescript-eslint/strict`, `jsx-a11y`를 기반으로 합니다. 품질을 보여주는 프로젝트라 주요 규칙은 끄지 않습니다.
+ESLint 9 flat config(`eslint.config.mjs`)를 사용합니다. `eslint-config-next`가 flat config 배열을 직접 export하므로 `FlatCompat` 없이 import합니다.
 
-| 규칙 | 설정 |
-| --- | --- |
-| `@typescript-eslint/no-explicit-any` | error |
-| `@typescript-eslint/no-unused-vars` | error (`_` 접두사 예외) |
-| `@typescript-eslint/consistent-type-imports` | error |
-| `jsx-a11y/*` | recommended |
+- **base:** `eslint-config-next` (core-web-vitals + typescript 포함)
+- **jsx-a11y:** `eslint-config-next`에 플러그인이 번들되어 있으므로, recommended rules 전체를 rules로 병합
+- **@typescript-eslint/strict:** 플러그인 스코프 충돌을 피하기 위해 프리셋의 rules만 추출하여 병합
+
+| 규칙                                         | 설정                         |
+| -------------------------------------------- | ---------------------------- |
+| `@typescript-eslint/strict` 프리셋 rules     | 28개 전체 적용               |
+| `@typescript-eslint/no-explicit-any`         | error                        |
+| `@typescript-eslint/no-unused-vars`          | error (`_` 접두사 예외)      |
+| `@typescript-eslint/consistent-type-imports` | error                        |
+| `jsx-a11y/*`                                 | recommended 전체 (34개 규칙) |
+
+품질을 보여주는 프로젝트라 주요 규칙은 끄지 않습니다.
 
 ## Stylelint
 
-토큰 우선 규칙을 사람이 아니라 도구로 지키게 합니다.
+`stylelint-config-standard`와 `stylelint-config-css-modules`를 확장합니다. 토큰 우선 규칙을 도구로 지킵니다.
 
 - `color-no-hex`, `color-named: never` — `tokens.css` 외 파일에서 색상 하드코딩 금지
-- `stylelint-declaration-strict-value` — `color`, `background-color`, `z-index`, `transition-duration` 등은 `var()`만 허용
-- `tokens.css`, `globals.css`는 예외로 둡니다.
+- `stylelint-declaration-strict-value` — 아래 속성은 `var()`만 허용:
+  `color`, `background-color`, `border-color`, `outline-color`, `fill`, `z-index`, `transition-duration`, `transition-timing-function`, `animation-duration`, `animation-timing-function`, `box-shadow`
+- `stylelint-config-css-modules` — `composes`, `:global` 허용, CSS Modules camelCase 클래스명 허용
+- `tokens.css`, `globals.css`는 위 규칙의 예외로 둡니다.
 
 ## Git Hooks
 
@@ -43,16 +52,16 @@
 <Type>: <Subject>
 ```
 
-| Type | 용도 |
-| --- | --- |
-| Feature | 새 기능 |
-| Fix | 버그 수정 |
-| Refactor | 리팩토링 |
-| Style | 스타일, 토큰 변경 |
-| Test | 테스트 추가·수정 |
-| Chore | 설정, 의존성, 빌드 |
-| Docs | 문서 (컨벤션 포함) |
-| Rename | 파일·폴더 이름 변경 |
+| Type     | 용도                |
+| -------- | ------------------- |
+| Feature  | 새 기능             |
+| Fix      | 버그 수정           |
+| Refactor | 리팩토링            |
+| Style    | 스타일, 토큰 변경   |
+| Test     | 테스트 추가·수정    |
+| Chore    | 설정, 의존성, 빌드  |
+| Docs     | 문서 (컨벤션 포함)  |
+| Rename   | 파일·폴더 이름 변경 |
 
 - Type은 영어 그대로, Subject는 한글로 작성
 - Subject는 50자 이내, 마침표 없음
@@ -60,12 +69,12 @@
 
 ## 테스트
 
-| 대상 | 도구 | 위치 |
-| --- | --- | --- |
-| `src/lib`의 순수 로직 | Vitest | 대상 파일 옆 `*.test.ts` |
-| 사용자 흐름, 시각 회귀 | Playwright | `e2e/*.spec.ts` |
-| 접근성 | @axe-core/playwright | 주요 페이지 E2E 안에서 |
-| 성능 | Lighthouse CI | CI |
+| 대상                   | 도구                 | 위치                     |
+| ---------------------- | -------------------- | ------------------------ |
+| `src/lib`의 순수 로직  | Vitest               | 대상 파일 옆 `*.test.ts` |
+| 사용자 흐름, 시각 회귀 | Playwright           | `e2e/*.spec.ts`          |
+| 접근성                 | @axe-core/playwright | 주요 페이지 E2E 안에서   |
+| 성능                   | Lighthouse CI        | CI                       |
 
 - 커버리지 수치를 목표로 두지 않습니다. 로직이 있는 곳을 테스트합니다.
 - 요소 탐색 우선순위: `getByRole` > `getByText` > `getByTestId`
