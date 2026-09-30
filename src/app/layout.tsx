@@ -1,7 +1,24 @@
 import type { Metadata, Viewport } from 'next';
-import { JsonLd } from '@/components/seo';
+import dynamic from 'next/dynamic';
+import { JsonLd, ThemeScript } from '@/components/seo';
 import { PERSON, SITE } from '@/lib/site';
 import './globals.css';
+
+const ViewportIndicator =
+  process.env.NODE_ENV === 'development'
+    ? dynamic(() =>
+        import('@/components/dev/ViewportIndicator').then(
+          (m) => m.ViewportIndicator,
+        ),
+      )
+    : () => null;
+
+const ThemeToggle =
+  process.env.NODE_ENV === 'development'
+    ? dynamic(() =>
+        import('@/components/dev/ThemeToggle').then((m) => m.ThemeToggle),
+      )
+    : () => null;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -34,6 +51,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
+  viewportFit: 'cover',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: SITE.themeColor.light },
     { media: '(prefers-color-scheme: dark)', color: SITE.themeColor.dark },
@@ -63,11 +81,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body>
         {children}
         <JsonLd data={personJsonLd} />
         <JsonLd data={webSiteJsonLd} />
+        <ViewportIndicator />
+        <ThemeToggle />
       </body>
     </html>
   );
