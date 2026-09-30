@@ -43,13 +43,15 @@
 /* ---------- Primitive: Typography ---------- */
 :root {
   /* --font-pretendard는 next/font/local의 variable 옵션으로 주입 */
-  --font-family-sans: var(--font-pretendard), -apple-system, BlinkMacSystemFont,
-    system-ui, sans-serif;
+  --font-family-sans:
+    var(--font-pretendard), -apple-system, BlinkMacSystemFont, system-ui,
+    sans-serif;
   --font-family-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   --font-size-12: 0.75rem;
   --font-size-13: 0.8125rem;
   --font-size-14: 0.875rem;
+  --font-size-15: 0.9375rem;
   --font-size-16: 1rem;
   --font-size-18: 1.125rem;
   --font-size-20: 1.25rem;
@@ -109,17 +111,27 @@
   --opacity-disabled: 0.4;
 }
 
+/* ---------- Fluid: 360px → 1280px 선형 보간 ---------- */
+:root {
+  --font-size-48-72: clamp(3rem, 2.41rem + 2.61vw, 4.5rem); /* 48→72px */
+  --font-size-40-56: clamp(2.5rem, 2.11rem + 1.74vw, 3.5rem); /* 40→56px */
+  --font-size-28-40: clamp(1.75rem, 1.46rem + 1.3vw, 2.5rem); /* 28→40px */
+  --font-size-20-24: clamp(1.25rem, 1.15rem + 0.43vw, 1.5rem); /* 20→24px */
+  --spacing-section: clamp(3rem, 1.24rem + 7.83vw, 7.5rem); /* 48→120px */
+  --layout-gutter: clamp(1.25rem, 0.76rem + 2.17vw, 2.5rem); /* 20→40px */
+}
+
 /* ---------- Layout ---------- */
 :root {
   --layout-prose-max: 720px;
+  --layout-prose-min: 560px;
   --layout-page-max: 1200px;
-  --layout-gutter: var(--spacing-20);
+  --layout-note-width: 240px;
   --layout-header-height: 56px;
 }
 
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   :root {
-    --layout-gutter: var(--spacing-40);
     --layout-header-height: 64px;
   }
 }
@@ -136,12 +148,44 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
   /* 스프링 곡선: linear-easing-generator로 생성한 값으로 교체 가능 */
-  --ease-spring-gentle: linear(0, 0.19 4%, 0.54 10%, 0.85 18%, 1.02 28%,
-    1.05 34%, 1.03 44%, 1 60%, 1);
-  --ease-spring-bounce: linear(0, 0.009, 0.035 2.1%, 0.141, 0.281 6.7%,
-    0.723 12.9%, 0.938 16.7%, 1.017, 1.077, 1.121, 1.149 24.3%, 1.159,
-    1.163, 1.161, 1.154 29.9%, 1.129 32.8%, 1.051 39.6%, 1.017 43.1%,
-    0.991, 0.977 51%, 0.974 53.8%, 0.975 57.1%, 0.997 69.8%, 1.003 76.9%, 1);
+  --ease-spring-gentle: linear(
+    0,
+    0.19 4%,
+    0.54 10%,
+    0.85 18%,
+    1.02 28%,
+    1.05 34%,
+    1.03 44%,
+    1 60%,
+    1
+  );
+  --ease-spring-bounce: linear(
+    0,
+    0.009,
+    0.035 2.1%,
+    0.141,
+    0.281 6.7%,
+    0.723 12.9%,
+    0.938 16.7%,
+    1.017,
+    1.077,
+    1.121,
+    1.149 24.3%,
+    1.159,
+    1.163,
+    1.161,
+    1.154 29.9%,
+    1.129 32.8%,
+    1.051 39.6%,
+    1.017 43.1%,
+    0.991,
+    0.977 51%,
+    0.974 53.8%,
+    0.975 57.1%,
+    0.997 69.8%,
+    1.003 76.9%,
+    1
+  );
 }
 
 /* ---------- Motion: 애니메이션별 ---------- */
@@ -254,7 +298,11 @@
     var(--color-blue-100),
     transparent
   );
-  --gradient-fade-bottom: linear-gradient(to bottom, transparent, var(--color-bg-base));
+  --gradient-fade-bottom: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-bg-base)
+  );
   --gradient-skeleton: linear-gradient(
     90deg,
     var(--color-bg-muted) 0%,
@@ -302,7 +350,11 @@
     rgb(47 123 245 / 0.24),
     transparent
   );
-  --gradient-fade-bottom: linear-gradient(to bottom, transparent, var(--color-bg-base));
+  --gradient-fade-bottom: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-bg-base)
+  );
   --gradient-skeleton: linear-gradient(
     90deg,
     var(--color-bg-muted) 0%,

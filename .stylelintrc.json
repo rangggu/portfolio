@@ -21,10 +21,18 @@
         "transition-timing-function",
         "animation-duration",
         "animation-timing-function",
-        "box-shadow"
+        "box-shadow",
+        "font-size"
       ],
       {
-        "ignoreValues": ["currentColor", "inherit", "transparent", "none", "0"],
+        "ignoreValues": [
+          "currentColor",
+          "inherit",
+          "transparent",
+          "none",
+          "0",
+          "1em"
+        ],
         "disableFix": true,
         "message": "Expected variable for \"${property}\". Use a design token from tokens.css"
       }
@@ -32,7 +40,11 @@
   },
   "overrides": [
     {
-      "files": ["src/styles/tokens.css", "src/app/globals.css"],
+      "files": [
+        "src/styles/tokens.css",
+        "src/styles/typography.module.css",
+        "src/app/globals.css"
+      ],
       "rules": {
         "color-no-hex": null,
         "color-named": null,

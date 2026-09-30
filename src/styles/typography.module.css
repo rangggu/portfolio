@@ -1,0 +1,107 @@
+/* display: 첫 화면 이름 (48→72px) */
+.display {
+  font-size: var(--font-size-48-72);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* headingXl: 첫 화면 한 줄 소개 (40→56px) */
+.headingXl {
+  font-size: var(--font-size-40-56);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* headingLg: 섹션 제목 (28→40px) */
+.headingLg {
+  font-size: var(--font-size-28-40);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* headingMd: 회사명, 프로젝트 제목 (20→24px) */
+.headingMd {
+  font-size: var(--font-size-20-24);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* headingSm: 작은 소제목 (18px) */
+.headingSm {
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* bodyLg: 소개·케이스 스터디 본문, 첫 화면 보조 (18px) */
+.bodyLg {
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-relaxed);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* bodyMd: 일반 본문 (16px) */
+.bodyMd {
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* bodySm: 여백 메모, 보조 설명 (14px) */
+.bodySm {
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* labelMd: 메뉴, 버튼, 링크 (15px) */
+.labelMd {
+  font-size: var(--font-size-15);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* labelSm: 칩, 태그 (12px) */
+.labelSm {
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+/* caption: 부가 설명 (13px) */
+.caption {
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* monoMd: 연도, 섹션 번호, 기간 (15px) */
+.monoMd {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-15);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-normal);
+  font-variant-numeric: tabular-nums;
+}
+
+/* monoSm: 작은 고정폭 (12px) */
+.monoSm {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-normal);
+  font-variant-numeric: tabular-nums;
+}
