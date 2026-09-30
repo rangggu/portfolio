@@ -48,6 +48,7 @@ npm run test:e2e     # Playwright (시각 회귀 + axe 포함)
 | [typescript-and-import](docs/conventions/typescript-and-import.md) | 타입 규칙, 경로 별칭, import 순서                    |
 | [data-and-rendering](docs/conventions/data-and-rendering.md)       | 렌더링 전략, 데이터 연동, 상태, 에러 처리            |
 | [code-quality](docs/conventions/code-quality.md)                   | 린트, 포맷, 커밋, 테스트, PR 체크리스트              |
+| [seo](docs/conventions/seo.md)                                     | 메타데이터, OG 이미지, JSON-LD, sitemap, 검색 인증   |
 
 ## 작업 방식
 
