@@ -12,13 +12,13 @@
 
 ### 토큰 도메인과 CSS 속성
 
-| 토큰 | 적용 속성 |
-| --- | --- |
-| `--color-text-*` | `color` |
-| `--color-bg-*` | `background`, `background-color`, `fill` |
-| `--color-border-*` | `border-color`, `outline-color` |
-| `--gradient-*` | `background-image` |
-| `--shadow-*` | `box-shadow` |
+| 토큰               | 적용 속성                                |
+| ------------------ | ---------------------------------------- |
+| `--color-text-*`   | `color`                                  |
+| `--color-bg-*`     | `background`, `background-color`, `fill` |
+| `--color-border-*` | `border-color`, `outline-color`          |
+| `--gradient-*`     | `background-image`                       |
+| `--shadow-*`       | `box-shadow`                             |
 
 도메인이 맞지 않는 토큰을 빌려 쓰지 않습니다. 예를 들어 텍스트 색에 `--color-bg-*`를 쓰지 않습니다.
 
@@ -43,7 +43,8 @@
   border-radius: var(--radius-12);
   background-color: var(--color-bg-accent);
   color: var(--color-text-on-accent);
-  transition: transform var(--motion-release-duration) var(--motion-release-ease);
+  transition: transform var(--motion-release-duration)
+    var(--motion-release-ease);
 
   &:active {
     transform: scale(var(--motion-press-scale));
@@ -67,7 +68,10 @@
 JS에서 계산한 값은 inline style의 CSS 변수로 넘기고, CSS에서 `var()`로 받습니다. 스타일 속성 자체를 inline으로 쓰지 않습니다.
 
 ```tsx
-<div className={styles.bar} style={{ '--progress': progress } as CSSProperties} />
+<div
+  className={styles.bar}
+  style={{ '--progress': progress } as CSSProperties}
+/>
 ```
 
 ```css
@@ -78,12 +82,15 @@ JS에서 계산한 값은 inline style의 CSS 변수로 넘기고, CSS에서 `va
 
 ## 타이포그래피
 
-- `font-size`, `line-height`, `font-weight`를 컴포넌트에서 따로 지정하지 않습니다.
+- 컴포넌트에서 `--font-size-*` 토큰을 직접 쓰지 않습니다. 크기 토큰을 참조하는 곳은 `typography.module.css` 하나뿐이어야 합니다.
 - `Text`, `Heading` 컴포넌트를 쓰거나, `typography.module.css`의 텍스트 스타일을 `composes`로 가져옵니다.
+- `font-size: inherit`, `1em`처럼 부모 크기를 따르는 경우만 예외입니다.
+- 새 크기가 필요하면 토큰을 직접 쓰지 말고 텍스트 스타일을 추가한 뒤 `design-tokens.md`에 기록합니다.
+- 굵기만 다른 변형(`bodyMdBold` 등)은 만들지 않습니다. 본문 속 강조는 `<strong>`에 전역 스타일로 처리합니다.
 
 ```css
 .title {
-  composes: title2 from '@/styles/typography.module.css';
+  composes: headingMd from '@/styles/typography.module.css';
   color: var(--color-text-primary);
 }
 ```
@@ -103,15 +110,7 @@ JS에서 계산한 값은 inline style의 CSS 변수로 넘기고, CSS에서 `va
 
 ## 반응형
 
-- 모바일 우선으로 작성하고 `min-width` 미디어 쿼리를 씁니다.
-- CSS 변수는 미디어 쿼리 조건에 쓸 수 없으므로, 브레이크포인트는 아래 두 값만 씁니다.
-
-| 이름 | 조건 |
-| --- | --- |
-| tablet | `@media (min-width: 768px)` |
-| desktop | `@media (min-width: 1024px)` |
-
-- 컴포넌트 자체의 반응형은 가능하면 컨테이너 쿼리(`@container`)를 씁니다.
+브레이크포인트, 기기 매트릭스, 입력 방식 분기, 섹션별 규칙 등 반응형 전체 규칙은 [responsive.md](responsive.md)를 참고합니다.
 
 ## 다크 모드
 
