@@ -14,30 +14,30 @@
 
 ## 색상 (semantic)
 
-| 토큰                               | 용도                       |
-| ---------------------------------- | -------------------------- |
-| `--color-text-primary`             | 본문, 제목                 |
-| `--color-text-secondary`           | 보조 설명, 메타 정보       |
-| `--color-text-tertiary`            | 캡션, 비활성에 가까운 정보 |
-| `--color-text-disabled`            | 비활성 텍스트              |
-| `--color-text-inverse`             | 반전 배경 위 텍스트        |
-| `--color-text-accent`              | 링크, 강조                 |
-| `--color-text-on-accent`           | 강조 배경 위 텍스트        |
-| `--color-text-danger` / `-success` | 상태 표시                  |
-| `--color-bg-base`                  | 페이지 배경                |
-| `--color-bg-subtle`                | 섹션 구분 배경             |
-| `--color-bg-muted`                 | 태그, 스켈레톤 등          |
-| `--color-bg-elevated`              | 카드, 팝오버, 다이얼로그   |
-| `--color-bg-inverse`               | 반전 영역 (툴팁 등)        |
-| `--color-bg-accent` / `-hover`     | 주요 버튼                  |
-| `--color-bg-accent-subtle`         | 강조 배경 (선택된 탭 등)   |
-| `--color-bg-header`                | 반투명 헤더 (blur와 함께)  |
-| `--color-bg-dim`                   | 오버레이 딤                |
-| `--color-bg-code`                  | 코드 블록                  |
-| `--color-border-default`           | 기본 테두리, 구분선        |
-| `--color-border-subtle`            | 약한 구분선                |
-| `--color-border-strong`            | 입력 요소 테두리           |
-| `--color-border-focus`             | 포커스 링                  |
+| 토큰                               | 용도                           |
+| ---------------------------------- | ------------------------------ |
+| `--color-text-primary`             | 본문, 제목                     |
+| `--color-text-secondary`           | 보조 설명, 메타 정보           |
+| `--color-text-tertiary`            | 캡션, 비활성에 가까운 정보     |
+| `--color-text-disabled`            | 비활성 텍스트                  |
+| `--color-text-inverse`             | 반전 배경 위 텍스트            |
+| `--color-text-accent`              | 링크, 강조                     |
+| `--color-text-on-accent`           | 강조 배경 위 텍스트            |
+| `--color-text-danger` / `-success` | 상태 표시                      |
+| `--color-bg-base`                  | 페이지 배경                    |
+| `--color-bg-subtle`                | 섹션 구분 배경                 |
+| `--color-bg-muted`                 | 태그, 스켈레톤 등              |
+| `--color-bg-elevated`              | 카드, 팝오버, 다이얼로그       |
+| `--color-bg-inverse`               | 반전 영역 (툴팁 등)            |
+| `--color-bg-accent` / `-hover`     | 주요 버튼                      |
+| `--color-bg-accent-subtle`         | 강조 배경 (선택된 탭 등)       |
+| `--color-bg-floating`              | 반투명 플로팅 UI (blur와 함께) |
+| `--color-bg-dim`                   | 오버레이 딤                    |
+| `--color-bg-code`                  | 코드 블록                      |
+| `--color-border-default`           | 기본 테두리, 구분선            |
+| `--color-border-subtle`            | 약한 구분선                    |
+| `--color-border-strong`            | 입력 요소 테두리               |
+| `--color-border-focus`             | 포커스 링                      |
 
 ## 그라데이션
 
@@ -105,15 +105,15 @@
 
 ## 그림자·블러·투명도
 
-| 토큰                 | 용도                          |
-| -------------------- | ----------------------------- |
-| `--shadow-sm`        | 카드 기본                     |
-| `--shadow-md`        | 카드 hover, 드롭다운          |
-| `--shadow-lg`        | 팝오버, 커맨드 팔레트         |
-| `--shadow-overlay`   | 다이얼로그, 바텀시트          |
-| `--blur-header`      | 스크롤 헤더 `backdrop-filter` |
-| `--blur-overlay`     | 오버레이 딤 블러              |
-| `--opacity-disabled` | 비활성 요소                   |
+| 토큰                 | 용도                        |
+| -------------------- | --------------------------- |
+| `--shadow-sm`        | 카드 기본                   |
+| `--shadow-md`        | 카드 hover, 드롭다운        |
+| `--shadow-lg`        | 팝오버, 커맨드 팔레트       |
+| `--shadow-overlay`   | 다이얼로그, 바텀시트        |
+| `--blur-floating`    | 플로팅 UI `backdrop-filter` |
+| `--blur-overlay`     | 오버레이 딤 블러            |
+| `--opacity-disabled` | 비활성 요소                 |
 
 ## 유동 토큰
 
@@ -130,14 +130,17 @@
 
 ## 레이아웃
 
-| 토큰                     | 값            | 용도                                                               |
-| ------------------------ | ------------- | ------------------------------------------------------------------ |
-| `--layout-prose-max`     | 720px         | 본문 글 최대 폭 (본문 18px에서 한 줄 한글 40자 안팎의 가독성 기준) |
-| `--layout-prose-min`     | 560px         | 여백 메모와 나란히 놓일 때 본문 최소 폭                            |
-| `--layout-page-max`      | 1200px        | 페이지 콘텐츠 영역 최대 폭. 타임라인, 목록 등은 이 폭을 전부 사용  |
-| `--layout-note-width`    | 240px         | 여백 메모 고정 폭                                                  |
-| `--layout-gutter`        | clamp 20→40px | 좌우 여백 (유동 토큰)                                              |
-| `--layout-header-height` | 56 → 64 (lg)  | 헤더 높이, sticky 목차 top 계산                                    |
+| 토큰                       | 값                                   | 용도                                                               |
+| -------------------------- | ------------------------------------ | ------------------------------------------------------------------ |
+| `--layout-prose-max`       | 720px                                | 본문 글 최대 폭 (본문 18px에서 한 줄 한글 40자 안팎의 가독성 기준) |
+| `--layout-prose-min`       | 560px                                | 여백 메모와 나란히 놓일 때 본문 최소 폭                            |
+| `--layout-page-max`        | 1200px                               | 프레임 최대 폭. 타임라인, 목록 등은 이 폭을 전부 사용              |
+| `--layout-note-width`      | 240px                                | 여백 메모 고정 폭                                                  |
+| `--layout-gutter`          | clamp 20→40px                        | 프레임 안쪽 좌우 여백 (유동 토큰)                                  |
+| `--layout-frame-peek`      | fine: clamp 48→120px, coarse: 12px   | 옆 프레임 노출 폭. `@media (pointer: coarse)`에서 12px로 재정의    |
+| `--layout-frame-gap`       | fine: clamp 24→80px, coarse: 12px    | 프레임 사이 간격. `@media (pointer: coarse)`에서 12px로 재정의     |
+| `--layout-floating-top`    | calc(44px + 12px + safe-area) ≈ 68px | 상단 플로팅 UI 영역. scroll-padding, sticky top 계산에 사용        |
+| `--layout-floating-bottom` | calc(44px + 20px + safe-area) ≈ 76px | 하단 메뉴 바 영역. scroll-padding, 프레임 끝 안내 위치에 사용      |
 
 ## 모션
 
@@ -162,7 +165,6 @@
 | ------------------------ | ------------------------------------------------------------------------------------------------------- |
 | 누름 피드백              | `--motion-press-scale`, `--motion-press-duration`, `--motion-release-duration`, `--motion-release-ease` |
 | 카드 hover               | `--motion-hover-lift`, `--motion-hover-duration`                                                        |
-| 스크롤 헤더              | `--motion-header-duration`, `--motion-header-ease`                                                      |
 | 페이지 전환              | `--motion-page-duration`, `--motion-page-ease`                                                          |
 | 테마 원형 확산           | `--motion-theme-reveal-duration`, `--motion-theme-reveal-ease`                                          |
 | 다이얼로그               | `--motion-dialog-duration`, `--motion-dialog-ease`, `--motion-dialog-scale-from`                        |

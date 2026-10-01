@@ -105,7 +105,7 @@
   --focus-ring-width: 2px;
   --focus-ring-offset: 2px;
 
-  --blur-header: 12px;
+  --blur-floating: 12px;
   --blur-overlay: 4px;
 
   --opacity-disabled: 0.4;
@@ -127,12 +127,20 @@
   --layout-prose-min: 560px;
   --layout-page-max: 1200px;
   --layout-note-width: 240px;
-  --layout-header-height: 56px;
+  --layout-frame-peek: clamp(3rem, 8.3vw, 7.5rem); /* 48→120px */
+  --layout-frame-gap: clamp(1.5rem, 5.6vw, 5rem); /* 24→80px */
+  --layout-floating-top: calc(
+    44px + 12px + env(safe-area-inset-top, 0px)
+  ); /* 바 높이 + 간격 + safe-area ≈ 68px */
+  --layout-floating-bottom: calc(
+    44px + 20px + env(safe-area-inset-bottom, 0px)
+  ); /* 바 높이 + 간격 + safe-area ≈ 76px */
 }
 
-@media (width >= 1024px) {
+@media (pointer: coarse) {
   :root {
-    --layout-header-height: 64px;
+    --layout-frame-peek: 12px;
+    --layout-frame-gap: 12px;
   }
 }
 
@@ -199,10 +207,6 @@
   /* 카드 hover */
   --motion-hover-lift: -2px;
   --motion-hover-duration: var(--duration-fast);
-
-  /* 스크롤 헤더 */
-  --motion-header-duration: var(--duration-normal);
-  --motion-header-ease: var(--ease-standard);
 
   /* 페이지 전환 (View Transitions) */
   --motion-page-duration: var(--duration-slow);
@@ -274,7 +278,7 @@
   --color-bg-accent: var(--color-blue-500);
   --color-bg-accent-hover: var(--color-blue-600);
   --color-bg-accent-subtle: var(--color-blue-50);
-  --color-bg-header: var(--color-white-alpha-72);
+  --color-bg-floating: var(--color-white-alpha-72);
   --color-bg-dim: var(--color-black-alpha-40);
   --color-bg-code: var(--color-gray-50);
 
@@ -331,7 +335,7 @@
   --color-bg-accent: var(--color-blue-500);
   --color-bg-accent-hover: var(--color-blue-400);
   --color-bg-accent-subtle: rgb(47 123 245 / 0.16);
-  --color-bg-header: var(--color-gray-950-alpha-72);
+  --color-bg-floating: var(--color-gray-950-alpha-72);
   --color-bg-dim: var(--color-black-alpha-60);
   --color-bg-code: var(--color-gray-900);
 
