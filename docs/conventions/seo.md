@@ -22,6 +22,20 @@
 - 하위 페이지는 `metadata` export에서 `title`만 지정하면 템플릿이 적용됩니다.
 - `alternates.canonical`은 각 페이지 경로 기준으로 설정합니다.
 
+### 프레임별 메타데이터
+
+각 프레임 라우트마다 `title`과 `description`을 따로 둡니다.
+
+| 프레임    | 경로         | title                                              |
+| --------- | ------------ | -------------------------------------------------- |
+| 첫 화면   | `/`          | 김규리 · 프론트엔드 개발자 (기본값, 템플릿 미적용) |
+| 소개      | `/about`     | 소개 · 김규리                                      |
+| 경력      | `/career`    | 경력 · 김규리                                      |
+| 프로젝트  | `/projects`  | 프로젝트 · 김규리                                  |
+| 기술      | `/skills`    | 기술 · 김규리                                      |
+| 학력·자격 | `/education` | 학력·자격 · 김규리                                 |
+| 연락처    | `/contact`   | 연락처 · 김규리                                    |
+
 ## viewport & theme-color
 
 `viewport` export에서 라이트/다크별 `theme-color`를 설정합니다. 값은 `tokens.css`의 `--color-bg-base`와 일치시킵니다.
@@ -48,16 +62,16 @@ Next.js 파일 규칙을 사용합니다.
 
 ## sitemap & robots
 
-| 파일             | 설명                                                 |
-| ---------------- | ---------------------------------------------------- |
-| `app/sitemap.ts` | 홈 + 프로젝트 경로. content/ 목록 기반으로 확장 예정 |
-| `app/robots.ts`  | 전체 허용, sitemap 경로 명시                         |
+| 파일             | 설명                                                   |
+| ---------------- | ------------------------------------------------------ |
+| `app/sitemap.ts` | 홈 + 프레임별 라우트 7개 + 프로젝트 케이스 스터디 경로 |
+| `app/robots.ts`  | 전체 허용, sitemap 경로 명시                           |
 
 ## JSON-LD
 
 루트 레이아웃에 `Person`과 `WebSite` 스키마를 삽입합니다. `src/components/seo/JsonLd.tsx` 컴포넌트를 사용하며, 값은 `src/lib/site.ts`에서 가져옵니다.
 
-- Person: 이름, jobTitle, description, url, sameAs
+- Person: 이름, jobTitle, description, url, sameAs, alternateName("Myu")
 - WebSite: name, url
 - 페이지별 구조화 데이터(Article 등)가 필요하면 같은 JsonLd 컴포넌트를 재사용합니다.
 
