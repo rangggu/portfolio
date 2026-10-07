@@ -122,8 +122,8 @@
   --layout-prose-min: 560px;
   --layout-page-max: 1200px;
   --layout-note-width: 240px;
-  --layout-frame-peek: clamp(3rem, 8.3vw, 7.5rem); /* 48→120px */
-  --layout-frame-gap: clamp(1.5rem, 5.6vw, 5rem); /* 24→80px */
+  --layout-frame-peek: clamp(2rem, 4vw, 4.5rem); /* 32→72px (1440: 58px) */
+  --layout-frame-gap: clamp(1rem, 2.5vw, 2.5rem); /* 16→40px (1440: 36px) */
 
   /* 조작 요소 크기 */
   --size-touch-target: 44px; /* 터치 기기 최소 터치 영역 */
