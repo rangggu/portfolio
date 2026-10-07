@@ -1,0 +1,18 @@
+/* 좌우 여백은 --layout-gutter. container-type을 지정해 안쪽 컴포넌트가 @container로 이 폭에 반응한다.
+ * page: --layout-page-max는 여백 포함 최대 폭 (콘텐츠 = page-max - gutter × 2)
+ * prose: --layout-prose-max는 본문 글 자체의 최대 폭이라 여백을 더한다 */
+.root {
+  container-type: inline-size;
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+}
+
+.root[data-width='page'] {
+  --container-max: var(--layout-page-max);
+}
+
+.root[data-width='prose'] {
+  --container-max: calc(var(--layout-prose-max) + var(--layout-gutter) * 2);
+}

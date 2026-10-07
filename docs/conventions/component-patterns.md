@@ -87,6 +87,7 @@ return (
 
 - 네이티브 요소의 props를 확장하고 `...props`로 전달합니다.
 - `ref`는 React 19 방식대로 일반 prop으로 받습니다 (`forwardRef` 사용 안 함).
+  - 예외: `as`로 렌더링 태그를 바꾸는 `Text`, `Stack`, `Container`는 `ref`를 받지 않습니다. 태그마다 ref 요소 타입이 달라 하나의 타입으로 안전하게 표현할 수 없기 때문입니다. ref가 필요하면 네이티브 요소를 직접 쓰거나 감싸는 요소에 겁니다.
 - `className`은 바깥 배치(margin, 위치)용으로만 허용하고, 내부 스타일을 덮어쓰는 용도로 쓰지 않습니다.
 - variant, size, 상태는 `data-*` 속성으로 표현합니다.
   - 예외: size에 따라 텍스트 스타일이 달라지면 CSS Modules `composes` 제약 때문에 텍스트 스타일만 size별 클래스로 고르고, `data-size`도 함께 붙입니다. 자세한 내용은 [styling](styling.md#css-modules-규칙)을 봅니다.

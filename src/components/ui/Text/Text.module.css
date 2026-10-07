@@ -1,0 +1,17 @@
+/* 텍스트 스타일(variant)은 typography.module.css 클래스로, 색(tone)은 data-tone으로 */
+
+.root[data-tone='primary'] {
+  color: var(--color-text-primary);
+}
+
+.root[data-tone='secondary'] {
+  color: var(--color-text-secondary);
+}
+
+.root[data-tone='tertiary'] {
+  color: var(--color-text-tertiary);
+}
+
+.root[data-tone='accent'] {
+  color: var(--color-text-accent);
+}

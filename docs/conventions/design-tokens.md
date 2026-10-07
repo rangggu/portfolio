@@ -175,6 +175,9 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 | --------------------- | ---- | -------------------------------------------------------------------------------------------------------- |
 | `--size-touch-target` | 44px | 터치 기기(`pointer: coarse`) 최소 터치 영역. 버튼 min-size, 플로팅 바 높이 계산                          |
 | `--size-icon-button`  | 36px | 포인터 기기 IconButton 보이는 크기. 터치 영역 확장은 `calc((icon-button - touch-target) / 2)` 음수 inset |
+| `--size-icon-sm`      | 16px | Icon `size="sm"`                                                                                         |
+| `--size-icon-md`      | 20px | Icon `size="md"` (기본)                                                                                  |
+| `--size-icon-lg`      | 24px | Icon `size="lg"`                                                                                         |
 
 ## 모션
 

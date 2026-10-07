@@ -1,6 +1,11 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Button } from '@/components/ui/Button';
+import { Container } from '@/components/ui/Container';
+import { Heading } from '@/components/ui/Heading';
+import { Icon } from '@/components/ui/Icon';
+import { Stack } from '@/components/ui/Stack';
+import { Text, type TextVariant } from '@/components/ui/Text';
 import { IconButton } from '@/components/ui/IconButton';
 import { Link } from '@/components/ui/Link';
 import { VisuallyHidden } from '@/components/ui/VisuallyHidden';
@@ -52,18 +57,41 @@ function Row({ children }: { children: React.ReactNode }) {
   );
 }
 
+const TEXT_VARIANTS: TextVariant[] = [
+  'display',
+  'headingXl',
+  'headingLg',
+  'headingMd',
+  'headingSm',
+  'bodyLg',
+  'bodyMd',
+  'bodySm',
+  'labelMd',
+  'labelSm',
+  'caption',
+  'monoMd',
+  'monoSm',
+];
+
+function SampleIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <circle cx="12" cy="12" r="9" />
+    </svg>
+  );
+}
+
 export default function DevUiPage() {
   if (process.env.NODE_ENV !== 'development') {
     notFound();
   }
 
   return (
-    <main
-      style={{
-        maxWidth: 'var(--layout-page-max)',
-        margin: '0 auto',
-        paddingBlock: 'var(--spacing-section)',
-      }}
+    <Container
+      as="main"
+      id="main"
+      tabIndex={-1}
+      style={{ paddingBlock: 'var(--spacing-64)' }}
     >
       <h1 style={{ marginBottom: 'var(--spacing-32)' }}>UI Components</h1>
 
@@ -120,12 +148,60 @@ export default function DevUiPage() {
         </Row>
       </Section>
 
+      <Section title="Text — variant 13개 × tone">
+        <Stack gap="8">
+          {TEXT_VARIANTS.map((variant) => (
+            <Text key={variant} variant={variant}>
+              {variant}: 작은 불편을 그냥 지나치지 않습니다.
+            </Text>
+          ))}
+          <Stack direction="row" gap="16" wrap>
+            <Text tone="secondary">secondary</Text>
+            <Text tone="tertiary">tertiary</Text>
+            <Text tone="accent">accent</Text>
+          </Stack>
+        </Stack>
+      </Section>
+
+      <Section title="Heading — level과 시각 스타일 분리">
+        <Stack gap="8">
+          <Heading level={3}>h3 기본 (headingMd)</Heading>
+          <Heading level={3} variant="headingLg">
+            h3 + headingLg
+          </Heading>
+        </Stack>
+      </Section>
+
+      <Section title="Stack — rowFrom 480 (컨테이너 폭 기준)">
+        <Stack gap="12" rowFrom={480}>
+          <Button variant="secondary">하나</Button>
+          <Button variant="secondary">둘</Button>
+          <Button variant="secondary">셋</Button>
+        </Stack>
+      </Section>
+
+      <Section title="Icon — sm / md / lg, currentColor">
+        <Stack direction="row" gap="16" align="center">
+          <Icon size="sm">
+            <SampleIcon />
+          </Icon>
+          <Icon size="md">
+            <SampleIcon />
+          </Icon>
+          <Text as="span" tone="accent">
+            <Icon size="lg" label="원">
+              <SampleIcon />
+            </Icon>
+          </Text>
+        </Stack>
+      </Section>
+
       <Section title="VisuallyHidden">
         <p>
           아래에 숨겨진 텍스트가 있습니다 (스크린리더만 읽음):
           <VisuallyHidden>이 텍스트는 보이지 않습니다</VisuallyHidden>
         </p>
       </Section>
-    </main>
+    </Container>
   );
 }
