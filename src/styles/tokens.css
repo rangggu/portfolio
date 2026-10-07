@@ -55,11 +55,6 @@
   --font-size-15: 0.9375rem;
   --font-size-16: 1rem;
   --font-size-18: 1.125rem;
-  --font-size-20: 1.25rem;
-  --font-size-24: 1.5rem;
-  --font-size-32: 2rem;
-  --font-size-40: 2.5rem;
-  --font-size-56: 3.5rem;
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -115,10 +110,9 @@
 /* ---------- Fluid: 360px → 1280px 선형 보간 ---------- */
 :root {
   --font-size-48-72: clamp(3rem, 2.41rem + 2.61vw, 4.5rem); /* 48→72px */
-  --font-size-40-56: clamp(2.5rem, 2.11rem + 1.74vw, 3.5rem); /* 40→56px */
+  --font-size-36-56: clamp(2.25rem, 1.76rem + 2.17vw, 3.5rem); /* 36→56px */
   --font-size-28-40: clamp(1.75rem, 1.46rem + 1.3vw, 2.5rem); /* 28→40px */
   --font-size-20-24: clamp(1.25rem, 1.15rem + 0.43vw, 1.5rem); /* 20→24px */
-  --spacing-section: clamp(3rem, 1.24rem + 7.83vw, 7.5rem); /* 48→120px */
   --layout-gutter: clamp(1.25rem, 0.76rem + 2.17vw, 2.5rem); /* 20→40px */
 }
 
@@ -133,7 +127,6 @@
 
   /* 조작 요소 크기 */
   --size-touch-target: 44px; /* 터치 기기 최소 터치 영역 */
-  --size-icon-button: 36px; /* 포인터 기기 IconButton 보이는 크기 */
   --size-icon-sm: 16px;
   --size-icon-md: 20px;
   --size-icon-lg: 24px;
@@ -279,7 +272,6 @@
   --color-text-primary: var(--color-gray-900);
   --color-text-secondary: var(--color-gray-600);
   --color-text-tertiary: var(--color-gray-500);
-  --color-text-disabled: var(--color-gray-400);
   --color-text-inverse: var(--color-gray-0);
   --color-text-accent: var(--color-blue-600);
   --color-text-on-accent: var(--color-gray-0);
@@ -338,7 +330,6 @@
   --color-text-primary: var(--color-gray-50);
   --color-text-secondary: var(--color-gray-400);
   --color-text-tertiary: var(--color-gray-500);
-  --color-text-disabled: var(--color-gray-700);
   --color-text-inverse: var(--color-gray-900);
   --color-text-accent: var(--color-blue-300);
   --color-text-on-accent: var(--color-gray-0);

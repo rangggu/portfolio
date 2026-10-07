@@ -32,6 +32,7 @@
 - 루트 요소 클래스는 `.root`로 통일합니다.
 - variant, size는 `data-*` 속성 선택자로 분기합니다.
 - 상태는 네이티브 의사 클래스와 ARIA 속성을 먼저 씁니다 (`:disabled`, `:focus-visible`, `[aria-expanded='true']`). 없을 때만 `data-state`를 씁니다.
+- 비활성 상태는 `opacity: var(--opacity-disabled)` 하나로 통일합니다. 색을 따로 바꾸지 않고, 비활성 전용 색 토큰도 만들지 않습니다.
 - `:global`은 `globals.css`에서만 씁니다.
 - 네이티브 CSS 중첩은 2단계까지만 씁니다.
 - `transition: all`을 쓰지 않고 속성을 명시합니다.

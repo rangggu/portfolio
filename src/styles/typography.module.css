@@ -6,9 +6,9 @@
   letter-spacing: var(--letter-spacing-tight);
 }
 
-/* headingXl: 첫 화면 한 줄 소개 (40→56px) */
+/* headingXl: 첫 화면 한 줄 소개 (36→56px) */
 .headingXl {
-  font-size: var(--font-size-40-56);
+  font-size: var(--font-size-36-56);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);

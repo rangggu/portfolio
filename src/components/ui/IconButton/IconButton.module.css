@@ -1,10 +1,13 @@
 .root {
+  /* 보이는 크기: IconButton에서만 쓰는 값이라 로컬 변수. 터치 영역은 전역 --size-touch-target */
+  --icon-button-size: 36px;
+
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--size-icon-button);
-  height: var(--size-icon-button);
+  width: var(--icon-button-size);
+  height: var(--icon-button-size);
   border: none;
   border-radius: var(--radius-8);
   cursor: pointer;
@@ -33,7 +36,7 @@
 .root::before {
   content: '';
   position: absolute;
-  inset: calc((var(--size-icon-button) - var(--size-touch-target)) / 2);
+  inset: calc((var(--icon-button-size) - var(--size-touch-target)) / 2);
 }
 
 /* --- variant --- */

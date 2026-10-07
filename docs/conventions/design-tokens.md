@@ -12,43 +12,52 @@
 
 라이트/다크 전환은 semantic 토큰만 재정의해서 처리합니다. 그라데이션도 semantic 색상을 참조하므로 테마에 따라 함께 바뀝니다.
 
+## 이름 규칙
+
+모든 토큰에 적용합니다.
+
+- **전역 토큰 기준:** 전역 토큰은 두 곳 이상에서 쓰이거나, 테마·디자인 결정에 해당하는 값만 둡니다. 한 컴포넌트에서만 쓰는 장식 값은 그 컴포넌트 CSS의 로컬 변수로 둡니다 (예: `Canvas.module.css`의 `--dot-size`·`--dot-gap`, `IconButton.module.css`의 `--icon-button-size`).
+- **로컬 변수 이름:** 컴포넌트 CSS 안에서 `.root`에 선언하고, 전역 토큰과 겹치지 않는 짧은 이름을 씁니다 (`--dot-gap`, `--stack-gap`).
+- **크기 토큰:** 값을 드러내는 이름. 고정 크기는 `--font-size-{px}`, 유동 크기는 `--font-size-{min}-{max}`처럼 px 값을 이름에 씁니다. 값이 바뀌면 이름도 바꿉니다.
+- **비활성 상태:** `--opacity-disabled` 하나로 표현합니다. 비활성 전용 색 토큰(`--color-text-disabled` 등)은 만들지 않습니다.
+- **보류 토큰:** 쓰임이 정해지지 않은 토큰은 표에 "보류"로 표시하고 재검토 시점을 적습니다.
+
 ## 색상 (semantic)
 
-| 토큰                               | 용도                           |
-| ---------------------------------- | ------------------------------ |
-| `--color-text-primary`             | 본문, 제목                     |
-| `--color-text-secondary`           | 보조 설명, 메타 정보           |
-| `--color-text-tertiary`            | 캡션, 비활성에 가까운 정보     |
-| `--color-text-disabled`            | 비활성 텍스트                  |
-| `--color-text-inverse`             | 반전 배경 위 텍스트            |
-| `--color-text-accent`              | 링크, 강조                     |
-| `--color-text-on-accent`           | 강조 배경 위 텍스트            |
-| `--color-text-danger` / `-success` | 상태 표시                      |
-| `--color-bg-base`                  | 페이지 배경                    |
-| `--color-bg-subtle`                | 섹션 구분 배경                 |
-| `--color-bg-muted`                 | 태그, 스켈레톤 등              |
-| `--color-bg-elevated`              | 카드, 팝오버, 다이얼로그       |
-| `--color-bg-inverse`               | 반전 영역 (툴팁 등)            |
-| `--color-bg-accent` / `-hover`     | 주요 버튼                      |
-| `--color-bg-accent-subtle`         | 강조 배경 (선택된 탭 등)       |
-| `--color-bg-floating`              | 반투명 플로팅 UI (blur와 함께) |
-| `--color-bg-dim`                   | 오버레이 딤                    |
-| `--color-bg-code`                  | 코드 블록                      |
-| `--color-bg-canvas`                | 캔버스 바탕 (프레임 바깥)      |
-| `--color-bg-canvas-dot`            | 캔버스 점 무늬                 |
-| `--color-border-default`           | 기본 테두리, 구분선            |
-| `--color-border-subtle`            | 약한 구분선                    |
-| `--color-border-strong`            | 입력 요소 테두리               |
-| `--color-border-focus`             | 포커스 링                      |
+| 토큰                               | 용도                                                            |
+| ---------------------------------- | --------------------------------------------------------------- |
+| `--color-text-primary`             | 본문, 제목                                                      |
+| `--color-text-secondary`           | 보조 설명, 메타 정보                                            |
+| `--color-text-tertiary`            | 캡션, 비활성에 가까운 정보                                      |
+| `--color-text-inverse`             | 반전 배경 위 텍스트                                             |
+| `--color-text-accent`              | 링크, 강조                                                      |
+| `--color-text-on-accent`           | 강조 배경 위 텍스트                                             |
+| `--color-text-danger` / `-success` | 상태 표시 (보류: Phase 2에서 연락처·모바일 구성 확정 후 재검토) |
+| `--color-bg-base`                  | 페이지 배경                                                     |
+| `--color-bg-subtle`                | 섹션 구분 배경                                                  |
+| `--color-bg-muted`                 | 태그, 스켈레톤 등                                               |
+| `--color-bg-elevated`              | 카드, 팝오버, 다이얼로그                                        |
+| `--color-bg-inverse`               | 반전 영역 (툴팁 등)                                             |
+| `--color-bg-accent` / `-hover`     | 주요 버튼                                                       |
+| `--color-bg-accent-subtle`         | 강조 배경 (선택된 탭 등)                                        |
+| `--color-bg-floating`              | 반투명 플로팅 UI (blur와 함께)                                  |
+| `--color-bg-dim`                   | 오버레이 딤                                                     |
+| `--color-bg-code`                  | 코드 블록                                                       |
+| `--color-bg-canvas`                | 캔버스 바탕 (프레임 바깥)                                       |
+| `--color-bg-canvas-dot`            | 캔버스 점 무늬                                                  |
+| `--color-border-default`           | 기본 테두리, 구분선                                             |
+| `--color-border-subtle`            | 약한 구분선                                                     |
+| `--color-border-strong`            | 입력 요소 테두리                                                |
+| `--color-border-focus`             | 포커스 링                                                       |
 
 ## 그라데이션
 
-| 토큰                     | 용도                                       |
-| ------------------------ | ------------------------------------------ |
-| `--gradient-accent`      | 강조 텍스트(`background-clip: text`), 배지 |
-| `--gradient-hero-glow`   | 히어로 영역 배경 광원                      |
-| `--gradient-fade-bottom` | 접힌 콘텐츠 하단 페이드                    |
-| `--gradient-skeleton`    | 스켈레톤 shimmer                           |
+| 토큰                     | 용도                                                                          |
+| ------------------------ | ----------------------------------------------------------------------------- |
+| `--gradient-accent`      | 강조 텍스트(`background-clip: text`), 배지                                    |
+| `--gradient-hero-glow`   | 히어로 영역 배경 광원                                                         |
+| `--gradient-fade-bottom` | 접힌 콘텐츠 하단 페이드 (보류: Phase 2에서 연락처·모바일 구성 확정 후 재검토) |
+| `--gradient-skeleton`    | 스켈레톤 shimmer                                                              |
 
 ## 타이포그래피
 
@@ -77,9 +86,8 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 
 메트릭 출처: Apple SD Gothic Neo는 macOS fontTools 실측 + Playwright 실측 보정, 맑은 고딕은 Microsoft Typography 공식 사양, Noto Sans KR은 Google Fonts 메타데이터.
 
-### 이름 규칙
+### 타이포그래피 규칙
 
-- **크기 토큰** (`tokens.css`): 값을 드러내는 이름. 고정 크기는 `--font-size-{px}`, 유동 크기는 `--font-size-{min}-{max}`.
 - **텍스트 스타일** (`typography.module.css`): "종류 + 크기" 패턴 (`headingLg`, `bodyMd`, `monoSm` 등). 용도 이름(hero, section)은 쓰지 않음. 용도는 컴포넌트가 정함.
 - 컴포넌트는 `--font-size-*` 토큰을 직접 쓰지 않고 항상 텍스트 스타일만 사용 (`Text`/`Heading` 컴포넌트 또는 `composes`). 크기 토큰을 참조하는 곳은 `typography.module.css` 하나뿐이어야 함.
 - `font-size: inherit`, `1em`처럼 부모 크기를 따르는 경우만 예외.
@@ -91,7 +99,7 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 | 스타일      | size (토큰)               | weight   | line-height | letter-spacing | font               | 용도                    |
 | ----------- | ------------------------- | -------- | ----------- | -------------- | ------------------ | ----------------------- |
 | `display`   | `--font-size-48-72` 48→72 | bold     | tight       | tight          | sans               | 첫 화면 이름            |
-| `headingXl` | `--font-size-40-56` 40→56 | bold     | tight       | tight          | sans               | 첫 화면 한 줄 소개      |
+| `headingXl` | `--font-size-36-56` 36→56 | bold     | tight       | tight          | sans               | 첫 화면 한 줄 소개      |
 | `headingLg` | `--font-size-28-40` 28→40 | bold     | tight       | tight          | sans               | 섹션 제목               |
 | `headingMd` | `--font-size-20-24` 20→24 | semibold | snug        | tight          | sans               | 회사명, 프로젝트 제목   |
 | `headingSm` | `--font-size-18` 18       | semibold | snug        | normal         | sans               | 작은 소제목             |
@@ -132,15 +140,15 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 
 ## 그림자·블러·투명도
 
-| 토큰                 | 용도                        |
-| -------------------- | --------------------------- |
-| `--shadow-sm`        | 카드 기본                   |
-| `--shadow-md`        | 카드 hover, 드롭다운        |
-| `--shadow-lg`        | 팝오버, 커맨드 팔레트       |
-| `--shadow-overlay`   | 다이얼로그, 바텀시트        |
-| `--blur-floating`    | 플로팅 UI `backdrop-filter` |
-| `--blur-overlay`     | 오버레이 딤 블러            |
-| `--opacity-disabled` | 비활성 요소                 |
+| 토큰                 | 용도                                                                                 |
+| -------------------- | ------------------------------------------------------------------------------------ |
+| `--shadow-sm`        | 카드 기본                                                                            |
+| `--shadow-md`        | 카드 hover, 드롭다운                                                                 |
+| `--shadow-lg`        | 팝오버, 커맨드 팔레트                                                                |
+| `--shadow-overlay`   | 다이얼로그, 바텀시트                                                                 |
+| `--blur-floating`    | 플로팅 UI `backdrop-filter`                                                          |
+| `--blur-overlay`     | 오버레이 딤 블러                                                                     |
+| `--opacity-disabled` | 비활성 요소. 비활성 표현은 이 토큰 하나로 통일하고 비활성 전용 색 토큰은 만들지 않음 |
 
 ## 유동 토큰
 
@@ -149,37 +157,35 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 | 토큰                | clamp 값                                   | 모바일 → 최대 |
 | ------------------- | ------------------------------------------ | ------------- |
 | `--font-size-48-72` | `clamp(3rem, 2.41rem + 2.61vw, 4.5rem)`    | 48→72px       |
-| `--font-size-40-56` | `clamp(2.5rem, 2.11rem + 1.74vw, 3.5rem)`  | 40→56px       |
+| `--font-size-36-56` | `clamp(2.25rem, 1.76rem + 2.17vw, 3.5rem)` | 36→56px       |
 | `--font-size-28-40` | `clamp(1.75rem, 1.46rem + 1.3vw, 2.5rem)`  | 28→40px       |
 | `--font-size-20-24` | `clamp(1.25rem, 1.15rem + 0.43vw, 1.5rem)` | 20→24px       |
-| `--spacing-section` | `clamp(3rem, 1.24rem + 7.83vw, 7.5rem)`    | 48→120px      |
 | `--layout-gutter`   | `clamp(1.25rem, 0.76rem + 2.17vw, 2.5rem)` | 20→40px       |
 
 ## 레이아웃
 
-| 토큰                            | 값                                                         | 용도                                                               |
-| ------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------ |
-| `--layout-prose-max`            | 720px                                                      | 본문 글 최대 폭 (본문 18px에서 한 줄 한글 40자 안팎의 가독성 기준) |
-| `--layout-prose-min`            | 560px                                                      | 여백 메모와 나란히 놓일 때 본문 최소 폭                            |
-| `--layout-page-max`             | 1200px                                                     | 프레임 최대 폭. 타임라인, 목록 등은 이 폭을 전부 사용              |
-| `--layout-note-width`           | 240px                                                      | 여백 메모 고정 폭                                                  |
-| `--layout-gutter`               | clamp 20→40px                                              | 프레임 안쪽 좌우 여백 (유동 토큰)                                  |
-| `--layout-frame-peek`           | fine: clamp 48→120px, coarse: 12px                         | 옆 프레임 노출 폭. `@media (pointer: coarse)`에서 12px로 재정의    |
-| `--layout-frame-gap`            | fine: clamp 24→80px, coarse: 12px                          | 프레임 사이 간격. `@media (pointer: coarse)`에서 12px로 재정의     |
-| `--layout-floating-bar-padding` | `--spacing-4` (4px)                                        | 플로팅 바 위아래 안쪽 여백                                         |
-| `--layout-floating-bar-height`  | `--size-touch-target` + padding × 2 = 52px                 | 플로팅 바 높이 (터치 영역 + 안쪽 여백)                             |
-| `--layout-floating-top`         | bar-height + `--spacing-12` + safe-area = 64px + safe-area | 상단 플로팅 UI 영역. scroll-padding, sticky top 계산에 사용        |
-| `--layout-floating-bottom`      | bar-height + `--spacing-20` + safe-area = 72px + safe-area | 하단 메뉴 바 영역. scroll-padding, 프레임 끝 안내 위치에 사용      |
+| 토큰                            | 값                                                         | 용도                                                                                                                                          |
+| ------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--layout-prose-max`            | 720px                                                      | 본문 글 최대 폭 (본문 18px에서 한 줄 한글 40자 안팎의 가독성 기준)                                                                            |
+| `--layout-prose-min`            | 560px                                                      | 여백 메모와 나란히 놓일 때 본문 최소 폭                                                                                                       |
+| `--layout-page-max`             | 1200px                                                     | 프레임 최대 폭(좌우 여백 포함). 콘텐츠 최대 폭은 여기서 `--layout-gutter` × 2를 뺀 값(최대 1120px). 타임라인, 목록 등은 콘텐츠 폭을 전부 사용 |
+| `--layout-note-width`           | 240px                                                      | 여백 메모 고정 폭                                                                                                                             |
+| `--layout-gutter`               | clamp 20→40px                                              | 프레임 안쪽 좌우 여백 (유동 토큰)                                                                                                             |
+| `--layout-frame-peek`           | fine: clamp 48→120px, coarse: 12px                         | 옆 프레임 노출 폭. `@media (pointer: coarse)`에서 12px로 재정의                                                                               |
+| `--layout-frame-gap`            | fine: clamp 24→80px, coarse: 12px                          | 프레임 사이 간격. `@media (pointer: coarse)`에서 12px로 재정의                                                                                |
+| `--layout-floating-bar-padding` | `--spacing-4` (4px)                                        | 플로팅 바 위아래 안쪽 여백                                                                                                                    |
+| `--layout-floating-bar-height`  | `--size-touch-target` + padding × 2 = 52px                 | 플로팅 바 높이 (터치 영역 + 안쪽 여백)                                                                                                        |
+| `--layout-floating-top`         | bar-height + `--spacing-12` + safe-area = 64px + safe-area | 상단 플로팅 UI 영역. scroll-padding, sticky top 계산에 사용                                                                                   |
+| `--layout-floating-bottom`      | bar-height + `--spacing-20` + safe-area = 72px + safe-area | 하단 메뉴 바 영역. scroll-padding, 프레임 끝 안내 위치에 사용                                                                                 |
 
 ### 조작 요소 크기
 
-| 토큰                  | 값   | 용도                                                                                                     |
-| --------------------- | ---- | -------------------------------------------------------------------------------------------------------- |
-| `--size-touch-target` | 44px | 터치 기기(`pointer: coarse`) 최소 터치 영역. 버튼 min-size, 플로팅 바 높이 계산                          |
-| `--size-icon-button`  | 36px | 포인터 기기 IconButton 보이는 크기. 터치 영역 확장은 `calc((icon-button - touch-target) / 2)` 음수 inset |
-| `--size-icon-sm`      | 16px | Icon `size="sm"`                                                                                         |
-| `--size-icon-md`      | 20px | Icon `size="md"` (기본)                                                                                  |
-| `--size-icon-lg`      | 24px | Icon `size="lg"`                                                                                         |
+| 토큰                  | 값   | 용도                                                                            |
+| --------------------- | ---- | ------------------------------------------------------------------------------- |
+| `--size-touch-target` | 44px | 터치 기기(`pointer: coarse`) 최소 터치 영역. 버튼 min-size, 플로팅 바 높이 계산 |
+| `--size-icon-sm`      | 16px | Icon `size="sm"`                                                                |
+| `--size-icon-md`      | 20px | Icon `size="md"` (기본)                                                         |
+| `--size-icon-lg`      | 24px | Icon `size="lg"`                                                                |
 
 ### 캔버스
 
@@ -204,16 +210,16 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 
 ### 애니메이션별
 
-| 애니메이션               | 토큰                                                                                                    |
-| ------------------------ | ------------------------------------------------------------------------------------------------------- |
-| 누름 피드백              | `--motion-press-scale`, `--motion-press-duration`, `--motion-release-duration`, `--motion-release-ease` |
-| 카드 hover               | `--motion-hover-lift`, `--motion-hover-duration`                                                        |
-| 페이지 전환              | `--motion-page-duration`, `--motion-page-ease`                                                          |
-| 테마 원형 확산           | `--motion-theme-reveal-duration`, `--motion-theme-reveal-ease`                                          |
-| 다이얼로그               | `--motion-dialog-duration`, `--motion-dialog-ease`, `--motion-dialog-scale-from`                        |
-| 바텀시트                 | `--motion-sheet-duration`, `--motion-sheet-ease`                                                        |
-| 토스트                   | `--motion-toast-duration`                                                                               |
-| 레이아웃 모핑 인디케이터 | `--motion-indicator-duration`, `--motion-indicator-ease`                                                |
+| 애니메이션                                                     | 토큰                                                                                                    |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| 누름 피드백                                                    | `--motion-press-scale`, `--motion-press-duration`, `--motion-release-duration`, `--motion-release-ease` |
+| 카드 hover                                                     | `--motion-hover-lift`, `--motion-hover-duration`                                                        |
+| 페이지 전환                                                    | `--motion-page-duration`, `--motion-page-ease`                                                          |
+| 테마 원형 확산                                                 | `--motion-theme-reveal-duration`, `--motion-theme-reveal-ease`                                          |
+| 다이얼로그                                                     | `--motion-dialog-duration`, `--motion-dialog-ease`, `--motion-dialog-scale-from`                        |
+| 바텀시트 (보류: Phase 2에서 연락처·모바일 구성 확정 후 재검토) | `--motion-sheet-duration`, `--motion-sheet-ease`                                                        |
+| 토스트                                                         | `--motion-toast-duration`                                                                               |
+| 레이아웃 모핑 인디케이터                                       | `--motion-indicator-duration`, `--motion-indicator-ease`                                                |
 
 ### reduced motion
 
