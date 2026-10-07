@@ -9,6 +9,7 @@
     "lint": "eslint && stylelint \"src/**/*.css\"",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "check:responsive": "node --experimental-strip-types --no-warnings scripts/check-responsive.mjs",
     "prepare": "husky"
   },
   "dependencies": {

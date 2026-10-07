@@ -1,7 +1,7 @@
 /**
  * 기준 기기 매트릭스
  * Phase 4 Playwright 테스트와 docs/conventions/responsive.md에서 같은 목록을 사용한다.
- * CSS viewport 값(논리 픽셀, 세로 모드 기준).
+ * CSS viewport 값(논리 픽셀). 태블릿은 세로·가로를 모두 둔다.
  *
  * 출처:
  * - Apple: https://developer.apple.com/help/app-store-connect/reference/screenshot-specifications/
@@ -98,6 +98,30 @@ export const DEVICES = [
     category: 'tablet',
     width: 1024,
     height: 1366,
+  },
+  {
+    name: 'iPad mini 7 (landscape)',
+    category: 'tablet',
+    width: 1133,
+    height: 744,
+  },
+  {
+    name: 'iPad Air 11" (landscape)',
+    category: 'tablet',
+    width: 1180,
+    height: 820,
+  },
+  {
+    name: 'iPad Pro 11" (landscape)',
+    category: 'tablet',
+    width: 1194,
+    height: 834,
+  },
+  {
+    name: 'iPad Pro 13" (landscape)',
+    category: 'tablet',
+    width: 1366,
+    height: 1024,
   },
 
   // --- 랩톱·데스크톱 ---
