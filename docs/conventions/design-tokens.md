@@ -50,6 +50,31 @@
 
 ## 타이포그래피
 
+### 폰트 대체 보정 (CLS 방지)
+
+Pretendard Variable을 다이나믹 서브셋으로 로드하므로 `next/font`의 자동 보정을 쓰지 않습니다. 대신 운영체제별 대체 폰트에 `size-adjust` 등을 직접 적용합니다.
+
+**Pretendard Variable 메트릭:** UPM 2048, ascent 1950, descent 494, lineGap 0
+
+**계산 방식** (Next.js 폰트 대체 보정과 동일):
+
+```
+pRatio = (pretendardAscent + pretendardDescent) / pretendardUPM
+fRatio = (fallbackAscent + fallbackDescent) / fallbackUPM
+size-adjust       = pRatio / fRatio
+ascent-override   = (pretendardAscent / pretendardUPM) / sizeAdjust
+descent-override  = (pretendardDescent / pretendardUPM) / sizeAdjust
+line-gap-override = 0 (Pretendard lineGap이 0)
+```
+
+| 대체 폰트                 | OS            | UPM  | ascent | descent | size-adjust | ascent-override | descent-override |
+| ------------------------- | ------------- | ---- | ------ | ------- | ----------- | --------------- | ---------------- |
+| Apple SD Gothic Neo       | macOS·iOS     | 1000 | 900    | 300     | 99.65%      | 95.55%          | 24.20%           |
+| 맑은 고딕 (Malgun Gothic) | Windows       | 2048 | 2167   | 533     | 90.52%      | 105.19%         | 26.65%           |
+| Noto Sans KR              | Android·Linux | 1000 | 1160   | 288     | 82.41%      | 115.53%         | 29.27%           |
+
+메트릭 출처: Apple SD Gothic Neo는 macOS fontTools 실측 + Playwright 실측 보정, 맑은 고딕은 Microsoft Typography 공식 사양, Noto Sans KR은 Google Fonts 메타데이터.
+
 ### 이름 규칙
 
 - **크기 토큰** (`tokens.css`): 값을 드러내는 이름. 고정 크기는 `--font-size-{px}`, 유동 크기는 `--font-size-{min}-{max}`.

@@ -1,4 +1,48 @@
+@import url('pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css');
 @import url('@/styles/tokens.css');
+
+/* ---------- Fallback fonts: Pretendard 메트릭 보정 ----------
+ * Pretendard Variable: UPM 2048, ascent 1950, descent 494, lineGap 0
+ *
+ * 계산 방식 (Next.js 폰트 대체 보정과 동일):
+ *   pRatio = (pretendardAscent + pretendardDescent) / pretendardUPM
+ *   fRatio = (fallbackAscent + fallbackDescent) / fallbackUPM
+ *   size-adjust      = pRatio / fRatio
+ *   ascent-override   = (pretendardAscent / pretendardUPM) / sizeAdjust
+ *   descent-override  = (pretendardDescent / pretendardUPM) / sizeAdjust
+ *   line-gap-override = 0 (Pretendard lineGap이 0이므로)
+ */
+
+/* macOS · iOS: Apple SD Gothic Neo (UPM 1000, ascent 900, descent 300)
+ * 메트릭 계산 99.45%, Playwright 실측 99.65% → 실측 값 채택 */
+@font-face {
+  font-family: 'Pretendard Fallback Mac';
+  src: local('Apple SD Gothic Neo');
+  size-adjust: 99.65%;
+  ascent-override: 95.55%;
+  descent-override: 24.2%;
+  line-gap-override: 0%;
+}
+
+/* Windows: 맑은 고딕 (UPM 2048, ascent 2167, descent 533) */
+@font-face {
+  font-family: 'Pretendard Fallback Win';
+  src: local('Malgun Gothic');
+  size-adjust: 90.52%;
+  ascent-override: 105.19%;
+  descent-override: 26.65%;
+  line-gap-override: 0%;
+}
+
+/* Android · Linux: Noto Sans KR (UPM 1000, ascent 1160, descent 288) */
+@font-face {
+  font-family: 'Pretendard Fallback Android';
+  src: local('Noto Sans KR');
+  size-adjust: 82.41%;
+  ascent-override: 115.53%;
+  descent-override: 29.27%;
+  line-gap-override: 0%;
+}
 
 /* ---------- Reset ---------- */
 *,
