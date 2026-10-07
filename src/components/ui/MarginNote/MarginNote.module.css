@@ -1,0 +1,98 @@
+/*
+ * 여백 메모 (product.md 여백 메모, responsive.md 여백 메모 컨테이너 쿼리)
+ * 넓은 프레임(컨테이너 ≥ 832px = 본문 최소 560 + 간격 32 + 메모 240): 본문 오른쪽에 항상 표시
+ * 좁은 프레임: 숨김, 연결 텍스트를 누르면 문단 바로 아래에 펼침 (팝오버 아님)
+ * --margin-note-mode는 JS가 aria-expanded를 맞추려고 읽는다.
+ */
+.group {
+  --margin-note-mode: narrow;
+
+  display: grid;
+  gap: var(--spacing-12);
+}
+
+.notes {
+  display: grid;
+  gap: var(--spacing-12);
+}
+
+/* 좁은 프레임: 펼친 메모만 보이고, 펼친 게 없으면 자리도 차지하지 않는다 */
+.note[data-open='false'] {
+  display: none;
+}
+
+.notes:not(:has(.note[data-open='true'])) {
+  display: none;
+}
+
+.note {
+  composes: bodySm from '@/styles/typography.module.css';
+  padding: var(--spacing-12) var(--spacing-16);
+  border-inline-start: var(--border-width-2) solid var(--color-border-strong);
+  border-radius: var(--radius-4);
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+/* 연결 텍스트: 문장 속 인라인 버튼. 44px 터치 영역 규칙의 예외 (responsive.md) */
+.anchor {
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-4);
+  background: none;
+  color: var(--color-text-accent);
+  font: inherit;
+  text-align: inherit;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: var(--border-width-2);
+  text-underline-offset: var(--spacing-4);
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+@container (width >= 832px) {
+  .group {
+    --margin-note-mode: wide;
+
+    grid-template-columns: minmax(0, 1fr) var(--layout-note-width);
+    column-gap: var(--spacing-32);
+    align-items: start;
+  }
+
+  .notes:not(:has(.note[data-open='true'])) {
+    display: grid;
+  }
+
+  .note[data-open='false'] {
+    display: block;
+  }
+
+  .note {
+    padding: 0 0 0 var(--spacing-12);
+    background-color: transparent;
+  }
+
+  /* 넓은 프레임에서는 연결 표시를 점선으로 가볍게 */
+  .anchor {
+    color: inherit;
+    text-decoration-style: dotted;
+    text-decoration-thickness: var(--border-width-1);
+  }
+
+  /* 메모 ↔ 연결 텍스트 서로 강조 (hover·focus) */
+  .anchor[data-active],
+  .note[data-active] {
+    background-color: var(--color-bg-accent-subtle);
+  }
+
+  .note[data-active] {
+    border-inline-start-color: var(--color-border-focus);
+  }
+}
+
+@media print {
+  .notes {
+    display: none;
+  }
+}

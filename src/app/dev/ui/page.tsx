@@ -8,6 +8,12 @@ import { Stack } from '@/components/ui/Stack';
 import { Text, type TextVariant } from '@/components/ui/Text';
 import { IconButton } from '@/components/ui/IconButton';
 import { Link } from '@/components/ui/Link';
+import {
+  MarginNote,
+  MarginNoteAnchor,
+  MarginNoteGroup,
+} from '@/components/ui/MarginNote';
+import { Prose } from '@/components/ui/Prose';
 import { VisuallyHidden } from '@/components/ui/VisuallyHidden';
 
 export const metadata: Metadata = {
@@ -78,6 +84,29 @@ function SampleIcon() {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <circle cx="12" cy="12" r="9" />
     </svg>
+  );
+}
+
+function MarginNoteSample() {
+  return (
+    <Prose>
+      <p>메모가 없는 문단은 본문 열 폭만 씁니다.</p>
+      <MarginNoteGroup>
+        <p>
+          연결 텍스트는{' '}
+          <MarginNoteAnchor note="why">왜 그렇게 했는지</MarginNoteAnchor>를
+          짧게 적은 메모와 이어집니다. 한 문단에{' '}
+          <MarginNoteAnchor note="more">메모가 둘</MarginNoteAnchor>이어도
+          됩니다.
+        </p>
+        <MarginNote id="why">
+          넓은 프레임에서는 본문 오른쪽에 항상 보이고, 좁은 프레임에서는 눌렀을
+          때 문단 아래에 펼쳐집니다.
+        </MarginNote>
+        <MarginNote id="more">메모는 문단 순서대로 쌓입니다.</MarginNote>
+      </MarginNoteGroup>
+      <p>다음 문단은 메모와 상관없이 이어집니다.</p>
+    </Prose>
   );
 }
 
@@ -194,6 +223,16 @@ export default function DevUiPage() {
             </Icon>
           </Text>
         </Stack>
+      </Section>
+
+      <Section title="MarginNote — 넓은 프레임 (컨테이너 ≥ 832px)">
+        <MarginNoteSample />
+      </Section>
+
+      <Section title="MarginNote — 좁은 프레임 (안쪽 Container prose, < 832px)">
+        <Container width="prose">
+          <MarginNoteSample />
+        </Container>
       </Section>
 
       <Section title="VisuallyHidden">

@@ -263,6 +263,21 @@ CSS가 뷰포트에 반응하면 레이아웃은 자동으로 바뀝니다. JS�
 - 연결 텍스트는 `<button>`으로 구현하고 `aria-expanded`, `aria-controls`로 상태 전달
 - 문장 속 인라인 텍스트라 44px 터치 영역 규칙의 예외이지만, 줄 간격(`--line-height-relaxed: 1.75`)으로 오터치를 방지
 
+**구현 (`components/ui/MarginNote`, MDX 글과 일반 컴포넌트에서 같은 모양으로 사용):**
+
+```tsx
+<MarginNoteGroup>
+  <p>
+    … <MarginNoteAnchor note="why">연결 텍스트</MarginNoteAnchor> …
+  </p>
+  <MarginNote id="why">메모 내용</MarginNote>
+</MarginNoteGroup>
+```
+
+- `MarginNoteGroup`이 서버에서 자식을 본문과 메모로 나눠, 메모가 항상 문단 뒤(넓으면 오른쪽 열)에 오게 합니다. `id`는 그룹 안에서만 유일하면 됩니다.
+- 넓음/좁음은 CSS 컨테이너 쿼리가 정하고, JS는 그 결과만 읽어 `aria-expanded`를 맞춥니다.
+- 긴 글은 `Prose`로 감쌉니다. 넓은 프레임에서 메모가 없는 블록도 본문 열 폭에 맞춰 정렬됩니다.
+
 ## 입력 방식 분기
 
 너비와 별개로 입력 방식에 따라 분기합니다.

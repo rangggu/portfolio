@@ -1,0 +1,42 @@
+.root {
+  composes: bodyLg from '@/styles/typography.module.css';
+  max-width: var(--layout-prose-max);
+  margin-inline: auto;
+  color: var(--color-text-primary);
+
+  & > * + * {
+    margin-top: var(--spacing-24);
+  }
+
+  & > :is(h2, h3) {
+    margin-top: var(--spacing-48);
+  }
+
+  & > :is(h2, h3) + * {
+    margin-top: var(--spacing-16);
+  }
+
+  & > :is(ul, ol) {
+    display: grid;
+    gap: var(--spacing-8);
+    padding-inline-start: var(--spacing-24);
+  }
+}
+
+/* 넓은 프레임: 본문 열 + 간격 + 메모 열. 메모 그룹이 아닌 블록은 본문 열 폭만 쓴다 */
+@container (width >= 832px) {
+  .root {
+    --prose-note-space: calc(var(--spacing-32) + var(--layout-note-width));
+
+    max-width: calc(var(--layout-prose-max) + var(--prose-note-space));
+
+    & > * {
+      max-width: calc(100% - var(--prose-note-space));
+    }
+
+    /* MarginNoteGroup은 메모 열까지 전체 폭을 쓴다 */
+    & > [data-margin-note-group] {
+      max-width: none;
+    }
+  }
+}
