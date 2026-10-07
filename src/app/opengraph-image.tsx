@@ -1,7 +1,12 @@
 // TODO: Phase 2에서 프로젝트별 OG 이미지 추가 예정
 import { ImageResponse } from 'next/og';
 
-export const alt = '김규리 · 프론트엔드 개발자';
+import { RESUME } from '@/lib/resume';
+import { SITE } from '@/lib/site';
+
+const { profile } = RESUME;
+
+export const alt = SITE.title;
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -29,10 +34,10 @@ export default function OpenGraphImage() {
         }}
       >
         <div style={{ fontSize: 56, fontWeight: 700, letterSpacing: -1 }}>
-          김규리
+          {profile.name}
         </div>
         <div style={{ fontSize: 32, color: '#8a929c', fontWeight: 500 }}>
-          프론트엔드 개발자
+          {profile.jobTitle}
         </div>
         <div
           style={{
@@ -44,7 +49,7 @@ export default function OpenGraphImage() {
           }}
         />
         <div style={{ fontSize: 26, color: '#69717c', lineHeight: 1.5 }}>
-          작은 불편을 그냥 지나치지 않습니다.
+          {profile.tagline}
         </div>
       </div>
     </div>,

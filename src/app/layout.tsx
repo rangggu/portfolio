@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from 'next';
 import dynamic from 'next/dynamic';
 import { SkipLink } from '@/components/layout/SkipLink';
 import { JsonLd, ThemeScript } from '@/components/seo';
-import { PERSON, SITE } from '@/lib/site';
+import { RESUME } from '@/lib/resume';
+import { toPersonJsonLd } from '@/lib/resume/jsonLd';
+import { SITE } from '@/lib/site';
 import './globals.css';
 
 const ViewportIndicator =
@@ -66,15 +68,7 @@ export const viewport: Viewport = {
   ],
 };
 
-const personJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: PERSON.name,
-  jobTitle: PERSON.jobTitle,
-  description: PERSON.description,
-  url: SITE.url,
-  sameAs: PERSON.sameAs,
-};
+const personJsonLd = toPersonJsonLd(RESUME, SITE.url);
 
 const webSiteJsonLd = {
   '@context': 'https://schema.org',

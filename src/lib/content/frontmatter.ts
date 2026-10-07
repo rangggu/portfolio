@@ -13,10 +13,7 @@ export interface ProjectFrontmatter {
   tags: string[];
   /** public/projects/{slug}/ 아래 경로 */
   thumbnail: string;
-  /**
-   * 경력 타임라인 항목 id.
-   * TODO: 15단계(이력서 데이터 구조)에서 경력 데이터가 생기면 빌드 시 존재 여부 검사 추가
-   */
+  /** 경력 타임라인 항목 id (content/resume/timeline.ts). 없는 id면 빌드가 실패한다 */
   timelineId: string;
   /** 초안. 개발 서버에서만 보이고 프로덕션 빌드에서는 모든 곳에서 빠진다. 기본값 false */
   draft: boolean;

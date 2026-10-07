@@ -5,6 +5,9 @@ import path from 'node:path';
 import { createProcessor, evaluate } from '@mdx-js/mdx';
 import matter from 'gray-matter';
 
+import { TIMELINE_IDS } from '@/lib/resume';
+import { validateProjectTimelineIds } from '@/lib/resume/validate';
+
 import {
   parseProjectFrontmatter,
   type ProjectFrontmatter,
@@ -27,6 +30,8 @@ export interface ContentOptions {
   dir?: string;
   /** 초안 포함 여부. 기본값은 SHOW_DRAFTS */
   includeDrafts?: boolean;
+  /** timelineId 검사 기준 (테스트용). 기본값은 이력서 데이터의 타임라인 id */
+  timelineIds?: ReadonlySet<string>;
 }
 
 export interface ProjectMeta extends ProjectFrontmatter {
@@ -89,10 +94,13 @@ export async function getProjectMeta(
 export async function getAllProjectMeta({
   dir = PROJECTS_DIR,
   includeDrafts = SHOW_DRAFTS,
+  timelineIds = TIMELINE_IDS,
 }: ContentOptions = {}): Promise<ProjectMeta[]> {
   const slugs = await listSlugs(dir);
   const sources = await Promise.all(slugs.map((slug) => readSource(slug, dir)));
   const metas = sources.map((source) => source.meta);
+  // 초안 포함 모든 글의 timelineId가 경력에 있어야 한다 (없으면 빌드 실패)
+  validateProjectTimelineIds(metas, timelineIds);
   return metas
     .filter((meta) => includeDrafts || !meta.draft)
     .sort((a, b) => b.period.start.localeCompare(a.period.start));

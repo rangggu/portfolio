@@ -19,6 +19,7 @@
 CLAUDE.md
 docs/conventions/            # 컨벤션 문서
 content/projects/            # 프로젝트 글 MDX ({slug}.mdx)
+content/resume/              # 이력서 데이터 (TS): profile, intro, timeline, skills, education
 e2e/                         # Playwright 테스트
 src/
   ├── app/                   # 라우트 (조합만 담당)
@@ -61,6 +62,7 @@ src/
   ├── lib/                   # 전역 순수 로직 (Vitest 대상)
   │   ├── api/{domain}/      # 외부 API 연동 (서버 전용)
   │   ├── content/           # content/projects 로더 (목록·메타·본문 컴파일·평문)
+  │   ├── resume/            # 이력서 타입·검증·JSON-LD·평문, 경력 ↔ 프로젝트 글 연결
   │   └── {기능명}/          # 예: format/, physics/, motion/
   │
   ├── styles/

@@ -13,9 +13,18 @@ import {
 
 const FIXTURES = path.join(__dirname, '__fixtures__', 'projects');
 /** 프로덕션 빌드 기준 (초안 제외) */
-const PUBLISHED = { dir: FIXTURES, includeDrafts: false };
+const FIXTURE_TIMELINE = new Set(['alpha', 'beta', 'gamma']);
+const PUBLISHED = {
+  dir: FIXTURES,
+  includeDrafts: false,
+  timelineIds: FIXTURE_TIMELINE,
+};
 /** 개발 서버 기준 (초안 포함) */
-const WITH_DRAFTS = { dir: FIXTURES, includeDrafts: true };
+const WITH_DRAFTS = {
+  dir: FIXTURES,
+  includeDrafts: true,
+  timelineIds: FIXTURE_TIMELINE,
+};
 
 describe('getProjectSlugs', () => {
   it('.mdx 파일만 이름 순으로 돌려준다', async () => {
@@ -68,6 +77,15 @@ describe('getAllProjectMeta', () => {
   it('초안을 숨기면 목록에서 뺀다', async () => {
     const metas = await getAllProjectMeta(PUBLISHED);
     expect(metas.map((meta) => meta.slug)).toEqual(['beta', 'alpha']);
+  });
+
+  it('타임라인에 없는 timelineId가 있으면 초안이라도 에러를 낸다', async () => {
+    await expect(
+      getAllProjectMeta({
+        ...PUBLISHED,
+        timelineIds: new Set(['alpha', 'beta']),
+      }),
+    ).rejects.toThrow('gamma.mdx → "gamma"');
   });
 });
 

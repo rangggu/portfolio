@@ -69,9 +69,9 @@ Next.js 파일 규칙을 사용합니다.
 
 ## JSON-LD
 
-루트 레이아웃에 `Person`과 `WebSite` 스키마를 삽입합니다. `src/components/seo/JsonLd.tsx` 컴포넌트를 사용하며, 값은 `src/lib/site.ts`에서 가져옵니다.
+루트 레이아웃에 `Person`과 `WebSite` 스키마를 삽입합니다. `src/components/seo/JsonLd.tsx` 컴포넌트를 사용합니다. Person은 이력서 데이터(`content/resume`)에서 `toPersonJsonLd`(`src/lib/resume/jsonLd.ts`)로 만들고, 사이트 URL 등은 `src/lib/site.ts`에서 가져옵니다.
 
-- Person: 이름, jobTitle, description, url, sameAs, alternateName("Myu")
+- Person: 이름, jobTitle, description, url, sameAs, alternateName("Myu"). 채워진 경우 email, alumniOf(학력), knowsAbout(기술)도 넣습니다. `TODO` 값은 넣지 않습니다.
 - WebSite: name, url
 - 페이지별 구조화 데이터(Article 등)가 필요하면 같은 JsonLd 컴포넌트를 재사용합니다.
 
