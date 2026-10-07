@@ -1,0 +1,73 @@
+.root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-icon-button);
+  height: var(--size-icon-button);
+  border: none;
+  border-radius: var(--radius-8);
+  cursor: pointer;
+  color: var(--color-text-primary);
+  transition:
+    transform var(--motion-release-duration) var(--motion-release-ease),
+    background-color var(--duration-fast) var(--ease-standard);
+
+  &:active {
+    transform: scale(var(--motion-press-scale));
+    transition-duration: var(--motion-press-duration);
+  }
+
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-border-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  &:disabled {
+    opacity: var(--opacity-disabled);
+    cursor: not-allowed;
+  }
+}
+
+/* 터치 영역 확장: 보이는 크기보다 터치 영역을 넓힘 (음수 inset) */
+.root::before {
+  content: '';
+  position: absolute;
+  inset: calc((var(--size-icon-button) - var(--size-touch-target)) / 2);
+}
+
+/* --- variant --- */
+
+.root[data-variant='ghost'] {
+  background-color: transparent;
+}
+
+.root[data-variant='surface'] {
+  background-color: var(--color-bg-elevated);
+  box-shadow: var(--shadow-md);
+}
+
+/* --- hover (pointer 기기만) --- */
+
+@media (hover: hover) {
+  .root[data-variant='ghost']:hover:not(:disabled) {
+    background-color: var(--color-bg-subtle);
+  }
+
+  .root[data-variant='surface']:hover:not(:disabled) {
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+/* --- 터치 기기: 최소 크기 보장 --- */
+
+@media (pointer: coarse) {
+  .root {
+    width: var(--size-touch-target);
+    height: var(--size-touch-target);
+  }
+
+  .root::before {
+    inset: 0;
+  }
+}

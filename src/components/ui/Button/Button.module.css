@@ -1,0 +1,96 @@
+.base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  border: var(--border-width-1) solid transparent;
+  cursor: pointer;
+  transition:
+    transform var(--motion-release-duration) var(--motion-release-ease),
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+
+  &:active {
+    transform: scale(var(--motion-press-scale));
+    transition-duration: var(--motion-press-duration);
+  }
+
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-border-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  &:disabled {
+    opacity: var(--opacity-disabled);
+    cursor: not-allowed;
+  }
+}
+
+/* --- size별 텍스트 스타일 ---
+ * composes는 단순 클래스 선택자에서만 쓸 수 있어 텍스트 스타일만 클래스로 고른다.
+ * 높이·패딩·라운드는 아래 data-size에서 처리한다. */
+
+.sizeMd {
+  composes: base;
+  composes: labelMd from '@/styles/typography.module.css';
+}
+
+.sizeSm {
+  composes: base;
+  composes: labelSm from '@/styles/typography.module.css';
+}
+
+/* --- size (data-* 속성) --- */
+
+.base[data-size='md'] {
+  padding: var(--spacing-12) var(--spacing-20);
+  border-radius: var(--radius-12);
+}
+
+.base[data-size='sm'] {
+  padding: var(--spacing-8) var(--spacing-16);
+  border-radius: var(--radius-8);
+}
+
+/* --- variant (data-* 속성) --- */
+
+.base[data-variant='primary'] {
+  background-color: var(--color-bg-accent);
+  color: var(--color-text-on-accent);
+}
+
+.base[data-variant='secondary'] {
+  background-color: transparent;
+  border-color: var(--color-border-strong);
+  color: var(--color-text-primary);
+}
+
+.base[data-variant='ghost'] {
+  background-color: transparent;
+  color: var(--color-text-primary);
+}
+
+/* --- hover (pointer 기기만) --- */
+
+@media (hover: hover) {
+  .base[data-variant='primary']:hover:not(:disabled) {
+    background-color: var(--color-bg-accent-hover);
+  }
+
+  .base[data-variant='secondary']:hover:not(:disabled) {
+    background-color: var(--color-bg-subtle);
+  }
+
+  .base[data-variant='ghost']:hover:not(:disabled) {
+    background-color: var(--color-bg-subtle);
+  }
+}
+
+/* --- 터치 기기 터치 영역 확보 --- */
+
+@media (pointer: coarse) {
+  .base {
+    min-height: var(--size-touch-target);
+    min-width: var(--size-touch-target);
+  }
+}

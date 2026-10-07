@@ -155,17 +155,26 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 
 ## 레이아웃
 
-| 토큰                       | 값                                   | 용도                                                               |
-| -------------------------- | ------------------------------------ | ------------------------------------------------------------------ |
-| `--layout-prose-max`       | 720px                                | 본문 글 최대 폭 (본문 18px에서 한 줄 한글 40자 안팎의 가독성 기준) |
-| `--layout-prose-min`       | 560px                                | 여백 메모와 나란히 놓일 때 본문 최소 폭                            |
-| `--layout-page-max`        | 1200px                               | 프레임 최대 폭. 타임라인, 목록 등은 이 폭을 전부 사용              |
-| `--layout-note-width`      | 240px                                | 여백 메모 고정 폭                                                  |
-| `--layout-gutter`          | clamp 20→40px                        | 프레임 안쪽 좌우 여백 (유동 토큰)                                  |
-| `--layout-frame-peek`      | fine: clamp 48→120px, coarse: 12px   | 옆 프레임 노출 폭. `@media (pointer: coarse)`에서 12px로 재정의    |
-| `--layout-frame-gap`       | fine: clamp 24→80px, coarse: 12px    | 프레임 사이 간격. `@media (pointer: coarse)`에서 12px로 재정의     |
-| `--layout-floating-top`    | calc(44px + 12px + safe-area) ≈ 68px | 상단 플로팅 UI 영역. scroll-padding, sticky top 계산에 사용        |
-| `--layout-floating-bottom` | calc(44px + 20px + safe-area) ≈ 76px | 하단 메뉴 바 영역. scroll-padding, 프레임 끝 안내 위치에 사용      |
+| 토큰                            | 값                                                         | 용도                                                               |
+| ------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------ |
+| `--layout-prose-max`            | 720px                                                      | 본문 글 최대 폭 (본문 18px에서 한 줄 한글 40자 안팎의 가독성 기준) |
+| `--layout-prose-min`            | 560px                                                      | 여백 메모와 나란히 놓일 때 본문 최소 폭                            |
+| `--layout-page-max`             | 1200px                                                     | 프레임 최대 폭. 타임라인, 목록 등은 이 폭을 전부 사용              |
+| `--layout-note-width`           | 240px                                                      | 여백 메모 고정 폭                                                  |
+| `--layout-gutter`               | clamp 20→40px                                              | 프레임 안쪽 좌우 여백 (유동 토큰)                                  |
+| `--layout-frame-peek`           | fine: clamp 48→120px, coarse: 12px                         | 옆 프레임 노출 폭. `@media (pointer: coarse)`에서 12px로 재정의    |
+| `--layout-frame-gap`            | fine: clamp 24→80px, coarse: 12px                          | 프레임 사이 간격. `@media (pointer: coarse)`에서 12px로 재정의     |
+| `--layout-floating-bar-padding` | `--spacing-4` (4px)                                        | 플로팅 바 위아래 안쪽 여백                                         |
+| `--layout-floating-bar-height`  | `--size-touch-target` + padding × 2 = 52px                 | 플로팅 바 높이 (터치 영역 + 안쪽 여백)                             |
+| `--layout-floating-top`         | bar-height + `--spacing-12` + safe-area = 64px + safe-area | 상단 플로팅 UI 영역. scroll-padding, sticky top 계산에 사용        |
+| `--layout-floating-bottom`      | bar-height + `--spacing-20` + safe-area = 72px + safe-area | 하단 메뉴 바 영역. scroll-padding, 프레임 끝 안내 위치에 사용      |
+
+### 조작 요소 크기
+
+| 토큰                  | 값   | 용도                                                                                                     |
+| --------------------- | ---- | -------------------------------------------------------------------------------------------------------- |
+| `--size-touch-target` | 44px | 터치 기기(`pointer: coarse`) 최소 터치 영역. 버튼 min-size, 플로팅 바 높이 계산                          |
+| `--size-icon-button`  | 36px | 포인터 기기 IconButton 보이는 크기. 터치 영역 확장은 `calc((icon-button - touch-target) / 2)` 음수 inset |
 
 ## 모션
 

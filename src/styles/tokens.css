@@ -130,12 +130,24 @@
   --layout-note-width: 240px;
   --layout-frame-peek: clamp(3rem, 8.3vw, 7.5rem); /* 48→120px */
   --layout-frame-gap: clamp(1.5rem, 5.6vw, 5rem); /* 24→80px */
+
+  /* 조작 요소 크기 */
+  --size-touch-target: 44px; /* 터치 기기 최소 터치 영역 */
+  --size-icon-button: 36px; /* 포인터 기기 IconButton 보이는 크기 */
+
+  /* 플로팅 바: 터치 영역 + 위아래 안쪽 여백 */
+  --layout-floating-bar-padding: var(--spacing-4);
+  --layout-floating-bar-height: calc(
+    var(--size-touch-target) + var(--layout-floating-bar-padding) * 2
+  ); /* 44 + 4×2 = 52px */
   --layout-floating-top: calc(
-    44px + 12px + env(safe-area-inset-top, 0px)
-  ); /* 바 높이 + 간격 + safe-area ≈ 68px */
+    var(--layout-floating-bar-height) + var(--spacing-12) +
+      env(safe-area-inset-top, 0px)
+  ); /* 52 + 12 + safe-area */
   --layout-floating-bottom: calc(
-    44px + 20px + env(safe-area-inset-bottom, 0px)
-  ); /* 바 높이 + 간격 + safe-area ≈ 76px */
+    var(--layout-floating-bar-height) + var(--spacing-20) +
+      env(safe-area-inset-bottom, 0px)
+  ); /* 52 + 20 + safe-area */
 }
 
 @media (pointer: coarse) {

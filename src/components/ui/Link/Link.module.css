@@ -1,0 +1,18 @@
+.root {
+  color: var(--color-text-accent);
+  text-decoration: none;
+  border-radius: var(--radius-4);
+  transition: color var(--duration-fast) var(--ease-standard);
+
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-border-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
+
+@media (hover: hover) {
+  .root:hover {
+    text-decoration: underline;
+    text-underline-offset: var(--spacing-4);
+  }
+}

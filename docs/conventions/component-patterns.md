@@ -2,12 +2,12 @@
 
 ## 디렉토리별 역할
 
-| 위치 | 역할 | 규칙 |
-| --- | --- | --- |
-| `components/ui/` | 디자인 시스템 기초 컴포넌트 | 도메인 무관, props만으로 동작, 비즈니스 로직 금지 |
-| `components/layout/` | 사이트 공통 레이아웃 | Header, Footer, TableOfContents |
-| `components/mdx/` | MDX 본문 전용 | CodeBlock, Callout, Figure |
-| `features/{feature}/` | 기능 단위 | 상태, 서버 연동, 로직 포함 가능 |
+| 위치                  | 역할                        | 규칙                                              |
+| --------------------- | --------------------------- | ------------------------------------------------- |
+| `components/ui/`      | 디자인 시스템 기초 컴포넌트 | 도메인 무관, props만으로 동작, 비즈니스 로직 금지 |
+| `components/layout/`  | 사이트 공통 레이아웃        | Header, Footer, TableOfContents                   |
+| `components/mdx/`     | MDX 본문 전용               | CodeBlock, Callout, Figure                        |
+| `features/{feature}/` | 기능 단위                   | 상태, 서버 연동, 로직 포함 가능                   |
 
 ## 컴포넌트 선언
 
@@ -89,6 +89,7 @@ return (
 - `ref`는 React 19 방식대로 일반 prop으로 받습니다 (`forwardRef` 사용 안 함).
 - `className`은 바깥 배치(margin, 위치)용으로만 허용하고, 내부 스타일을 덮어쓰는 용도로 쓰지 않습니다.
 - variant, size, 상태는 `data-*` 속성으로 표현합니다.
+  - 예외: size에 따라 텍스트 스타일이 달라지면 CSS Modules `composes` 제약 때문에 텍스트 스타일만 size별 클래스로 고르고, `data-size`도 함께 붙입니다. 자세한 내용은 [styling](styling.md#css-modules-규칙)을 봅니다.
 - IconButton처럼 텍스트가 없는 컴포넌트는 `aria-label`을 필수 prop으로 둡니다.
 
 ## 훅 설계
