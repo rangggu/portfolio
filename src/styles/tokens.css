@@ -264,6 +264,7 @@
   --z-dropdown: 200;
   --z-overlay: 300;
   --z-toast: 400;
+  --z-skip-link: 500; /* 본문 바로가기: 모든 UI 위 */
   /* <dialog>는 top layer에 뜨므로 z-index 대상 아님 */
 }
 

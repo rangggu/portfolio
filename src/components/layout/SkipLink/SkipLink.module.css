@@ -1,0 +1,22 @@
+.root {
+  composes: labelMd from '@/styles/typography.module.css';
+  position: fixed;
+  top: calc(var(--spacing-8) + env(safe-area-inset-top, 0px));
+  left: calc(var(--spacing-8) + env(safe-area-inset-left, 0px));
+  z-index: var(--z-skip-link);
+  padding: var(--spacing-12) var(--spacing-16);
+  border-radius: var(--radius-8);
+  background-color: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+  box-shadow: var(--shadow-md);
+
+  /* 포커스 전에는 화면 밖에 두되 보조기기에서는 읽힌다 */
+  &:not(:focus) {
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}

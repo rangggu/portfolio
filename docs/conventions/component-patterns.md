@@ -126,7 +126,11 @@ const { states: streamStates, actions: streamActions } = useStreamDemo();
 
 - 클릭 가능한 요소는 `<button>`과 `<a>`를 씁니다. `div`에 `onClick`을 달지 않습니다.
 - 모달은 네이티브 `<dialog>`를 `showModal()`로 엽니다. 직접 만드는 오버레이(바텀시트, 모바일 메뉴)는 열려 있는 동안 배경에 `inert`를 겁니다.
-- 포커스 링은 `:focus-visible`로 표시하고 절대 `outline: none`만 남기지 않습니다.
+- 포커스 링은 `:focus-visible`로 표시하고 절대 `outline: none`만 남기지 않습니다. 기본 링은 `globals.css`의 전역 `:focus-visible` 규칙(포커스 링 토큰)이 그리므로, 컴포넌트는 모양이 달라야 할 때만 재정의합니다.
+- 모든 페이지의 `<main>`에는 `id="main"`과 `tabIndex={-1}`을 붙입니다. `layout.tsx`의 본문 바로가기(`SkipLink`)가 이 요소로 포커스를 옮깁니다.
+- 프레임은 `<section aria-labelledby="{프레임 제목 id}">`로 제목과 연결합니다. 첫 화면 이름만 `h1`, 나머지 프레임 제목은 `h2`입니다.
+- 새 탭으로 열리는 링크는 "(새 탭에서 열림)"을 보조기기에 알립니다 (`Link`가 자동 처리).
+- `header`, `nav` 랜드마크는 Phase 3 플로팅 UI(위치 표시, 메뉴 바)에서 추가합니다.
 - 모든 기능은 키보드만으로 사용할 수 있어야 합니다.
 - 이미지는 의미가 있으면 `alt`를 쓰고, 장식이면 `alt=""`를 씁니다.
 - 헤딩 순서(h1 → h2 → h3)를 건너뛰지 않습니다.

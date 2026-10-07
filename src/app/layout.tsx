@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import dynamic from 'next/dynamic';
+import { SkipLink } from '@/components/layout/SkipLink';
 import { JsonLd, ThemeScript } from '@/components/seo';
 import { PERSON, SITE } from '@/lib/site';
 import './globals.css';
@@ -86,6 +87,7 @@ export default function RootLayout({
         <ThemeScript />
       </head>
       <body>
+        <SkipLink />
         {children}
         <JsonLd data={personJsonLd} />
         <JsonLd data={webSiteJsonLd} />

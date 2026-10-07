@@ -55,7 +55,23 @@
 
 html {
   text-size-adjust: 100%;
-  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* 전역 포커스 링: 키보드 포커스(:focus-visible)에만 표시. 마우스 클릭에는 표시되지 않는다 */
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-border-focus);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* 본문 바로가기 대상(main 등 tabindex="-1")은 화면 전체를 감싸므로 링을 안쪽에 그린다 */
+[tabindex='-1']:focus-visible {
+  outline-offset: calc(var(--focus-ring-width) * -1);
 }
 
 body {
