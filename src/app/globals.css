@@ -1,5 +1,6 @@
 @import url('pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css');
 @import url('@/styles/tokens.css');
+@import url('@/styles/code.css');
 
 /* ---------- Fallback fonts: Pretendard 메트릭 보정 ----------
  * Pretendard Variable: UPM 2048, ascent 1950, descent 494, lineGap 0

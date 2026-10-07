@@ -1,0 +1,41 @@
+---
+title: Bitlight
+summary: 조명 제어 대시보드의 첫 화면 로딩을 줄인 작업입니다.
+period:
+  start: 2024-03
+  end: 2024-06
+tags: [Next.js, TypeScript, 성능]
+thumbnail: /projects/bitlight/thumbnail.png
+timelineId: bitlight
+draft: true
+---
+
+{/* 샘플 글: 형식 확인용 자리표시입니다. 실제 내용으로 교체합니다. */}
+
+## 소개
+
+여러 공간의 조명을 한 화면에서 켜고 끄는 대시보드입니다.
+
+## 역할·기술
+
+프론트엔드 단독 개발. Next.js App Router, TypeScript.
+
+## 주요 성과
+
+- 첫 화면 표시까지 걸리는 시간: 3.1초 → 1.4초
+
+## 문제와 해결
+
+처음에는 모든 공간의 상태를 한 번에 불러왔습니다. 화면에 보이는 공간만 먼저 불러오고, 나머지는 스크롤에 맞춰 이어서 받도록 바꿨습니다.
+
+```ts
+export function getVisibleRoomIds(rooms: Room[], viewport: Viewport) {
+  return rooms
+    .filter((room) => intersects(room.bounds, viewport))
+    .map((room) => room.id);
+}
+```
+
+## 회고
+
+공간 수가 더 늘어나면 목록 자체를 가상화해야 합니다. 아직 남은 일입니다.

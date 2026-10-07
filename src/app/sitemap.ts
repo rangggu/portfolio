@@ -1,11 +1,11 @@
 import type { MetadataRoute } from 'next';
+
+import { getProjectSlugs } from '@/lib/content/projects';
 import { SITE } from '@/lib/site';
 
-// TODO: content/ 목록 기반으로 동적 생성하도록 변경
-const PROJECT_SLUGS = ['bitlight', 'superposition'];
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  const projectEntries = PROJECT_SLUGS.map((slug) => ({
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const slugs = await getProjectSlugs();
+  const projectEntries = slugs.map((slug) => ({
     url: `${SITE.url}/projects/${slug}`,
     lastModified: new Date(),
   }));

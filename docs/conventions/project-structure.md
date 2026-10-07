@@ -18,7 +18,7 @@
 ```
 CLAUDE.md
 docs/conventions/            # 컨벤션 문서
-content/                     # MDX 케이스 스터디
+content/projects/            # 프로젝트 글 MDX ({slug}.mdx)
 e2e/                         # Playwright 테스트
 src/
   ├── app/                   # 라우트 (조합만 담당)
@@ -44,7 +44,7 @@ src/
   │   │       ├── Button.module.css
   │   │       └── index.ts
   │   ├── layout/            # Header, Footer, TableOfContents
-  │   └── mdx/               # CodeBlock, Callout, Figure
+  │   └── mdx/               # MDX 요소 매핑(mdxComponents), CodeBlock, Callout, Figure
   │
   ├── features/              # 기능 단위 코드
   │   ├── actions/           # 사이트 액션 레지스트리 (Phase 3~4)
@@ -60,6 +60,7 @@ src/
   │
   ├── lib/                   # 전역 순수 로직 (Vitest 대상)
   │   ├── api/{domain}/      # 외부 API 연동 (서버 전용)
+  │   ├── content/           # content/projects 로더 (목록·메타·본문 컴파일·평문)
   │   └── {기능명}/          # 예: format/, physics/, motion/
   │
   ├── styles/

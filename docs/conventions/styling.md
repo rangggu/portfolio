@@ -10,6 +10,8 @@
 
 토큰 없이 써도 되는 값: `0`, `100%`, `auto`, `1fr`, `currentColor`, `inherit`, 레이아웃용 `%`·`fr`·`vw`·`vh`
 
+**예외 — 코드 하이라이팅 색:** MDX 코드 블록의 토큰 색은 Shiki 듀얼 테마(github-light / github-dark)가 빌드 타임에 각 토큰에 넣는 `--shiki-light`·`--shiki-dark` 값을 그대로 씁니다. `src/styles/code.css`가 `data-theme`에 따라 둘 중 하나를 고릅니다. 코드 블록의 배경·테두리·간격·글꼴은 토큰을 씁니다.
+
 ### 토큰 도메인과 CSS 속성
 
 | 토큰               | 적용 속성                                |
