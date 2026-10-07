@@ -297,6 +297,8 @@
   --color-bg-floating: var(--color-white-alpha-72);
   --color-bg-dim: var(--color-black-alpha-40);
   --color-bg-code: var(--color-gray-50);
+  --color-bg-canvas: var(--color-gray-100);
+  --color-bg-canvas-dot: var(--color-gray-300);
 
   --color-border-default: var(--color-gray-200);
   --color-border-subtle: var(--color-gray-100);
@@ -354,6 +356,8 @@
   --color-bg-floating: var(--color-gray-950-alpha-72);
   --color-bg-dim: var(--color-black-alpha-60);
   --color-bg-code: var(--color-gray-900);
+  --color-bg-canvas: var(--color-gray-950);
+  --color-bg-canvas-dot: var(--color-gray-800);
 
   --color-border-default: var(--color-gray-800);
   --color-border-subtle: var(--color-gray-900);

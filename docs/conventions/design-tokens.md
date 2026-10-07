@@ -34,6 +34,8 @@
 | `--color-bg-floating`              | 반투명 플로팅 UI (blur와 함께) |
 | `--color-bg-dim`                   | 오버레이 딤                    |
 | `--color-bg-code`                  | 코드 블록                      |
+| `--color-bg-canvas`                | 캔버스 바탕 (프레임 바깥)      |
+| `--color-bg-canvas-dot`            | 캔버스 점 무늬                 |
 | `--color-border-default`           | 기본 테두리, 구분선            |
 | `--color-border-subtle`            | 약한 구분선                    |
 | `--color-border-strong`            | 입력 요소 테두리               |
@@ -178,6 +180,10 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 | `--size-icon-sm`      | 16px | Icon `size="sm"`                                                                                         |
 | `--size-icon-md`      | 20px | Icon `size="md"` (기본)                                                                                  |
 | `--size-icon-lg`      | 24px | Icon `size="lg"`                                                                                         |
+
+### 캔버스
+
+점 무늬 색은 테마에 따라 바뀌므로 전역 토큰(`--color-bg-canvas`, `--color-bg-canvas-dot`)입니다. 점 크기·간격은 캔버스에서만 쓰는 장식 값이라 `Canvas.module.css`의 로컬 변수(`--dot-size`, `--dot-gap`)로 둡니다. 프레임 바탕은 `--color-bg-elevated`, 테두리는 `--color-border-subtle`을 씁니다.
 
 ## 모션
 

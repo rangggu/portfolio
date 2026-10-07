@@ -67,9 +67,6 @@ body {
   line-height: var(--line-height-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding-left: max(var(--layout-gutter), env(safe-area-inset-left));
-  padding-right: max(var(--layout-gutter), env(safe-area-inset-right));
-  padding-bottom: env(safe-area-inset-bottom);
 }
 
 img,

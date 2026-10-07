@@ -1,0 +1,67 @@
+/* 레인 전환 기준: 프레임 안쪽 폭(Container) 768px (responsive.md 경력 타임라인) */
+
+.timeline {
+  display: grid;
+  gap: var(--spacing-16);
+}
+
+.lanes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-24);
+}
+
+.item {
+  display: grid;
+  gap: var(--spacing-4);
+  padding-inline-start: var(--spacing-12);
+}
+
+.lane[data-lane='company'] .item {
+  border-inline-start: var(--border-width-2) solid var(--color-border-strong);
+}
+
+.lane[data-lane='side'] .item {
+  border-inline-start: var(--border-width-1) solid var(--color-border-default);
+}
+
+.legendItem {
+  padding-inline-start: var(--spacing-8);
+}
+
+.legendItem[data-lane='company'] {
+  border-inline-start: var(--border-width-2) solid var(--color-border-strong);
+}
+
+.legendItem[data-lane='side'] {
+  border-inline-start: var(--border-width-1) solid var(--color-border-default);
+}
+
+/* 좁은 프레임: 한 레인 + 상단 레인 라벨. 레인 제목은 보조기기용으로만 남긴다 */
+@container (width < 768px) {
+  .laneTitle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* 넓은 프레임: 회사 60% + 사이드 40% 나란히, 레인마다 제목 */
+@container (width >= 768px) {
+  .legend {
+    display: none;
+  }
+
+  .lanes {
+    grid-template-columns: 3fr 2fr;
+    gap: var(--spacing-40);
+  }
+
+  .laneTitle {
+    margin-bottom: var(--spacing-16);
+  }
+}

@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { Container } from '@/components/ui/Container';
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -20,8 +21,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   return (
-    <main>
+    <Container as="main" id="main" tabIndex={-1}>
       <h1>{slug}</h1>
-    </main>
+    </Container>
   );
 }

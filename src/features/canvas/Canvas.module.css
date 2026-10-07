@@ -1,0 +1,25 @@
+.root {
+  /* 점 무늬 장식 값: 이 컴포넌트에서만 쓰므로 로컬 변수 */
+  --dot-size: 1px;
+  --dot-gap: 24px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100dvh;
+  padding-inline: env(safe-area-inset-left, 0) env(safe-area-inset-right, 0);
+  background-color: var(--color-bg-canvas);
+  background-image: radial-gradient(
+    circle,
+    var(--color-bg-canvas-dot) var(--dot-size),
+    transparent 0
+  );
+  background-size: var(--dot-gap) var(--dot-gap);
+}
+
+@media print {
+  .root {
+    padding: 0;
+    background: none;
+  }
+}
