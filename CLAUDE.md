@@ -14,7 +14,8 @@ npm run build        # 프로덕션 빌드
 npm run lint         # ESLint + Stylelint
 npm run typecheck    # tsc --noEmit
 npm run test         # Vitest
-npm run test:e2e     # Playwright (시각 회귀 + axe 포함)
+npm run check:responsive  # 기기 매트릭스 반응형 검사 (서버 실행 후)
+npm run screenshot        # 1512×823·393×852(터치) 라이트·다크 스크린샷 (서버 실행 후)
 ```
 
 ## 반드시 지킬 규칙

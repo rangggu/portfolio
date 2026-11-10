@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "check:responsive": "node --experimental-strip-types --no-warnings scripts/check-responsive.mjs",
-    "prepare": "husky"
+    "prepare": "husky",
+    "screenshot": "node scripts/screenshot.mjs"
   },
   "dependencies": {
     "@mdx-js/mdx": "^3.1.1",

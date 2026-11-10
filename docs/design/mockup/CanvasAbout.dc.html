@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>데스크톱 소개 프레임</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}a{color:#1B1E23;text-decoration:none}</style>
+</helmet>
+<div style="width: 1440px; height: 900px; position: relative; overflow: hidden; background-color: #EFEDE8; background-image: radial-gradient(circle, #CFCAC0 1px, transparent 1.3px); background-size: 22px 22px; color: #1B1E23; font-family: 'Noto Sans KR', sans-serif">
+
+<div style="position: absolute; left: 200px; top: 80px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{accent}}">01 소개 · /about</div>
+<div style="position: absolute; left: 200px; top: 104px; width: 1040px; height: 860px; box-sizing: border-box; padding: 64px 56px; background: #FFFFFF; box-shadow: 0 0 0 1.5px {{accent}}, 0 2px 6px rgba(27, 30, 35, 0.05)">
+<span style="position: absolute; left: -5px; top: -5px; width: 8px; height: 8px; background: #FFFFFF; border: 1.5px solid {{accent}}"></span>
+<span style="position: absolute; right: -5px; top: -5px; width: 8px; height: 8px; background: #FFFFFF; border: 1.5px solid {{accent}}"></span>
+<div style="display: flex; align-items: baseline; gap: 14px; border-top: 1px solid #1B1E23; padding-top: 18px; margin-bottom: 48px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #6E757F">01</span>
+<h2 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -0.02em">소개</h2>
+</div>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) 240px; column-gap: 32px; row-gap: 24px; align-items: start">
+<p style="margin: 0; font-size: 18px; line-height: 1.85">경제학을 공부하다가, 내가 쓴 코드가 바로 화면에 그려지는 게 좋아서 개발을 시작했습니다.</p>
+<div></div>
+<p style="margin: 0; font-size: 18px; line-height: 1.85">첫 회사에서 측정 준비가 오래 걸린다는 피드백을 받았을 때, 입력 필드를 줄이는 대신 <button type="button" aria-expanded="true" style="display: inline; padding: 0 2px; margin: 0; border: none; border-bottom: 1.5px dotted {{accent}}; border-radius: 3px; background: #EAF0FD; font-family: inherit; font-size: inherit; line-height: inherit; color: #1B1E23; cursor: pointer">이전 입력값을 자동으로 채우는 방식</button>을 택했습니다. 그 뒤로 불편한 곳을 한 번 더 들여다보는 게 습관이 됐습니다.</p>
+<aside style="padding: 16px 18px; border: 1px solid {{accent}}; border-radius: 12px; background: #FFFFFF; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: {{accent}}">메모</span>
+<span style="font-size: 14px; line-height: 1.7; color: #3F454D">필드를 줄이면 준비는 빨라지지만 필요한 정보가 빠집니다. 불편의 원인은 같은 값을 매번 다시 입력하는 데 있었어요. 준비 시간은 10초에서 5초로 줄었습니다.</span>
+</aside>
+<p style="margin: 0; font-size: 18px; line-height: 1.85">지금은 커머스 서비스에서 화면과 그 뒤의 구조를 함께 다룹니다. 매달 반복되던 이벤트 배포를 <button type="button" aria-expanded="false" style="display: inline; padding: 0; margin: 0; border: none; border-bottom: 1.5px dotted #9AA0A8; background: transparent; font-family: inherit; font-size: inherit; line-height: inherit; color: #1B1E23; cursor: pointer">데이터 구조로 바꾸거나</button>, 흩어진 스타일을 디자인 시스템으로 정리하는 일을 해왔습니다.</p>
+<aside style="padding: 16px 18px; border: 1px solid #E2DFD8; border-radius: 12px; background: #FFFFFF; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6E757F">메모</span>
+<span style="font-size: 14px; line-height: 1.7; color: #5F6670">이벤트마다 프로젝트 세 곳을 고쳐 배포하던 방식을, 할인 대상·유형·기간을 데이터로 조합하는 구조로 바꿨습니다. 대응 시간은 25시간에서 1시간으로 줄었습니다.</span>
+</aside>
+</div>
+</div>
+
+<a href="#" aria-label="02 경력으로 이동" style="position: absolute; left: 1320px; top: 80px; width: 1040px; height: 900px; display: block">
+<span style="position: absolute; left: 0; top: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5F6670">02 경력</span>
+<span style="position: absolute; left: 0; top: 24px; width: 1040px; height: 1400px; box-sizing: border-box; padding: 64px 56px; background: #FFFFFF; box-shadow: 0 0 0 1px #E2DFD8; display: block">
+<span style="display: block; border-top: 1px solid #1B1E23; padding-top: 18px; font-size: 32px; font-weight: 700">02 경력</span>
+</span>
+</a>
+
+<div style="position: absolute; left: 20px; top: 20px; height: 48px; box-sizing: border-box; padding: 0 16px 0 10px; display: flex; align-items: center; gap: 10px; background: #FFFFFF; border-radius: 12px; box-shadow: 0 1px 2px rgba(27, 30, 35, 0.06), 0 6px 20px rgba(27, 30, 35, 0.08)">
+<svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7.5" fill="#1B1E23"></rect><path fill="#F4F1EA" d="M6.2 13.2 L6.9 5.7 Q7.1 4.7 8 5.2 L13.1 9.4 Q16 8.5 18.9 9.4 L24 5.2 Q24.9 4.7 25.1 5.7 L25.8 13.2 Q27.4 16.2 27 19.4 Q26 26.4 16 26.8 Q6 26.4 5 19.4 Q4.6 16.2 6.2 13.2 Z"></path><path d="M9.7 17.6 Q11.9 19.9 14.1 17.6" fill="none" stroke="#1B1E23" stroke-width="1.7" stroke-linecap="round"></path><path d="M17.9 17.6 Q20.1 19.9 22.3 17.6" fill="none" stroke="#1B1E23" stroke-width="1.7" stroke-linecap="round"></path><path fill="#5B8DEF" d="M14.9 21.2 H17.1 L16 22.5 Z"></path></svg>
+<span style="font-size: 15px; font-weight: 700">Myu</span>
+<span style="width: 1px; height: 18px; background: #E2DFD8"></span>
+<span style="font-size: 14px; color: #5F6670">포트폴리오 / <span style="color: #1B1E23; font-weight: 500">소개</span></span>
+</div>
+
+<div style="position: absolute; right: 20px; top: 20px; display: flex; gap: 8px">
+<button type="button" style="height: 48px; padding: 0 12px 0 16px; display: flex; align-items: center; gap: 10px; border: none; border-radius: 12px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(27, 30, 35, 0.06), 0 6px 20px rgba(27, 30, 35, 0.08); font-family: 'Noto Sans KR', sans-serif; font-size: 14px; color: #1B1E23">물어보기<span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #5F6670; padding: 2px 6px; border: 1px solid #E2DFD8; border-radius: 6px">⌘K</span></button>
+<button type="button" aria-label="다크 모드로 전환" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border: none; border-radius: 12px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(27, 30, 35, 0.06), 0 6px 20px rgba(27, 30, 35, 0.08); color: #1B1E23"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg></button>
+</div>
+
+<nav aria-label="프레임 이동" style="position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); padding: 6px; display: flex; gap: 2px; background: #FFFFFF; border-radius: 14px; box-shadow: 0 1px 2px rgba(27, 30, 35, 0.06), 0 8px 28px rgba(27, 30, 35, 0.12)">
+<sc-for list="{{menu}}" as="m" hint-placeholder-count="7">
+<a href="#" style="{{m.style}}">{{m.label}}</a>
+</sc-for>
+</nav>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2F66DD","options":["#2F66DD","#C2552B","#2F7A5B"]},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#2F66DD';
+    const active = 1;
+    const labels = ['첫 화면', '소개', '경력', '프로젝트', '기술', '학력·자격', '연락처'];
+    const base = 'height: 44px; padding: 0 14px; display: flex; align-items: center; border-radius: 10px; font-size: 14px; white-space: nowrap; ';
+    return {
+      accent,
+      menu: labels.map((label, i) => ({ label, style: base + (i === active ? 'background: ' + accent + '; color: #FFFFFF; font-weight: 500;' : 'color: #3F454D;') }))
+    };
+  }
+}
+</script>
+</body>
+</html>
