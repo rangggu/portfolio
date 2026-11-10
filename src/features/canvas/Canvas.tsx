@@ -25,8 +25,13 @@ function FrameContent({ frame }: { frame: CanvasFrame }) {
   }
 }
 
+interface CanvasProps {
+  /** 프레임들 뒤에 렌더할 내용 (라우트별 초기 프레임 스크립트) */
+  children?: React.ReactNode;
+}
+
 /** 점 무늬 캔버스. 이번 단계는 카메라 이동 없이 프레임을 문서 순서대로 세로로 쌓는다. */
-export function Canvas() {
+export function Canvas({ children }: CanvasProps) {
   return (
     <main id="main" tabIndex={-1} className={styles.root}>
       {FRAMES.map((frame) => (
@@ -40,6 +45,7 @@ export function Canvas() {
           <FrameContent frame={frame} />
         </Frame>
       ))}
+      {children}
       <CurrentFrameTracker frameIds={FRAME_IDS} />
     </main>
   );

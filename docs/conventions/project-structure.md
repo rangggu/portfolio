@@ -23,16 +23,17 @@ content/resume/              # 이력서 데이터 (TS): profile, intro, timelin
 e2e/                         # Playwright 테스트
 src/
   ├── app/                   # 라우트 (조합만 담당)
-  │   ├── layout.tsx         # 캔버스 공유 레이아웃, 플로팅 UI
-  │   ├── page.tsx           # 첫 화면 (/)
-  │   ├── about/page.tsx
-  │   ├── career/page.tsx
-  │   ├── projects/
-  │   │   ├── page.tsx       # 프로젝트 목록 프레임 (/projects)
-  │   │   └── [slug]/page.tsx  # 케이스 스터디 (직접 접근 시 단독 페이지)
-  │   ├── skills/page.tsx
-  │   ├── education/page.tsx
-  │   ├── contact/page.tsx
+  │   ├── layout.tsx         # 루트 레이아웃 (html, 본문 바로가기, JSON-LD)
+  │   ├── (canvas)/          # 프레임 라우트 7개 (route group)
+  │   │   ├── layout.tsx     # 캔버스 공유 레이아웃, 플로팅 UI
+  │   │   ├── page.tsx       # 첫 화면 (/)
+  │   │   ├── about/page.tsx
+  │   │   ├── career/page.tsx
+  │   │   ├── projects/page.tsx  # 프로젝트 목록 프레임 (/projects)
+  │   │   ├── skills/page.tsx
+  │   │   ├── education/page.tsx
+  │   │   └── contact/page.tsx
+  │   ├── projects/[slug]/page.tsx  # 케이스 스터디 (직접 접근 시 단독 페이지, 캔버스 없음)
   │   ├── @modal/            # Intercepting Routes 모달 슬롯 (Phase 3~4)
   │   │   ├── (.)projects/[slug]/page.tsx
   │   │   └── default.tsx
@@ -95,7 +96,11 @@ src/
 
 ### 캔버스 라우트 구조
 
-7개 프레임 라우트(`/`, `/about`, `/career`, `/projects`, `/skills`, `/education`, `/contact`)는 같은 캔버스 레이아웃(`layout.tsx`)을 공유하고, 초기 프레임만 다르게 시작합니다. 모두 정적 생성됩니다.
+7개 프레임 라우트(`/`, `/about`, `/career`, `/projects`, `/skills`, `/education`, `/contact`)는 route group `app/(canvas)/`에 두고 같은 캔버스 레이아웃(`(canvas)/layout.tsx`)을 공유하며, 초기 프레임만 다르게 시작합니다. 모두 정적 생성됩니다.
+
+- 각 `page.tsx`는 `getFrameMetadata(frameId)`로 메타데이터를 내보내고 `<InitialFrame frameId>`만 렌더합니다 (`features/canvas`).
+- `InitialFrame`은 프레임들 뒤에 인라인 스크립트로 렌더되어, 주소로 직접 들어오면 첫 페인트 전에 해당 프레임으로 스크롤합니다. 현재 프레임은 하이드레이션 뒤 스크롤 위치로 정해집니다.
+- 레이아웃이 유지되므로 프레임 라우트 사이를 클라이언트에서 이동해도 캔버스는 다시 만들어지지 않습니다.
 
 `/projects`(프레임)와 `/projects/[slug]`(케이스 스터디)의 공존:
 
