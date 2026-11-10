@@ -76,10 +76,12 @@ async function measure(page) {
       '[role="group"][data-lane="company"]',
     ).parentElement;
 
-    // 잘림: overflow가 visible이 아닌데 내용이 넘친 요소 (1px 시각적 숨김 요소는 제외)
+    // 잘림: 내용을 숨기는(hidden·clip) 요소에서 내용이 넘친 경우 (1px 시각적 숨김 요소는 제외).
+    // auto·scroll은 사용자가 밀어서 볼 수 있으므로 잘림이 아니다 (예: 메뉴 바 가로 스크롤)
+    const hides = (value) => value === 'hidden' || value === 'clip';
     const clipped = [...document.querySelectorAll('body *')].filter((el) => {
       const style = getComputedStyle(el);
-      if (style.overflowX === 'visible' && style.overflowY === 'visible') {
+      if (!hides(style.overflowX) && !hides(style.overflowY)) {
         return false;
       }
       if (el.clientWidth <= 1 || el.clientHeight <= 1) return false;
@@ -94,7 +96,8 @@ async function measure(page) {
       ...document.querySelectorAll('#hero h1, #hero p, #hero a'),
     ];
     const covered = heroTexts.filter((el) => {
-      el.scrollIntoView({ block: 'center' });
+      // globals.css의 smooth 스크롤이 걸리면 이동 중에 측정되므로 즉시 이동한다
+      el.scrollIntoView({ block: 'center', behavior: 'instant' });
       const rect = el.getBoundingClientRect();
       const hit = document.elementFromPoint(
         rect.left + rect.width / 2,
@@ -102,7 +105,7 @@ async function measure(page) {
       );
       return hit && !el.contains(hit) && !hit.contains(el);
     });
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'instant' });
     const h1 = document.querySelector('#hero h1').getBoundingClientRect();
 
     return {
