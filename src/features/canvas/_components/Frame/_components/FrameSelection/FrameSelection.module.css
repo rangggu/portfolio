@@ -1,0 +1,52 @@
+/* 선택 표시 수치는 시안(mockup-spec.md 캔버스와 프레임) 값. 이 컴포넌트에서만 쓰는 장식 값이라 로컬 변수 */
+.root {
+  --selection-width: 1.5px;
+  --handle-size: 8px;
+  --handle-offset: -5px;
+
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  outline: var(--selection-width) solid var(--color-border-focus);
+}
+
+.handle {
+  position: absolute;
+  width: var(--handle-size);
+  height: var(--handle-size);
+  border: var(--selection-width) solid var(--color-border-focus);
+  background-color: var(--color-bg-elevated);
+}
+
+.handle[data-corner='top-left'] {
+  top: var(--handle-offset);
+  left: var(--handle-offset);
+}
+
+.handle[data-corner='top-right'] {
+  top: var(--handle-offset);
+  right: var(--handle-offset);
+}
+
+.handle[data-corner='bottom-left'] {
+  bottom: var(--handle-offset);
+  left: var(--handle-offset);
+}
+
+.handle[data-corner='bottom-right'] {
+  right: var(--handle-offset);
+  bottom: var(--handle-offset);
+}
+
+/* 터치 기기는 외곽선만 (시안 CanvasMobile) */
+@media (pointer: coarse) {
+  .handle {
+    display: none;
+  }
+}
+
+@media print {
+  .root {
+    display: none;
+  }
+}

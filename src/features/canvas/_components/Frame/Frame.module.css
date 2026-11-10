@@ -25,7 +25,13 @@
   margin-bottom: var(--spacing-8);
 }
 
+/* 현재 프레임이면 이름표도 포인트색 (선택 표시는 FrameSelection이 그린다) */
+.root:has([data-frame-selected]) .label {
+  color: var(--color-text-accent);
+}
+
 .surface {
+  position: relative;
   display: flex;
   flex: 1;
   flex-direction: column;

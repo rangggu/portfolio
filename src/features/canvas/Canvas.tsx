@@ -1,8 +1,15 @@
 import { CareerFrame } from './_components/CareerFrame';
+import { CurrentFrameTracker } from './_components/CurrentFrameTracker';
 import { Frame } from './_components/Frame';
 import { HeroFrame } from './_components/HeroFrame';
 import { PlaceholderFrame } from './_components/PlaceholderFrame';
-import { FRAMES, getFrameHeadingId, type CanvasFrame } from './_lib/frames';
+import {
+  FRAME_IDS,
+  FRAMES,
+  getFrameHeadingId,
+  getFrameLabel,
+  type CanvasFrame,
+} from './_lib/frames';
 import styles from './Canvas.module.css';
 
 function FrameContent({ frame }: { frame: CanvasFrame }) {
@@ -26,14 +33,14 @@ export function Canvas() {
         <Frame
           key={frame.id}
           id={frame.id}
-          number={frame.number}
-          label={frame.label}
+          label={getFrameLabel(frame)}
           headingId={getFrameHeadingId(frame.id)}
           align={frame.id === 'hero' ? 'center' : 'start'}
         >
           <FrameContent frame={frame} />
         </Frame>
       ))}
+      <CurrentFrameTracker frameIds={FRAME_IDS} />
     </main>
   );
 }
