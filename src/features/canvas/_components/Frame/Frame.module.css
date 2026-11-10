@@ -32,10 +32,10 @@
   padding-block: var(--spacing-48);
 
   /* 테두리가 안쪽 폭을 줄이지 않도록 outline을 안쪽으로 그린다 */
-  outline: var(--border-width-1) solid var(--color-border-subtle);
+  outline: var(--border-width-1) solid var(--color-border-default);
   outline-offset: calc(var(--border-width-1) * -1);
   background-color: var(--color-bg-elevated);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-frame);
 }
 
 /* 첫 화면만 내용을 세로 가운데 정렬 */

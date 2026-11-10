@@ -1,7 +1,7 @@
 .root {
   /* 점 무늬 장식 값: 이 컴포넌트에서만 쓰므로 로컬 변수 */
   --dot-size: 1px;
-  --dot-gap: 24px;
+  --dot-gap: 22px;
 
   display: flex;
   flex-direction: column;

@@ -31,7 +31,7 @@ export function Frame({
       {/* 피그마 프레임 이름표. 제목은 프레임 안에 따로 있어 보조기기에서는 숨긴다 */}
       <Text
         variant="caption"
-        tone="tertiary"
+        tone="secondary"
         className={styles.label}
         aria-hidden="true"
       >
