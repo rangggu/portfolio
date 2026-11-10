@@ -1,0 +1,27 @@
+.root {
+  /* 시안 28px. 이 아이콘에서만 쓰는 크기라 로컬 변수 */
+  --cat-icon-size: 28px;
+
+  flex-shrink: 0;
+  width: var(--cat-icon-size);
+  height: var(--cat-icon-size);
+}
+
+.tile {
+  fill: var(--color-text-primary);
+}
+
+.face {
+  fill: var(--color-bg-canvas);
+}
+
+.eye {
+  fill: none;
+  stroke: var(--color-text-primary);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+}
+
+.nose {
+  fill: var(--color-bg-accent);
+}

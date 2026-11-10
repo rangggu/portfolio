@@ -6,11 +6,14 @@ import styles from './Link.module.css';
 
 interface LinkProps extends ComponentPropsWithoutRef<'a'> {
   href: string;
+  /** inline: 본문 링크(포인트색, hover 밑줄). plain: 글자색을 물려받고 꾸밈 없음 (메뉴 항목 등) */
+  variant?: 'inline' | 'plain';
   ref?: Ref<HTMLAnchorElement>;
 }
 
 export function Link({
   href,
+  variant = 'inline',
   rel,
   target,
   className,
@@ -25,6 +28,7 @@ export function Link({
     <NextLink
       href={href}
       className={rootClassName}
+      data-variant={variant}
       {...props}
       {...linkAttributes}
     >

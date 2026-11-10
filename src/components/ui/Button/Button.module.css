@@ -10,19 +10,21 @@
     background-color var(--duration-fast) var(--ease-standard),
     border-color var(--duration-fast) var(--ease-standard);
 
-  &:active {
-    transform: scale(var(--motion-press-scale));
-    transition-duration: var(--motion-press-duration);
-  }
-
   &:focus-visible {
     outline: var(--focus-ring-width) solid var(--color-border-focus);
     outline-offset: var(--focus-ring-offset);
   }
 
-  &:disabled {
+  /* aria-disabled: 포커스는 받되 동작하지 않는 상태 (예: 준비 중인 기능) */
+  &:disabled,
+  &[aria-disabled='true'] {
     opacity: var(--opacity-disabled);
     cursor: not-allowed;
+  }
+
+  &:active:not(:disabled, [aria-disabled='true']) {
+    transform: scale(var(--motion-press-scale));
+    transition-duration: var(--motion-press-duration);
   }
 }
 
@@ -73,15 +75,15 @@
 /* --- hover (pointer 기기만) --- */
 
 @media (hover: hover) {
-  .base[data-variant='primary']:hover:not(:disabled) {
+  .base[data-variant='primary']:hover:not(:disabled, [aria-disabled='true']) {
     background-color: var(--color-bg-accent-hover);
   }
 
-  .base[data-variant='secondary']:hover:not(:disabled) {
+  .base[data-variant='secondary']:hover:not(:disabled, [aria-disabled='true']) {
     background-color: var(--color-bg-subtle);
   }
 
-  .base[data-variant='ghost']:hover:not(:disabled) {
+  .base[data-variant='ghost']:hover:not(:disabled, [aria-disabled='true']) {
     background-color: var(--color-bg-subtle);
   }
 }

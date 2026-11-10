@@ -89,6 +89,7 @@ return (
 - `ref`는 React 19 방식대로 일반 prop으로 받습니다 (`forwardRef` 사용 안 함).
   - 예외: `as`로 렌더링 태그를 바꾸는 `Text`, `Stack`, `Container`는 `ref`를 받지 않습니다. 태그마다 ref 요소 타입이 달라 하나의 타입으로 안전하게 표현할 수 없기 때문입니다. ref가 필요하면 네이티브 요소를 직접 쓰거나 감싸는 요소에 겁니다.
 - `className`은 바깥 배치(margin, 위치)용으로만 허용하고, 내부 스타일을 덮어쓰는 용도로 쓰지 않습니다.
+  - 예외: `Link variant="plain"`은 꾸밈 없는 링크라, 메뉴 항목처럼 링크 자체가 큰 클릭 영역이 될 때 크기·배경을 `className`으로 줍니다 (예: `FrameMenu`).
 - variant, size, 상태는 `data-*` 속성으로 표현합니다.
   - 예외: size에 따라 텍스트 스타일이 달라지면 CSS Modules `composes` 제약 때문에 텍스트 스타일만 size별 클래스로 고르고, `data-size`도 함께 붙입니다. 자세한 내용은 [styling](styling.md#css-modules-규칙)을 봅니다.
 - IconButton처럼 텍스트가 없는 컴포넌트는 `aria-label`을 필수 prop으로 둡니다.
@@ -130,7 +131,8 @@ const { states: streamStates, actions: streamActions } = useStreamDemo();
 - 모든 페이지의 `<main>`에는 `id="main"`과 `tabIndex={-1}`을 붙입니다. `layout.tsx`의 본문 바로가기(`SkipLink`)가 이 요소로 포커스를 옮깁니다.
 - 프레임은 `<section aria-labelledby="{프레임 제목 id}">`로 제목과 연결합니다. 첫 화면 이름만 `h1`, 나머지 프레임 제목은 `h2`입니다.
 - 새 탭으로 열리는 링크는 "(새 탭에서 열림)"을 보조기기에 알립니다 (`Link`가 자동 처리).
-- `header`, `nav` 랜드마크는 Phase 3 플로팅 UI(위치 표시, 메뉴 바)에서 추가합니다.
+- 캔버스의 `header`(왼쪽 위 위치 표시)와 `nav aria-label="프레임 이동"`(하단 메뉴 바)은 플로팅 UI가 맡습니다. 메뉴 바는 화면 아래에 있어도 DOM에서는 `main` 앞에 둬서 키보드로 본문보다 먼저 닿게 합니다. 현재 프레임 항목에 `aria-current="page"`를 붙입니다.
+- 아직 동작하지 않는 기능의 버튼은 `disabled` 대신 `aria-disabled="true"`로 포커스는 받게 하고, 「준비 중」을 화면과 보조기기에 함께 알립니다 (`Button`이 `aria-disabled` 스타일을 지원).
 - 모든 기능은 키보드만으로 사용할 수 있어야 합니다.
 - 이미지는 의미가 있으면 `alt`를 쓰고, 장식이면 `alt=""`를 씁니다.
 - 헤딩 순서(h1 → h2 → h3)를 건너뛰지 않습니다.

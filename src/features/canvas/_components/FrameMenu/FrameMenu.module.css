@@ -1,0 +1,58 @@
+/*
+ * 위치: --layout-floating-bottom 계산식과 같다 (바 높이 + spacing-20 + safe-area).
+ * 아래 spacing-20, 가운데. 넘치면 바 안에서 가로로 밀어서 본다.
+ */
+.root {
+  position: fixed;
+  bottom: calc(var(--spacing-20) + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  z-index: var(--z-sticky);
+  max-width: calc(
+    100% - var(--spacing-16) * 2 - env(safe-area-inset-left, 0px) -
+      env(safe-area-inset-right, 0px)
+  );
+  padding: var(--layout-floating-bar-padding);
+  overflow-x: auto;
+  border-radius: var(--radius-12);
+  background-color: var(--color-bg-elevated);
+  box-shadow: var(--shadow-floating-raised);
+  transform: translateX(-50%);
+  scrollbar-width: none;
+}
+
+.list {
+  display: flex;
+  list-style: none;
+  gap: var(--spacing-2);
+}
+
+.item {
+  composes: labelMd from '@/styles/typography.module.css';
+  display: flex;
+  align-items: center;
+  height: var(--size-touch-target);
+  padding-inline: var(--spacing-12);
+  border-radius: var(--radius-8);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+
+  &[aria-current='page'] {
+    background-color: var(--color-bg-accent);
+    color: var(--color-text-on-accent);
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+@media (hover: hover) {
+  .item:not([aria-current='page']):hover {
+    background-color: var(--color-bg-subtle);
+    color: var(--color-text-primary);
+  }
+}
+
+@media print {
+  .root {
+    display: none;
+  }
+}

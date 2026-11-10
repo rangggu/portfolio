@@ -1,0 +1,104 @@
+/*
+ * 위치: --layout-floating-top 계산식과 같다 (바 높이 + spacing-12 + safe-area).
+ * 위 spacing-12, 좌우 spacing-16 안쪽. 높이는 --layout-floating-bar-height (시안 48px보다 토큰 우선).
+ */
+.root {
+  position: fixed;
+  top: calc(var(--spacing-12) + env(safe-area-inset-top, 0px));
+  right: calc(var(--spacing-16) + env(safe-area-inset-right, 0px));
+  left: calc(var(--spacing-16) + env(safe-area-inset-left, 0px));
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+
+  /* 상자 사이 빈 곳은 아래 캔버스를 누를 수 있게 */
+  pointer-events: none;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  height: var(--layout-floating-bar-height);
+  border-radius: var(--radius-12);
+  background-color: var(--color-bg-elevated);
+  box-shadow: var(--shadow-floating);
+  pointer-events: auto;
+}
+
+.location {
+  composes: box;
+  gap: var(--spacing-8);
+  min-width: 0;
+  padding-inline: var(--spacing-12) var(--spacing-16);
+}
+
+.brand {
+  font-weight: var(--font-weight-bold);
+}
+
+.divider {
+  flex-shrink: 0;
+  width: var(--border-width-1);
+  height: var(--spacing-16);
+  background-color: var(--color-border-default);
+}
+
+.path {
+  overflow: hidden;
+  min-width: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.current {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--spacing-8);
+}
+
+.surface {
+  composes: box;
+  padding: var(--layout-floating-bar-padding);
+}
+
+/* 터치 기기: 위쪽 한 줄 바 하나 (왼쪽 위치 표시, 오른쪽 버튼) */
+@media (pointer: coarse) {
+  .root {
+    height: var(--layout-floating-bar-height);
+    padding-inline: var(--spacing-12) var(--layout-floating-bar-padding);
+    border-radius: var(--radius-12);
+    background-color: var(--color-bg-elevated);
+    box-shadow: var(--shadow-floating);
+    pointer-events: auto;
+  }
+
+  .location,
+  .surface {
+    height: auto;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .actions {
+    gap: 0;
+  }
+
+  .divider,
+  .site {
+    display: none;
+  }
+}
+
+@media print {
+  .root {
+    display: none;
+  }
+}

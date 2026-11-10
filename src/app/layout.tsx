@@ -16,20 +16,6 @@ const ViewportIndicator =
       )
     : () => null;
 
-const FloatingGuide =
-  process.env.NODE_ENV === 'development'
-    ? dynamic(() =>
-        import('@/components/dev/FloatingGuide').then((m) => m.FloatingGuide),
-      )
-    : () => null;
-
-const ThemeToggle =
-  process.env.NODE_ENV === 'development'
-    ? dynamic(() =>
-        import('@/components/dev/ThemeToggle').then((m) => m.ThemeToggle),
-      )
-    : () => null;
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
@@ -92,9 +78,7 @@ export default function RootLayout({
         {children}
         <JsonLd data={personJsonLd} />
         <JsonLd data={webSiteJsonLd} />
-        <FloatingGuide />
         <ViewportIndicator />
-        <ThemeToggle />
       </body>
     </html>
   );

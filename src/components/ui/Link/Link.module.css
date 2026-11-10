@@ -10,8 +10,16 @@
   }
 }
 
+/* --- variant --- */
+
+.root[data-variant='plain'] {
+  color: inherit;
+}
+
+/* --- hover (pointer 기기만) --- */
+
 @media (hover: hover) {
-  .root:hover {
+  .root[data-variant='inline']:hover {
     text-decoration: underline;
     text-underline-offset: var(--spacing-4);
   }
