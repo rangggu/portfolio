@@ -91,6 +91,15 @@ PR마다 아래가 모두 통과해야 합니다.
 4. Playwright (시각 회귀 + axe)
 5. Lighthouse CI
 
+### Lighthouse CI (`.github/workflows/lighthouse.yml`)
+
+- 기존 CI(`ci.yml`)와 별도 워크플로로 돌립니다. 설정은 `lighthouserc.cjs`입니다.
+- `SHOW_DRAFTS=true`로 빌드해 초안 샘플 글까지 포함한 뒤 `next start`로 띄워 측정합니다. 이 변수는 측정 전용이며 배포 빌드에는 쓰지 않습니다.
+- 대상: 홈, 프로젝트 글 페이지. 모바일·데스크톱 프리셋을 각각 3회 실행해 중앙값으로 판정합니다.
+- 기준: performance·accessibility·best-practices·seo 각 0.9 미만이면 실패, accessibility는 1.0 미만이면 경고.
+- 리포트는 임시 공개 저장소(며칠 뒤 만료)에 올리고, PR에는 점수표와 리포트 링크를 댓글로 남깁니다(같은 댓글을 갱신). 원본 결과는 워크플로 아티팩트로 보관합니다.
+- 프리셋은 `LIGHTHOUSE_FORM_FACTOR`로 고릅니다. `LHCI_`로 시작하는 환경 변수는 lhci가 자기 옵션으로 읽으므로 쓰지 않습니다.
+
 ## PR 체크리스트
 
 - [ ] 하드코딩된 스타일 값이 없고 semantic 토큰을 썼다

@@ -45,3 +45,8 @@ next-env.d.ts
 
 # responsive check screenshots
 /test-results
+
+# Lighthouse CI
+/.lighthouseci
+/lhci-results
+/lhci-summary.md

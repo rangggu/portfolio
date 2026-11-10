@@ -18,8 +18,12 @@ import { mdastToPlainText } from './plainText';
 /** 프로젝트 글 원본 폴더 (레포 루트 content/projects) */
 export const PROJECTS_DIR = path.join(process.cwd(), 'content', 'projects');
 
-/** 초안(draft: true)은 개발 서버에서만 보인다. 프로덕션 빌드에서는 페이지·목록·sitemap·AI 지식 모두에서 빠진다 */
-export const SHOW_DRAFTS = process.env.NODE_ENV === 'development';
+/**
+ * 초안(draft: true)은 개발 서버에서만 보인다. 프로덕션 빌드에서는 페이지·목록·sitemap·AI 지식 모두에서 빠진다.
+ * 예외: 빌드 시 SHOW_DRAFTS=true를 주면 초안을 포함한다 (Lighthouse CI 측정 전용, 배포 빌드에서는 쓰지 않는다)
+ */
+export const SHOW_DRAFTS =
+  process.env.NODE_ENV === 'development' || process.env.SHOW_DRAFTS === 'true';
 
 const EXTENSION = '.mdx';
 

@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import {
   getAllProjectMeta,
@@ -138,4 +138,52 @@ describe('getAllProjectPlainText', () => {
     expect(items.map((item) => item.slug)).toEqual(['alpha', 'beta']);
     expect(items.some((item) => item.text.includes('감마'))).toBe(false);
   });
+});
+
+describe('SHOW_DRAFTS', () => {
+  /** 모듈을 불러올 때 값이 정해지므로 환경 변수를 바꾼 뒤 새로 불러온다 */
+  async function loadInProduction(showDrafts?: string) {
+    vi.stubEnv('NODE_ENV', 'production');
+    if (showDrafts !== undefined) vi.stubEnv('SHOW_DRAFTS', showDrafts);
+    vi.resetModules();
+    return import('./projects');
+  }
+
+  /** includeDrafts를 넘기지 않아 기본값(SHOW_DRAFTS)을 따른다 */
+  const DEFAULT_DRAFTS = { dir: FIXTURES, timelineIds: FIXTURE_TIMELINE };
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it('프로덕션에서 SHOW_DRAFTS가 없으면 초안을 뺀다', async () => {
+    const projects = await loadInProduction();
+    expect(projects.SHOW_DRAFTS).toBe(false);
+    expect(await projects.getProjectSlugs(DEFAULT_DRAFTS)).toEqual([
+      'alpha',
+      'beta',
+    ]);
+  });
+
+  it('프로덕션에서 SHOW_DRAFTS=true면 초안을 포함한다', async () => {
+    const projects = await loadInProduction('true');
+    expect(projects.SHOW_DRAFTS).toBe(true);
+    expect(await projects.getProjectSlugs(DEFAULT_DRAFTS)).toEqual([
+      'alpha',
+      'beta',
+      'gamma',
+    ]);
+  });
+
+  it.each(['1', 'TRUE', 'yes', ''])(
+    'SHOW_DRAFTS가 "true"가 아닌 값(%j)이면 초안을 뺀다',
+    async (value) => {
+      const projects = await loadInProduction(value);
+      expect(projects.SHOW_DRAFTS).toBe(false);
+      expect(await projects.getProjectSlugs(DEFAULT_DRAFTS)).toEqual([
+        'alpha',
+        'beta',
+      ]);
+    },
+  );
 });

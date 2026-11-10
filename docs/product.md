@@ -159,7 +159,7 @@
 5. 회고 — **"아직 남은 것"**을 여기서 풉니다.
 
 - 원문은 `content/projects/{slug}.mdx`입니다. frontmatter: `title`, `summary`, `period`(`{ start, end }`, 진행 중이면 `end` 생략, `YYYY-MM`), `tags`, `thumbnail`(`/projects/{slug}/` 아래), `timelineId`(경력 타임라인 항목 id), `draft`(선택, 기본값 `false`).
-- **초안:** `draft: true`인 글은 개발 서버(`npm run dev`)에서만 보이고 글 상단에 "초안" 표시가 붙습니다. 프로덕션 빌드에서는 페이지, 프로젝트 목록, sitemap, AI 지식 추출 모두에서 빠집니다. 공개하려면 `draft`를 지우거나 `false`로 바꿉니다.
+- **초안:** `draft: true`인 글은 개발 서버(`npm run dev`)에서만 보이고 글 상단에 "초안" 표시가 붙습니다. 프로덕션 빌드에서는 페이지, 프로젝트 목록, sitemap, AI 지식 추출 모두에서 빠집니다. 공개하려면 `draft`를 지우거나 `false`로 바꿉니다. 빌드할 때 `SHOW_DRAFTS=true`를 주면 초안을 포함하는데, Lighthouse CI 측정 전용이며 배포 빌드에서는 쓰지 않습니다.
 - 여백 메모는 글 안에서도 `MarginNoteGroup`·`MarginNoteAnchor`·`MarginNote`로 씁니다. 비교 블록 컴포넌트는 글을 쓰다가 필요해지면 추가합니다.
 
 ## 문체
