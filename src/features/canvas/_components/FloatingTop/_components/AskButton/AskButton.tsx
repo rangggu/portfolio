@@ -11,17 +11,19 @@ import styles from './AskButton.module.css';
 export function AskButton() {
   return (
     <Button variant="ghost" type="button" aria-disabled="true">
-      <Icon className={styles.icon}>
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinejoin="round"
-        >
-          <path d="M4 5.5h16v10H9.5L5.5 19v-3.5H4z" />
-        </svg>
-      </Icon>
+      <span className={styles.icon}>
+        <Icon>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinejoin="round"
+          >
+            <path d="M4 5.5h16v10H9.5L5.5 19v-3.5H4z" />
+          </svg>
+        </Icon>
+      </span>
       <span className={styles.label}>
         물어보기{' '}
         <Text as="span" variant="caption" tone="secondary">

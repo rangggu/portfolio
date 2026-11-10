@@ -82,6 +82,15 @@ describe('validateResume', () => {
     ]);
   });
 
+  it('메모가 있는 소개 문단은 조각마다 검사하고 TODO 위치를 기록한다', () => {
+    const data = sample();
+    data.intro = [
+      '문자열 문단',
+      ['앞 ', { text: '연결 텍스트', note: TODO }, ' 뒤'],
+    ];
+    expect(validateResume(data).todos).toEqual(['intro[1][1].note']);
+  });
+
   it.each<[string, (data: Resume) => void, RegExp]>([
     [
       '빈 이름',
@@ -92,6 +101,12 @@ describe('validateResume', () => {
       '이메일 형식',
       (d) => void (d.profile = { ...d.profile, email: 'me' }),
       /profile\.email: 이메일/,
+    ],
+    ['빈 소개 문단 배열', (d) => void (d.intro = [[]]), /intro\[0\]: 비어/],
+    [
+      '빈 소개 메모',
+      (d) => void (d.intro = [['앞 ', { text: '연결', note: ' ' }]]),
+      /intro\[0\]\[1\]\.note: 비어/,
     ],
     [
       '링크 URL 형식',

@@ -1,3 +1,4 @@
+import { AboutFrame } from './_components/AboutFrame';
 import { CareerFrame } from './_components/CareerFrame';
 import { CurrentFrameTracker } from './_components/CurrentFrameTracker';
 import { Frame } from './_components/Frame';
@@ -18,6 +19,14 @@ function FrameContent({ frame }: { frame: CanvasFrame }) {
   switch (frame.id) {
     case 'hero':
       return <HeroFrame headingId={headingId} />;
+    case 'about':
+      return (
+        <AboutFrame
+          headingId={headingId}
+          number={frame.number}
+          title={frame.label}
+        />
+      );
     case 'career':
       return <CareerFrame headingId={headingId} title={frame.label} />;
     default:

@@ -1,0 +1,1 @@
+export { FrameHeading } from './FrameHeading';

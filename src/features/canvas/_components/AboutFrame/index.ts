@@ -1,0 +1,1 @@
+export { AboutFrame } from './AboutFrame';

@@ -70,7 +70,23 @@ export function validateResume(resume: Resume): ResumeValidation {
   check.pattern(profile.email, 'profile.email', EMAIL, '이메일');
   check.links(profile.links, 'profile.links');
 
-  intro.forEach((paragraph, index) => check.text(paragraph, `intro[${index}]`));
+  intro.forEach((paragraph, index) => {
+    const at = `intro[${index}]`;
+    if (typeof paragraph === 'string') {
+      check.text(paragraph, at);
+      return;
+    }
+    if (paragraph.length === 0) check.errors.push(`${at}: 비어 있습니다`);
+    paragraph.forEach((segment, segmentIndex) => {
+      const segmentAt = `${at}[${segmentIndex}]`;
+      if (typeof segment === 'string') {
+        check.text(segment, segmentAt);
+        return;
+      }
+      check.text(segment.text, `${segmentAt}.text`);
+      check.text(segment.note, `${segmentAt}.note`);
+    });
+  });
 
   const timelineIds = new Set<string>();
   timeline.forEach((item, index) => {

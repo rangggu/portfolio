@@ -1,0 +1,8 @@
+.block {
+  display: grid;
+  place-items: center;
+  padding-block: var(--spacing-48);
+  border: var(--border-width-1) dashed var(--color-border-default);
+  border-radius: var(--radius-12);
+  text-align: center;
+}
