@@ -28,7 +28,13 @@ function FrameContent({ frame }: { frame: CanvasFrame }) {
         />
       );
     case 'career':
-      return <CareerFrame headingId={headingId} title={frame.label} />;
+      return (
+        <CareerFrame
+          headingId={headingId}
+          number={frame.number}
+          title={frame.label}
+        />
+      );
     default:
       return <PlaceholderFrame headingId={headingId} title={frame.label} />;
   }

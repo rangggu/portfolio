@@ -27,7 +27,17 @@ export const timeline = [
     links: [],
   },
   // TODO: 나머지 회사·사이드 항목 (부트캠프 시기는 dimmed: true)
-  // TODO: 사이드 레인의 마지막 항목은 이 포트폴리오
+  {
+    // 사이드 레인의 마지막 항목. 경력 프레임에서 「지금 보는 중」이 붙는다
+    id: 'portfolio',
+    lane: 'side',
+    name: '이 포트폴리오',
+    // TODO: 역할, 기간, 한 줄 설명
+    role: TODO,
+    period: { start: TODO },
+    summary: TODO,
+    links: [],
+  },
 ] as const satisfies readonly TimelineItem[];
 
 export type TimelineId = (typeof timeline)[number]['id'];
