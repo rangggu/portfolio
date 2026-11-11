@@ -72,9 +72,8 @@ async function measure(page) {
       container.clientWidth -
       parseFloat(containerStyle.paddingLeft) -
       parseFloat(containerStyle.paddingRight);
-    const lanes = career.querySelector(
-      '[role="group"][data-lane="company"]',
-    ).parentElement;
+    // 경력 연도 행: 넓으면 연도 | 회사 | 사이드 3열, 좁으면 한 열. 보일 항목이 없으면 행이 없다
+    const timelineRow = career.querySelector('ol > li');
 
     // 잘림: 내용을 숨기는(hidden·clip) 요소에서 내용이 넘친 경우 (1px 시각적 숨김 요소는 제외).
     // auto·scroll은 사용자가 밀어서 볼 수 있으므로 잘림이 아니다 (예: 메뉴 바 가로 스크롤)
@@ -117,7 +116,12 @@ async function measure(page) {
       h1Visible: h1.top >= 0 && h1.bottom <= innerHeight,
       frame: Math.round(career.getBoundingClientRect().width),
       inner: Math.round(inner),
-      lanes: getComputedStyle(lanes).gridTemplateColumns.split(' ').length,
+      lanes: timelineRow
+        ? getComputedStyle(timelineRow).gridTemplateColumns.split(' ').length >=
+          3
+          ? 2
+          : 1
+        : 0,
     };
   });
 }
@@ -175,7 +179,7 @@ async function main() {
       h1보임: mark(result.h1Visible),
       프레임: result.frame,
       안쪽: result.inner,
-      경력: result.lanes === 2 ? '두 레인' : '한 레인',
+      경력: ['항목 없음', '한 레인', '두 레인'][result.lanes],
     });
   }
 
