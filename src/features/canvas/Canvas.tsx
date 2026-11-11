@@ -1,9 +1,12 @@
 import { AboutFrame } from './_components/AboutFrame';
 import { CareerFrame } from './_components/CareerFrame';
+import { ContactFrame } from './_components/ContactFrame';
 import { CurrentFrameTracker } from './_components/CurrentFrameTracker';
+import { EducationFrame } from './_components/EducationFrame';
 import { Frame } from './_components/Frame';
 import { HeroFrame } from './_components/HeroFrame';
-import { PlaceholderFrame } from './_components/PlaceholderFrame';
+import { ProjectsFrame } from './_components/ProjectsFrame';
+import { SkillsFrame } from './_components/SkillsFrame';
 import {
   FRAME_IDS,
   FRAMES,
@@ -35,8 +38,38 @@ function FrameContent({ frame }: { frame: CanvasFrame }) {
           title={frame.label}
         />
       );
-    default:
-      return <PlaceholderFrame headingId={headingId} title={frame.label} />;
+    case 'projects':
+      return (
+        <ProjectsFrame
+          headingId={headingId}
+          number={frame.number}
+          title={frame.label}
+        />
+      );
+    case 'skills':
+      return (
+        <SkillsFrame
+          headingId={headingId}
+          number={frame.number}
+          title={frame.label}
+        />
+      );
+    case 'education':
+      return (
+        <EducationFrame
+          headingId={headingId}
+          number={frame.number}
+          title={frame.label}
+        />
+      );
+    case 'contact':
+      return (
+        <ContactFrame
+          headingId={headingId}
+          number={frame.number}
+          title={frame.label}
+        />
+      );
   }
 }
 

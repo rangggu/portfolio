@@ -10,6 +10,7 @@ const base: Resume = {
     jobTitle: '프론트엔드 개발자',
     tagline: '한 줄 소개',
     subline: '보조 문장',
+    contactMessage: '연락 문장',
     email: TODO,
     links: [{ type: 'github', label: 'GitHub', url: 'https://github.com/me' }],
   },

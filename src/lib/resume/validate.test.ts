@@ -45,6 +45,7 @@ function sample(): Resume {
       jobTitle: '직무',
       tagline: '한 줄 소개',
       subline: '보조 문장',
+      contactMessage: '연락 문장',
       email: 'me@example.com',
       links: [
         { type: 'github', label: 'GitHub', url: 'https://github.com/me' },

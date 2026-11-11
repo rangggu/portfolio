@@ -67,6 +67,7 @@ export function validateResume(resume: Resume): ResumeValidation {
   check.text(profile.jobTitle, 'profile.jobTitle');
   check.text(profile.tagline, 'profile.tagline');
   check.text(profile.subline, 'profile.subline');
+  check.text(profile.contactMessage, 'profile.contactMessage');
   check.pattern(profile.email, 'profile.email', EMAIL, '이메일');
   check.links(profile.links, 'profile.links');
 

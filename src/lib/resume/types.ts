@@ -34,6 +34,8 @@ export interface Profile {
   tagline: string;
   /** 첫 화면 보조 문장 */
   subline: string;
+  /** 연락처 프레임 큰 문장 */
+  contactMessage: string;
   email: string;
   links: readonly ProfileLink[];
 }

@@ -1,0 +1,55 @@
+/* 열 전환 기준: 프레임 안쪽 폭(Container) 768px (responsive.md 학력·자격) */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+}
+
+/* 좁은 프레임: 학력 → 자격 한 열 */
+.columns {
+  display: grid;
+  gap: var(--spacing-40);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  min-width: 0;
+}
+
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--spacing-16);
+  padding-block: var(--spacing-16);
+  border-bottom: var(--border-width-1) solid var(--color-border-subtle);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  min-width: 0;
+}
+
+.date {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* 넓은 프레임: 학력 | 자격 두 열 */
+@container (width >= 768px) {
+  .columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--spacing-48);
+  }
+}

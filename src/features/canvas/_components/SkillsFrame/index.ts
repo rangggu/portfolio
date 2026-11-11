@@ -1,0 +1,1 @@
+export { SkillsFrame } from './SkillsFrame';
