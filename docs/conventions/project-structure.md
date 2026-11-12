@@ -99,7 +99,8 @@ src/
 7개 프레임 라우트(`/`, `/about`, `/career`, `/projects`, `/skills`, `/education`, `/contact`)는 route group `app/(canvas)/`에 두고 같은 캔버스 레이아웃(`(canvas)/layout.tsx`)을 공유하며, 초기 프레임만 다르게 시작합니다. 모두 정적 생성됩니다.
 
 - 각 `page.tsx`는 `getFrameMetadata(frameId)`로 메타데이터를 내보내고 `<InitialFrame frameId>`만 렌더합니다 (`features/canvas`).
-- `InitialFrame`은 프레임들 뒤에 인라인 스크립트로 렌더되어, 주소로 직접 들어오면 첫 페인트 전에 해당 프레임으로 스크롤합니다. 현재 프레임은 하이드레이션 뒤 스크롤 위치로 정해집니다.
+- `InitialFrame`은 프레임들 뒤에 인라인 스크립트로 렌더되어, 주소로 직접 들어오면 첫 페인트 전에 해당 프레임에서 시작하게 합니다 (세로 페이지는 스크롤, 카메라 모드는 카메라 첫 위치). 현재 프레임은 하이드레이션 뒤 스크롤 위치로 정해집니다.
+- 스크롤로 현재 프레임이 바뀌면 주소를 교체하고(`replaceState`), 메뉴로 이동하면 기록을 추가합니다(`pushState`). 같은 레이아웃을 공유하므로 page는 다시 렌더되지 않습니다 (`FrameAddressSync`).
 - 레이아웃이 유지되므로 프레임 라우트 사이를 클라이언트에서 이동해도 캔버스는 다시 만들어지지 않습니다.
 
 `/projects`(프레임)와 `/projects/[slug]`(케이스 스터디)의 공존:

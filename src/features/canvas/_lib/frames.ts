@@ -37,3 +37,18 @@ export function getFrameLabel(frame: CanvasFrame): string {
 
   return `${name} · ${frame.path}`;
 }
+
+/** 주소에 맞는 프레임. 캔버스 주소가 아니면 undefined */
+export function getFrameByPath(pathname: string): CanvasFrame | undefined {
+  const normalized =
+    pathname.length > 1 && pathname.endsWith('/')
+      ? pathname.slice(0, -1)
+      : pathname;
+  return FRAMES.find((frame) => frame.path === normalized);
+}
+
+export function getFrame(frameId: FrameId): CanvasFrame {
+  const frame = FRAMES.find((item) => item.id === frameId);
+  if (!frame) throw new Error(`알 수 없는 프레임: ${frameId}`);
+  return frame;
+}

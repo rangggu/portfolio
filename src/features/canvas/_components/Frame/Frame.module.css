@@ -56,6 +56,19 @@
   }
 }
 
+/* 카메라 모드: 폭은 Canvas의 지도 열(--frame-width)이 정한다. 옆 프레임은 눌러서 이동할 수 있다 */
+@media screen {
+  /* position: Canvas의 점 무늬(world::before)보다 위에 그린다 */
+  :root[data-camera] .root {
+    position: relative;
+    width: 100%;
+  }
+
+  :root[data-camera] .root:not(:has([data-frame-selected])) {
+    cursor: pointer;
+  }
+}
+
 @media print {
   .root {
     width: 100%;

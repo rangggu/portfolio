@@ -24,3 +24,15 @@ export function getFrameMetadata(frameId: FrameId): Metadata {
     alternates: { canonical: frame.path },
   };
 }
+
+/** 프레임별 문서 제목. 스크롤로 프레임이 바뀔 때 클라이언트가 document.title에 쓴다 (메타데이터와 같은 규칙) */
+export function getFrameDocumentTitles(): Record<FrameId, string> {
+  return Object.fromEntries(
+    FRAMES.map((frame) => [
+      frame.id,
+      frame.id === 'hero'
+        ? SITE.title
+        : SITE.titleTemplate.replace('%s', frame.label),
+    ]),
+  ) as Record<FrameId, string>;
+}

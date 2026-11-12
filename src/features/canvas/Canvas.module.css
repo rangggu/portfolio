@@ -17,6 +17,124 @@
   background-size: var(--dot-gap) var(--dot-gap);
 }
 
+/* 세로 페이지: stage·world는 상자를 만들지 않아 프레임이 .root의 flex 항목이 된다 */
+.stage,
+.world {
+  display: contents;
+}
+
+/*
+ * 카메라 모드 (docs/product.md 「스크롤은 진짜, 카메라 이동은 연출」)
+ * .root   문서 높이 = 카메라 경로 길이 + 한 화면 (--camera-track은 CameraController가 정한다)
+ * .stage  화면에 고정된 무대. 넘치는 world는 잘라 낸다
+ * .world  캔버스 지도(docs/design/mockup/CanvasMap)대로 놓은 프레임. transform으로 카메라를 흉내 낸다
+ *         한 열 = 프레임 폭, 열 간격 = --layout-frame-gap, 좌우 여백 = 첫 열이 화면 가운데에 오는 값
+ *         그래서 프레임 하나를 가운데 두면 양옆으로 --layout-frame-peek만큼 이웃이 보인다
+ */
+@media screen {
+  :root[data-camera] .root {
+    display: block;
+    height: calc(var(--camera-track, 0px) + 100dvh);
+    background-image: none;
+    overflow-anchor: none;
+  }
+
+  :root[data-camera] .stage {
+    container-type: size;
+    position: sticky;
+    top: 0;
+    display: block;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  :root[data-camera] .world {
+    --frame-width: min(
+      100cqw - (var(--layout-frame-peek) + var(--layout-frame-gap)) * 2,
+      var(--layout-page-max)
+    );
+
+    /*
+     * 스크롤 여유: 브라우저는 Tab 포커스·페이지 내 검색 결과를 보이려고 stage를 스크롤한다.
+     * world를 사방으로 이만큼 띄워 두면 앞(왼쪽·위) 프레임 쪽으로도 스크롤할 수 있고,
+     * CameraController가 그 스크롤을 실제 스크롤 위치로 바꾼 뒤 stage를 이 위치로 되돌린다.
+     * 카메라가 갈 수 있는 가장 먼 좌표보다 커야 한다 (디자인 값이 아니라 로컬 변수)
+     */
+    --camera-room: 100000px;
+
+    position: relative;
+    display: grid;
+    grid-template-areas:
+      'hero . . . .'
+      'about career projects skills education'
+      '. . . . contact';
+    grid-template-columns: repeat(5, var(--frame-width));
+    column-gap: var(--layout-frame-gap);
+    align-items: start;
+    width: max-content;
+    margin: var(--camera-room);
+    padding-inline: calc((100cqw - var(--frame-width)) / 2);
+
+    /*
+     * JS 전: stage 스크롤이 0이라 여유만큼 되돌려 놓는다. 직접 들어온 주소의 첫 위치는 InitialFrame 스크립트가 정한다.
+     * 이후는 CameraController가 stage를 여유만큼 스크롤하고 카메라 좌표만 transform으로 덮어쓴다
+     */
+    transform: translate3d(
+      calc((var(--camera-room) + var(--camera-initial-x, 0px)) * -1),
+      calc((var(--camera-room) + var(--camera-initial-y, 0px)) * -1),
+      0
+    );
+    transition: opacity var(--duration-fast) var(--ease-standard);
+    will-change: transform;
+  }
+
+  /* 점 무늬는 world와 함께 움직여야 캔버스 위를 지나가는 느낌이 난다. 프레임 바깥 빈 캔버스까지 넉넉히 덮는다 */
+  :root[data-camera] .world::before {
+    position: absolute;
+    inset: -100dvh -100cqw;
+    background-image: radial-gradient(
+      circle,
+      var(--color-bg-canvas-dot) var(--dot-size),
+      transparent 0
+    );
+    background-size: var(--dot-gap) var(--dot-gap);
+    content: '';
+  }
+
+  /* 메뉴·옆 프레임으로 이동할 때 잠깐 감춘다 */
+  :root[data-camera] .world[data-fading] {
+    opacity: 0;
+  }
+
+  :root[data-camera] .world > [id='hero'] {
+    grid-area: hero;
+  }
+
+  :root[data-camera] .world > [id='about'] {
+    grid-area: about;
+  }
+
+  :root[data-camera] .world > [id='career'] {
+    grid-area: career;
+  }
+
+  :root[data-camera] .world > [id='projects'] {
+    grid-area: projects;
+  }
+
+  :root[data-camera] .world > [id='skills'] {
+    grid-area: skills;
+  }
+
+  :root[data-camera] .world > [id='education'] {
+    grid-area: education;
+  }
+
+  :root[data-camera] .world > [id='contact'] {
+    grid-area: contact;
+  }
+}
+
 @media print {
   .root {
     padding: 0;
