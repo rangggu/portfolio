@@ -3,10 +3,10 @@
  * 첫 화면(뷰포트)과 전체 페이지를 각각 남긴다.
  * Phase 4에서 Playwright 시각 회귀 테스트(e2e/)가 생기면 그쪽으로 옮길 예정인 임시 스크립트.
  *
- * 사용법: npm run build && npm start 로 서버를 띄운 뒤
- *   npm run screenshot
- *   SCREENSHOT_PATHS=/,/career npm run screenshot
- *   BASE_URL=http://localhost:3123 npm run screenshot
+ * 사용법: yarn build && yarn start 로 서버를 띄운 뒤
+ *   yarn screenshot
+ *   SCREENSHOT_PATHS=/,/career yarn screenshot
+ *   BASE_URL=http://localhost:3123 yarn screenshot
  *
  * 스크린샷: test-results/screenshots/
  */
@@ -38,7 +38,7 @@ async function main() {
     await fetch(BASE_URL);
   } catch {
     console.error(
-      `서버에 연결할 수 없습니다: ${BASE_URL} (npm run build && npm start)`,
+      `서버에 연결할 수 없습니다: ${BASE_URL} (yarn build && yarn start)`,
     );
     process.exit(1);
   }
