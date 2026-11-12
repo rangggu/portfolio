@@ -4,9 +4,9 @@
  * 매트릭스에 더해 폰 가로 모드, 짧은 랩톱, 브라우저 200% 확대(CSS 뷰포트를 절반으로 줄여 재현)도 검사한다.
  * Phase 4에서 Playwright 테스트(e2e/)로 옮길 예정인 임시 검사 스크립트.
  *
- * 사용법: npm run build && npm start 로 서버를 띄운 뒤
- *   npm run check:responsive
- *   BASE_URL=http://localhost:3123 npm run check:responsive
+ * 사용법: yarn build && yarn start 로 서버를 띄운 뒤
+ *   yarn check:responsive
+ *   BASE_URL=http://localhost:3123 yarn check:responsive
  *
  * 스크린샷: test-results/responsive/
  */
@@ -148,7 +148,7 @@ async function main() {
     await fetch(BASE_URL);
   } catch {
     console.error(
-      `서버에 연결할 수 없습니다: ${BASE_URL} (npm run build && npm start)`,
+      `서버에 연결할 수 없습니다: ${BASE_URL} (yarn build && yarn start)`,
     );
     process.exit(1);
   }
