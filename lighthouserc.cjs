@@ -13,7 +13,7 @@ const FLOOR = { minScore: 0.9, aggregationMethod: 'median' };
 module.exports = {
   ci: {
     collect: {
-      startServerCommand: `npm run start -- --port ${PORT}`,
+      startServerCommand: `yarn start --port ${PORT}`,
       startServerReadyPattern: 'Ready',
       url: [
         `http://localhost:${PORT}/`,

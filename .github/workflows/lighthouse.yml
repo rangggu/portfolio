@@ -17,8 +17,6 @@ concurrency:
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
-    env:
-      LHCI_VERSION: 0.15.1
 
     steps:
       - uses: actions/checkout@v4
@@ -26,13 +24,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
+          cache: yarn
 
-      - run: npm ci
+      - run: yarn install --frozen-lockfile
 
       # 측정 전용 빌드: 샘플 글(draft)을 포함한다. 배포 빌드에는 SHOW_DRAFTS를 주지 않는다
       - name: Build (초안 포함)
-        run: npm run build
+        run: yarn build
         env:
           SHOW_DRAFTS: 'true'
 
@@ -43,9 +41,9 @@ jobs:
           for preset in mobile desktop; do
             export LIGHTHOUSE_FORM_FACTOR="$preset"
             rm -rf .lighthouseci
-            npx --yes "@lhci/cli@${LHCI_VERSION}" collect || status=1
-            npx --yes "@lhci/cli@${LHCI_VERSION}" upload || echo "업로드 실패 (리포트 링크 없음)"
-            npx --yes "@lhci/cli@${LHCI_VERSION}" assert || status=1
+            yarn lhci collect || status=1
+            yarn lhci upload || echo "업로드 실패 (리포트 링크 없음)"
+            yarn lhci assert || status=1
             mkdir -p "lhci-results/$preset"
             cp .lighthouseci/*.json "lhci-results/$preset/" 2>/dev/null || true
           done

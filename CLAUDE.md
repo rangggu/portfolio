@@ -9,12 +9,12 @@ Next.js App Router, React 19, TypeScript(strict), React Compiler, CSS Modules + 
 ## 명령어
 
 ```bash
-npm run dev          # 개발 서버
-npm run build        # 프로덕션 빌드
-npm run lint         # ESLint + Stylelint
-npm run typecheck    # tsc --noEmit
-npm run test         # Vitest
-npm run test:e2e     # Playwright (시각 회귀 + axe 포함)
+yarn dev              # 개발 서버
+yarn build            # 프로덕션 빌드
+yarn lint             # ESLint + Stylelint
+yarn typecheck        # tsc --noEmit
+yarn test             # Vitest
+yarn test:e2e         # Playwright (시각 회귀 + axe 포함)
 ```
 
 ## 반드시 지킬 규칙
