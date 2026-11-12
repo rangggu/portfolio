@@ -63,7 +63,7 @@ function toFileName(device) {
 }
 
 async function measure(page) {
-  return page.evaluate(() => {
+  return page.evaluate(async () => {
     const root = document.documentElement;
     const career = document.getElementById('career');
     const container = career.querySelector('[data-width]');
@@ -77,8 +77,10 @@ async function measure(page) {
 
     // 잘림: 내용을 숨기는(hidden·clip) 요소에서 내용이 넘친 경우 (1px 시각적 숨김 요소는 제외).
     // auto·scroll은 사용자가 밀어서 볼 수 있으므로 잘림이 아니다 (예: 메뉴 바 가로 스크롤)
+    // 카메라 모드의 stage는 화면 밖 프레임을 일부러 숨기는 무대라 제외한다 (카메라가 옮겨 가며 보여 준다)
     const hides = (value) => value === 'hidden' || value === 'clip';
     const clipped = [...document.querySelectorAll('body *')].filter((el) => {
+      if (el.hasAttribute('data-camera-stage')) return false;
       const style = getComputedStyle(el);
       if (!hides(style.overflowX) && !hides(style.overflowY)) {
         return false;
@@ -104,7 +106,14 @@ async function measure(page) {
       );
       return hit && !el.contains(hit) && !hit.contains(el);
     });
+    // 카메라 모드는 스크롤 이벤트(다음 프레임)에서 카메라를 옮기므로, 위 이동이 끝난 뒤 맨 위로 가고 다시 기다린다
+    const nextFrames = () =>
+      new Promise((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(resolve)),
+      );
+    await nextFrames();
     window.scrollTo({ top: 0, behavior: 'instant' });
+    await nextFrames();
     const h1 = document.querySelector('#hero h1').getBoundingClientRect();
 
     return {
