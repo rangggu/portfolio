@@ -77,7 +77,8 @@ async function measure(page) {
 
     // 잘림: 내용을 숨기는(hidden·clip) 요소에서 내용이 넘친 경우 (1px 시각적 숨김 요소는 제외).
     // auto·scroll은 사용자가 밀어서 볼 수 있으므로 잘림이 아니다 (예: 메뉴 바 가로 스크롤)
-    // 카메라 모드의 stage는 화면 밖 프레임을 일부러 숨기는 무대라 제외한다 (카메라가 옮겨 가며 보여 준다)
+    // 카메라 모드의 stage는 화면 밖 프레임을 일부러 숨기는 무대라 제외한다 (카메라가 옮겨 가며 보여 준다).
+    // 스와이프 모드의 stage·프레임은 auto(밀어서 보는 영역)라 그대로 통과한다
     const hides = (value) => value === 'hidden' || value === 'clip';
     const clipped = [...document.querySelectorAll('body *')].filter((el) => {
       if (el.hasAttribute('data-camera-stage')) return false;
@@ -113,6 +114,11 @@ async function measure(page) {
       );
     await nextFrames();
     window.scrollTo({ top: 0, behavior: 'instant' });
+    // 스와이프 모드(터치)는 문서 대신 stage와 프레임 안이 스크롤되므로 둘 다 처음 위치로 돌린다
+    if (matchMedia('screen and (pointer: coarse)').matches) {
+      document.querySelector('[data-camera-stage]').scrollTo(0, 0);
+      document.getElementById('hero').scrollTop = 0;
+    }
     await nextFrames();
     const h1 = document.querySelector('#hero h1').getBoundingClientRect();
 
