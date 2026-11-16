@@ -11,6 +11,7 @@ import { FrameEndHint } from './_components/FrameEndHint';
 import { HeroFrame } from './_components/HeroFrame';
 import { ProjectsFrame } from './_components/ProjectsFrame';
 import { SkillsFrame } from './_components/SkillsFrame';
+import { SwipeController } from './_components/SwipeController';
 import {
   FRAME_IDS,
   FRAMES,
@@ -86,7 +87,10 @@ interface CanvasProps {
 /**
  * 점 무늬 캔버스. 문서는 프레임 순서대로 이어지는 세로 페이지다.
  * 카메라 모드(마우스 기기)에서는 stage가 화면에 고정되고, world 안 프레임이 지도대로 놓이며,
- * CameraController가 스크롤 위치에 맞춰 world를 옮긴다. DOM 순서는 그대로라 키보드·스크린리더 순서가 같다.
+ * CameraController가 스크롤 위치에 맞춰 world를 옮긴다.
+ * 스와이프 모드(터치 기기)에서는 stage가 지도대로 놓인 프레임을 가로·세로로 넘기는 스냅 스크롤 영역이 되고,
+ * SwipeController가 그 위치로 현재 프레임을 정한다. data-camera-* 속성은 두 모드가 함께 쓴다.
+ * DOM 순서는 그대로라 키보드·스크린리더 순서가 같다.
  */
 export function Canvas({ children }: CanvasProps) {
   return (
@@ -112,6 +116,7 @@ export function Canvas({ children }: CanvasProps) {
       <CurrentFrameTracker frameIds={FRAME_IDS} />
       <FrameAddressSync titles={getFrameDocumentTitles()} />
       <CameraController frameIds={FRAME_IDS} />
+      <SwipeController frameIds={FRAME_IDS} />
     </main>
   );
 }

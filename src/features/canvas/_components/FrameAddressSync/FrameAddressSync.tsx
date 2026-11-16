@@ -5,6 +5,7 @@ import { getFrame, getFrameByPath, type FrameId } from '../../_lib/frames';
 import {
   isNavigatingToFrame,
   navigateToFrame,
+  subscribeNavigationEnd,
 } from '../../_lib/navigateToFrame';
 import {
   getCurrentFrame,
@@ -40,10 +41,13 @@ export function FrameAddressSync({ titles }: FrameAddressSyncProps) {
     };
 
     const unsubscribe = subscribeCurrentFrame(syncAddress);
+    // 이동 중에는 건너뛰었으므로 끝나면 도착한 프레임으로 다시 맞춘다
+    const unsubscribeNavigationEnd = subscribeNavigationEnd(syncAddress);
     window.addEventListener('popstate', handlePopState);
 
     return () => {
       unsubscribe();
+      unsubscribeNavigationEnd();
       window.removeEventListener('popstate', handlePopState);
     };
   }, [titles]);

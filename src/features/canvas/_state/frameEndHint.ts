@@ -3,12 +3,15 @@ import type { CameraDirection } from '@/lib/canvas/cameraTrack';
 import type { FrameId } from '../_lib/frames';
 
 /**
- * 프레임 끝 안내 (docs/product.md 「프레임 끝 안내」). 카메라가 프레임 끝에서 멈춘 동안(hold) 보인다.
+ * 프레임 끝 안내 (docs/product.md 「프레임 끝 안내」).
+ * 카메라 모드는 프레임 끝에서 멈춘 동안(hold), 스와이프 모드는 프레임 안을 끝까지 내렸을 때 보인다.
  * 사라지는 동안에도 글자가 남아 있도록 안내 내용과 표시 여부를 따로 둔다.
  */
 export interface FrameEndHintTarget {
   nextFrameId: FrameId;
   direction: CameraDirection;
+  /** 다음 프레임으로 가는 동작. scroll: 계속 스크롤 (카메라), swipe: 옆·아래로 넘기기 (터치) */
+  gesture: 'scroll' | 'swipe';
 }
 
 interface FrameEndHintState {
@@ -37,7 +40,8 @@ export function setFrameEndHint(target: FrameEndHintTarget | undefined) {
   if (
     next.visible === state.visible &&
     next.target?.nextFrameId === state.target?.nextFrameId &&
-    next.target?.direction === state.target?.direction
+    next.target?.direction === state.target?.direction &&
+    next.target?.gesture === state.target?.gesture
   ) {
     return;
   }

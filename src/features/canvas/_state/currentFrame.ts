@@ -3,7 +3,8 @@ import type { FrameId } from '../_lib/frames';
 
 /**
  * 지금 보고 있는 프레임. 선택 표시, 위치 표시, 메뉴 바가 함께 쓴다.
- * 값은 세로 페이지에서는 CurrentFrameTracker가, 카메라 모드에서는 CameraController가 스크롤 위치로 정한다.
+ * 값은 세로 페이지에서는 CurrentFrameTracker가, 카메라 모드에서는 CameraController가,
+ * 스와이프 모드에서는 SwipeController가 스크롤 위치로 정한다.
  */
 
 /** 서버 렌더와 첫 하이드레이션에서 쓰는 값 */

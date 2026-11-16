@@ -15,7 +15,8 @@ import { DURATION } from '@/lib/motion/tokens';
 import { getFrameByPath, type FrameId } from '../../_lib/frames';
 import {
   navigateToFrame,
-  registerCameraNavigator,
+  registerFrameNavigator,
+  type FrameNavigator,
 } from '../../_lib/navigateToFrame';
 import { getCurrentFrame, setCurrentFrame } from '../../_state/currentFrame';
 import { setFrameEndHint } from '../../_state/frameEndHint';
@@ -126,7 +127,11 @@ export function startCamera(frameIds: readonly FrameId[]): () => void {
         next.progress > 0 &&
         next.nextFrameId &&
         next.nextDirection
-        ? { nextFrameId: next.nextFrameId, direction: next.nextDirection }
+        ? {
+            nextFrameId: next.nextFrameId,
+            direction: next.nextDirection,
+            gesture: 'scroll',
+          }
         : undefined,
     );
   };
@@ -150,14 +155,10 @@ export function startCamera(frameIds: readonly FrameId[]): () => void {
     jump(anchor ? scrollForAnchor(track, anchor) : window.scrollY);
   };
 
-  const jumpToFrame = (frameId: FrameId, { fade }: { fade: boolean }) => {
+  // 카메라는 옆 프레임도 페이드로 옮긴다 (스크롤 위치와 카메라 좌표가 한 몸이라 미끄러지는 연출이 없다)
+  const jumpToFrame: FrameNavigator['jumpToFrame'] = (frameId) => {
     window.clearTimeout(fadeTimer);
     const target = scrollForFrame(track, frameId);
-    if (!fade) {
-      world.removeAttribute('data-fading');
-      jump(target);
-      return;
-    }
     world.setAttribute('data-fading', '');
     fadeTimer = window.setTimeout(() => {
       jump(target);
@@ -244,7 +245,7 @@ export function startCamera(frameIds: readonly FrameId[]): () => void {
   resizeObserver.observe(stage);
   frames.forEach((frame) => resizeObserver.observe(frame));
 
-  const unregister = registerCameraNavigator({ jumpToFrame });
+  const unregister = registerFrameNavigator({ jumpToFrame });
   window.addEventListener('scroll', handleScroll, { passive: true });
   stage.addEventListener('scroll', handleStageScroll);
   world.addEventListener('focusin', handleFocusIn);
