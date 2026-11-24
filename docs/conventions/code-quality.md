@@ -69,17 +69,24 @@ ESLint 9 flat config(`eslint.config.mjs`)를 사용합니다. `eslint-config-nex
 
 ## 테스트
 
-| 대상                   | 도구                 | 위치                     |
-| ---------------------- | -------------------- | ------------------------ |
-| `src/lib`의 순수 로직  | Vitest               | 대상 파일 옆 `*.test.ts` |
-| 사용자 흐름, 시각 회귀 | Playwright           | `e2e/*.spec.ts`          |
-| 접근성                 | @axe-core/playwright | 주요 페이지 E2E 안에서   |
-| 성능                   | Lighthouse CI        | CI                       |
+| 대상                   | 도구                  | 위치                     |
+| ---------------------- | --------------------- | ------------------------ |
+| `src/lib`의 순수 로직  | Vitest                | 대상 파일 옆 `*.test.ts` |
+| 사용자 흐름, 시각 회귀 | Playwright            | `e2e/*.spec.ts`          |
+| 접근성                 | @axe-core/playwright  | 주요 페이지 E2E 안에서   |
+| 성능                   | Lighthouse CI         | CI                       |
+| 실제 사용자 성능       | Vercel Speed Insights | 운영 배포 (대시보드)     |
 
 - 커버리지 수치를 목표로 두지 않습니다. 로직이 있는 곳을 테스트합니다.
 - 요소 탐색 우선순위: `getByRole` > `getByText` > `getByTestId`
 - 컴포넌트 테스트가 필요하면 `userEvent`를 씁니다 (`fireEvent` 지양).
 - 시각 회귀 스냅샷은 라이트·다크, 모바일·데스크톱 조합으로 찍습니다.
+
+### 실험실 측정과 실제 사용자 측정
+
+- Lighthouse CI는 정해진 기기·네트워크를 흉내 낸 **실험실 측정**입니다. PR에서 기준(0.9) 미달을 막는 데 씁니다.
+- Vercel Speed Insights는 운영 사이트를 연 **실제 방문자**의 Core Web Vitals(LCP·CLS·INP·FCP·TTFB)를 모읍니다. 루트 레이아웃의 `<SpeedInsights />`가 보내며, 수집 스크립트가 Vercel 배포에만 있어서 Vercel에서 빌드할 때(`VERCEL` 환경 변수)만 넣습니다. 로컬·CI의 Lighthouse 측정에는 들어가지 않습니다. 결과는 Vercel 프로젝트의 Speed Insights 탭에서 봅니다 (처음 한 번 대시보드에서 켜야 합니다).
+- 두 값이 다르면 실제 사용자 값을 기준으로 원인을 찾고, 재현과 검증은 Lighthouse로 합니다.
 
 ## CI
 
@@ -99,6 +106,14 @@ PR마다 아래가 모두 통과해야 합니다.
 - 기준: performance·accessibility·best-practices·seo 각 0.9 미만이면 실패, accessibility는 1.0 미만이면 경고.
 - 리포트는 임시 공개 저장소(며칠 뒤 만료)에 올리고, PR에는 점수표와 리포트 링크를 댓글로 남깁니다(같은 댓글을 갱신). 원본 결과는 워크플로 아티팩트로 보관합니다.
 - 프리셋은 `LIGHTHOUSE_FORM_FACTOR`로 고릅니다. `LHCI_`로 시작하는 환경 변수는 lhci가 자기 옵션으로 읽으므로 쓰지 않습니다.
+
+로컬에서 같은 측정을 재현하려면 측정 전용으로 빌드한 뒤 `yarn lighthouse`를 실행합니다. 서버는 lhci가 `yarn start --port 9001`로 띄우고 끝나면 닫습니다 (9001 포트가 비어 있어야 합니다). 리포트는 올리지 않고 `.lighthouseci/`에 남습니다.
+
+```bash
+SHOW_DRAFTS=true yarn build
+yarn lighthouse                                  # 모바일
+LIGHTHOUSE_FORM_FACTOR=desktop yarn lighthouse   # 데스크톱
+```
 
 ## PR 체크리스트
 

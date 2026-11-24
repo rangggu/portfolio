@@ -16,6 +16,8 @@ yarn typecheck           # tsc --noEmit
 yarn test                # Vitest
 yarn check:responsive    # 기기 매트릭스 반응형 검사 (서버 실행 후)
 yarn screenshot          # 1512×823·393×852(터치) 라이트·다크 스크린샷 (서버 실행 후)
+yarn lighthouse          # Lighthouse 측정·기준 판정 (SHOW_DRAFTS=true yarn build 후)
+yarn fonts               # 사이트 글자로 Pretendard 서브셋 다시 만들기
 ```
 
 ## 반드시 지킬 규칙

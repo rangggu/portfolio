@@ -21,6 +21,7 @@ docs/conventions/            # 컨벤션 문서
 content/projects/            # 프로젝트 글 MDX ({slug}.mdx)
 content/resume/              # 이력서 데이터 (TS): profile, intro, timeline, skills, education
 e2e/                         # Playwright 테스트
+scripts/                     # 개발 스크립트 (반응형 검사, 스크린샷, Lighthouse 요약, 폰트 서브셋)
 src/
   ├── app/                   # 라우트 (조합만 담당)
   │   ├── layout.tsx         # 루트 레이아웃 (html, 본문 바로가기, JSON-LD)
@@ -64,10 +65,12 @@ src/
   │   ├── api/{domain}/      # 외부 API 연동 (서버 전용)
   │   ├── content/           # content/projects 로더 (목록·메타·본문 컴파일·평문)
   │   ├── resume/            # 이력서 타입·검증·JSON-LD·평문, 경력 ↔ 프로젝트 글 연결
+  │   ├── fonts/             # 폰트 서브셋 글자 모으기, 서브셋 누락 테스트
   │   └── {기능명}/          # 예: format/, physics/, motion/
   │
   ├── styles/
   │   ├── tokens.css         # 디자인 토큰 (primitive → semantic)
+  │   ├── fonts/             # Pretendard 서브셋 (yarn fonts로 만든 woff2·글자 목록, next/font 선언)
   │   ├── typography.module.css
   │   └── globals.css
   │
