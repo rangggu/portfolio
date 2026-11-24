@@ -39,7 +39,6 @@ src/
   │   ├── @modal/            # Intercepting Routes 모달 슬롯 (Phase 3~4)
   │   │   ├── (.)projects/[slug]/page.tsx
   │   │   └── default.tsx
-  │   └── api/               # Route Handler (Phase 3~4)
   │
   ├── components/
   │   ├── ui/                # 디자인 시스템 기초 컴포넌트 (도메인 무관)
@@ -51,9 +50,8 @@ src/
   │   └── mdx/               # MDX 요소 매핑(mdxComponents), CodeBlock, Callout, Figure
   │
   ├── features/              # 기능 단위 코드
-  │   ├── actions/           # 사이트 액션 레지스트리 (Phase 3~4)
   │   ├── design-system/     # 디자인 시스템 문서 페이지 (토큰 표·견본, 컴포넌트 문서·예시)
-  │   └── {feature}/         # 예: command-palette, streaming-demo
+  │   └── {feature}/         # 예: theme, canvas
   │       ├── {Feature}.tsx
   │       ├── {Feature}.module.css
   │       ├── actions.ts     # Server Actions
@@ -96,10 +94,6 @@ src/
 | 부모 컴포넌트 1개         | 부모 폴더의 `_components/` (재귀 중첩 가능, 깊이 제한 없음) |
 | 같은 feature의 여러 곳    | `features/{feature}/_shared/`                               |
 | 여러 feature, 도메인 무관 | `components/ui/`                                            |
-
-### 사이트 액션 레지스트리 (`features/actions/`)
-
-프로젝트 열기, 테마 전환, 이메일 복사, 이력서 다운로드 등 사이트 전역에서 실행할 수 있는 액션을 하나의 레지스트리로 관리합니다. Cmd+K 커맨드 팔레트와 AI 에이전트 도구가 같은 레지스트리를 공유합니다. 구현은 Phase 3~4에서 진행합니다.
 
 ### 캔버스 라우트 구조
 

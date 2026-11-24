@@ -1,4 +1,4 @@
-/** 케이스 스터디 frontmatter. generateMetadata·OG 이미지·sitemap·AI 지식이 같은 데이터를 쓴다. */
+/** 케이스 스터디 frontmatter. generateMetadata·OG 이미지·sitemap이 같은 데이터를 쓴다. */
 export interface ProjectPeriod {
   /** YYYY-MM */
   start: string;

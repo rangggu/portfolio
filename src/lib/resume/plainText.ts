@@ -13,7 +13,7 @@ function period(value: Period): string {
   return formatPeriod(value);
 }
 
-/** Phase 4 에이전트·인쇄 이력서용 평문. TODO인 값은 빠진다 */
+/** 인쇄 이력서용 평문. TODO인 값은 빠진다 */
 export function toResumePlainText(resume: Resume): string {
   const { profile, intro, timeline, skills, education, certifications } =
     resume;

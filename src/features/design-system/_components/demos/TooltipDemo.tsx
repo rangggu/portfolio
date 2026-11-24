@@ -10,9 +10,9 @@ export function TooltipDemo() {
   return (
     <div className={ex.stack}>
       <div className={ex.row}>
-        <Tooltip content="Phase 4에서 열려요">
+        <Tooltip content="준비 중이에요">
           <Button variant="ghost" type="button" aria-disabled="true">
-            물어보기 (위)
+            비활성 (위)
           </Button>
         </Tooltip>
         <Tooltip content="아래쪽에 보이는 툴팁이에요" placement="bottom">

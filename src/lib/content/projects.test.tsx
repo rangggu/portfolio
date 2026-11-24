@@ -4,10 +4,8 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import {
   getAllProjectMeta,
-  getAllProjectPlainText,
   getProjectContent,
   getProjectMeta,
-  getProjectPlainText,
   getProjectSlugs,
 } from './projects';
 
@@ -112,31 +110,6 @@ describe('getProjectContent', () => {
 
   it('초안을 숨기는 환경에서는 본문도 읽지 않는다', async () => {
     await expect(getProjectContent('gamma', PUBLISHED)).rejects.toThrow('초안');
-  });
-});
-
-describe('getProjectPlainText', () => {
-  it('제목·요약·본문 텍스트를 평문으로 뽑고, JSX는 감싼 내용만 남긴다', async () => {
-    const text = await getProjectPlainText('beta', PUBLISHED);
-    expect(text).toContain('Beta');
-    expect(text).toContain('베타 요약');
-    expect(text).toContain('연결 텍스트');
-    expect(text).toContain('메모 내용');
-    expect(text).not.toContain('MarginNote');
-    expect(text).not.toContain('주석');
-  });
-
-  it('코드 블록 내용도 남긴다', async () => {
-    const text = await getProjectPlainText('alpha', PUBLISHED);
-    expect(text).toContain('const answer = 42;');
-  });
-});
-
-describe('getAllProjectPlainText', () => {
-  it('초안을 숨기면 AI 지식 추출에서도 뺀다', async () => {
-    const items = await getAllProjectPlainText(PUBLISHED);
-    expect(items.map((item) => item.slug)).toEqual(['alpha', 'beta']);
-    expect(items.some((item) => item.text.includes('감마'))).toBe(false);
   });
 });
 

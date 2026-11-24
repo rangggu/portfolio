@@ -2,7 +2,7 @@ import * as runtime from 'react/jsx-runtime';
 
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { createProcessor, evaluate } from '@mdx-js/mdx';
+import { evaluate } from '@mdx-js/mdx';
 import matter from 'gray-matter';
 
 import { TIMELINE_IDS } from '@/lib/resume';
@@ -13,13 +13,12 @@ import {
   type ProjectFrontmatter,
 } from './frontmatter';
 import { REHYPE_PLUGINS, REMARK_PLUGINS } from './mdxOptions';
-import { mdastToPlainText } from './plainText';
 
 /** 프로젝트 글 원본 폴더 (레포 루트 content/projects) */
 export const PROJECTS_DIR = path.join(process.cwd(), 'content', 'projects');
 
 /**
- * 초안(draft: true)은 개발 서버에서만 보인다. 프로덕션 빌드에서는 페이지·목록·sitemap·AI 지식 모두에서 빠진다.
+ * 초안(draft: true)은 개발 서버에서만 보인다. 프로덕션 빌드에서는 페이지·목록·sitemap 모두에서 빠진다.
  * 예외: 빌드 시 SHOW_DRAFTS=true를 주면 초안을 포함한다 (Lighthouse CI 측정 전용, 배포 빌드에서는 쓰지 않는다)
  */
 export const SHOW_DRAFTS =
@@ -122,27 +121,4 @@ export async function getProjectContent(
     rehypePlugins: REHYPE_PLUGINS,
   });
   return { meta, Content };
-}
-
-/** Phase 4 AI 지식용 평문 (제목·요약 + 본문) */
-export async function getProjectPlainText(
-  slug: string,
-  options: ContentOptions = {},
-): Promise<string> {
-  const { meta, body } = await readProject(slug, options);
-  const tree = createProcessor({ remarkPlugins: REMARK_PLUGINS }).parse(body);
-  return [meta.title, meta.summary, mdastToPlainText(tree)].join('\n\n');
-}
-
-/** Phase 4 AI 지식 추출용: 공개된 모든 글의 평문 (초안 제외는 options를 따른다) */
-export async function getAllProjectPlainText(
-  options: ContentOptions = {},
-): Promise<{ slug: string; text: string }[]> {
-  const slugs = await getProjectSlugs(options);
-  return Promise.all(
-    slugs.map(async (slug) => ({
-      slug,
-      text: await getProjectPlainText(slug, options),
-    })),
-  );
 }

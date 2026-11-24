@@ -72,11 +72,11 @@ export function ModalDemo() {
       <Dialog
         open={opened === 'md'}
         onClose={close}
-        title="물어보기"
+        title="메모 남기기"
         description="Tab이 대화상자 안에서만 돌고, Esc로 닫혀요."
         footer={footer}
       >
-        <Input label="질문" placeholder="궁금한 점을 적어 주세요" />
+        <Input label="메모" placeholder="남길 말을 적어 주세요" />
       </Dialog>
       <Dialog
         open={opened === 'lg'}
