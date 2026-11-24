@@ -1,10 +1,14 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Button } from '@/components/ui/Button';
+import { Card, CardLink } from '@/components/ui/Card';
+import { Divider } from '@/components/ui/Divider';
 import { Container } from '@/components/ui/Container';
 import { Heading } from '@/components/ui/Heading';
 import { Icon } from '@/components/ui/Icon';
+import { Input, Textarea } from '@/components/ui/Input';
 import { Stack } from '@/components/ui/Stack';
+import { Tag } from '@/components/ui/Tag';
 import { Text, type TextVariant } from '@/components/ui/Text';
 import { IconButton } from '@/components/ui/IconButton';
 import { Link } from '@/components/ui/Link';
@@ -15,6 +19,10 @@ import {
 } from '@/components/ui/MarginNote';
 import { Prose } from '@/components/ui/Prose';
 import { VisuallyHidden } from '@/components/ui/VisuallyHidden';
+import { ModalDemo } from './_demos/ModalDemo';
+import { TabsDemo } from './_demos/TabsDemo';
+import { ToastDemo } from './_demos/ToastDemo';
+import { TooltipDemo } from './_demos/TooltipDemo';
 
 export const metadata: Metadata = {
   robots: 'noindex',
@@ -240,6 +248,94 @@ export default function DevUiPage() {
           아래에 숨겨진 텍스트가 있습니다 (스크린리더만 읽음):
           <VisuallyHidden>이 텍스트는 보이지 않습니다</VisuallyHidden>
         </p>
+      </Section>
+
+      <Section title="Tag — tone × size">
+        <Row>
+          <Tag>React</Tag>
+          <Tag tone="accent">대표 프로젝트</Tag>
+          <Tag size="sm">TypeScript</Tag>
+          <Tag size="sm" tone="accent">
+            진행 중
+          </Tag>
+        </Row>
+        <Stack as="ul" direction="row" gap="8" wrap>
+          <Tag as="li">언어·프레임워크</Tag>
+          <Tag as="li">스타일링</Tag>
+          <Tag as="li">데이터·상태</Tag>
+        </Stack>
+      </Section>
+
+      <Section title="Divider — horizontal / vertical">
+        <p>위 문단</p>
+        <Divider style={{ marginBlock: 'var(--spacing-12)' }} />
+        <p>아래 문단</p>
+        <Row>
+          <span>왼쪽</span>
+          <Divider orientation="vertical" decorative />
+          <span>오른쪽 (장식 세로선)</span>
+        </Row>
+      </Section>
+
+      <Section title="Input · Textarea — 기본 / 설명 / 오류 / 비활성">
+        <Stack gap="20" style={{ maxWidth: 'var(--layout-prose-max)' }}>
+          <Input label="이름" placeholder="김규리" />
+          <Input
+            label="이메일"
+            type="email"
+            description="답장을 받을 주소예요."
+            defaultValue="hello@"
+            error="이메일 형식이 아니에요."
+          />
+          <Input label="비활성" disabled defaultValue="수정할 수 없어요" />
+          <Input label="검색" hideLabel placeholder="라벨이 보이지 않는 입력" />
+          <Textarea
+            label="물어볼 내용"
+            description="Phase 4 물어보기 입력에 쓸 모양이에요."
+          />
+        </Stack>
+      </Section>
+
+      <Section title="Dialog · BottomSheet">
+        <ModalDemo />
+      </Section>
+
+      <Section title="Tabs — 키보드 ←·→·Home·End">
+        <TabsDemo />
+      </Section>
+
+      <Section title="Tooltip — hover · 포커스 · 터치 길게 누르기">
+        <TooltipDemo />
+      </Section>
+
+      <Section title="Toast — toast()">
+        <ToastDemo />
+      </Section>
+
+      <Section title="Card · CardLink">
+        <Stack gap="12">
+          <Card as="article">
+            <Heading level={3} variant="headingSm">
+              정적 카드
+            </Heading>
+            <Text tone="secondary">목록 항목을 담는 상자입니다.</Text>
+          </Card>
+          <CardLink href="/projects">
+            <Heading level={3} variant="headingSm">
+              링크 카드
+            </Heading>
+            <Text tone="secondary">
+              카드 전체가 링크입니다. hover에 살짝 들리고, Tab으로 포커스 링이
+              보입니다.
+            </Text>
+          </CardLink>
+          <CardLink href="https://github.com/rangggu">
+            <Heading level={3} variant="headingSm">
+              외부 링크 카드
+            </Heading>
+            <Text tone="secondary">새 탭으로 열리고 보조기기에 알립니다.</Text>
+          </CardLink>
+        </Stack>
       </Section>
     </Container>
   );
