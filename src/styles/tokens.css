@@ -53,11 +53,11 @@
 
 /* ---------- Primitive: Typography ---------- */
 :root {
-  /* Pretendard Variable은 다이나믹 서브셋 CSS로 로드됨 (globals.css) */
+  /* Pretendard 서브셋은 next/font가 --font-pretendard로 넣는다 (src/styles/fonts). 대체 폰트 보정은 globals.css */
   --font-family-sans:
-    'Pretendard Variable', 'Pretendard Fallback Mac', 'Pretendard Fallback Win',
-    'Pretendard Fallback Android', -apple-system, BlinkMacSystemFont, system-ui,
-    sans-serif;
+    var(--font-pretendard), 'Pretendard Fallback Mac',
+    'Pretendard Fallback Win', 'Pretendard Fallback Android', -apple-system,
+    BlinkMacSystemFont, system-ui, sans-serif;
   --font-family-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   --font-size-12: 0.75rem;

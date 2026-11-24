@@ -91,9 +91,19 @@
 
 ## 타이포그래피
 
+### 폰트 서브셋
+
+Pretendard는 **사이트에 쓰는 글자만 남긴 서브셋** 한 파일(`src/styles/fonts/pretendard-subset.woff2`, 가변 폰트, 굵기 400~700)로 씁니다. 렌더링을 막는 다이나믹 서브셋 CSS와 한글 조각 여러 개(첫 화면 ≈288KB) 대신 ≈53KB 하나를 preload해, 첫 페인트부터 Pretendard로 그립니다.
+
+- 불러오기: `next/font/local`(`src/styles/fonts/index.ts`)이 해시 파일명·preload를 맡고, `--font-pretendard` 변수로 `--font-family-sans` 맨 앞에 들어갑니다.
+- 만들기: `yarn fonts`. 이력서 데이터(`content/resume`)·프로젝트 글(`content/projects`)·UI 문자열(`src`의 문자열·JSX 텍스트, 주석 제외)에서 글자를 모으고, ASCII 인쇄 문자와 날짜 단위(년·월·일)를 더합니다. 대체 글리프(GSUB)는 남기지 않습니다 (`tabular-nums`는 고정폭 시스템 폰트에만 씁니다).
+- 결과 woff2와 글자 목록(`pretendard-subset.txt`)을 커밋합니다. 내용에 목록에 없는 글자가 생기면 Vitest(`src/lib/fonts/subsetCoverage.test.ts`)가 실패하므로 `yarn fonts`로 다시 만듭니다.
+- 서브셋에 없는 글자(예: 미리 알 수 없는 에이전트 응답)는 아래 대체 폰트가 글자 단위로 그립니다.
+- 새 굵기 토큰이 400~700 밖이면 `scripts/subset-font.mjs`의 굵기 범위도 함께 바꿉니다.
+
 ### 폰트 대체 보정 (CLS 방지)
 
-Pretendard Variable을 다이나믹 서브셋으로 로드하므로 `next/font`의 자동 보정을 쓰지 않습니다. 대신 운영체제별 대체 폰트에 `size-adjust` 등을 직접 적용합니다.
+서브셋에 없는 글자와 폰트가 도착하기 전을 위해 운영체제별 대체 폰트에 `size-adjust` 등을 직접 적용합니다. 그래서 `next/font`의 자동 보정(`adjustFontFallback`)은 끕니다. 서브셋도 원본과 메트릭(UPM·ascent·descent)이 같습니다.
 
 **Pretendard Variable 메트릭:** UPM 2048, ascent 1950, descent 494, lineGap 0
 

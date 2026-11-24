@@ -5,6 +5,7 @@ import { JsonLd, ThemeScript } from '@/components/seo';
 import { RESUME } from '@/lib/resume';
 import { toPersonJsonLd } from '@/lib/resume/jsonLd';
 import { SITE } from '@/lib/site';
+import { pretendard } from '@/styles/fonts';
 import './globals.css';
 
 const ViewportIndicator =
@@ -69,7 +70,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" suppressHydrationWarning>
+    <html lang="ko" className={pretendard.variable} suppressHydrationWarning>
       <head>
         <ThemeScript />
       </head>

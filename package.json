@@ -11,13 +11,13 @@
     "test": "vitest run",
     "check:responsive": "node --experimental-strip-types --no-warnings scripts/check-responsive.mjs",
     "prepare": "husky",
-    "screenshot": "node scripts/screenshot.mjs"
+    "screenshot": "node scripts/screenshot.mjs",
+    "fonts": "node --experimental-strip-types --no-warnings scripts/subset-font.mjs"
   },
   "dependencies": {
     "@mdx-js/mdx": "^3.1.1",
     "gray-matter": "^4.0.3",
     "next": "16.3.6",
-    "pretendard": "^1.3.9",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "rehype-pretty-code": "^0.14.5",
@@ -36,11 +36,13 @@
     "eslint-config-next": "16.3.6",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
+    "pretendard": "^1.3.9",
     "prettier": "^3.9.9",
     "stylelint": "^17.15.0",
     "stylelint-config-css-modules": "^4.6.0",
     "stylelint-config-standard": "^40.0.0",
     "stylelint-declaration-strict-value": "^1.12.1",
+    "subset-font": "^2.9.0",
     "typescript": "^5",
     "vite": "^8.3.1",
     "vitest": "^5.0.2"
