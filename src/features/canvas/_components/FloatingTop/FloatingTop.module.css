@@ -65,7 +65,17 @@
 
 .surface {
   composes: box;
+  gap: var(--spacing-4);
   padding: var(--layout-floating-bar-padding);
+}
+
+/* 모드 전환은 마우스 기기 캔버스(카메라 모드)에서만 */
+.modeButton {
+  display: inline-flex;
+}
+
+:root:not([data-camera]) .modeButton {
+  display: none;
 }
 
 /* 터치 기기: 위쪽 한 줄 바 하나 (왼쪽 위치 표시, 오른쪽 버튼) */

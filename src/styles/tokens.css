@@ -131,7 +131,7 @@
 :root {
   --layout-prose-max: 720px;
   --layout-prose-min: 560px;
-  --layout-page-max: 1200px;
+  --layout-page-max: 1440px; /* 프레임·단독 페이지 최대 폭: 큰 화면에서도 프레임 비율이 화면과 비슷하게 */
   --layout-note-width: 240px;
   --layout-frame-peek: clamp(2rem, 4vw, 4.5rem); /* 32→72px (1440: 58px) */
   --layout-frame-gap: clamp(1rem, 2.5vw, 2.5rem); /* 16→40px (1440: 36px) */
@@ -247,6 +247,10 @@
 
   /* 토스트 */
   --motion-toast-duration: var(--duration-normal);
+
+  /* 캔버스 카메라 이동 (옆 프레임·메뉴·뒤로 가기): 가까우면 최소, 멀수록 늘어 최대에서 멈춘다 */
+  --motion-camera-min-duration: var(--duration-slow);
+  --motion-camera-max-duration: var(--duration-slower);
 
   /* 레이아웃 모핑 인디케이터 */
   --motion-indicator-duration: var(--duration-normal);

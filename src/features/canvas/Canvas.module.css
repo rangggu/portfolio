@@ -25,8 +25,9 @@
 
 /*
  * 캔버스 지도(docs/design/mockup/CanvasMap). 카메라 모드와 스와이프 모드가 함께 쓴다.
- * 한 열 = 프레임 폭, 열 간격 = --layout-frame-gap, 좌우 여백 = 첫 열이 화면 가운데에 오는 값.
+ * 한 열 = 프레임 폭, 열 간격 = --frame-gap, 좌우 여백 = 첫 열이 화면 가운데에 오는 값.
  * 그래서 프레임 하나를 가운데 두면 양옆으로 --layout-frame-peek만큼 이웃이 보인다.
+ * 프레임이 최대 폭(--layout-page-max)에 닿은 큰 화면에서는 남는 폭을 간격이 받아, 이웃은 계속 peek만큼만 보인다
  * 세로 페이지에서는 world가 display: contents라 아래 grid 값은 쓰이지 않는다.
  */
 .world {
@@ -34,13 +35,17 @@
     100cqw - (var(--layout-frame-peek) + var(--layout-frame-gap)) * 2,
     var(--layout-page-max)
   );
+  --frame-gap: max(
+    var(--layout-frame-gap),
+    (100cqw - var(--frame-width)) / 2 - var(--layout-frame-peek)
+  );
 
   grid-template-areas:
     'hero . . . .'
     'about career projects skills education'
     '. . . . contact';
   grid-template-columns: repeat(5, var(--frame-width));
-  column-gap: var(--layout-frame-gap);
+  column-gap: var(--frame-gap);
 }
 
 .world > [id='hero'] {
@@ -136,9 +141,61 @@
     content: '';
   }
 
-  /* 메뉴·옆 프레임으로 이동할 때 잠깐 감춘다 */
+  /* 먼 프레임으로 이동할 때 잠깐 감춘다 (옆 프레임은 미끄러진다) */
   :root[data-camera] .world[data-fading] {
     opacity: 0;
+  }
+
+  /*
+   * 자유 모드 (docs/product.md 「자유 모드」). 문서는 스크롤하지 않고 startFreeCamera가 입력을 직접 받는다.
+   * world는 왼쪽 위 기준으로 확대·축소하고, 점 무늬는 배율과 위치(--free-*)를 따라 stage 배경에 그린다
+   * (world에 붙이면 축소했을 때 무늬가 모자란다)
+   */
+  :root[data-camera][data-canvas-mode='free'] .root {
+    height: 100dvh;
+  }
+
+  :root[data-camera][data-canvas-mode='free'] .stage {
+    background-image: radial-gradient(
+      circle,
+      var(--color-bg-canvas-dot) var(--dot-size),
+      transparent 0
+    );
+    background-position: var(--free-dot-x, 0) var(--free-dot-y, 0);
+    background-size: calc(var(--dot-gap) * var(--free-dot-scale, 1))
+      calc(var(--dot-gap) * var(--free-dot-scale, 1));
+    cursor: grab;
+  }
+
+  :root[data-camera][data-canvas-mode='free'] .world {
+    transform-origin: 0 0;
+    transition: none;
+    will-change: auto;
+  }
+
+  /* 조작하는 동안만 레이어로 올리고, 멈추면 풀어 확대된 글자를 선명하게 다시 그린다 */
+  :root[data-camera][data-canvas-mode='free'] .world[data-moving] {
+    will-change: transform;
+  }
+
+  :root[data-camera][data-canvas-mode='free'] .world::before {
+    display: none;
+  }
+
+  /* 프레임 안은 글자 선택·링크가 그대로다. Space를 누르고 있으면 어디서든 끌 수 있다 */
+  :root[data-camera][data-canvas-mode='free'] .world > * {
+    cursor: auto;
+  }
+
+  :root[data-camera][data-canvas-mode='free'] .stage[data-space] * {
+    cursor: grab;
+    user-select: none;
+  }
+
+  :root[data-camera][data-canvas-mode='free'] .stage[data-dragging],
+  :root[data-camera][data-canvas-mode='free'] .stage[data-dragging] * {
+    cursor: grabbing;
+    user-select: none;
   }
 }
 

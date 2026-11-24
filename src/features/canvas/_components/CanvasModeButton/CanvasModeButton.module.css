@@ -1,0 +1,5 @@
+/* 권유 말풍선(ModeHint)의 위치 기준 */
+.anchor {
+  position: relative;
+  display: inline-flex;
+}

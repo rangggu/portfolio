@@ -7,6 +7,7 @@ import {
 } from '@/lib/canvas/swipe';
 import { DURATION } from '@/lib/motion/tokens';
 import { getFrameByPath, type FrameId } from '../../_lib/frames';
+import { prefersReducedMotion } from '../../_lib/motion';
 import {
   markNavigating,
   navigateToFrame,
@@ -37,10 +38,6 @@ function findElements(frameIds: readonly FrameId[]): SwipeElements | null {
   });
   if (!stage || !world || frames.length === 0) return null;
   return { stage, world, frames };
-}
-
-function prefersReducedMotion() {
-  return matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 /**

@@ -12,6 +12,7 @@ import { HeroFrame } from './_components/HeroFrame';
 import { ProjectsFrame } from './_components/ProjectsFrame';
 import { SkillsFrame } from './_components/SkillsFrame';
 import { SwipeController } from './_components/SwipeController';
+import { ZoomControls } from './_components/ZoomControls';
 import {
   FRAME_IDS,
   FRAMES,
@@ -113,6 +114,7 @@ export function Canvas({ children }: CanvasProps) {
       </div>
       {children}
       <FrameEndHint />
+      <ZoomControls />
       <CurrentFrameTracker frameIds={FRAME_IDS} />
       <FrameAddressSync titles={getFrameDocumentTitles()} />
       <CameraController frameIds={FRAME_IDS} />

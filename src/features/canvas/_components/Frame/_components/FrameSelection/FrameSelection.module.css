@@ -8,6 +8,18 @@
   inset: 0;
   pointer-events: none;
   outline: var(--selection-width) solid var(--color-border-focus);
+  transition: opacity var(--duration-normal) var(--ease-standard);
+
+  /* 새로 선택된 프레임은 서서히 나타난다 */
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+/* 카메라가 옆 프레임으로 미끄러지는 동안은 숨겼다가, 도착하면 위 전환으로 나타난다 */
+:root[data-camera-traveling] .root {
+  opacity: 0;
+  transition: none;
 }
 
 .handle {

@@ -1,0 +1,67 @@
+/*
+ * 오른쪽 아래, 메뉴 바와 같은 높이 (FrameMenu.module.css 위치 계산과 같다).
+ * 좁은 창에서는 메뉴 바와 겹치지 않게 메뉴 바 위로 올린다.
+ * 자유 모드(마우스 기기 캔버스)에서만 보인다
+ */
+.root {
+  position: fixed;
+  right: calc(var(--spacing-16) + env(safe-area-inset-right, 0px));
+  bottom: calc(var(--spacing-20) + env(safe-area-inset-bottom, 0px));
+  z-index: var(--z-sticky);
+  display: none;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--layout-floating-bar-padding);
+  border-radius: var(--radius-12);
+  background-color: var(--color-bg-elevated);
+  box-shadow: var(--shadow-floating);
+}
+
+:root[data-camera][data-canvas-mode='free'] .root {
+  display: flex;
+}
+
+@media (width < 1024px) {
+  .root {
+    bottom: calc(var(--layout-floating-bottom) + var(--spacing-8));
+  }
+}
+
+.percent {
+  composes: labelMd from '@/styles/typography.module.css';
+  align-self: stretch;
+  min-width: calc(var(--size-touch-target) + var(--spacing-12));
+  padding-inline: var(--spacing-8);
+  border: none;
+  border-radius: var(--radius-8);
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-border-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
+
+@media (hover: hover) {
+  .percent:hover {
+    background-color: var(--color-bg-subtle);
+    color: var(--color-text-primary);
+  }
+}
+
+.divider {
+  width: var(--border-width-1);
+  height: var(--spacing-16);
+  margin-inline: var(--spacing-4);
+  background-color: var(--color-border-default);
+}
+
+@media print {
+  .root {
+    display: none;
+  }
+}

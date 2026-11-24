@@ -101,7 +101,7 @@ Pretendard는 **사이트에 쓰는 글자만 남긴 서브셋** 한 파일(`src
 - 불러오기: `next/font/local`(`src/styles/fonts/index.ts`)이 해시 파일명·preload를 맡고, `--font-pretendard` 변수로 `--font-family-sans` 맨 앞에 들어갑니다.
 - 만들기: `yarn fonts`. 이력서 데이터(`content/resume`)·프로젝트 글(`content/projects`)·UI 문자열(`src`의 문자열·JSX 텍스트, 주석 제외)에서 글자를 모으고, ASCII 인쇄 문자와 날짜 단위(년·월·일)를 더합니다. 대체 글리프(GSUB)는 남기지 않습니다 (`tabular-nums`는 고정폭 시스템 폰트에만 씁니다).
 - 결과 woff2와 글자 목록(`pretendard-subset.txt`)을 커밋합니다. 내용에 목록에 없는 글자가 생기면 Vitest(`src/lib/fonts/subsetCoverage.test.ts`)가 실패하므로 `yarn fonts`로 다시 만듭니다.
-- 서브셋에 없는 글자(예: 미리 알 수 없는 에이전트 응답)는 아래 대체 폰트가 글자 단위로 그립니다.
+- 서브셋에 없는 글자는 아래 대체 폰트가 글자 단위로 그립니다.
 - 새 굵기 토큰이 400~700 밖이면 `scripts/subset-font.mjs`의 굵기 범위도 함께 바꿉니다.
 
 ### 폰트 대체 보정 (CLS 방지)
@@ -187,10 +187,10 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 | -------------------------- | ------------------------------------------------------------------------------------ |
 | `--shadow-sm`              | 카드 기본                                                                            |
 | `--shadow-md`              | 카드 hover, 드롭다운                                                                 |
-| `--shadow-lg`              | 팝오버, 커맨드 팔레트                                                                |
+| `--shadow-lg`              | 팝오버                                                                               |
 | `--shadow-overlay`         | 다이얼로그, 바텀시트                                                                 |
 | `--shadow-frame`           | 캔버스 프레임 (시안 기반 임시 값)                                                    |
-| `--shadow-floating`        | 플로팅 UI: 위치 표시, 물어보기·테마 버튼 (시안 기반 임시 값)                         |
+| `--shadow-floating`        | 플로팅 UI: 위치 표시, 모드·테마 버튼 (시안 기반 임시 값)                             |
 | `--shadow-floating-raised` | 하단 메뉴 바 (시안 기반 임시 값)                                                     |
 | `--blur-floating`          | 플로팅 UI `backdrop-filter`                                                          |
 | `--blur-overlay`           | 오버레이 딤 블러                                                                     |
@@ -210,19 +210,19 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 
 ## 레이아웃
 
-| 토큰                            | 값                                                         | 용도                                                                                                                                          |
-| ------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--layout-prose-max`            | 720px                                                      | 본문 글 최대 폭 (본문 18px에서 한 줄 한글 40자 안팎의 가독성 기준)                                                                            |
-| `--layout-prose-min`            | 560px                                                      | 여백 메모와 나란히 놓일 때 본문 최소 폭                                                                                                       |
-| `--layout-page-max`             | 1200px                                                     | 프레임 최대 폭(좌우 여백 포함). 콘텐츠 최대 폭은 여기서 `--layout-gutter` × 2를 뺀 값(최대 1120px). 타임라인, 목록 등은 콘텐츠 폭을 전부 사용 |
-| `--layout-note-width`           | 240px                                                      | 여백 메모 고정 폭                                                                                                                             |
-| `--layout-gutter`               | clamp 20→40px                                              | 프레임 안쪽 좌우 여백 (유동 토큰)                                                                                                             |
-| `--layout-frame-peek`           | fine: clamp 32→72px, coarse: 12px                          | 옆 프레임 노출 폭. `@media (pointer: coarse)`에서 12px로 재정의                                                                               |
-| `--layout-frame-gap`            | fine: clamp 16→40px, coarse: 12px                          | 프레임 사이 간격. `@media (pointer: coarse)`에서 12px로 재정의                                                                                |
-| `--layout-floating-bar-padding` | `--spacing-4` (4px)                                        | 플로팅 바 위아래 안쪽 여백                                                                                                                    |
-| `--layout-floating-bar-height`  | `--size-touch-target` + padding × 2 = 52px                 | 플로팅 바 높이 (터치 영역 + 안쪽 여백)                                                                                                        |
-| `--layout-floating-top`         | bar-height + `--spacing-12` + safe-area = 64px + safe-area | 상단 플로팅 UI 영역. scroll-padding, sticky top 계산에 사용                                                                                   |
-| `--layout-floating-bottom`      | bar-height + `--spacing-20` + safe-area = 72px + safe-area | 하단 메뉴 바 영역. scroll-padding, 프레임 끝 안내 위치에 사용                                                                                 |
+| 토큰                            | 값                                                         | 용도                                                                                                                                                                                                                                         |
+| ------------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--layout-prose-max`            | 720px                                                      | 본문 글 최대 폭 (본문 18px에서 한 줄 한글 40자 안팎의 가독성 기준)                                                                                                                                                                           |
+| `--layout-prose-min`            | 560px                                                      | 여백 메모와 나란히 놓일 때 본문 최소 폭                                                                                                                                                                                                      |
+| `--layout-page-max`             | 1440px                                                     | 프레임·단독 페이지(`Container width="page"`) 최대 폭(좌우 여백 포함). 큰 화면에서도 프레임 비율이 화면과 비슷하게 유지되는 값. 콘텐츠 최대 폭은 여기서 `--layout-gutter` × 2를 뺀 값(최대 1360px). 타임라인, 목록 등은 콘텐츠 폭을 전부 사용 |
+| `--layout-note-width`           | 240px                                                      | 여백 메모 고정 폭                                                                                                                                                                                                                            |
+| `--layout-gutter`               | clamp 20→40px                                              | 프레임 안쪽 좌우 여백 (유동 토큰)                                                                                                                                                                                                            |
+| `--layout-frame-peek`           | fine: clamp 32→72px, coarse: 12px                          | 옆 프레임 노출 폭. `@media (pointer: coarse)`에서 12px로 재정의                                                                                                                                                                              |
+| `--layout-frame-gap`            | fine: clamp 16→40px, coarse: 12px                          | 프레임 사이 간격. `@media (pointer: coarse)`에서 12px로 재정의                                                                                                                                                                               |
+| `--layout-floating-bar-padding` | `--spacing-4` (4px)                                        | 플로팅 바 위아래 안쪽 여백                                                                                                                                                                                                                   |
+| `--layout-floating-bar-height`  | `--size-touch-target` + padding × 2 = 52px                 | 플로팅 바 높이 (터치 영역 + 안쪽 여백)                                                                                                                                                                                                       |
+| `--layout-floating-top`         | bar-height + `--spacing-12` + safe-area = 64px + safe-area | 상단 플로팅 UI 영역. scroll-padding, sticky top 계산에 사용                                                                                                                                                                                  |
+| `--layout-floating-bottom`      | bar-height + `--spacing-20` + safe-area = 72px + safe-area | 하단 메뉴 바 영역. scroll-padding, 프레임 끝 안내 위치에 사용                                                                                                                                                                                |
 
 ### 조작 요소 크기
 
@@ -265,6 +265,7 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 | 다이얼로그                                                     | `--motion-dialog-duration`, `--motion-dialog-ease`, `--motion-dialog-scale-from`                        |
 | 바텀시트 (보류: Phase 2에서 연락처·모바일 구성 확정 후 재검토) | `--motion-sheet-duration`, `--motion-sheet-ease`                                                        |
 | 토스트                                                         | `--motion-toast-duration`                                                                               |
+| 캔버스 카메라 이동 (거리에 따라 최소~최대)                     | `--motion-camera-min-duration`, `--motion-camera-max-duration`                                          |
 | 레이아웃 모핑 인디케이터                                       | `--motion-indicator-duration`, `--motion-indicator-ease`                                                |
 
 ### reduced motion
@@ -283,4 +284,4 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 | `--z-raised`    | 10  | hover로 떠오르는 카드                                |
 | `--z-base`      | 0   | 기본                                                 |
 
-`<dialog>`(프로젝트 모달, 커맨드 팔레트)는 top layer에 뜨므로 이 표의 대상이 아닙니다.
+`<dialog>`(프로젝트 모달 등)는 top layer에 뜨므로 이 표의 대상이 아닙니다.

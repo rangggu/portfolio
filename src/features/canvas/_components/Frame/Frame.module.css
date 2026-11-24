@@ -2,12 +2,13 @@
  * 프레임 폭 = 캔버스 폭 - (노출 + 간격) × 2, 최대 --layout-page-max (responsive.md 프레임 폭 계산)
  *
  * 세로: 한 프레임(이름표 + 본체)이 한 화면을 채운다.
- *   위: 위쪽 플로팅 영역 + 간격 → 이름표 → 본체
- *   아래: 본체 → 간격 → 아래쪽 플로팅 영역
- *   본체 최소 높이 = 100svh - 위쪽 플로팅 - 이름표 - 아래쪽 플로팅 - 간격 × 2
+ *   위: 위쪽 플로팅 영역 + 위 간격(12, 화면 끝 → 플로팅과 같은 값) → 이름표(+4) → 본체
+ *   아래: 본체 → 간격(16) → 아래쪽 플로팅 영역
+ *   본체 최소 높이 = 100svh - 위쪽 플로팅 - 이름표 - 아래쪽 플로팅 - 간격들
  * 플로팅 영역(--layout-floating-*)에 safe-area가 포함되어 있다.
  */
 .root {
+  --frame-space-top: var(--spacing-12);
   --frame-space: var(--spacing-16);
 
   display: flex;
@@ -17,12 +18,13 @@
     var(--layout-page-max)
   );
   min-height: 100svh;
-  padding-block: calc(var(--layout-floating-top) + var(--frame-space))
+  padding-block: calc(var(--layout-floating-top) + var(--frame-space-top))
     calc(var(--layout-floating-bottom) + var(--frame-space));
 }
 
 .label {
-  margin-bottom: var(--spacing-8);
+  margin-bottom: var(--spacing-4);
+  transition: color var(--duration-normal) var(--ease-standard);
 }
 
 /* 현재 프레임이면 이름표도 포인트색 (선택 표시는 FrameSelection이 그린다) */

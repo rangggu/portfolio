@@ -101,4 +101,8 @@ export const MOTION = {
     duration: DURATION.normal,
     ease: EASE.springGentle,
   },
+  camera: {
+    minDuration: DURATION.slow,
+    maxDuration: DURATION.slower,
+  },
 } as const;

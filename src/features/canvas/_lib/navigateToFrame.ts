@@ -33,6 +33,9 @@ const navigationEndListeners = new Set<() => void>();
 /** smooth 스크롤이 끝났는데 scrollend가 오지 않는 브라우저를 위한 상한 */
 const PENDING_TIMEOUT = 1000;
 
+/** 직접 끝내는 이동(카메라 미끄러짐)이 끝내지 못했을 때의 안전장치 (가장 긴 이동보다 길게) */
+const MANUAL_PENDING_TIMEOUT = 2000;
+
 export function registerFrameNavigator(navigator: FrameNavigator) {
   frameNavigator = navigator;
   return () => {
@@ -67,19 +70,27 @@ function clearPending() {
 }
 
 /**
- * 스크롤로 frameId까지 옮기는 동안 이동 중으로 표시한다.
- * scroller의 scrollend(또는 상한 시간)에 끝난다
+ * frameId까지 옮기는 동안 이동 중으로 표시한다. 끝내는 함수를 돌려준다.
+ * - scroller를 주면 그 scrollend(또는 상한 시간)에 저절로 끝난다
+ * - 'manual'이면 돌려받은 함수로 직접 끝낸다 (rAF로 조금씩 옮겨 중간에 scrollend가 오는 이동). 상한 시간은 안전장치
  */
 export function markNavigating(
   frameId: FrameId,
-  scroller: EventTarget = window,
-) {
+  scroller: EventTarget | 'manual' = window,
+): () => void {
   // 이어진 이동이면 앞 이동의 끝을 알리지 않는다 (지나온 프레임으로 주소를 되돌리지 않게)
   stopPending();
   pendingFrame = frameId;
-  pendingScroller = scroller;
-  scroller.addEventListener('scrollend', clearPending, { once: true });
-  pendingTimer = window.setTimeout(clearPending, PENDING_TIMEOUT);
+  if (scroller === 'manual') {
+    pendingTimer = window.setTimeout(clearPending, MANUAL_PENDING_TIMEOUT);
+  } else {
+    pendingScroller = scroller;
+    scroller.addEventListener('scrollend', clearPending, { once: true });
+    pendingTimer = window.setTimeout(clearPending, PENDING_TIMEOUT);
+  }
+  return () => {
+    if (pendingFrame === frameId) clearPending();
+  };
 }
 
 /** 키보드 사용자를 위해 제목으로 포커스를 옮긴다 (스크롤은 이미 했으므로 막는다) */

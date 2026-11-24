@@ -1,13 +1,13 @@
 import { Text } from '@/components/ui/Text';
 import { ThemeButton } from '@/features/theme';
 import { RESUME } from '@/lib/resume';
-import { AskButton } from './_components/AskButton';
+import { CanvasModeButton } from '../CanvasModeButton';
 import { CatIcon } from './_components/CatIcon';
 import { CurrentFrameName } from './_components/CurrentFrameName';
 import styles from './FloatingTop.module.css';
 
 /**
- * 위쪽 플로팅 UI. 마우스 기기는 왼쪽 위(위치 표시)·오른쪽 위(물어보기·테마) 상자 따로,
+ * 위쪽 플로팅 UI. 마우스 기기는 왼쪽 위(위치 표시)·오른쪽 위(모드·테마) 상자 따로,
  * 터치 기기는 한 줄 바 하나로 묶는다 (mockup-spec.md 플로팅 UI).
  */
 export function FloatingTop() {
@@ -33,9 +33,9 @@ export function FloatingTop() {
       </header>
       <div className={styles.actions}>
         <div className={styles.surface}>
-          <AskButton />
-        </div>
-        <div className={styles.surface}>
+          <span className={styles.modeButton}>
+            <CanvasModeButton />
+          </span>
           <ThemeButton />
         </div>
       </div>

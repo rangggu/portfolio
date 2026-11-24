@@ -57,6 +57,14 @@ html {
   text-size-adjust: 100%;
 }
 
+/*
+ * 카메라 모드: 읽기 모드는 문서가 스크롤되고 자유 모드는 스크롤되지 않는다.
+ * 모드를 바꿀 때 스크롤바가 생기고 사라지며 화면이 옆으로 튀지 않게 스크롤바 자리를 항상 둔다
+ */
+html[data-camera] {
+  scrollbar-gutter: stable;
+}
+
 /* 카메라 모드는 스크롤 위치로 카메라를 바로 맞춰야 해서 부드러운 스크롤을 쓰지 않는다 */
 @media (prefers-reduced-motion: no-preference) {
   html:not([data-camera]) {
