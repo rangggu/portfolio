@@ -4,7 +4,7 @@ const { profile } = RESUME;
 
 /** 사이트 정보. 이름·직무·소개 문구는 이력서 데이터(content/resume/profile.ts)에서 가져온다 */
 export const SITE = {
-  url: 'https://www.lily-developer.me',
+  url: 'https://www.myu-developer.me',
   name: `${profile.name} · ${profile.jobTitle}`,
   title: `${profile.name} · ${profile.jobTitle}`,
   titleTemplate: `%s · ${profile.name}`,
