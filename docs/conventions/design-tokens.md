@@ -2,6 +2,8 @@
 
 값의 원천은 `src/styles/tokens.css`입니다. 이 문서는 토큰의 이름과 용도를 정리하며, 토큰을 추가·변경하면 이 문서도 함께 갱신합니다.
 
+값과 견본은 사이트의 [`/dev/design-system`](/dev/design-system)에서 볼 수 있습니다. 이 페이지는 `tokens.css`를 빌드 때 읽어(`src/lib/design-tokens/parseTokens.ts`) 그룹 주석(`/* ---------- 제목 ---------- */`)별로 보여 주므로, 새 그룹을 만들 때는 이 주석 형식을 지키고 `features/design-system/_lib/tokenSections.ts`에 제목·설명을 더합니다.
+
 ## 계층
 
 | 계층                | 역할                                               | 참조 가능 위치        |

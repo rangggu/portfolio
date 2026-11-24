@@ -9,6 +9,8 @@
 | `components/mdx/`     | MDX 본문 전용               | CodeBlock, Callout, Figure                        |
 | `features/{feature}/` | 기능 단위                   | 상태, 서버 연동, 로직 포함 가능                   |
 
+`components/ui/`에 컴포넌트를 추가하거나 props를 바꾸면 디자인 시스템 문서(`/dev/design-system`, `features/design-system/_lib/componentDocs.tsx`)의 설명·props·예시도 함께 고칩니다.
+
 ## 컴포넌트 선언
 
 - 컴포넌트는 `export function`(named export)으로 선언하고 `index.ts`에서 다시 내보냅니다.
