@@ -100,6 +100,14 @@ PR마다 아래가 모두 통과해야 합니다.
 - 리포트는 임시 공개 저장소(며칠 뒤 만료)에 올리고, PR에는 점수표와 리포트 링크를 댓글로 남깁니다(같은 댓글을 갱신). 원본 결과는 워크플로 아티팩트로 보관합니다.
 - 프리셋은 `LIGHTHOUSE_FORM_FACTOR`로 고릅니다. `LHCI_`로 시작하는 환경 변수는 lhci가 자기 옵션으로 읽으므로 쓰지 않습니다.
 
+로컬에서 같은 측정을 재현하려면 측정 전용으로 빌드한 뒤 `yarn lighthouse`를 실행합니다. 서버는 lhci가 `yarn start --port 9001`로 띄우고 끝나면 닫습니다 (9001 포트가 비어 있어야 합니다). 리포트는 올리지 않고 `.lighthouseci/`에 남습니다.
+
+```bash
+SHOW_DRAFTS=true yarn build
+yarn lighthouse                                  # 모바일
+LIGHTHOUSE_FORM_FACTOR=desktop yarn lighthouse   # 데스크톱
+```
+
 ## PR 체크리스트
 
 - [ ] 하드코딩된 스타일 값이 없고 semantic 토큰을 썼다

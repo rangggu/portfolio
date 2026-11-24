@@ -12,6 +12,7 @@
     "check:responsive": "node --experimental-strip-types --no-warnings scripts/check-responsive.mjs",
     "prepare": "husky",
     "screenshot": "node scripts/screenshot.mjs",
+    "lighthouse": "lhci collect && lhci assert",
     "fonts": "node --experimental-strip-types --no-warnings scripts/subset-font.mjs"
   },
   "dependencies": {
