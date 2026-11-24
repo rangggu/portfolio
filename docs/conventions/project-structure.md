@@ -66,6 +66,7 @@ src/
   │   ├── content/           # content/projects 로더 (목록·메타·본문 컴파일·평문)
   │   ├── resume/            # 이력서 타입·검증·JSON-LD·평문, 경력 ↔ 프로젝트 글 연결
   │   ├── fonts/             # 폰트 서브셋 글자 모으기, 서브셋 누락 테스트
+  │   ├── ui/                # 공용 UI 컴포넌트의 순수 로직 (탭 키보드 이동, 툴팁 위치, 토스트 목록)
   │   └── {기능명}/          # 예: format/, physics/, motion/
   │
   ├── styles/

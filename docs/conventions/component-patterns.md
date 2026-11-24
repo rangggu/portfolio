@@ -93,6 +93,9 @@ return (
 - variant, size, 상태는 `data-*` 속성으로 표현합니다.
   - 예외: size에 따라 텍스트 스타일이 달라지면 CSS Modules `composes` 제약 때문에 텍스트 스타일만 size별 클래스로 고르고, `data-size`도 함께 붙입니다. 자세한 내용은 [styling](styling.md#css-modules-규칙)을 봅니다.
 - IconButton처럼 텍스트가 없는 컴포넌트는 `aria-label`을 필수 prop으로 둡니다.
+- 입력 요소(`Input`·`Textarea`)는 `label`이 필수이고, `description`·`error`를 주면 id로 연결(`aria-describedby`, 오류면 `aria-invalid`)합니다. 라벨을 숨겨야 하면 `hideLabel`을 씁니다.
+- 상호작용 컴포넌트(`Tabs`, `Tooltip`, `Toaster`, `Dialog`)의 계산·상태 로직은 `src/lib/ui`의 순수 함수로 두고 Vitest로 테스트합니다.
+- 컴포넌트 이벤트를 자식이나 비상호작용 요소(`li`, 감싸는 `span`)에 달아야 하면 JSX 핸들러 대신 `useEffect`에서 네이티브 리스너를 답니다 (jsx-a11y 규칙과 React Compiler의 렌더 중 ref 접근 금지 때문).
 
 ## 훅 설계
 
@@ -126,7 +129,9 @@ const { states: streamStates, actions: streamActions } = useStreamDemo();
 ## 접근성
 
 - 클릭 가능한 요소는 `<button>`과 `<a>`를 씁니다. `div`에 `onClick`을 달지 않습니다.
-- 모달은 네이티브 `<dialog>`를 `showModal()`로 엽니다. 직접 만드는 오버레이(바텀시트, 모바일 메뉴)는 열려 있는 동안 배경에 `inert`를 겁니다.
+- 모달은 네이티브 `<dialog>`를 `showModal()`로 엽니다. 가운데 모달은 `Dialog`, 화면 아래 시트는 `BottomSheet`(둘 다 `components/ui/Dialog`)를 씁니다. 컴포넌트 안에서 기기를 나누지 않으므로, 어느 쪽을 쓸지는 쓰는 쪽이 기기에 맞게 고릅니다 (예: 데스크톱 `Dialog`, 폰 `BottomSheet`). 두 컴포넌트는 `open`·`onClose`로 제어하고, Esc·바깥 누르기·닫기 버튼이 모두 `onClose`를 부릅니다. 열린 동안 배경 스크롤은 `globals.css`가 잠급니다. 그 밖에 직접 만드는 오버레이(모바일 메뉴 등)는 열려 있는 동안 배경에 `inert`를 겁니다.
+- 짧은 알림은 `toast(message, { tone })`(`components/ui/Toast`)로 띄웁니다. 표시 영역 `Toaster`는 루트 레이아웃에 하나 있고, `aria-live`로 보조기기에 알리며 모달이 열려 있으면 그 안으로 옮겨집니다. 알림에만 있는 정보를 두지 않습니다 (몇 초 뒤 사라짐).
+- 보조 설명은 `Tooltip`으로 붙입니다. 자식은 포커스할 수 있는 요소 하나이고 `aria-describedby`로 연결됩니다. 마우스 hover·키보드 포커스·터치 길게 누르기로 보이므로, 꼭 필요한 정보나 버튼 이름을 툴팁에만 두지 않습니다 (아이콘 버튼 이름은 `aria-label`).
 - 포커스 링은 `:focus-visible`로 표시하고 절대 `outline: none`만 남기지 않습니다. 기본 링은 `globals.css`의 전역 `:focus-visible` 규칙(포커스 링 토큰)이 그리므로, 컴포넌트는 모양이 달라야 할 때만 재정의합니다.
 - 모든 페이지의 `<main>`에는 `id="main"`과 `tabIndex={-1}`을 붙입니다. `layout.tsx`의 본문 바로가기(`SkipLink`)가 이 요소로 포커스를 옮깁니다.
 - 프레임은 `<section aria-labelledby="{프레임 제목 id}">`로 제목과 연결합니다. 첫 화면 이름만 `h1`, 나머지 프레임 제목은 `h2`입니다.
