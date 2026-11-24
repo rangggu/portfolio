@@ -1,0 +1,22 @@
+/* 예시 배치: 가로로 감싸는 줄, 세로 쌓기, 본문 폭 제한 */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.narrow {
+  max-width: var(--layout-prose-max);
+}
+
+.end {
+  display: flex;
+  justify-content: flex-end;
+}

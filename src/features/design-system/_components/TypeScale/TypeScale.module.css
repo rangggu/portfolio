@@ -1,0 +1,35 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.item {
+  display: grid;
+  gap: var(--spacing-4) var(--spacing-24);
+  padding-block: var(--spacing-12);
+  border-bottom: var(--border-width-1) solid var(--color-border-subtle);
+  overflow-wrap: anywhere;
+}
+
+.meta {
+  composes: caption from '@/styles/typography.module.css';
+  display: flex;
+  gap: var(--spacing-8);
+  color: var(--color-text-tertiary);
+}
+
+@container (width >= 768px) {
+  /* 메타 열 폭: 이 페이지에서만 쓰는 값이라 로컬 변수 */
+  .item {
+    --meta-width: 200px;
+
+    grid-template-columns: var(--meta-width) 1fr;
+    align-items: baseline;
+  }
+
+  .meta {
+    flex-direction: column;
+    gap: 0;
+  }
+}

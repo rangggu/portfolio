@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { BottomSheet, Dialog } from '@/components/ui/Dialog';
 import { Input } from '@/components/ui/Input';
+import ex from '../../_shared/Example/Example.module.css';
 
 type Opened = 'sm' | 'md' | 'lg' | 'long' | 'sheet' | 'sheet-long' | null;
 
@@ -28,9 +29,7 @@ export function ModalDemo() {
   );
 
   return (
-    <div
-      style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--spacing-12)' }}
-    >
+    <div className={ex.row}>
       <Button variant="secondary" type="button" onClick={() => setOpened('sm')}>
         Dialog sm
       </Button>

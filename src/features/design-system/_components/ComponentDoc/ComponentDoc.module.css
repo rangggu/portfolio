@@ -1,0 +1,51 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  padding-block: var(--spacing-32);
+  border-top: var(--border-width-1) solid var(--color-border-subtle);
+  scroll-margin-top: var(--spacing-24);
+}
+
+/* 예시 영역: 페이지 배경과 구분되는 상자. 안쪽 컴포넌트가 이 폭에 반응하도록 컨테이너로 둔다 */
+.example {
+  container-type: inline-size;
+  padding: var(--spacing-24);
+  border: var(--border-width-1) solid var(--color-border-default);
+  border-radius: var(--radius-16);
+  background-color: var(--color-bg-elevated);
+}
+
+.props {
+  composes: bodySm from '@/styles/typography.module.css';
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.prop {
+  display: grid;
+  gap: var(--spacing-2) var(--spacing-16);
+
+  & dd {
+    color: var(--color-text-secondary);
+  }
+}
+
+@container (width >= 640px) {
+  /* props 이름 열 폭: 이 페이지에서만 쓰는 값이라 로컬 변수 */
+  .prop {
+    --prop-name-width: 180px;
+
+    grid-template-columns: var(--prop-name-width) 1fr;
+  }
+}
+
+.notes {
+  composes: bodySm from '@/styles/typography.module.css';
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding-left: var(--spacing-20);
+  color: var(--color-text-secondary);
+}

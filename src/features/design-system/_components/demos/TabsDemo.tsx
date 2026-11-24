@@ -1,12 +1,13 @@
 'use client';
 
 import { Tab, TabList, TabPanel, Tabs } from '@/components/ui/Tabs';
+import ex from '../../_shared/Example/Example.module.css';
 
 const MANY = ['전체', '회사', '사이드', '부트캠프', '오픈소스', '글쓰기'];
 
 export function TabsDemo() {
   return (
-    <div style={{ display: 'grid', gap: 'var(--spacing-32)' }}>
+    <div className={ex.stack}>
       <Tabs defaultValue="overview">
         <TabList aria-label="프로젝트 정보">
           <Tab value="overview">개요</Tab>

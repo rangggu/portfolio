@@ -4,13 +4,12 @@ import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
 import { IconButton } from '@/components/ui/IconButton';
 import { Tooltip } from '@/components/ui/Tooltip';
+import ex from '../../_shared/Example/Example.module.css';
 
 export function TooltipDemo() {
   return (
-    <div style={{ display: 'grid', gap: 'var(--spacing-16)' }}>
-      <div
-        style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--spacing-12)' }}
-      >
+    <div className={ex.stack}>
+      <div className={ex.row}>
         <Tooltip content="Phase 4에서 열려요">
           <Button variant="ghost" type="button" aria-disabled="true">
             물어보기 (위)
@@ -37,7 +36,7 @@ export function TooltipDemo() {
           </IconButton>
         </Tooltip>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <div className={ex.end}>
         <Tooltip content="화면 오른쪽 끝에서도 잘리지 않고 안쪽으로 밀려 들어와요">
           <Button variant="secondary" type="button">
             오른쪽 끝

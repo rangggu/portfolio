@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Dialog } from '@/components/ui/Dialog';
 import { toast } from '@/components/ui/Toast';
+import ex from '../../_shared/Example/Example.module.css';
 
 export function ToastDemo() {
   const [open, setOpen] = useState(false);
@@ -16,9 +17,7 @@ export function ToastDemo() {
   };
 
   return (
-    <div
-      style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--spacing-12)' }}
-    >
+    <div className={ex.row}>
       <Button
         variant="secondary"
         type="button"

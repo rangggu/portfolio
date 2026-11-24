@@ -1,0 +1,174 @@
+/* 견본 칸 크기: 이 페이지에서만 쓰는 값이라 로컬 변수 */
+.root {
+  --swatch-size: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--swatch-size);
+  min-height: var(--swatch-size);
+}
+
+/* 텍스트 스타일은 단순 클래스에서만 composes할 수 있어 견본 글자용 클래스를 따로 둔다 */
+.headingSample {
+  composes: headingMd from '@/styles/typography.module.css';
+}
+
+.bodySample {
+  composes: bodySm from '@/styles/typography.module.css';
+}
+
+/* --- 색 --- */
+
+.root[data-shape='fill'] {
+  width: var(--swatch-size);
+  border: var(--border-width-1) solid var(--color-border-subtle);
+  border-radius: var(--radius-8);
+  background-color: var(--preview);
+}
+
+.root[data-shape='gradient'] {
+  width: calc(var(--swatch-size) * 2);
+  border-radius: var(--radius-8);
+  background-image: var(--preview);
+}
+
+.root[data-shape='text'] {
+  width: var(--swatch-size);
+  border-radius: var(--radius-8);
+  background-color: var(--color-bg-base);
+  color: var(--preview);
+}
+
+.root[data-backdrop='inverse'] {
+  background-color: var(--color-bg-inverse);
+}
+
+.root[data-backdrop='accent'] {
+  background-color: var(--color-bg-accent);
+}
+
+.root[data-shape='border'] {
+  width: var(--swatch-size);
+  border: var(--border-width-2) solid var(--preview);
+  border-radius: var(--radius-8);
+}
+
+.root[data-shape='shadow'] {
+  width: calc(var(--swatch-size) * 1.5);
+  border-radius: var(--radius-8);
+  background-color: var(--color-bg-elevated);
+  box-shadow: var(--preview);
+}
+
+/* --- 크기 --- */
+
+.root[data-shape='bar'] {
+  justify-content: flex-start;
+  width: 100%;
+  min-width: 0;
+}
+
+/* 막대 + 계산된 px. 막대는 칸 폭을 넘지 않는다 */
+.barWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  width: 100%;
+  min-width: 0;
+}
+
+.bar,
+.barMeasure {
+  width: var(--preview);
+  height: var(--spacing-8);
+}
+
+.bar {
+  /* 막대 최대 길이: 표 칸을 밀어 넓히지 않게 고정 (이 페이지에서만 쓰는 값이라 로컬 변수) */
+  --bar-max-width: 160px;
+
+  max-width: var(--bar-max-width);
+  border-radius: var(--radius-round);
+  background-color: var(--color-bg-accent);
+}
+
+.barMeasure {
+  position: absolute;
+  visibility: hidden;
+}
+
+.barLabel {
+  composes: monoSm from '@/styles/typography.module.css';
+  color: var(--color-text-tertiary);
+}
+
+.root[data-shape='radius'] {
+  width: var(--swatch-size);
+  border: var(--border-width-2) solid var(--color-border-strong);
+  border-radius: var(--preview);
+}
+
+.root[data-shape='line']::before {
+  width: var(--swatch-size);
+  height: var(--preview);
+  background-color: var(--color-text-primary);
+  content: '';
+}
+
+/* --- 글자 --- */
+
+.root[data-shape='font-family'] {
+  font-family: var(--preview);
+}
+
+.root[data-shape='font-size'] {
+  font-size: var(--preview);
+  line-height: var(--line-height-tight);
+}
+
+.root[data-shape='font-weight'] {
+  font-weight: var(--preview);
+}
+
+.root[data-shape='line-height'] {
+  line-height: var(--preview);
+  white-space: pre-line;
+}
+
+.root[data-shape='letter-spacing'] {
+  letter-spacing: var(--preview);
+}
+
+/* --- 모션: 그 줄에 마우스를 올리면 점이 오른쪽으로 간다 --- */
+
+.root[data-shape='duration'],
+.root[data-shape='ease'] {
+  justify-content: flex-start;
+  width: calc(var(--swatch-size) * 2);
+  border-radius: var(--radius-round);
+  background-color: var(--color-bg-subtle);
+}
+
+.dot {
+  width: var(--spacing-12);
+  height: var(--spacing-12);
+  margin-inline: var(--spacing-4);
+  border-radius: var(--radius-round);
+  background-color: var(--color-bg-accent);
+}
+
+.root[data-shape='duration'] .dot {
+  transition: transform var(--preview) var(--ease-standard);
+}
+
+.root[data-shape='ease'] .dot {
+  transition: transform var(--duration-slower) var(--preview);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  tr:hover .dot {
+    transform: translateX(calc(var(--swatch-size) * 2 - var(--spacing-20)));
+  }
+}
