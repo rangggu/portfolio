@@ -10,7 +10,7 @@
 
 | 항목                  | 값                                    |
 | --------------------- | ------------------------------------- |
-| metadataBase          | `https://www.lily-developer.me`       |
+| metadataBase          | `https://www.myu-developer.me`        |
 | title 기본값          | `김규리 · 프론트엔드 개발자`          |
 | title 템플릿          | `%s · 김규리`                         |
 | description           | 포트폴리오 소개 (site.ts 참조)        |
