@@ -1,0 +1,16 @@
+.root {
+  flex-shrink: 0;
+  border: none;
+  background-color: var(--color-border-subtle);
+}
+
+.root[data-orientation='horizontal'] {
+  width: 100%;
+  height: var(--border-width-1);
+}
+
+/* 세로: 부모(flex 행) 높이를 따른다 */
+.root[data-orientation='vertical'] {
+  align-self: stretch;
+  width: var(--border-width-1);
+}

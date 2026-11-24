@@ -1,0 +1,89 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+/* 묶음 제목: 누르면 접고 펼친다. 펼침 표시는 회전하는 화살표 */
+.groupTitle {
+  composes: labelMd from '@/styles/typography.module.css';
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  min-height: var(--size-touch-target);
+  border-radius: var(--radius-4);
+  color: var(--color-text-primary);
+  list-style: none;
+  cursor: pointer;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::before {
+    width: var(--spacing-6);
+    height: var(--spacing-6);
+    border-right: var(--border-width-2) solid currentColor;
+    border-bottom: var(--border-width-2) solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform var(--duration-fast) var(--ease-standard);
+    content: '';
+  }
+
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-border-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
+
+.group[open] > .groupTitle::before {
+  transform: rotate(45deg);
+}
+
+/* 하위 항목: 왼쪽 세로선과 함께 들여 쓴다 */
+.list {
+  display: flex;
+  flex-direction: column;
+  margin-left: var(--spacing-4);
+  padding-left: var(--spacing-12);
+  border-left: var(--border-width-1) solid var(--color-border-subtle);
+  list-style: none;
+}
+
+.link {
+  composes: bodySm from '@/styles/typography.module.css';
+  display: block;
+  padding-block: var(--spacing-2);
+  border-radius: var(--radius-4);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-border-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
+
+/* 지금 보고 있는 섹션 */
+.link[aria-current='location'] {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+@media (hover: hover) {
+  .link:hover,
+  .groupTitle:hover {
+    color: var(--color-text-primary);
+  }
+
+  .link:hover {
+    text-decoration: underline;
+    text-underline-offset: var(--spacing-4);
+  }
+}
+
+@media (pointer: coarse) {
+  .link {
+    padding-block: var(--spacing-8);
+  }
+}

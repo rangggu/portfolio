@@ -75,6 +75,15 @@ html {
   outline-offset: calc(var(--focus-ring-width) * -1);
 }
 
+/*
+ * 모달(Dialog·BottomSheet)이 열린 동안 뒤 페이지가 스크롤되지 않게 한다.
+ * 문서(카메라 모드·세로 페이지)와 캔버스 stage(스와이프 모드) 둘 다 잠근다
+ */
+html:has(dialog[data-modal][open]),
+html:has(dialog[data-modal][open]) [data-camera-stage] {
+  overflow: hidden;
+}
+
 body {
   min-height: 100dvh;
   background-color: var(--color-bg-base);

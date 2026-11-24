@@ -35,6 +35,7 @@ src/
   │   │   ├── education/page.tsx
   │   │   └── contact/page.tsx
   │   ├── projects/[slug]/page.tsx  # 케이스 스터디 (직접 접근 시 단독 페이지, 캔버스 없음)
+  │   ├── dev/design-system/page.tsx  # 디자인 시스템 문서 (공개, noindex·sitemap 제외)
   │   ├── @modal/            # Intercepting Routes 모달 슬롯 (Phase 3~4)
   │   │   ├── (.)projects/[slug]/page.tsx
   │   │   └── default.tsx
@@ -51,6 +52,7 @@ src/
   │
   ├── features/              # 기능 단위 코드
   │   ├── actions/           # 사이트 액션 레지스트리 (Phase 3~4)
+  │   ├── design-system/     # 디자인 시스템 문서 페이지 (토큰 표·견본, 컴포넌트 문서·예시)
   │   └── {feature}/         # 예: command-palette, streaming-demo
   │       ├── {Feature}.tsx
   │       ├── {Feature}.module.css
@@ -65,7 +67,9 @@ src/
   │   ├── api/{domain}/      # 외부 API 연동 (서버 전용)
   │   ├── content/           # content/projects 로더 (목록·메타·본문 컴파일·평문)
   │   ├── resume/            # 이력서 타입·검증·JSON-LD·평문, 경력 ↔ 프로젝트 글 연결
+  │   ├── design-tokens/     # tokens.css 파서 (디자인 시스템 문서용)
   │   ├── fonts/             # 폰트 서브셋 글자 모으기, 서브셋 누락 테스트
+  │   ├── ui/                # 공용 UI 컴포넌트의 순수 로직 (탭 키보드 이동, 툴팁 위치, 토스트 목록)
   │   └── {기능명}/          # 예: format/, physics/, motion/
   │
   ├── styles/

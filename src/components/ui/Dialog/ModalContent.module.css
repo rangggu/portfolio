@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+  padding: var(--spacing-20) var(--spacing-20) var(--spacing-8)
+    var(--spacing-24);
+}
+
+.description {
+  padding-inline: var(--spacing-24);
+}
+
+/* 내용이 길면 이 영역만 스크롤된다 (제목·버튼은 고정) */
+.body {
+  flex: 1;
+  min-height: 0;
+  padding: var(--spacing-16) var(--spacing-24) var(--spacing-24);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--spacing-8);
+  padding: var(--spacing-16) var(--spacing-24) var(--spacing-24);
+  border-top: var(--border-width-1) solid var(--color-border-subtle);
+}

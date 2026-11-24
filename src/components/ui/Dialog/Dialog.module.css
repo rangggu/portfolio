@@ -1,0 +1,77 @@
+/*
+ * 가운데 모달. 열림·닫힘은 [open] 전환에 @starting-style과 allow-discrete로 모션을 건다.
+ * 움직임 줄이기에서는 --motion-dialog-scale-from이 1이라 페이드만 남는다.
+ */
+.root {
+  /* 크기별 최대 폭: 이 컴포넌트에서만 쓰는 값이라 로컬 변수 */
+  --dialog-width-sm: 400px;
+  --dialog-width-md: 560px;
+  --dialog-width-lg: 800px;
+  --dialog-width: var(--dialog-width-md);
+
+  width: min(100% - var(--spacing-32), var(--dialog-width));
+  max-width: none;
+  max-height: none;
+
+  /* 전역 리셋(margin: 0)이 지운 브라우저 기본 가운데 정렬을 되살린다 */
+  margin: auto;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-24);
+  background-color: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-overlay);
+  opacity: 0;
+  transform: scale(var(--motion-dialog-scale-from));
+  transition:
+    opacity var(--motion-dialog-duration) var(--motion-dialog-ease),
+    transform var(--motion-dialog-duration) var(--motion-dialog-ease),
+    overlay var(--motion-dialog-duration) allow-discrete,
+    display var(--motion-dialog-duration) allow-discrete;
+}
+
+.root[data-size='sm'] {
+  --dialog-width: var(--dialog-width-sm);
+}
+
+.root[data-size='lg'] {
+  --dialog-width: var(--dialog-width-lg);
+}
+
+.root[open] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@starting-style {
+  .root[open] {
+    opacity: 0;
+    transform: scale(var(--motion-dialog-scale-from));
+  }
+}
+
+.root::backdrop {
+  background-color: var(--color-bg-dim);
+  opacity: 0;
+  transition:
+    opacity var(--motion-dialog-duration) var(--motion-dialog-ease),
+    overlay var(--motion-dialog-duration) allow-discrete,
+    display var(--motion-dialog-duration) allow-discrete;
+}
+
+.root[open]::backdrop {
+  opacity: 1;
+}
+
+@starting-style {
+  .root[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+/* 높이는 화면 안으로 제한하고, 넘치는 내용은 안쪽 본문이 스크롤한다 */
+.panel {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - var(--spacing-48));
+}

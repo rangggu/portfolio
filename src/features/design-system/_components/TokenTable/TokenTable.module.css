@@ -1,0 +1,88 @@
+.scroll {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  border: var(--border-width-1) solid var(--color-border-default);
+  border-radius: var(--radius-12);
+
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-border-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
+
+/* 표 최소 폭: 좁은 화면에서도 값 열이 너무 좁아지지 않게 (이 페이지에서만 쓰는 값이라 로컬 변수) */
+.table {
+  --table-min-width: 640px;
+
+  composes: bodySm from '@/styles/typography.module.css';
+  width: 100%;
+  min-width: var(--table-min-width);
+  border-collapse: collapse;
+  text-align: left;
+
+  & th,
+  & td {
+    padding: var(--spacing-8) var(--spacing-12);
+    border-bottom: var(--border-width-1) solid var(--color-border-subtle);
+    vertical-align: middle;
+  }
+
+  & thead th {
+    background-color: var(--color-bg-subtle);
+    color: var(--color-text-secondary);
+  }
+
+  & tbody tr:last-child > * {
+    border-bottom: none;
+  }
+}
+
+.headCell {
+  composes: labelSm from '@/styles/typography.module.css';
+}
+
+.name {
+  font-weight: var(--font-weight-regular);
+  white-space: nowrap;
+}
+
+.note {
+  composes: caption from '@/styles/typography.module.css';
+  display: block;
+  color: var(--color-text-tertiary);
+  white-space: normal;
+}
+
+/* 견본 열은 고정 폭, 값 열은 최소 폭을 둬서 긴 값이 글자 단위로 줄바꿈되지 않게 한다 (좁으면 표가 가로로 밀린다) */
+.preview {
+  --preview-column-width: 200px;
+
+  width: var(--preview-column-width);
+  min-width: var(--preview-column-width);
+}
+
+.valueCell {
+  --value-column-min-width: 220px;
+
+  min-width: var(--value-column-min-width);
+}
+
+.value {
+  composes: monoSm from '@/styles/typography.module.css';
+  overflow-wrap: anywhere;
+}
+
+.override {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.override + .override {
+  margin-top: var(--spacing-8);
+}
+
+.condition {
+  composes: caption from '@/styles/typography.module.css';
+  color: var(--color-text-tertiary);
+}

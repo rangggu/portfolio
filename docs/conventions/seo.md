@@ -11,8 +11,8 @@
 | 항목                  | 값                                    |
 | --------------------- | ------------------------------------- |
 | metadataBase          | `https://www.myu-developer.me`        |
-| title 기본값          | `김규리 · 프론트엔드 개발자`          |
-| title 템플릿          | `%s · 김규리`                         |
+| title 기본값          | `김규리 \| 프론트엔드 개발자`         |
+| title 템플릿          | `%s \| 김규리 포트폴리오`             |
 | description           | 포트폴리오 소개 (site.ts 참조)        |
 | openGraph description | `작은 불편을 그냥 지나치지 않습니다.` |
 | openGraph type        | `website`                             |
@@ -20,21 +20,22 @@
 | twitter card          | `summary_large_image`                 |
 
 - 하위 페이지는 `metadata` export에서 `title`만 지정하면 템플릿이 적용됩니다.
+- 제목 규칙은 `src/lib/siteTitle.ts` 한곳에 둡니다 (구분자는 세로선 `|`, 꼬리는 「이름 포트폴리오」). 프로젝트 글은 글 제목, 404는 「페이지를 찾을 수 없어요」, 오류 페이지(`error.tsx`·`global-error.tsx`)는 「문제가 생겼어요」에 같은 꼬리가 붙습니다. 클라이언트 오류 페이지는 metadata를 내보낼 수 없어 `<title>`을 직접 둡니다.
 - `alternates.canonical`은 각 페이지 경로 기준으로 설정합니다.
 
 ### 프레임별 메타데이터
 
 각 프레임 라우트마다 `title`과 `description`을 따로 둡니다.
 
-| 프레임    | 경로         | title                                              |
-| --------- | ------------ | -------------------------------------------------- |
-| 첫 화면   | `/`          | 김규리 · 프론트엔드 개발자 (기본값, 템플릿 미적용) |
-| 소개      | `/about`     | 소개 · 김규리                                      |
-| 경력      | `/career`    | 경력 · 김규리                                      |
-| 프로젝트  | `/projects`  | 프로젝트 · 김규리                                  |
-| 기술      | `/skills`    | 기술 · 김규리                                      |
-| 학력·자격 | `/education` | 학력·자격 · 김규리                                 |
-| 연락처    | `/contact`   | 연락처 · 김규리                                    |
+| 프레임    | 경로         | title                                               |
+| --------- | ------------ | --------------------------------------------------- |
+| 첫 화면   | `/`          | 김규리 \| 프론트엔드 개발자 (기본값, 템플릿 미적용) |
+| 소개      | `/about`     | 소개 \| 김규리 포트폴리오                           |
+| 경력      | `/career`    | 경력 \| 김규리 포트폴리오                           |
+| 프로젝트  | `/projects`  | 프로젝트 \| 김규리 포트폴리오                       |
+| 기술      | `/skills`    | 기술 \| 김규리 포트폴리오                           |
+| 학력·자격 | `/education` | 학력·자격 \| 김규리 포트폴리오                      |
+| 연락처    | `/contact`   | 연락처 \| 김규리 포트폴리오                         |
 
 - 값은 `features/canvas`의 `getFrameMetadata(frameId)`가 만듭니다. title은 프레임 이름(`FRAMES`의 `label`)에 템플릿이 붙고, canonical은 프레임 경로입니다.
 - description은 `src/features/canvas/_lib/frames.ts`의 `description`을 쓰고, 비어 있으면 사이트 기본 설명(`SITE.description`)을 씁니다. 프레임별 문구는 아직 비어 있습니다.
