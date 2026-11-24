@@ -59,10 +59,17 @@
   flex: 1;
 }
 
-/* 반전 배경 위라 닫기 아이콘도 반전색 */
+/* 반전 배경 위라 닫기 아이콘도 반전색. 올렸을 때 IconButton 기본 배경(bg-subtle)은 다크 모드에서 알림 배경과 같아 아이콘이 묻히므로 뒤집는다 */
 .close {
   flex-shrink: 0;
   color: var(--color-text-inverse);
+}
+
+@media (hover: hover) {
+  .close[data-variant]:hover:not(:disabled) {
+    background-color: var(--color-text-inverse);
+    color: var(--color-bg-inverse);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
