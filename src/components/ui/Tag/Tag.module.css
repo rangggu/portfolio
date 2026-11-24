@@ -1,0 +1,29 @@
+.root {
+  composes: labelSm from '@/styles/typography.module.css';
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-round);
+  white-space: nowrap;
+}
+
+/* --- size: 글자는 같고 여백만 다르다 --- */
+
+.root[data-size='md'] {
+  padding: var(--spacing-4) var(--spacing-12);
+}
+
+.root[data-size='sm'] {
+  padding: var(--spacing-2) var(--spacing-8);
+}
+
+/* --- tone --- */
+
+.root[data-tone='neutral'] {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+}
+
+.root[data-tone='accent'] {
+  background-color: var(--color-bg-accent-subtle);
+  color: var(--color-text-accent);
+}
