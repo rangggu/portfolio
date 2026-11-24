@@ -1,0 +1,93 @@
+/*
+ * 화면 아래에 붙는 시트. 아래에서 올라오는 모션은 --motion-sheet-*,
+ * 움직임 줄이기에서는 위치 이동 없이 페이드만 한다.
+ */
+.root {
+  /* 넓은 화면에서 시트가 너무 넓어지지 않게: 이 컴포넌트에서만 쓰는 값이라 로컬 변수 */
+  --sheet-width: 640px;
+
+  width: min(100%, var(--sheet-width));
+  max-width: 100%;
+  max-height: none;
+  margin: auto auto 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-24) var(--radius-24) 0 0;
+  background-color: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-overlay);
+  transform: translateY(100%);
+  transition:
+    transform var(--motion-sheet-duration) var(--motion-sheet-ease),
+    overlay var(--motion-sheet-duration) allow-discrete,
+    display var(--motion-sheet-duration) allow-discrete;
+}
+
+.root[open] {
+  transform: translateY(0);
+}
+
+@starting-style {
+  .root[open] {
+    transform: translateY(100%);
+  }
+}
+
+.root::backdrop {
+  background-color: var(--color-bg-dim);
+  opacity: 0;
+  transition:
+    opacity var(--motion-sheet-duration) var(--ease-standard),
+    overlay var(--motion-sheet-duration) allow-discrete,
+    display var(--motion-sheet-duration) allow-discrete;
+}
+
+.root[open]::backdrop {
+  opacity: 1;
+}
+
+@starting-style {
+  .root[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    opacity: 0;
+    transform: none;
+    transition:
+      opacity var(--motion-sheet-duration) var(--ease-standard),
+      overlay var(--motion-sheet-duration) allow-discrete,
+      display var(--motion-sheet-duration) allow-discrete;
+  }
+
+  .root[open] {
+    opacity: 1;
+    transform: none;
+  }
+
+  @starting-style {
+    .root[open] {
+      opacity: 0;
+      transform: none;
+    }
+  }
+}
+
+/* 위쪽 플로팅 영역만큼은 비워 두고, 아래는 홈 인디케이터(safe-area)를 피한다 */
+.panel {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - var(--layout-floating-top));
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.handle {
+  align-self: center;
+  width: var(--spacing-40);
+  height: var(--spacing-4);
+  margin-top: var(--spacing-8);
+  border-radius: var(--radius-round);
+  background-color: var(--color-bg-muted);
+}
