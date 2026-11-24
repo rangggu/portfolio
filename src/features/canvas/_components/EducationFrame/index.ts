@@ -1,0 +1,1 @@
+export { EducationFrame } from './EducationFrame';

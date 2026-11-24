@@ -1,12 +1,6 @@
 'use client';
 
-import { useEffect, useState, useSyncExternalStore } from 'react';
-import {
-  getFloatingGuide,
-  restoreFloatingGuide,
-  setFloatingGuide,
-  subscribeFloatingGuide,
-} from './floatingGuideState';
+import { useEffect, useState } from 'react';
 
 function getBreakpointName(width: number): string {
   if (width >= 1024) return 'lg';
@@ -16,16 +10,6 @@ function getBreakpointName(width: number): string {
 
 export function ViewportIndicator() {
   const [size, setSize] = useState({ w: 0, h: 0 });
-  const floatingGuide = useSyncExternalStore(
-    subscribeFloatingGuide,
-    getFloatingGuide,
-    () => false,
-  );
-
-  useEffect(() => {
-    restoreFloatingGuide();
-  }, []);
-
   useEffect(() => {
     const update = () =>
       setSize({ w: window.innerWidth, h: window.innerHeight });
@@ -61,21 +45,6 @@ export function ViewportIndicator() {
       <span>
         {size.w}×{size.h} · {ratio} · {bp}
       </span>
-      <button
-        type="button"
-        aria-pressed={floatingGuide}
-        onClick={() => setFloatingGuide(!floatingGuide)}
-        style={{
-          padding: '0 6px',
-          border: '1px solid currentColor',
-          borderRadius: 3,
-          background: floatingGuide ? '#fff' : 'transparent',
-          color: floatingGuide ? '#000' : '#fff',
-          font: 'inherit',
-        }}
-      >
-        플로팅 자리
-      </button>
     </div>
   );
 }

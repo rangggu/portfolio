@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>캔버스 지도</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; height: 900px; position: relative; overflow: hidden; background-color: #EFEDE8; background-image: radial-gradient(circle, #CFCAC0 1px, transparent 1.3px); background-size: 22px 22px; color: #1B1E23; font-family: 'Noto Sans KR', sans-serif">
+
+<div style="position: absolute; left: 240px; top: 120px; width: 160px; height: 96px; box-sizing: border-box; padding: 12px; background: #FFFFFF; border: 1px solid #E2DFD8; border-radius: 6px; display: flex; flex-direction: column; justify-content: space-between">
+<span style="font-size: 14px; font-weight: 700">첫 화면</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5F6670">/</span>
+</div>
+<div style="position: absolute; left: 311px; top: 222px; font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: {{accent}}">↓</div>
+
+<div style="position: absolute; left: 240px; top: 262px; width: 160px; height: 150px; box-sizing: border-box; padding: 12px; background: #FFFFFF; border: 1px solid #E2DFD8; border-radius: 6px; display: flex; flex-direction: column; justify-content: space-between">
+<span style="font-size: 14px; font-weight: 700">01 소개</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5F6670">/about</span>
+</div>
+<div style="position: absolute; left: 408px; top: 300px; font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: {{accent}}">→</div>
+
+<div style="position: absolute; left: 440px; top: 262px; width: 160px; height: 300px; box-sizing: border-box; padding: 12px; background: #FFFFFF; border: 1px solid #E2DFD8; border-radius: 6px; display: flex; flex-direction: column; justify-content: space-between">
+<span style="font-size: 14px; font-weight: 700">02 경력</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5F6670">/career</span>
+</div>
+<div style="position: absolute; left: 608px; top: 300px; font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: {{accent}}">→</div>
+
+<div style="position: absolute; left: 640px; top: 262px; width: 160px; height: 220px; box-sizing: border-box; padding: 12px; background: #FFFFFF; border: 1px solid #E2DFD8; border-radius: 6px; display: flex; flex-direction: column; justify-content: space-between">
+<span style="font-size: 14px; font-weight: 700">03 프로젝트</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5F6670">/projects</span>
+</div>
+<div style="position: absolute; left: 808px; top: 300px; font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: {{accent}}">→</div>
+
+<div style="position: absolute; left: 840px; top: 262px; width: 160px; height: 140px; box-sizing: border-box; padding: 12px; background: #FFFFFF; border: 1px solid #E2DFD8; border-radius: 6px; display: flex; flex-direction: column; justify-content: space-between">
+<span style="font-size: 14px; font-weight: 700">04 기술</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5F6670">/skills</span>
+</div>
+<div style="position: absolute; left: 1008px; top: 300px; font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: {{accent}}">→</div>
+
+<div style="position: absolute; left: 1040px; top: 262px; width: 160px; height: 120px; box-sizing: border-box; padding: 12px; background: #FFFFFF; border: 1px solid #E2DFD8; border-radius: 6px; display: flex; flex-direction: column; justify-content: space-between">
+<span style="font-size: 14px; font-weight: 700">05 학력 · 자격</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5F6670">/education</span>
+</div>
+<div style="position: absolute; left: 1111px; top: 388px; font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: {{accent}}">↓</div>
+
+<div style="position: absolute; left: 1040px; top: 428px; width: 160px; height: 96px; box-sizing: border-box; padding: 12px; background: #FFFFFF; border: 1px solid #E2DFD8; border-radius: 6px; display: flex; flex-direction: column; justify-content: space-between">
+<span style="font-size: 14px; font-weight: 700">06 연락처</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5F6670">/contact</span>
+</div>
+
+<div style="position: absolute; left: 240px; top: 640px; display: flex; flex-direction: column; gap: 14px; font-size: 15px; color: #3F454D">
+<div style="display: flex; align-items: center; gap: 12px"><span style="width: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 18px; color: {{accent}}">↓</span>아래로 스크롤하면 카메라도 아래로</div>
+<div style="display: flex; align-items: center; gap: 12px"><span style="width: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 18px; color: {{accent}}">→</span>아래로 스크롤하지만 카메라는 오른쪽으로 (모바일은 좌우 스와이프)</div>
+<div style="display: flex; align-items: center; gap: 12px"><span style="width: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5F6670">/…</span>프레임마다 고유 주소, 직접 들어오면 그 프레임에서 시작</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2F66DD","options":["#2F66DD","#C2552B","#2F7A5B"]},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { accent: this.props.accent ?? '#2F66DD' };
+  }
+}
+</script>
+</body>
+</html>

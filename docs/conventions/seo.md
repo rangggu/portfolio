@@ -36,6 +36,10 @@
 | 학력·자격 | `/education` | 학력·자격 · 김규리                                 |
 | 연락처    | `/contact`   | 연락처 · 김규리                                    |
 
+- 값은 `features/canvas`의 `getFrameMetadata(frameId)`가 만듭니다. title은 프레임 이름(`FRAMES`의 `label`)에 템플릿이 붙고, canonical은 프레임 경로입니다.
+- description은 `src/features/canvas/_lib/frames.ts`의 `description`을 쓰고, 비어 있으면 사이트 기본 설명(`SITE.description`)을 씁니다. 프레임별 문구는 아직 비어 있습니다.
+- openGraph·twitter는 루트 값을 공유합니다. 프레임별 OG 이미지와 함께 나중에 나눕니다.
+
 ## viewport & theme-color
 
 `viewport` export에서 라이트/다크별 `theme-color`를 설정합니다. 값은 `tokens.css`의 `--color-bg-base`와 일치시킵니다.

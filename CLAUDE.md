@@ -9,12 +9,13 @@ Next.js App Router, React 19, TypeScript(strict), React Compiler, CSS Modules + 
 ## 명령어
 
 ```bash
-yarn dev              # 개발 서버
-yarn build            # 프로덕션 빌드
-yarn lint             # ESLint + Stylelint
-yarn typecheck        # tsc --noEmit
-yarn test             # Vitest
-yarn test:e2e         # Playwright (시각 회귀 + axe 포함)
+yarn dev                 # 개발 서버
+yarn build               # 프로덕션 빌드
+yarn lint                # ESLint + Stylelint
+yarn typecheck           # tsc --noEmit
+yarn test                # Vitest
+yarn check:responsive    # 기기 매트릭스 반응형 검사 (서버 실행 후)
+yarn screenshot          # 1512×823·393×852(터치) 라이트·다크 스크린샷 (서버 실행 후)
 ```
 
 ## 반드시 지킬 규칙

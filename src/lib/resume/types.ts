@@ -34,6 +34,8 @@ export interface Profile {
   tagline: string;
   /** 첫 화면 보조 문장 */
   subline: string;
+  /** 연락처 프레임 큰 문장 */
+  contactMessage: string;
   email: string;
   links: readonly ProfileLink[];
 }
@@ -111,10 +113,21 @@ export interface Certification {
   date: YearMonth;
 }
 
+/** 소개 문단 속 연결 텍스트와 그 여백 메모 */
+export interface IntroNote {
+  text: string;
+  note: string;
+}
+
+export type IntroSegment = string | IntroNote;
+
+/** 소개 문단. 메모가 없으면 문자열, 있으면 문자열과 IntroNote 조각의 배열 */
+export type IntroParagraph = string | readonly IntroSegment[];
+
 export interface Resume {
   profile: Profile;
   /** 소개 문단 */
-  intro: readonly string[];
+  intro: readonly IntroParagraph[];
   timeline: readonly TimelineItem[];
   skills: readonly Skill[];
   education: readonly Education[];

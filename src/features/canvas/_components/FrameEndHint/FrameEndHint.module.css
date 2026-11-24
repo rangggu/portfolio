@@ -1,0 +1,33 @@
+/* 메뉴 바(--layout-floating-bottom) 바로 위 가운데. 누를 것이 없어 포인터를 통과시킨다 */
+.root {
+  position: fixed;
+  bottom: calc(var(--layout-floating-bottom) + var(--spacing-8));
+  left: 50%;
+  z-index: var(--z-sticky);
+  padding: var(--spacing-8) var(--spacing-12);
+  border-radius: var(--radius-round);
+  background-color: var(--color-bg-elevated);
+  box-shadow: var(--shadow-floating);
+  opacity: 0;
+  transform: translate(-50%, var(--spacing-8));
+  transition:
+    opacity var(--motion-indicator-duration) var(--ease-standard),
+    transform var(--motion-indicator-duration) var(--motion-indicator-ease);
+  pointer-events: none;
+}
+
+.root[data-visible] {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* 내용이 없을 때(첫 안내 전)는 상자도 그리지 않는다 */
+.root:empty {
+  display: none;
+}
+
+@media print {
+  .root {
+    display: none;
+  }
+}

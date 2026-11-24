@@ -6,6 +6,8 @@ export const profile = {
   jobTitle: '프론트엔드 개발자',
   tagline: '작은 불편을 그냥 지나치지 않습니다.',
   subline: '화면의 디테일부터 그 뒤의 구조까지, 한 번 더 들여다보고 만듭니다.',
+  // TODO: 연락처 프레임 큰 문장
+  contactMessage: TODO,
   // TODO: 공개할 이메일 주소
   email: TODO,
   links: [

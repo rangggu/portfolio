@@ -58,8 +58,9 @@ html {
   text-size-adjust: 100%;
 }
 
+/* 카메라 모드는 스크롤 위치로 카메라를 바로 맞춰야 해서 부드러운 스크롤을 쓰지 않는다 */
 @media (prefers-reduced-motion: no-preference) {
-  html {
+  html:not([data-camera]) {
     scroll-behavior: smooth;
   }
 }

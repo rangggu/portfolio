@@ -12,6 +12,7 @@ describe('toResumePlainText', () => {
         jobTitle: '직무',
         tagline: '한 줄 소개',
         subline: '보조 문장',
+        contactMessage: '연락 문장',
         email: TODO,
         links: [],
       },
@@ -52,5 +53,32 @@ describe('toResumePlainText', () => {
     expect(text).toContain('- 사이드·개인 · 사이드 · 개인 · 2024.07 – 진행 중');
     expect(text).toContain('- 언어·프레임워크 · React');
     expect(text).not.toContain(TODO);
+  });
+
+  it('메모가 있는 소개 문단은 본문 뒤에 메모를 붙인다', () => {
+    const resume: Resume = {
+      profile: {
+        name: '이름',
+        nickname: 'Myu',
+        jobTitle: '직무',
+        tagline: '한 줄 소개',
+        subline: '보조 문장',
+        contactMessage: '연락 문장',
+        email: TODO,
+        links: [],
+      },
+      intro: [
+        '첫 문단',
+        ['둘째 ', { text: '연결', note: '메모 내용' }, ' 문단'],
+      ],
+      timeline: [],
+      skills: [],
+      education: [],
+      certifications: [],
+    };
+
+    expect(toResumePlainText(resume)).toContain(
+      '## 소개\n첫 문단\n둘째 연결 문단\n  메모: 메모 내용',
+    );
   });
 });

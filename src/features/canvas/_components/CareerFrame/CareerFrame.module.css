@@ -1,67 +1,172 @@
 /* 레인 전환 기준: 프레임 안쪽 폭(Container) 768px (responsive.md 경력 타임라인) */
 
+.root {
+  /* 이 프레임 전용 값: 연도 열 폭(시안 80px), 회사 막대 폭(시안 6px) */
+  --year-width: 80px;
+  --bar-width: var(--spacing-6);
+  --line-width: var(--border-width-2);
+  --marker-gap: var(--spacing-20);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+}
+
 .timeline {
   display: grid;
+  gap: var(--spacing-12);
+}
+
+/* 머리줄: 회사(굵은 막대) / 사이드 · 개인(얇은 선) */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--spacing-16);
 }
 
-.lanes {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-24);
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
 }
 
-.item {
+.legendMarker {
+  width: var(--spacing-16);
+}
+
+.legendItem[data-lane='company'] .legendMarker {
+  height: var(--bar-width);
+  border-radius: var(--radius-round);
+  background: var(--color-text-primary);
+}
+
+.legendItem[data-lane='side'] .legendMarker {
+  height: var(--line-width);
+  background: var(--color-border-strong);
+}
+
+.rows,
+.cellBody,
+.achievements,
+.links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rows {
+  display: grid;
+}
+
+/* 좁은 프레임: 한 열 (연도 → 회사 → 사이드) */
+.row {
+  display: grid;
+  gap: var(--spacing-12);
+  padding-block: var(--spacing-20);
+  border-top: var(--border-width-1) solid var(--color-border-subtle);
+}
+
+.row:last-child {
+  border-bottom: var(--border-width-1) solid var(--color-border-subtle);
+}
+
+.cell {
+  display: flex;
+  gap: var(--marker-gap);
+}
+
+.cell[data-empty] {
+  display: none;
+}
+
+.marker {
+  flex-shrink: 0;
+}
+
+.cell[data-lane='company'] .marker {
+  width: var(--bar-width);
+  background: var(--color-text-primary);
+}
+
+.cell[data-lane='company'] .marker[data-start] {
+  border-start-start-radius: var(--radius-round);
+  border-start-end-radius: var(--radius-round);
+}
+
+.cell[data-lane='side'] .marker {
+  width: var(--line-width);
+  background: var(--color-border-strong);
+}
+
+.cellBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  min-width: 0;
+}
+
+.company {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.achievements {
   display: grid;
   gap: var(--spacing-4);
-  padding-inline-start: var(--spacing-12);
 }
 
-.lane[data-lane='company'] .item {
-  border-inline-start: var(--border-width-2) solid var(--color-border-strong);
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
 }
 
-.lane[data-lane='side'] .item {
-  border-inline-start: var(--border-width-1) solid var(--color-border-default);
+.sideName {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--spacing-8);
 }
 
-.legendItem {
-  padding-inline-start: var(--spacing-8);
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-4) var(--spacing-12);
 }
 
-.legendItem[data-lane='company'] {
-  border-inline-start: var(--border-width-2) solid var(--color-border-strong);
-}
-
-.legendItem[data-lane='side'] {
-  border-inline-start: var(--border-width-1) solid var(--color-border-default);
-}
-
-/* 좁은 프레임: 한 레인 + 상단 레인 라벨. 레인 제목은 보조기기용으로만 남긴다 */
-@container (width < 768px) {
-  .laneTitle {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-}
-
-/* 넓은 프레임: 회사 60% + 사이드 40% 나란히, 레인마다 제목 */
+/* 넓은 프레임: 연도 | 회사 3fr | 사이드 2fr. 막대·선이 행을 건너 이어지도록 칸 위아래 여백을 칸 안으로 옮긴다 */
 @container (width >= 768px) {
   .legend {
-    display: none;
+    display: grid;
+    grid-template-columns: var(--year-width) minmax(0, 3fr) minmax(0, 2fr);
+    column-gap: var(--spacing-32);
   }
 
-  .lanes {
-    grid-template-columns: 3fr 2fr;
-    gap: var(--spacing-40);
+  .legend::before {
+    content: '';
   }
 
-  .laneTitle {
-    margin-bottom: var(--spacing-16);
+  .row {
+    grid-template-columns: var(--year-width) minmax(0, 3fr) minmax(0, 2fr);
+    column-gap: var(--spacing-32);
+    padding-block: 0;
+  }
+
+  .year {
+    padding-block-start: var(--spacing-24);
+  }
+
+  .cell[data-empty] {
+    display: flex;
+  }
+
+  .cellBody {
+    padding-block: var(--spacing-24);
+  }
+
+  /* 회사 막대는 시작 행에서 회사명 높이부터 */
+  .cell[data-lane='company'] .marker[data-start] {
+    margin-block-start: var(--spacing-24);
   }
 }

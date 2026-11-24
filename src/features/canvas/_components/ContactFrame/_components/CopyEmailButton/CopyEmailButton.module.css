@@ -1,0 +1,11 @@
+.root {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+/* 안내가 없을 때는 자리를 차지하지 않는다. display: none이면 보조기기가 새 안내를 놓칠 수 있어 흐름에서만 뺀다 */
+.status:empty {
+  position: absolute;
+}

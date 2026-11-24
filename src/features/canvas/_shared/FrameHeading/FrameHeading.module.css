@@ -1,0 +1,7 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  padding-top: var(--spacing-16);
+  border-top: var(--border-width-1) solid var(--color-text-primary);
+}

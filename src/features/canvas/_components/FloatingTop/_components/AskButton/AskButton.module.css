@@ -1,0 +1,27 @@
+.label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--spacing-8);
+}
+
+.icon {
+  display: none;
+}
+
+/* 터치 기기: 아이콘만 보이고 글자는 보조기기용으로 남긴다 (VisuallyHidden과 같은 방식) */
+@media (pointer: coarse) {
+  .icon {
+    display: inline-flex;
+  }
+
+  .label {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(50%);
+  }
+}

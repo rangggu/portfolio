@@ -1,5 +1,6 @@
 import { formatPeriod } from '@/lib/format/period';
 
+import { isIntroParagraphFilled, toIntroPlainText } from './intro';
 import { SKILL_CATEGORY_LABEL, type Period, type Resume } from './types';
 import { isTodo } from './validate';
 
@@ -28,7 +29,7 @@ export function toResumePlainText(resume: Resume): string {
       .join('\n'),
   );
 
-  const introText = intro.filter((paragraph) => !isTodo(paragraph));
+  const introText = intro.filter(isIntroParagraphFilled).map(toIntroPlainText);
   if (introText.length > 0) sections.push(['## 소개', ...introText].join('\n'));
 
   if (timeline.length > 0) {

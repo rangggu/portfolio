@@ -1,0 +1,95 @@
+/* 열 전환 기준: 프레임 안쪽 폭(Container) 768px (responsive.md 프로젝트) */
+
+.root {
+  /* 이 프레임 전용 값: 번호 열 폭(시안 56px), 행 최소 높이(시안 120px) */
+  --number-width: 56px;
+  --row-min-height: 120px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--border-width-1) solid var(--color-border-subtle);
+}
+
+.list > li {
+  border-bottom: var(--border-width-1) solid var(--color-border-subtle);
+}
+
+/* 좁은 프레임: 번호 | 내용, 메타는 내용 아래 */
+.row {
+  display: grid;
+  grid-template-columns: var(--number-width) minmax(0, 1fr) auto;
+  gap: var(--spacing-8) var(--spacing-16);
+  align-items: baseline;
+  padding-block: var(--spacing-24);
+  transition: background-color var(--motion-hover-duration) var(--ease-standard);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  min-width: 0;
+}
+
+.titleRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--spacing-8);
+}
+
+.meta {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.arrow {
+  grid-column: 3;
+  grid-row: 1;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-20-24);
+  color: var(--color-text-tertiary);
+  transition: color var(--motion-hover-duration) var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .row:hover {
+    background-color: var(--color-bg-subtle);
+  }
+
+  .row:hover .arrow {
+    color: var(--color-text-accent);
+  }
+}
+
+/* 넓은 프레임: 번호 | 제목·요약 | 메타 | 화살표 한 줄 */
+@container (width >= 768px) {
+  .row {
+    grid-template-columns: var(--number-width) minmax(0, 1fr) auto auto;
+    column-gap: var(--spacing-32);
+    align-items: center;
+    min-height: var(--row-min-height);
+  }
+
+  .meta {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .arrow {
+    grid-column: 4;
+  }
+}
+
+@media print {
+  .arrow {
+    display: none;
+  }
+}

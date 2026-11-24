@@ -63,7 +63,7 @@ function toFileName(device) {
 }
 
 async function measure(page) {
-  return page.evaluate(() => {
+  return page.evaluate(async () => {
     const root = document.documentElement;
     const career = document.getElementById('career');
     const container = career.querySelector('[data-width]');
@@ -72,14 +72,18 @@ async function measure(page) {
       container.clientWidth -
       parseFloat(containerStyle.paddingLeft) -
       parseFloat(containerStyle.paddingRight);
-    const lanes = career.querySelector(
-      '[role="group"][data-lane="company"]',
-    ).parentElement;
+    // 경력 연도 행: 넓으면 연도 | 회사 | 사이드 3열, 좁으면 한 열. 보일 항목이 없으면 행이 없다
+    const timelineRow = career.querySelector('ol > li');
 
-    // 잘림: overflow가 visible이 아닌데 내용이 넘친 요소 (1px 시각적 숨김 요소는 제외)
+    // 잘림: 내용을 숨기는(hidden·clip) 요소에서 내용이 넘친 경우 (1px 시각적 숨김 요소는 제외).
+    // auto·scroll은 사용자가 밀어서 볼 수 있으므로 잘림이 아니다 (예: 메뉴 바 가로 스크롤)
+    // 카메라 모드의 stage는 화면 밖 프레임을 일부러 숨기는 무대라 제외한다 (카메라가 옮겨 가며 보여 준다).
+    // 스와이프 모드의 stage·프레임은 auto(밀어서 보는 영역)라 그대로 통과한다
+    const hides = (value) => value === 'hidden' || value === 'clip';
     const clipped = [...document.querySelectorAll('body *')].filter((el) => {
+      if (el.hasAttribute('data-camera-stage')) return false;
       const style = getComputedStyle(el);
-      if (style.overflowX === 'visible' && style.overflowY === 'visible') {
+      if (!hides(style.overflowX) && !hides(style.overflowY)) {
         return false;
       }
       if (el.clientWidth <= 1 || el.clientHeight <= 1) return false;
@@ -94,7 +98,8 @@ async function measure(page) {
       ...document.querySelectorAll('#hero h1, #hero p, #hero a'),
     ];
     const covered = heroTexts.filter((el) => {
-      el.scrollIntoView({ block: 'center' });
+      // globals.css의 smooth 스크롤이 걸리면 이동 중에 측정되므로 즉시 이동한다
+      el.scrollIntoView({ block: 'center', behavior: 'instant' });
       const rect = el.getBoundingClientRect();
       const hit = document.elementFromPoint(
         rect.left + rect.width / 2,
@@ -102,7 +107,19 @@ async function measure(page) {
       );
       return hit && !el.contains(hit) && !hit.contains(el);
     });
-    window.scrollTo(0, 0);
+    // 카메라 모드는 스크롤 이벤트(다음 프레임)에서 카메라를 옮기므로, 위 이동이 끝난 뒤 맨 위로 가고 다시 기다린다
+    const nextFrames = () =>
+      new Promise((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(resolve)),
+      );
+    await nextFrames();
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    // 스와이프 모드(터치)는 문서 대신 stage와 프레임 안이 스크롤되므로 둘 다 처음 위치로 돌린다
+    if (matchMedia('screen and (pointer: coarse)').matches) {
+      document.querySelector('[data-camera-stage]').scrollTo(0, 0);
+      document.getElementById('hero').scrollTop = 0;
+    }
+    await nextFrames();
     const h1 = document.querySelector('#hero h1').getBoundingClientRect();
 
     return {
@@ -114,7 +131,12 @@ async function measure(page) {
       h1Visible: h1.top >= 0 && h1.bottom <= innerHeight,
       frame: Math.round(career.getBoundingClientRect().width),
       inner: Math.round(inner),
-      lanes: getComputedStyle(lanes).gridTemplateColumns.split(' ').length,
+      lanes: timelineRow
+        ? getComputedStyle(timelineRow).gridTemplateColumns.split(' ').length >=
+          3
+          ? 2
+          : 1
+        : 0,
     };
   });
 }
@@ -172,7 +194,7 @@ async function main() {
       h1보임: mark(result.h1Visible),
       프레임: result.frame,
       안쪽: result.inner,
-      경력: result.lanes === 2 ? '두 레인' : '한 레인',
+      경력: ['항목 없음', '한 레인', '두 레인'][result.lanes],
     });
   }
 
