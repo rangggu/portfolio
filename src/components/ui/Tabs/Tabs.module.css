@@ -1,0 +1,65 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* 넘치면 가로로 밀어서 본다. 아래 선은 목록 전체의 바닥선 */
+.list {
+  display: flex;
+  gap: var(--spacing-4);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  border-bottom: var(--border-width-1) solid var(--color-border-subtle);
+}
+
+.tab {
+  composes: labelMd from '@/styles/typography.module.css';
+  position: relative;
+  flex-shrink: 0;
+  min-height: var(--size-touch-target);
+  padding: var(--spacing-8) var(--spacing-12);
+  border: none;
+  border-radius: var(--radius-8) var(--radius-8) 0 0;
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard);
+
+  /* 포커스 링이 목록의 overflow에 잘리지 않게 안쪽으로 그린다 */
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-border-focus);
+    outline-offset: calc(var(--focus-ring-width) * -1);
+  }
+
+  &:disabled {
+    opacity: var(--opacity-disabled);
+    cursor: not-allowed;
+  }
+}
+
+.tab[aria-selected='true'] {
+  color: var(--color-text-primary);
+}
+
+/* 선택 표시: 아래 2px 선 (선택 색은 배경 토큰을 선의 배경으로 쓴다) */
+.tab[aria-selected='true']::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: var(--border-width-2);
+  background-color: var(--color-bg-accent);
+  content: '';
+}
+
+@media (hover: hover) {
+  .tab:hover:not(:disabled, [aria-selected='true']) {
+    color: var(--color-text-primary);
+  }
+}
+
+.panel {
+  padding-top: var(--spacing-20);
+  border-radius: var(--radius-4);
+}
