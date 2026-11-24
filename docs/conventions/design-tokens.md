@@ -48,6 +48,7 @@
 | `--color-border-default`           | 기본 테두리, 구분선                                             |
 | `--color-border-subtle`            | 약한 구분선                                                     |
 | `--color-border-strong`            | 입력 요소 테두리                                                |
+| `--color-border-danger`            | 입력 요소 오류 테두리 (`Input`·`Textarea`)                      |
 | `--color-border-focus`             | 포커스 링                                                       |
 
 ### 시안 기반 임시 값
