@@ -26,3 +26,24 @@
   border: var(--border-width-1) dashed var(--color-border-strong);
   border-radius: var(--radius-4);
 }
+
+/* 인쇄: 위아래 여백을 줄이고, 태그는 배경 대신 테두리 (흑백 인쇄에서도 보이게) */
+@media print {
+  .root,
+  .root[data-layout='modal'] {
+    padding-block: 0;
+  }
+
+  .header {
+    padding-bottom: var(--spacing-16);
+  }
+
+  .tag {
+    border: var(--border-width-1) solid var(--color-border-strong);
+    background: none;
+  }
+
+  .draft {
+    display: none;
+  }
+}

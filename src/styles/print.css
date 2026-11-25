@@ -1,0 +1,50 @@
+/* =============================================================
+ * 인쇄 공통 규칙 (docs/product.md 「인쇄」)
+ * 사이트를 인쇄하면 A4 이력서, 케이스 스터디 글은 A4 문서가 된다.
+ * 색은 늘 라이트 (tokens.css의 다크는 화면 전용). 컴포넌트별 인쇄 규칙은 각 CSS Module의 @media print.
+ * ============================================================= */
+@page {
+  size: a4;
+  margin: var(--print-page-margin);
+}
+
+@media print {
+  /* rem 토큰(글자·간격)이 화면 대비 같은 비율로 줄어든다 */
+  html {
+    color-scheme: light;
+    font-size: var(--print-root-font-size);
+  }
+
+  body {
+    min-height: auto;
+  }
+
+  /* 제목 바로 뒤에서 쪽이 갈리지 않게, 덩어리는 쪽 안에서 */
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+
+  pre,
+  figure,
+  img,
+  table {
+    break-inside: avoid;
+  }
+
+  /* 긴 코드 줄은 종이 밖으로 나가지 않게 접는다 */
+  pre,
+  pre code {
+    white-space: pre-wrap;
+  }
+
+  /* 외부 링크는 종이에서도 찾아갈 수 있게 주소를 붙인다. 글자가 이미 주소면 data-print-url="none" (메일 링크는 글자가 곧 주소) */
+  a[href^='http']:not([data-print-url='none'])::after {
+    content: ' (' attr(href) ')';
+    font-size: var(--font-size-12);
+    color: var(--color-text-secondary);
+    overflow-wrap: anywhere;
+  }
+}

@@ -88,6 +88,24 @@ describe('parseTokens', () => {
     expect(find('--color-bg-accent')?.dark).toBeUndefined();
   });
 
+  it('@media screen 안 다크 블록은 다크 값으로 읽는다 (조건부 값이 아니다)', () => {
+    const screenDark = parseTokens(`
+/* ---------- Semantic ---------- */
+:root {
+  --color-text-primary: var(--color-gray-900);
+}
+
+@media screen {
+  [data-theme='dark'] {
+    --color-text-primary: var(--color-gray-50);
+  }
+}
+`);
+    const token = screenDark[0]?.tokens[0];
+    expect(token?.dark).toBe('var(--color-gray-50)');
+    expect(token?.overrides).toEqual([]);
+  });
+
   it('@media 안 값은 조건부 값으로 붙인다', () => {
     expect(find('--layout-peek')?.overrides).toEqual([
       { condition: '(pointer: coarse)', value: '12px' },

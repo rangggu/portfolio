@@ -1,5 +1,6 @@
 @import url('@/styles/tokens.css');
 @import url('@/styles/code.css');
+@import url('@/styles/print.css');
 
 /* ---------- Fallback fonts: Pretendard 메트릭 보정 ----------
  * Pretendard Variable: UPM 2048, ascent 1950, descent 494, lineGap 0
@@ -90,6 +91,14 @@ html[data-camera] {
 html:has(dialog[data-modal][open]),
 html:has(dialog[data-modal][open]) [data-camera-stage] {
   overflow: hidden;
+}
+
+/* 인쇄는 모달이 열려 있어도 글 전체가 이어져야 한다 (스크롤 잠금이 첫 쪽에서 자르지 않게) */
+@media print {
+  html:has(dialog[data-modal][open]),
+  html:has(dialog[data-modal][open]) [data-camera-stage] {
+    overflow: visible;
+  }
 }
 
 body {

@@ -44,3 +44,24 @@
   padding: var(--spacing-16) var(--spacing-24) var(--spacing-24);
   border-top: var(--border-width-1) solid var(--color-border-subtle);
 }
+
+/* 인쇄: 버튼은 빼고 제목과 본문만, 본문은 스크롤 없이 이어지게 */
+@media print {
+  .header {
+    padding: 0 0 var(--spacing-8);
+  }
+
+  /* 모달 제목이 인쇄본의 글 제목 */
+  .header h2 {
+    font-size: var(--font-size-28-40);
+  }
+
+  .actions {
+    display: none;
+  }
+
+  .body {
+    padding: 0;
+    overflow: visible;
+  }
+}

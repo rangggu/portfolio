@@ -138,8 +138,27 @@
   }
 }
 
+/*
+ * 인쇄: 메모를 모두 문단 묶음 아래에 펼친다 (누를 수 없는 종이라서). 카드 대신 왼쪽 선.
+ */
 @media print {
   .notes,
+  .notes:not(:has(.note[data-open='true'])) {
+    display: grid;
+    gap: var(--spacing-8);
+  }
+
+  .note,
+  .note[data-open='false'] {
+    display: block;
+    padding: 0 0 0 var(--spacing-12);
+    border: none;
+    border-inline-start: var(--border-width-2) solid var(--color-border-strong);
+    border-radius: 0;
+    background: none;
+    break-inside: avoid;
+  }
+
   .connector {
     display: none;
   }

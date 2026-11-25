@@ -7,8 +7,11 @@
   color: var(--shiki-light);
 }
 
-[data-theme='dark'] [data-rehype-pretty-code-figure] code span {
-  color: var(--shiki-dark);
+/* 다크는 화면에서만 (인쇄는 늘 라이트, tokens.css) */
+@media screen {
+  [data-theme='dark'] [data-rehype-pretty-code-figure] code span {
+    color: var(--shiki-dark);
+  }
 }
 
 /* 본문 속 인라인 코드: 글자 크기는 부모를 따른다 */

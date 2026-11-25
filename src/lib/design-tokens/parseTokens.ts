@@ -6,6 +6,7 @@
  *   /* ---------- 그룹 제목 ---------- *\/   ← 다음 블록의 그룹
  *   :root { --name: value; /* 꼬리 주석 *\/ }
  *   [data-theme='dark'] { --name: value; }   ← 같은 이름 토큰의 다크 값
+ *   @media screen { [data-theme='dark'] { … } } ← 다크 값 (인쇄는 늘 라이트라 화면에서만 다크를 쓴다)
  *   @media (조건) { :root { --name: value; } } ← 같은 이름 토큰의 조건부 값
  */
 
@@ -34,6 +35,8 @@ export interface DesignTokenGroup {
 
 const GROUP_TITLE = /^-{3,}\s*(.+?)\s*-{3,}$/;
 const DARK_SELECTOR = /data-theme=['"]?dark/;
+/** 다크 블록을 감싸도 다크 값으로 읽는 조건 (화면 전용) */
+const SCREEN = 'screen';
 
 interface Declaration {
   name: string;
@@ -161,6 +164,10 @@ export function parseTokens(css: string): DesignTokenGroup[] {
     if (block.selector.startsWith('@media')) {
       const condition = block.selector.replace(/^@media\s*/, '');
       for (const inner of splitBlocks(block.body)) {
+        if (condition === SCREEN && DARK_SELECTOR.test(inner.selector)) {
+          pendingDark.push(...parseDeclarations(inner.body));
+          continue;
+        }
         for (const declaration of parseDeclarations(inner.body)) {
           pendingOverrides.push({ condition, declaration });
         }

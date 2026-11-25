@@ -12,7 +12,7 @@
 | semantic            | 의미 부여 (`--color-text-primary`)                 | 모든 컴포넌트         |
 | 수치형·모션·z-index | 단일 계층 (`--spacing-16`, `--motion-press-scale`) | 모든 컴포넌트         |
 
-라이트/다크 전환은 semantic 토큰만 재정의해서 처리합니다. 그라데이션도 semantic 색상을 참조하므로 테마에 따라 함께 바뀝니다.
+라이트/다크 전환은 semantic 토큰만 재정의해서 처리합니다. 그라데이션도 semantic 색상을 참조하므로 테마에 따라 함께 바뀝니다. 다크 재정의는 `@media screen` 안에 있어 인쇄는 테마와 상관없이 늘 라이트입니다.
 
 ## 이름 규칙
 
@@ -278,6 +278,13 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 ### reduced motion
 
 `prefers-reduced-motion: reduce`일 때 `tokens.css`에서 한 번에 재정의합니다. scale·이동 값은 중립(1, 0)으로, 스프링 곡선은 `--ease-standard`로 바뀌고, 테마 확산과 인디케이터 이동은 즉시 전환됩니다. 컴포넌트는 따로 분기하지 않습니다.
+
+## 인쇄
+
+| 토큰                     | 값        | 용도                                                                      |
+| ------------------------ | --------- | ------------------------------------------------------------------------- |
+| `--print-page-margin`    | 14mm 16mm | A4 쪽 여백 (위아래 · 좌우, `src/styles/print.css`의 `@page`)              |
+| `--print-root-font-size` | 81.25%    | 인쇄 때 `html` 글자 크기 (13px). rem 토큰(글자·간격)이 같은 비율로 줄어듦 |
 
 ## z-index
 

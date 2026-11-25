@@ -164,6 +164,19 @@
   }
 }
 
+/* ---------- Print ---------- */
+@media print {
+  /* 종이는 @page 여백이 있으니 컨테이너 좌우 여백은 없앤다 */
+  :root {
+    --layout-gutter: 0;
+  }
+}
+
+:root {
+  --print-page-margin: 14mm 16mm; /* A4 위아래 · 좌우 */
+  --print-root-font-size: 81.25%; /* 13px: rem 토큰(글자·간격)이 화면 대비 같은 비율로 줄어든다 */
+}
+
 /* ---------- Motion: 기본 ---------- */
 :root {
   --duration-instant: 100ms;
@@ -365,63 +378,66 @@
 }
 
 /* ---------- Semantic: Dark ---------- */
-[data-theme='dark'] {
-  --color-text-primary: var(--color-gray-50);
-  --color-text-secondary: var(--color-gray-400);
-  --color-text-tertiary: var(--color-gray-500);
-  --color-text-inverse: var(--color-gray-900);
-  --color-text-accent: var(--color-coral-300);
-  --color-text-on-accent: var(--color-gray-0);
-  --color-text-danger: var(--color-red-400);
-  --color-text-success: var(--color-green-400);
+/* 화면에서만 다크를 쓴다. 인쇄는 테마와 상관없이 늘 라이트 (흰 종이에 밝은 글자가 찍히지 않게, src/styles/print.css) */
+@media screen {
+  [data-theme='dark'] {
+    --color-text-primary: var(--color-gray-50);
+    --color-text-secondary: var(--color-gray-400);
+    --color-text-tertiary: var(--color-gray-500);
+    --color-text-inverse: var(--color-gray-900);
+    --color-text-accent: var(--color-coral-300);
+    --color-text-on-accent: var(--color-gray-0);
+    --color-text-danger: var(--color-red-400);
+    --color-text-success: var(--color-green-400);
 
-  --color-bg-base: var(--color-gray-950);
-  --color-bg-subtle: var(--color-gray-900);
-  --color-bg-muted: var(--color-gray-800);
-  --color-bg-elevated: var(--color-gray-900);
-  --color-bg-inverse: var(--color-gray-50);
-  --color-bg-accent: var(--color-coral-600);
-  --color-bg-accent-hover: var(--color-coral-700);
-  --color-bg-accent-subtle: rgb(245 114 156 / 0.16);
-  --color-bg-floating: var(--color-gray-950-alpha-56);
-  --color-border-glass: rgb(255 255 255 / 0.1);
-  --shadow-floating-glass:
-    inset 0 1px 0 rgb(255 255 255 / 0.08), 0 1px 2px rgb(0 0 0 / 0.3),
-    0 8px 28px rgb(0 0 0 / 0.5);
-  --color-bg-dim: var(--color-black-alpha-60);
-  --color-bg-code: var(--color-gray-900);
-  --color-bg-canvas: var(--color-warm-gray-950);
-  --color-bg-canvas-dot: var(--color-warm-gray-800);
+    --color-bg-base: var(--color-gray-950);
+    --color-bg-subtle: var(--color-gray-900);
+    --color-bg-muted: var(--color-gray-800);
+    --color-bg-elevated: var(--color-gray-900);
+    --color-bg-inverse: var(--color-gray-50);
+    --color-bg-accent: var(--color-coral-600);
+    --color-bg-accent-hover: var(--color-coral-700);
+    --color-bg-accent-subtle: rgb(245 114 156 / 0.16);
+    --color-bg-floating: var(--color-gray-950-alpha-56);
+    --color-border-glass: rgb(255 255 255 / 0.1);
+    --shadow-floating-glass:
+      inset 0 1px 0 rgb(255 255 255 / 0.08), 0 1px 2px rgb(0 0 0 / 0.3),
+      0 8px 28px rgb(0 0 0 / 0.5);
+    --color-bg-dim: var(--color-black-alpha-60);
+    --color-bg-code: var(--color-gray-900);
+    --color-bg-canvas: var(--color-warm-gray-950);
+    --color-bg-canvas-dot: var(--color-warm-gray-800);
 
-  --color-border-default: var(--color-warm-gray-700);
-  --color-border-subtle: var(--color-warm-gray-800);
-  --color-border-strong: var(--color-gray-600);
-  --color-border-danger: var(--color-red-400);
-  --color-border-focus: var(--color-coral-400);
+    --color-border-default: var(--color-warm-gray-700);
+    --color-border-subtle: var(--color-warm-gray-800);
+    --color-border-strong: var(--color-gray-600);
+    --color-border-danger: var(--color-red-400);
+    --color-border-focus: var(--color-coral-400);
 
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
-  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.4);
-  --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.5);
-  --shadow-overlay: 0 24px 64px rgb(0 0 0 / 0.6);
-  --shadow-frame: 0 2px 6px rgb(0 0 0 / 0.3);
-  --shadow-floating: 0 1px 2px rgb(0 0 0 / 0.3), 0 6px 20px rgb(0 0 0 / 0.4);
-  --shadow-floating-raised:
-    0 1px 2px rgb(0 0 0 / 0.3), 0 8px 28px rgb(0 0 0 / 0.5);
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 12px rgb(0 0 0 / 0.4);
+    --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.5);
+    --shadow-overlay: 0 24px 64px rgb(0 0 0 / 0.6);
+    --shadow-frame: 0 2px 6px rgb(0 0 0 / 0.3);
+    --shadow-floating: 0 1px 2px rgb(0 0 0 / 0.3), 0 6px 20px rgb(0 0 0 / 0.4);
+    --shadow-floating-raised:
+      0 1px 2px rgb(0 0 0 / 0.3), 0 8px 28px rgb(0 0 0 / 0.5);
 
-  --gradient-hero-glow: radial-gradient(
-    60% 50% at 50% 0%,
-    rgb(245 114 156 / 0.2),
-    transparent
-  );
-  --gradient-fade-bottom: linear-gradient(
-    to bottom,
-    transparent,
-    var(--color-bg-base)
-  );
-  --gradient-skeleton: linear-gradient(
-    90deg,
-    var(--color-bg-muted) 0%,
-    var(--color-bg-subtle) 50%,
-    var(--color-bg-muted) 100%
-  );
+    --gradient-hero-glow: radial-gradient(
+      60% 50% at 50% 0%,
+      rgb(245 114 156 / 0.2),
+      transparent
+    );
+    --gradient-fade-bottom: linear-gradient(
+      to bottom,
+      transparent,
+      var(--color-bg-base)
+    );
+    --gradient-skeleton: linear-gradient(
+      90deg,
+      var(--color-bg-muted) 0%,
+      var(--color-bg-subtle) 50%,
+      var(--color-bg-muted) 100%
+    );
+  }
 }
