@@ -4,9 +4,12 @@
  * 문서는 세로로 스크롤되고, 스크롤 위치(scrollY)를 캔버스 위 카메라 좌표로 바꾼다.
  * 카메라 좌표는 화면 왼쪽 위가 가리키는 캔버스(world) 좌표다.
  *
- * 프레임마다 구간이 이어진다 (마지막 프레임은 follow만):
+ * 프레임마다 구간이 이어진다 (마지막 프레임은 hold·move 없음):
+ *   lead    긴 프레임(첫 프레임 제외)의 맨 위 앞에서 조금 더 올리는 구간. 카메라가 맨 위 너머로 올라가 위 캔버스가
+ *           드러난다 (위로 스크롤할 때 맨 위에 닿자마자 이전 프레임으로 넘어가지 않게). 길이 = hold와 같다
  *   follow  프레임 안에서 카메라가 아래로 따라간다. 길이 = 프레임 높이 - 화면 높이
- *   hold    프레임 끝에서 잠깐 멈춘다. 프레임 끝 안내가 이때 보인다
+ *   hold    프레임 끝을 지나 조금 더 당긴다. 긴 프레임은 카메라가 끝 너머로 더 내려가 아래 캔버스가 드러나고
+ *           (끝에 닿자마자 넘어가지 않게), 화면 높이 프레임은 멈춰 있다. 프레임 끝 안내가 이때 보인다
  *   move    다음 프레임의 시작점으로 옮겨 간다. 길이 = 옆 프레임이면 가로 거리, 아래 프레임이면 세로 거리
  * 스크롤 1px이 카메라 이동 1px이 되도록 구간 길이를 이동 거리로 잡는다.
  */
@@ -30,7 +33,7 @@ export interface CameraPoint {
   y: number;
 }
 
-export type CameraPhase = 'follow' | 'hold' | 'move';
+export type CameraPhase = 'lead' | 'follow' | 'hold' | 'move';
 
 /** 다음 프레임이 놓인 방향 (프레임 끝 안내의 화살표) */
 export type CameraDirection = 'right' | 'down';
@@ -106,11 +109,31 @@ export function buildCameraTrack<Id extends string>(
     position += segment.length;
   };
 
+  /** 긴 프레임은 앞뒤로 더 당기는 구간(lead·hold)을 둔다 */
+  const followOf = (rect: FrameRect<Id>) =>
+    Math.max(0, rect.height - viewport.height);
+  const hasLead = (index: number) => {
+    const rect = rects[index];
+    return index > 0 && rect !== undefined && followOf(rect) > 0;
+  };
+  /** 이 프레임에 들어서는 카메라 위치 (lead가 있으면 맨 위 너머) */
+  const entryPoint = (index: number, top: CameraPoint): CameraPoint =>
+    hasLead(index) ? { x: top.x, y: top.y - options.holdLength } : top;
+
   rects.forEach((rect, index) => {
     const top = frameStartPoint(rect, viewport);
-    const followLength = Math.max(0, rect.height - viewport.height);
+    const followLength = followOf(rect);
     const bottom = { x: top.x, y: top.y + followLength };
 
+    if (hasLead(index)) {
+      push({
+        frameId: rect.id,
+        phase: 'lead',
+        length: options.holdLength,
+        from: entryPoint(index, top),
+        to: top,
+      });
+    }
     frameStarts[rect.id] = position;
     followLengths[rect.id] = followLength;
     push({
@@ -124,28 +147,31 @@ export function buildCameraTrack<Id extends string>(
     const next = rects[index + 1];
     if (!next) return;
 
-    const nextTop = frameStartPoint(next, viewport);
+    const nextTop = entryPoint(index + 1, frameStartPoint(next, viewport));
     const dx = nextTop.x - bottom.x;
-    const dy = nextTop.y - bottom.y;
     // 옆 프레임으로 갈 때는 가로 거리만큼만 스크롤한다. 긴 프레임 끝에서 옆 프레임 맨 위로 올라가는 세로 이동은
     // 그 안에 함께 일어난다 (아래로 스크롤하는데 화면이 오래 위로 가지 않도록)
     const horizontal = Math.abs(dx) >= 1;
     const nextDirection: CameraDirection = horizontal ? 'right' : 'down';
 
+    const pulled =
+      followLength > 0
+        ? { x: bottom.x, y: bottom.y + options.holdLength }
+        : bottom;
     push({
       frameId: rect.id,
       phase: 'hold',
       length: options.holdLength,
       from: bottom,
-      to: bottom,
+      to: pulled,
       nextFrameId: next.id,
       nextDirection,
     });
     push({
       frameId: rect.id,
       phase: 'move',
-      length: horizontal ? Math.abs(dx) : Math.abs(dy),
-      from: bottom,
+      length: horizontal ? Math.abs(dx) : Math.abs(nextTop.y - pulled.y),
+      from: pulled,
       to: nextTop,
       nextFrameId: next.id,
       nextDirection,

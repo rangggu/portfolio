@@ -1,24 +1,53 @@
-/* 메뉴 바(--layout-floating-bottom) 바로 위 가운데. 누를 것이 없어 포인터를 통과시킨다 */
+/*
+ * 메뉴 바(--layout-floating-bottom) 바로 위. 가로 위치는 다음 프레임 메뉴 항목을 따라 JS가 정하고(--hint-left),
+ * 아래 꼬리가 그 항목을 가리킨다(--hint-tail-x). 측정 전에는 가운데. 누를 것이 없어 포인터를 통과시킨다
+ */
 .root {
+  /* 화면 가장자리 최소 여백, 꼬리가 둥근 모서리에 걸리지 않는 거리 */
+  --hint-edge: var(--spacing-16);
+  --hint-tail-inset: var(--spacing-20);
+  --hint-tail-size: var(--spacing-8);
+
   position: fixed;
   bottom: calc(var(--layout-floating-bottom) + var(--spacing-8));
-  left: 50%;
+  left: var(--hint-left, 50%);
   z-index: var(--z-sticky);
   padding: var(--spacing-8) var(--spacing-12);
   border-radius: var(--radius-round);
   background-color: var(--color-bg-elevated);
   box-shadow: var(--shadow-floating);
+  white-space: nowrap;
   opacity: 0;
-  transform: translate(-50%, var(--spacing-8));
+
+  /* 가로 맞춤(translate)은 바로, 등장(transform)만 움직인다 */
+  translate: var(--hint-shift-x, -50%) 0;
+  transform: translateY(var(--spacing-8));
   transition:
     opacity var(--motion-indicator-duration) var(--ease-standard),
     transform var(--motion-indicator-duration) var(--motion-indicator-ease);
   pointer-events: none;
 }
 
+/* JS가 왼쪽 끝을 정하면 가운데 맞춤 이동을 끈다 */
+.root[data-placed] {
+  --hint-shift-x: 0;
+}
+
 .root[data-visible] {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: none;
+}
+
+/* 꼬리: 같은 배경의 회전 사각형을 말풍선 아래로 반쯤 내민다 */
+.root[data-tail]::after {
+  position: absolute;
+  top: 100%;
+  left: var(--hint-tail-x);
+  width: var(--hint-tail-size);
+  height: var(--hint-tail-size);
+  background-color: inherit;
+  content: '';
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 /* 내용이 없을 때(첫 안내 전)는 상자도 그리지 않는다 */

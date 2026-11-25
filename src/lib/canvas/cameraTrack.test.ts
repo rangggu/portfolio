@@ -23,6 +23,8 @@ const RECTS: FrameRect[] = [
 ];
 
 const track = buildCameraTrack(RECTS, VIEWPORT, { holdLength: HOLD });
+/** 경력(긴 프레임) 맨 위의 스크롤 위치 */
+const CAREER = 2360;
 
 describe('buildCameraTrack', () => {
   it('프레임마다 follow · hold · move 구간을 잇고 마지막 프레임은 follow만 둔다', () => {
@@ -35,6 +37,7 @@ describe('buildCameraTrack', () => {
       'about:follow',
       'about:hold',
       'about:move',
+      'career:lead',
       'career:follow',
       'career:hold',
       'career:move',
@@ -45,11 +48,11 @@ describe('buildCameraTrack', () => {
   it('구간 길이는 이동 거리와 같고, 프레임 시작 위치가 누적된다', () => {
     // hero: follow 0, hold 240, 아래로 800
     // about: follow 0, hold 240, 오른쪽으로 840
-    // career: follow 1200, hold 240, 아래로 800
+    // career: lead 240(맨 위 너머에서 들어섬), follow 1200, hold 240(끝 너머로 240 더 내려감), 아래로 800 - 240
     expect(track.frameStarts).toEqual({
       hero: 0,
       about: 1040,
-      career: 2120,
+      career: CAREER,
       contact: 4360,
     });
     expect(track.length).toBe(4360);
@@ -81,7 +84,7 @@ describe('buildCameraTrack', () => {
     const move = row.segments.find((segment) => segment.phase === 'move');
     expect(move).toMatchObject({
       length: 1040,
-      from: { x: 0, y: 1200 },
+      from: { x: 0, y: 1200 + HOLD },
       to: { x: 1040, y: 0 },
       nextDirection: 'right',
     });
@@ -104,6 +107,16 @@ describe('cameraAt', () => {
     });
   });
 
+  it('긴 프레임의 hold 구간은 끝 너머로 조금 더 내려간다 (화면 높이 프레임은 멈춰 있다)', () => {
+    const end = CAREER + 1200;
+    expect(cameraAt(track, end)).toMatchObject({ y: 2000, phase: 'hold' });
+    expect(cameraAt(track, end + HOLD / 2)).toMatchObject({
+      y: 2000 + HOLD / 2,
+      phase: 'hold',
+      frameId: 'career',
+    });
+  });
+
   it('move 구간은 선형으로 옮겨 가고 절반을 넘으면 다음 프레임이 된다', () => {
     expect(cameraAt(track, 240 + 399)).toMatchObject({
       y: 399,
@@ -116,12 +129,23 @@ describe('cameraAt', () => {
   });
 
   it('소개에서 경력으로는 오른쪽으로 간다', () => {
+    // 경력은 긴 프레임이라 맨 위 너머(800 - 240)로 들어선다
     const middle = cameraAt(track, 1040 + HOLD + 420);
-    expect(middle).toMatchObject({ x: 420, y: 800, frameId: 'career' });
+    expect(middle).toMatchObject({ x: 420, y: 680, frameId: 'career' });
+  });
+
+  it('긴 프레임의 lead 구간은 맨 위 너머에서 맨 위로 내려온다', () => {
+    expect(cameraAt(track, CAREER - HOLD)).toMatchObject({
+      y: 560,
+      phase: 'lead',
+      frameId: 'career',
+    });
+    expect(cameraAt(track, CAREER - HOLD / 2)).toMatchObject({ y: 680 });
+    expect(cameraAt(track, CAREER)).toMatchObject({ y: 800, phase: 'follow' });
   });
 
   it('긴 프레임은 카메라가 아래로 따라간다', () => {
-    expect(cameraAt(track, 2120 + 600)).toMatchObject({
+    expect(cameraAt(track, CAREER + 600)).toMatchObject({
       x: 840,
       y: 1400,
       frameId: 'career',
@@ -146,13 +170,13 @@ describe('cameraAt', () => {
 
 describe('cameraAnchorAt · scrollForAnchor', () => {
   it('같은 경로에서는 같은 스크롤 위치로 돌아온다', () => {
-    const anchor = cameraAnchorAt(track, 2120 + 300);
+    const anchor = cameraAnchorAt(track, CAREER + 300);
     expect(anchor).toEqual({
       frameId: 'career',
       phase: 'follow',
       progress: 0.25,
     });
-    expect(anchor && scrollForAnchor(track, anchor)).toBe(2420);
+    expect(anchor && scrollForAnchor(track, anchor)).toBe(CAREER + 300);
   });
 
   it('프레임 높이가 바뀌어도 프레임 안 진행 비율을 유지한다', () => {
@@ -161,7 +185,7 @@ describe('cameraAnchorAt · scrollForAnchor', () => {
       phase: 'follow',
       progress: 0.5,
     } as const;
-    expect(cameraAnchorAt(track, 2120 + 600)).toEqual(anchor);
+    expect(cameraAnchorAt(track, CAREER + 600)).toEqual(anchor);
     const taller = buildCameraTrack(
       RECTS.map((rect) =>
         rect.id === 'career' ? { ...rect, height: 2800 } : rect,
@@ -170,7 +194,7 @@ describe('cameraAnchorAt · scrollForAnchor', () => {
       { holdLength: HOLD },
     );
     // follow 2000의 절반
-    expect(scrollForAnchor(taller, anchor)).toBe(2120 + 1000);
+    expect(scrollForAnchor(taller, anchor)).toBe(CAREER + 1000);
   });
 
   it('구간이 없어지면 그 프레임의 시작으로 간다', () => {
@@ -210,25 +234,25 @@ describe('scrollToReveal', () => {
         'career',
         { top: 700, bottom: 740 },
         800,
-        2120 + 300,
+        CAREER + 300,
       ),
-    ).toBe(2420);
+    ).toBe(CAREER + 300);
   });
 
   it('보이지 않으면 구간을 화면 가운데로 가져온다', () => {
     // 1500 - (800 - 40) / 2 = 1120
     expect(
       scrollToReveal(track, 'career', { top: 1500, bottom: 1540 }, 800, 0),
-    ).toBe(2120 + 1120);
+    ).toBe(CAREER + 1120);
   });
 
   it('프레임 밖으로는 나가지 않는다', () => {
     expect(
       scrollToReveal(track, 'career', { top: 1950, bottom: 1990 }, 800, 0),
-    ).toBe(2120 + 1200);
+    ).toBe(CAREER + 1200);
     expect(
       scrollToReveal(track, 'career', { top: 10, bottom: 50 }, 800, 4000),
-    ).toBe(2120);
+    ).toBe(CAREER);
   });
 
   it('플로팅 UI가 가리는 곳은 보이지 않는 것으로 친다', () => {
@@ -238,9 +262,9 @@ describe('scrollToReveal', () => {
         'career',
         { top: 310, bottom: 340 },
         800,
-        2120 + 300,
+        CAREER + 300,
         { insetTop: 80 },
       ),
-    ).not.toBe(2420);
+    ).not.toBe(CAREER + 300);
   });
 });

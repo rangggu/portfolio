@@ -16,8 +16,13 @@ import {
   interpolate,
   travelDuration,
 } from '@/lib/canvas/cameraTravel';
+import { frameEndScroll, frameStep } from '@/lib/canvas/frameStep';
 import { DURATION, MOTION } from '@/lib/motion/tokens';
-import { getFrameByPath, type FrameId } from '../../_lib/frames';
+import {
+  getFrameByPath,
+  getFrameHeadingId,
+  type FrameId,
+} from '../../_lib/frames';
 import { isInsideOpenModal } from '../../_lib/modal';
 import { prefersReducedMotion } from '../../_lib/motion';
 import { showModeHint } from '../../_state/modeHint';
@@ -39,6 +44,24 @@ const TRAVELING_ATTRIBUTE = 'data-camera-traveling';
 
 /** 프레임 끝에서 멈추는 스크롤 길이 = 화면 높이 × 이 비율 (시안 값 없음, 휠 두세 번) */
 const HOLD_RATIO = 0.3;
+
+/**
+ * 휠 입력이 이 시간(ms) 넘게 끊겼다 다시 오면 새 동작으로 본다.
+ * 트랙패드 관성은 16ms 안팎으로 이어지고, 마우스 휠 한 칸씩은 보통 이보다 띄엄띄엄 온다
+ */
+const GESTURE_GAP = 160;
+
+/**
+ * 긴 프레임의 끝까지 이만큼(화면 높이 대비) 남으면 프레임 끝 안내를 보인다.
+ * 끝 48px 안쪽은 머무를 수 없어(frameStep이 바로 넘긴다) 이보다 좁으면 휠 한 번에 안내 구간을 건너뛴다
+ */
+const HINT_NEAR_END_RATIO = 0.5;
+
+/** 키로 한 화면씩 내릴 때의 거리 = 화면 높이 × 이 비율 (브라우저 기본과 비슷하게) */
+const PAGE_KEY_RATIO = 0.85;
+
+/** 방향키 한 번 거리 (px, 브라우저 기본과 비슷하게) */
+const ARROW_KEY_STEP = 40;
 
 /** 옆 프레임을 눌렀을 때 뒤따르는 click을 막는 시간 상한 */
 const CLICK_SUPPRESS_TIMEOUT = 600;
@@ -89,6 +112,10 @@ export function startCamera(
   let finishTravel: (() => void) | undefined;
   let focusRequest = 0;
   let suppressClickUntil = 0;
+  /** 마지막 휠 입력 시각 (새 동작인지 가르는 데 쓴다) */
+  let lastWheelAt = 0;
+  /** 스크롤로 프레임을 넘어간 뒤, 그 휠 동작(관성)이 끝날 때까지 휠을 버린다 */
+  let quietUntilGap = false;
 
   const resetStage = () => {
     stage.scrollLeft = room.x;
@@ -122,19 +149,27 @@ export function startCamera(
   const apply = (scrollY: number) => {
     const next = cameraAt(track, scrollY);
     if (!next) return;
+    // 미끄러지는 동안은 rAF 이동이 카메라를 움직인다. 늦게 온 스크롤 이벤트가 끼어들면 중간에 툭 끊겨 보인다
+    if (travelRequest) return;
     camera = next;
     world.style.transform = `translate3d(${-next.x}px, ${-next.y}px, 0)`;
     setCurrentFrame(travelTarget ?? next.frameId);
-    // 미끄러지는 동안은 지나가는 프레임의 끝 안내를 띄우지 않는다
+    // 프레임 끝이 보이면 다음 프레임을 알린다: 화면에 다 들어오는 프레임은 늘, 긴 프레임은 끝 근처에서
+    // (스크롤바로 온 멈춤 구간 포함). 경계를 넘는 스크롤은 곧장 다음 프레임으로 가므로(frameStep) 멈춰 기다리는 자리는 없다
+    const nearEnd =
+      next.phase === 'follow' &&
+      frameEndScroll(track, next.frameId) - scrollY <=
+        viewport.height * HINT_NEAR_END_RATIO;
+    const ahead = track.segments.find(
+      (segment) => segment.frameId === next.frameId && segment.phase === 'hold',
+    );
     setFrameEndHint(
-      !travelRequest &&
-        next.phase === 'hold' &&
-        next.progress > 0 &&
-        next.nextFrameId &&
-        next.nextDirection
+      (nearEnd || next.phase === 'hold') &&
+        ahead?.nextFrameId &&
+        ahead.nextDirection
         ? {
-            nextFrameId: next.nextFrameId,
-            direction: next.nextDirection,
+            nextFrameId: ahead.nextFrameId,
+            direction: ahead.nextDirection,
             gesture: 'scroll',
           }
         : undefined,
@@ -181,8 +216,9 @@ export function startCamera(
    */
   const jumpToFrame: FrameNavigator['jumpToFrame'] = (frameId) => {
     // 미끄러지는 중에 또 이동하면 앞 이동을 먼저 끝까지 보낸다 (스크롤은 아직 출발 위치라)
-    if (travelRequest) jump(travelScroll);
+    const interrupted = travelRequest !== 0;
     endTravel();
+    if (interrupted) jump(travelScroll);
     const from = window.scrollY;
     const target = scrollForFrame(track, frameId);
     const fromIndex = frameIds.indexOf(camera?.frameId ?? frameId);
@@ -200,14 +236,23 @@ export function startCamera(
       return;
     }
 
-    // 스크롤 경로(프레임 끝 멈춤·긴 프레임 따라 내려가기)를 거치지 않고 카메라를 목적지로 곧장 옮긴다.
-    // 클릭하자마자 움직이기 시작하고, 도착하면 스크롤 위치를 목적지에 맞춘다 (카메라 좌표가 같아 튀지 않는다)
+    slideTo(target, frameId);
+  };
+
+  /**
+   * 스크롤 경로(프레임 끝 멈춤·긴 프레임 따라 내려가기)를 거치지 않고 카메라를 목적지(스크롤 위치)로 곧장 옮긴다.
+   * 시작하자마자 움직이고, 도착하면 스크롤 위치를 목적지에 맞춘다 (카메라 좌표가 같아 튀지 않는다)
+   */
+  const slideTo = (target: number, frameId: FrameId) => {
+    const from = window.scrollY;
     const start = camera ?? cameraAt(track, from);
     const end = cameraAt(track, target);
     if (!start || !end) {
       jump(target);
       return;
     }
+    // 진행 중인 부드러운 스크롤(마우스 휠 애니메이션 등)을 멈춘다. 이동 중에 스크롤 위치가 계속 바뀌지 않게
+    window.scrollTo({ top: from, behavior: 'instant' });
     document.documentElement.setAttribute(TRAVELING_ATTRIBUTE, '');
     travelTarget = frameId;
     setCurrentFrame(frameId);
@@ -236,6 +281,107 @@ export function startCamera(
       endTravel();
     };
     travelRequest = requestAnimationFrame(step);
+  };
+
+  /** 다음·이전 프레임으로 곧장 옮긴다 (움직임 줄이기면 바로) */
+  const travelTo = (scroll: number, frameId: FrameId) => {
+    if (prefersReducedMotion()) jump(scroll);
+    else slideTo(scroll, frameId);
+  };
+
+  /**
+   * 프레임 경계를 넘는 휠은 멈추지 않고 곧장 다음·이전 프레임으로 (docs/product.md 「읽기 모드」).
+   * 넘어간 뒤 그 휠 동작(트랙패드 관성)이 끝날 때까지는 휠을 버려 두 칸씩 넘어가지 않는다.
+   * 확대·가로 이동 휠(Ctrl·Cmd·Shift)과 가로로 미는 동작, 열린 모달 안은 건드리지 않는다
+   */
+  const handleStepWheel = (event: WheelEvent) => {
+    const now = performance.now();
+    const fresh = now - lastWheelAt > GESTURE_GAP;
+    lastWheelAt = now;
+    if (event.defaultPrevented || travelRequest) return;
+    if (isInsideOpenModal(event.target)) return;
+    if (event.ctrlKey || event.metaKey || event.shiftKey) return;
+    if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+
+    if (quietUntilGap) {
+      if (!fresh) {
+        event.preventDefault();
+        return;
+      }
+      quietUntilGap = false;
+    }
+
+    const unit =
+      event.deltaMode === WheelEvent.DOM_DELTA_LINE
+        ? 16
+        : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
+          ? viewport.height
+          : 1;
+    const decision = frameStep(
+      track,
+      frameIds,
+      window.scrollY,
+      event.deltaY * unit,
+    );
+    if (decision.kind !== 'travel') return;
+    event.preventDefault();
+    travelTo(decision.scroll, decision.frameId);
+    quietUntilGap = true;
+  };
+
+  /** 키보드 스크롤(방향키·Page·Space)도 같은 규칙 */
+  const handleStepKey = (event: KeyboardEvent) => {
+    if (event.defaultPrevented || travelRequest) return;
+    if (event.altKey || event.ctrlKey || event.metaKey) return;
+    if (isInsideOpenModal(event.target)) return;
+    const target = event.target;
+    if (
+      target instanceof HTMLElement &&
+      (target.isContentEditable ||
+        target.closest(
+          'input, textarea, select, button, [role="tablist"], [role="slider"], [role="listbox"]',
+        ))
+    ) {
+      return;
+    }
+
+    const page = viewport.height * PAGE_KEY_RATIO;
+    const delta =
+      event.key === 'ArrowDown'
+        ? ARROW_KEY_STEP
+        : event.key === 'ArrowUp'
+          ? -ARROW_KEY_STEP
+          : event.key === 'PageDown' || (event.key === ' ' && !event.shiftKey)
+            ? page
+            : event.key === 'PageUp' || (event.key === ' ' && event.shiftKey)
+              ? -page
+              : 0;
+    if (delta === 0) return;
+
+    const decision = frameStep(track, frameIds, window.scrollY, delta);
+    if (decision.kind !== 'travel') return;
+    event.preventDefault();
+    // 길게 누른 반복 입력으로는 프레임을 넘기지 않는다 (경계에서 멈춰 있다)
+    if (event.repeat) return;
+    // 한 화면씩 넘기는 키(Space·Page)는 아직 못 본 내용이 남았으면 먼저 그 끝·처음까지만 보여 준다 (건너뛰지 않게)
+    const current = camera?.frameId;
+    if (current && current !== decision.frameId) {
+      const boundary =
+        delta > 0
+          ? frameEndScroll(track, current)
+          : (track.frameStarts[current] ?? 0);
+      if (Math.abs(boundary - window.scrollY) > ARROW_KEY_STEP) {
+        jump(boundary);
+        return;
+      }
+    }
+    travelTo(decision.scroll, decision.frameId);
+    // 키보드로 넘어가면 포커스도 그 프레임 제목으로 (다음 Tab이 지나온 프레임으로 되돌아가지 않게)
+    const heading = document.getElementById(
+      getFrameHeadingId(decision.frameId),
+    );
+    heading?.setAttribute('tabindex', '-1');
+    heading?.focus({ preventScroll: true });
   };
 
   // 이동을 시작한 입력(메뉴 클릭 등)은 시작 시각보다 앞선 이벤트라 걸러진다
@@ -385,6 +531,8 @@ export function startCamera(
     window.addEventListener(type, blockWhileTraveling, { passive: false });
   }
   window.addEventListener('wheel', handleModeHintWheel, { passive: false });
+  window.addEventListener('wheel', handleStepWheel, { passive: false });
+  window.addEventListener('keydown', handleStepKey);
   window.addEventListener('keydown', handleModeHintKey);
   window.addEventListener('gesturestart', handleModeHintGesture);
   stage.addEventListener('scroll', handleStageScroll);
@@ -403,6 +551,8 @@ export function startCamera(
       window.removeEventListener(type, blockWhileTraveling);
     }
     window.removeEventListener('wheel', handleModeHintWheel);
+    window.removeEventListener('wheel', handleStepWheel);
+    window.removeEventListener('keydown', handleStepKey);
     window.removeEventListener('keydown', handleModeHintKey);
     window.removeEventListener('gesturestart', handleModeHintGesture);
     stage.removeEventListener('scroll', handleStageScroll);

@@ -3,13 +3,13 @@
  *
  * 세로: 한 프레임(이름표 + 본체)이 한 화면을 채운다.
  *   위: 위쪽 플로팅 영역 + 위 간격(12, 화면 끝 → 플로팅과 같은 값) → 이름표(+4) → 본체
- *   아래: 본체 → 간격(16) → 아래쪽 플로팅 영역
+ *   아래: 본체 → 간격(48) → 아래쪽 플로팅 영역. 간격은 프레임 끝 안내 말풍선(메뉴 바 위)이 테두리를 가리지 않고 들어가는 자리
  *   본체 최소 높이 = 100svh - 위쪽 플로팅 - 이름표 - 아래쪽 플로팅 - 간격들
  * 플로팅 영역(--layout-floating-*)에 safe-area가 포함되어 있다.
  */
 .root {
   --frame-space-top: var(--spacing-12);
-  --frame-space: var(--spacing-16);
+  --frame-space: var(--spacing-48);
 
   display: flex;
   flex-direction: column;
