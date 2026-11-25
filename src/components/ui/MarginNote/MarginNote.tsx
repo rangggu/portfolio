@@ -1,5 +1,6 @@
 'use client';
 
+import { Icon } from '../Icon';
 import { useMarginNote } from './MarginNoteContext';
 
 import styles from './MarginNote.module.css';
@@ -28,6 +29,20 @@ export function MarginNote({ id, children }: MarginNoteProps) {
       onFocus={() => setActiveId(id)}
       onBlur={() => setActiveId(null)}
     >
+      {/* 말풍선 아이콘 (장식). 역할(role="note")이 이미 메모임을 알린다 */}
+      <span className={styles.label}>
+        <Icon size="sm">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinejoin="round"
+          >
+            <path d="M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-8l-4 3v-3H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" />
+          </svg>
+        </Icon>
+      </span>
       {children}
     </div>
   );

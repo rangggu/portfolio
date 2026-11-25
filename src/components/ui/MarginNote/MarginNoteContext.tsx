@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useId,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -47,6 +48,9 @@ interface MarginNoteProviderProps {
 export function MarginNoteProvider({ text, notes }: MarginNoteProviderProps) {
   const groupId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<SVGPathElement>(null);
+  const dotRef = useRef<SVGCircleElement>(null);
   const [wide, setWide] = useState(false);
   const [openIds, setOpenIds] = useState<ReadonlySet<string>>(new Set());
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -65,6 +69,39 @@ export function MarginNoteProvider({ text, notes }: MarginNoteProviderProps) {
     observer.observe(root);
     return () => observer.disconnect();
   }, []);
+
+  // 연결선: 연결 텍스트의 마지막 줄 높이에서 본문 열 오른쪽 끝 → 간격 가운데에서 꺾어 → 메모 아이콘 높이로.
+  // 선이 본문 글자를 가로지르지 않도록 본문 열과 메모 열 사이 간격 안에서만 그린다. 보이고 숨기는 건 CSS가 맡는다
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    const text = textRef.current;
+    const line = lineRef.current;
+    const dot = dotRef.current;
+    if (!wide || !activeId || !root || !text || !line || !dot) return;
+    const noteId = `${groupId}-${activeId}`;
+    const note = document.getElementById(noteId);
+    const anchor = root.querySelector(`[aria-controls="${noteId}"]`);
+    if (!note || !anchor) return;
+
+    const rootBox = root.getBoundingClientRect();
+    const anchorLines = anchor.getClientRects();
+    const anchorLine = anchorLines[anchorLines.length - 1];
+    const noteBox = note.getBoundingClientRect();
+    const label = note.firstElementChild?.getBoundingClientRect() ?? noteBox;
+    if (!anchorLine) return;
+
+    const startX = text.getBoundingClientRect().right - rootBox.left;
+    const startY = anchorLine.top + anchorLine.height / 2 - rootBox.top;
+    const endX = noteBox.left - rootBox.left;
+    const endY = label.top + label.height / 2 - rootBox.top;
+    const bendX = (startX + endX) / 2;
+    line.setAttribute(
+      'd',
+      `M ${startX} ${startY} H ${bendX} V ${endY} H ${endX}`,
+    );
+    dot.setAttribute('cx', String(startX));
+    dot.setAttribute('cy', String(startY));
+  }, [wide, activeId, groupId]);
 
   const toggle = useCallback((id: string) => {
     setOpenIds((previous) => {
@@ -90,8 +127,14 @@ export function MarginNoteProvider({ text, notes }: MarginNoteProviderProps) {
   return (
     <MarginNoteContext value={value}>
       <div ref={rootRef} className={styles.group} data-margin-note-group="">
-        <div className={styles.text}>{text}</div>
+        <div ref={textRef} className={styles.text}>
+          {text}
+        </div>
         <div className={styles.notes}>{notes}</div>
+        <svg className={styles.connector} aria-hidden="true">
+          <path ref={lineRef} className={styles.connectorLine} />
+          <circle ref={dotRef} className={styles.connectorDot} />
+        </svg>
       </div>
     </MarginNoteContext>
   );

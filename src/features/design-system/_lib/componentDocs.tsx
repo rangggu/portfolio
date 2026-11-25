@@ -241,6 +241,7 @@ export const COMPONENT_GROUPS: ComponentGroup[] = [
         ],
         notes: [
           '넓으면(컨테이너 832px 이상) 본문 옆, 좁으면 연결 글자를 눌러 문단 아래에 펼친다.',
+          '말풍선 아이콘 카드. 강조(hover·focus)하면 포인트색이 되고, 넓으면 연결선이 이어진다.',
         ],
         example: <MarginNoteSample />,
       },
