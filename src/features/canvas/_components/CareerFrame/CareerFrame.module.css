@@ -81,6 +81,7 @@
 
 .marker {
   flex-shrink: 0;
+  transition: background-color var(--motion-hover-duration) var(--ease-standard);
 }
 
 .cell[data-lane='company'] .marker {
@@ -96,6 +97,35 @@
 .cell[data-lane='side'] .marker {
   width: var(--line-width);
   background: var(--color-border-strong);
+}
+
+/*
+ * 칸 강조: 레인 표시(막대·선)와 항목 이름이 포인트색이 된다. 칸 자체는 누를 수 없어 커서는 그대로.
+ * 회사: 여러 해에 걸친 막대 전체를 함께 칠한다 (TimelineRows가 같은 회사 칸에 data-highlight).
+ * 사이드: 한 칸뿐이라 CSS만 (hover 가능 기기의 hover, 칸 안 링크 포커스)
+ */
+.cell h3 {
+  transition: color var(--motion-hover-duration) var(--ease-standard);
+}
+
+.cell[data-highlight] .marker,
+.cell[data-lane='side']:not([data-empty]):focus-within .marker {
+  background: var(--color-bg-accent);
+}
+
+.cell[data-highlight] h3,
+.cell[data-lane='side']:focus-within h3 {
+  color: var(--color-text-accent);
+}
+
+@media (hover: hover) {
+  .cell[data-lane='side']:not([data-empty]):hover .marker {
+    background: var(--color-bg-accent);
+  }
+
+  .cell[data-lane='side']:hover h3 {
+    color: var(--color-text-accent);
+  }
 }
 
 .cellBody {

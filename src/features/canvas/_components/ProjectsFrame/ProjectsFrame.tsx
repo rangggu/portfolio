@@ -34,7 +34,7 @@ function ProjectRow({
         </Text>
         <div className={styles.main}>
           <div className={styles.titleRow}>
-            <Heading level={3} variant="headingMd">
+            <Heading level={3} variant="headingMd" className={styles.title}>
               {project.title}
             </Heading>
             {project.draft && (

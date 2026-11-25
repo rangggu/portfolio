@@ -5,7 +5,40 @@
   gap: var(--spacing-12);
 }
 
+/* 두 모습을 한 칸에 겹친다: 버튼 폭은 긴 쪽에 맞춰 고정 */
+.faces {
+  display: grid;
+}
+
+.face {
+  display: inline-flex;
+  grid-area: 1 / 1;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-6);
+  opacity: 0;
+  transform: translateY(var(--motion-hover-shift));
+  transition:
+    opacity var(--motion-hover-duration) var(--ease-standard),
+    transform var(--motion-release-duration) var(--motion-release-ease);
+
+  &[data-active] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* 안내가 없을 때는 자리를 차지하지 않는다. display: none이면 보조기기가 새 안내를 놓칠 수 있어 흐름에서만 뺀다 */
 .status:empty {
   position: absolute;
+}
+
+/* 복사 성공은 버튼이 직접 보여 주므로 안내 글자는 보조기기에만 남긴다 */
+.root[data-result='copied'] .status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }

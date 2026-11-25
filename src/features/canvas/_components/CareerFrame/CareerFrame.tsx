@@ -9,6 +9,7 @@ import { getTimelineEntries, type TimelineEntry } from '@/lib/resume/timeline';
 import { buildTimelineRows, type TimelineRow } from '@/lib/resume/timelineRows';
 import { DevPlaceholder, shouldRenderSlot } from '../../_shared/DevPlaceholder';
 import { FrameHeading } from '../../_shared/FrameHeading';
+import { TimelineRows } from './_components/TimelineRows';
 import styles from './CareerFrame.module.css';
 
 interface CareerFrameProps {
@@ -148,6 +149,10 @@ interface YearRowProps {
 function YearRow({ label, row }: YearRowProps) {
   const companyStarts = row.company.filter((cell) => cell.isStart);
   const hasCompany = row.company.length > 0;
+  // 이 행의 막대가 누구 것인지: 이 해에 시작한 회사가 있으면 그 회사, 없으면 이어지는 회사 (강조 단위)
+  const barOwners = (
+    companyStarts.length > 0 ? companyStarts : row.company
+  ).map((cell) => cell.entry.item.id);
 
   return (
     <li className={styles.row}>
@@ -157,6 +162,7 @@ function YearRow({ label, row }: YearRowProps) {
       <div
         className={styles.cell}
         data-lane="company"
+        data-company={hasCompany ? barOwners.join(' ') : undefined}
         data-empty={companyStarts.length === 0 || undefined}
         role={companyStarts.length > 0 ? 'group' : undefined}
         aria-label={companyStarts.length > 0 ? LANE_LABEL.company : undefined}
@@ -233,7 +239,7 @@ export async function CareerFrame({
               </Text>
             ))}
           </div>
-          <ol className={styles.rows}>
+          <TimelineRows className={styles.rows}>
             {rows.map((row) => (
               <YearRow key={row.year} label={row.year} row={row} />
             ))}
@@ -248,7 +254,7 @@ export async function CareerFrame({
                 }}
               />
             )}
-          </ol>
+          </TimelineRows>
         </div>
       )}
     </div>
