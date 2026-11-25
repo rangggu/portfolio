@@ -295,7 +295,10 @@ export const COMPONENT_GROUPS: ComponentGroup[] = [
           ['aria-label', '필수: 버튼 이름'],
           ['variant', 'ghost · surface'],
         ],
-        notes: ['보이는 크기는 36px이지만 터치 영역은 44px로 넓다.'],
+        notes: [
+          '보이는 크기는 36px이지만 터치 영역은 44px로 넓다.',
+          '같은 모양의 링크는 IconLink (네이티브 <a>, 항상 전체 페이지 이동).',
+        ],
         example: (
           <div className={ex.row}>
             <IconButton aria-label="원 (ghost)" type="button">
@@ -460,7 +463,15 @@ export const COMPONENT_GROUPS: ComponentGroup[] = [
           ],
           ['title · description', '제목(h2)과 설명, aria로 연결'],
           ['footer', '아래 버튼 영역'],
-          ['size (Dialog)', 'sm · md · lg'],
+          [
+            'actions',
+            '제목 바에서 닫기 버튼 앞에 놓는 요소 (아이콘 버튼·링크)',
+          ],
+          [
+            'focusContent',
+            '열 때 첫 버튼 대신 내용 영역에 포커스 (긴 글 읽기)',
+          ],
+          ['size (Dialog)', 'sm · md · lg · xl (긴 글 + 여백 메모)'],
         ],
         notes: [
           '컴포넌트가 기기를 나누지 않는다. 데스크톱 Dialog, 폰 BottomSheet처럼 쓰는 쪽이 고른다.',

@@ -185,6 +185,7 @@
 
 - 원문은 `content/projects/{slug}.mdx`입니다. frontmatter: `title`, `summary`, `period`(`{ start, end }`, 진행 중이면 `end` 생략, `YYYY-MM`), `tags`, `thumbnail`(`/projects/{slug}/` 아래), `timelineId`(경력 타임라인 항목 id), `draft`(선택, 기본값 `false`).
 - **초안:** `draft: true`인 글은 개발 서버(`yarn dev`)에서만 보이고 글 상단에 "초안" 표시가 붙습니다. 프로덕션 빌드에서는 페이지, 프로젝트 목록, sitemap 모두에서 빠집니다. 공개하려면 `draft`를 지우거나 `false`로 바꿉니다. 빌드할 때 `SHOW_DRAFTS=true`를 주면 초안을 포함하는데, Lighthouse CI 측정 전용이며 배포 빌드에서는 쓰지 않습니다.
+- **캔버스에서 열기:** 캔버스 안의 글 링크는 캔버스를 떠나지 않고 그 위에 모달로 엽니다. 화면 폭 768px 이상은 가운데 모달, 미만은 아래 시트입니다. 주소는 `/projects/{slug}`로 바뀌어 공유·새로고침하면 단독 페이지가 열립니다. 제목 바에 글 제목과 「새 페이지로 열기」가 있고, 닫으면(Esc·바깥 누르기·닫기·뒤로 가기) 보던 프레임과 위치로 돌아옵니다.
 - 여백 메모는 글 안에서도 `MarginNoteGroup`·`MarginNoteAnchor`·`MarginNote`로 씁니다. 비교 블록 컴포넌트는 글을 쓰다가 필요해지면 추가합니다.
 
 ## 문체

@@ -33,12 +33,12 @@ src/
   │   │   ├── projects/page.tsx  # 프로젝트 목록 프레임 (/projects)
   │   │   ├── skills/page.tsx
   │   │   ├── education/page.tsx
-  │   │   └── contact/page.tsx
+  │   │   ├── contact/page.tsx
+  │   │   └── @modal/        # 캔버스 위 케이스 스터디 모달 슬롯 (Intercepting Routes)
+  │   │       ├── (.)projects/[slug]/page.tsx
+  │   │       └── default.tsx
   │   ├── projects/[slug]/page.tsx  # 케이스 스터디 (직접 접근 시 단독 페이지, 캔버스 없음)
   │   ├── dev/design-system/page.tsx  # 디자인 시스템 문서 (공개, noindex·sitemap 제외)
-  │   ├── @modal/            # Intercepting Routes 모달 슬롯 (Phase 3~4)
-  │   │   ├── (.)projects/[slug]/page.tsx
-  │   │   └── default.tsx
   │
   ├── components/
   │   ├── ui/                # 디자인 시스템 기초 컴포넌트 (도메인 무관)
@@ -108,7 +108,8 @@ src/
 
 - `/projects`는 프로젝트 목록 프레임으로 캔버스 안에 표시됩니다.
 - `/projects/[slug]`에 직접 접근하면 단독 페이지로 표시됩니다.
-- 프로젝트 목록 프레임에서 케이스 스터디를 열면 `@modal` Intercepting Routes로 모달 형태로 표시됩니다 (Phase 3~4).
+- 캔버스 안(프로젝트 목록·경력 타임라인)에서 케이스 스터디를 열면 `(canvas)/@modal` Intercepting Routes로 캔버스 위에 모달로 표시됩니다. 주소는 `/projects/[slug]`로 바뀌고, 닫으면 기록을 한 칸 뒤로 돌려 보던 프레임으로 돌아옵니다.
+- 병렬 라우트의 metadata는 반영되지 않으므로 모달의 문서 제목은 `ProjectModal`이 맞춥니다. 모달이 열린 동안(주소가 프레임 주소가 아닐 때) 캔버스는 주소·제목을 바꾸지 않고, 카메라는 모달 안 입력을 가로채지 않습니다.
 
 ### page.tsx는 조합만
 

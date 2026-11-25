@@ -17,6 +17,7 @@ import {
 } from '@/lib/canvas/freeCamera';
 import { DURATION, MOTION } from '@/lib/motion/tokens';
 import { getFrameByPath, type FrameId } from '../../_lib/frames';
+import { isInsideOpenModal } from '../../_lib/modal';
 import { prefersReducedMotion } from '../../_lib/motion';
 import {
   markNavigating,
@@ -233,7 +234,9 @@ export function startFreeCamera(
     flyTo(frameCamera(rect, viewport), frameId);
   };
 
+  // 열린 모달(케이스 스터디) 안 입력은 모달이 받는다 (휠은 모달 본문 스크롤)
   const handleWheel = (event: WheelEvent) => {
+    if (isInsideOpenModal(event.target)) return;
     event.preventDefault();
     endFlight();
     const unit = event.deltaMode === 1 ? LINE_HEIGHT : 1;
@@ -265,6 +268,7 @@ export function startFreeCamera(
 
   // Safari 트랙패드 핀치
   const handleGestureStart = (event: Event) => {
+    if (isInsideOpenModal(event.target)) return;
     const gesture = event as GestureEvent;
     event.preventDefault();
     endFlight();
@@ -322,6 +326,7 @@ export function startFreeCamera(
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (
+      isInsideOpenModal(event.target) ||
       isTypingTarget(event.target) ||
       event.ctrlKey ||
       event.metaKey ||

@@ -131,7 +131,7 @@ const { states: streamStates, actions: streamActions } = useStreamDemo();
 ## 접근성
 
 - 클릭 가능한 요소는 `<button>`과 `<a>`를 씁니다. `div`에 `onClick`을 달지 않습니다.
-- 모달은 네이티브 `<dialog>`를 `showModal()`로 엽니다. 가운데 모달은 `Dialog`, 화면 아래 시트는 `BottomSheet`(둘 다 `components/ui/Dialog`)를 씁니다. 컴포넌트 안에서 기기를 나누지 않으므로, 어느 쪽을 쓸지는 쓰는 쪽이 기기에 맞게 고릅니다 (예: 데스크톱 `Dialog`, 폰 `BottomSheet`). 두 컴포넌트는 `open`·`onClose`로 제어하고, Esc·바깥 누르기·닫기 버튼이 모두 `onClose`를 부릅니다. 열린 동안 배경 스크롤은 `globals.css`가 잠급니다. 그 밖에 직접 만드는 오버레이(모바일 메뉴 등)는 열려 있는 동안 배경에 `inert`를 겁니다.
+- 모달은 네이티브 `<dialog>`를 `showModal()`로 엽니다. 가운데 모달은 `Dialog`, 화면 아래 시트는 `BottomSheet`(둘 다 `components/ui/Dialog`)를 씁니다. 컴포넌트 안에서 기기를 나누지 않으므로, 어느 쪽을 쓸지는 쓰는 쪽이 기기에 맞게 고릅니다 (예: 데스크톱 `Dialog`, 폰 `BottomSheet`). 두 컴포넌트는 `open`·`onClose`로 제어하고, Esc·바깥 누르기·닫기 버튼이 모두 `onClose`를 부릅니다. 제목 바에 닫기 말고 다른 버튼·링크가 필요하면 `actions`로 넘기고, 닫기 버튼 앞에 놓입니다. 내용 영역은 키보드로 스크롤할 수 있게 포커스를 받고, 긴 글을 읽는 모달은 `focusContent`로 열 때 첫 포커스를 내용 영역에 줍니다. 열린 동안 배경 스크롤은 `globals.css`가 잠급니다. 그 밖에 직접 만드는 오버레이(모바일 메뉴 등)는 열려 있는 동안 배경에 `inert`를 겁니다.
 - 짧은 알림은 `toast(message, { tone })`(`components/ui/Toast`)로 띄웁니다. 표시 영역 `Toaster`는 루트 레이아웃에 하나 있고, `aria-live`로 보조기기에 알리며 모달이 열려 있으면 그 안으로 옮겨집니다. 알림에만 있는 정보를 두지 않습니다 (몇 초 뒤 사라짐).
 - 보조 설명은 `Tooltip`으로 붙입니다. 자식은 포커스할 수 있는 요소 하나이고 `aria-describedby`로 연결됩니다. 마우스 hover·키보드 포커스·터치 길게 누르기로 보이므로, 꼭 필요한 정보나 버튼 이름을 툴팁에만 두지 않습니다 (아이콘 버튼 이름은 `aria-label`).
 - 포커스 링은 `:focus-visible`로 표시하고 절대 `outline: none`만 남기지 않습니다. 기본 링은 `globals.css`의 전역 `:focus-visible` 규칙(포커스 링 토큰)이 그리므로, 컴포넌트는 모양이 달라야 할 때만 재정의합니다.

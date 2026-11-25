@@ -18,6 +18,7 @@ import {
 } from '@/lib/canvas/cameraTravel';
 import { DURATION, MOTION } from '@/lib/motion/tokens';
 import { getFrameByPath, type FrameId } from '../../_lib/frames';
+import { isInsideOpenModal } from '../../_lib/modal';
 import { prefersReducedMotion } from '../../_lib/motion';
 import { showModeHint } from '../../_state/modeHint';
 import { findCameraElements, type CameraHandoff } from './cameraElements';
@@ -241,7 +242,9 @@ export function startCamera(
   // 읽기 모드에서 확대(Ctrl·Cmd+휠·핀치)·좌우 이동(Shift+휠)·전체 보기(Shift+1·0)를 하려 하면
   // 모드 버튼 옆 말풍선으로 자유 모드를 권한다. 화면 확대는 막는다 (자유 모드에서 캔버스로 확대)
   const suggestFreeMode = showModeHint;
+  // 열린 모달(케이스 스터디) 안 입력은 권하지 않는다
   const handleModeHintWheel = (event: WheelEvent) => {
+    if (isInsideOpenModal(event.target)) return;
     if (event.ctrlKey || event.metaKey) {
       event.preventDefault();
       suggestFreeMode();
@@ -250,6 +253,7 @@ export function startCamera(
     }
   };
   const handleModeHintKey = (event: KeyboardEvent) => {
+    if (isInsideOpenModal(event.target)) return;
     if (!event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) {
       return;
     }
@@ -266,6 +270,7 @@ export function startCamera(
   };
   // Safari 트랙패드 핀치 (표준이 아닌 gesture 이벤트)
   const handleModeHintGesture = (event: Event) => {
+    if (isInsideOpenModal(event.target)) return;
     event.preventDefault();
     suggestFreeMode();
   };

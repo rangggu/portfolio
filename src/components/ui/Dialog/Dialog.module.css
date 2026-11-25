@@ -7,6 +7,12 @@
   --dialog-width-sm: 400px;
   --dialog-width-md: 560px;
   --dialog-width-lg: 800px;
+
+  /* 긴 글 + 여백 메모 열: 본문 열 + 간격 + 메모 열 + 좌우 안쪽 여백 (Prose 넓은 배치가 들어가는 폭) */
+  --dialog-width-xl: calc(
+    var(--layout-prose-max) + var(--spacing-32) + var(--layout-note-width) +
+      var(--spacing-24) * 2
+  );
   --dialog-width: var(--dialog-width-md);
 
   width: min(100% - var(--spacing-32), var(--dialog-width));
@@ -36,6 +42,10 @@
 
 .root[data-size='lg'] {
   --dialog-width: var(--dialog-width-lg);
+}
+
+.root[data-size='xl'] {
+  --dialog-width: var(--dialog-width-xl);
 }
 
 .root[open] {

@@ -18,11 +18,15 @@ export interface ModalProps extends Omit<
   description?: string;
   /** 아래 버튼 영역 */
   footer?: React.ReactNode;
+  /** 제목 바에서 닫기 버튼 앞에 놓는 요소 (아이콘 버튼·링크) */
+  actions?: React.ReactNode;
+  /** 열 때 첫 버튼 대신 내용 영역에 포커스 (긴 글 읽기: 바로 방향키로 스크롤) */
+  focusContent?: boolean;
 }
 
 interface DialogProps extends ModalProps {
-  /** 최대 폭. 좁은 화면에서는 화면 폭에 맞춰 줄어든다 */
-  size?: 'sm' | 'md' | 'lg';
+  /** 최대 폭. 좁은 화면에서는 화면 폭에 맞춰 줄어든다. xl: 긴 글 + 여백 메모 열 */
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 /**
@@ -34,6 +38,8 @@ export function Dialog({
   title,
   description,
   footer,
+  actions,
+  focusContent,
   size = 'md',
   className,
   children,
@@ -63,6 +69,8 @@ export function Dialog({
           title={title}
           description={description}
           footer={footer}
+          actions={actions}
+          focusContent={focusContent}
           onClose={onClose}
         >
           {children}

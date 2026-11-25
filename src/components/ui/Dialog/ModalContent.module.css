@@ -7,17 +7,33 @@
     var(--spacing-24);
 }
 
+.actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
 .description {
   padding-inline: var(--spacing-24);
 }
 
-/* 내용이 길면 이 영역만 스크롤된다 (제목·버튼은 고정) */
+/*
+ * 내용이 길면 이 영역만 스크롤된다 (제목·버튼은 고정).
+ * container: 안쪽 컴포넌트(Prose·여백 메모 등)가 @container로 모달 폭에 반응한다
+ */
 .body {
+  container-type: inline-size;
   flex: 1;
   min-height: 0;
   padding: var(--spacing-16) var(--spacing-24) var(--spacing-24);
   overflow-y: auto;
   overscroll-behavior: contain;
+
+  /* 스크롤 영역이 패널 끝에 붙어 있어 포커스 링을 안쪽에 그린다 */
+  &:focus-visible {
+    outline-offset: calc(var(--focus-ring-width) * -1);
+  }
 }
 
 .footer {

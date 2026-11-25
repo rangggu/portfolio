@@ -29,6 +29,8 @@ export function useModalDialog({ open, onClose }: UseModalDialogOptions) {
     if (!dialog) return;
     if (open && !dialog.open) {
       dialog.showModal();
+      // showModal()은 첫 버튼에 포커스를 준다. 내용 영역을 고른 모달이면 그쪽으로 옮긴다 (focusContent)
+      dialog.querySelector<HTMLElement>('[data-modal-initial-focus]')?.focus();
       window.dispatchEvent(new Event(MODAL_CHANGE_EVENT));
     }
     if (!open && dialog.open) {

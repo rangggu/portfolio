@@ -16,6 +16,8 @@ export function BottomSheet({
   title,
   description,
   footer,
+  actions,
+  focusContent,
   className,
   children,
   ...props
@@ -45,6 +47,8 @@ export function BottomSheet({
           title={title}
           description={description}
           footer={footer}
+          actions={actions}
+          focusContent={focusContent}
           onClose={onClose}
         >
           {children}
