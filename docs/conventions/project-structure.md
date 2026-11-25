@@ -53,6 +53,7 @@ src/
   ├── features/              # 기능 단위 코드
   │   ├── design-system/     # 디자인 시스템 문서 페이지 (토큰 표·견본, 컴포넌트 문서·예시)
   │   ├── resume/            # A4 인쇄 이력서 (ResumeDocument, 캔버스 인쇄용 PrintResume)
+  │   ├── og/                # 사이트 대표 OG 이미지 (next/og, 빌드 때 정적 생성)
   │   └── {feature}/         # 예: theme, canvas
   │       ├── {Feature}.tsx
   │       ├── {Feature}.module.css
@@ -68,6 +69,7 @@ src/
   │   ├── content/           # content/projects 로더 (목록·메타·본문 컴파일·평문)
   │   ├── resume/            # 이력서 타입·검증·JSON-LD·평문, 경력 ↔ 프로젝트 글 연결
   │   ├── design-tokens/     # tokens.css 파서 (디자인 시스템 문서용)
+  │   ├── og/                # OG 이미지 색 상수 (토큰과 같은 값, 일치 테스트)
   │   ├── fonts/             # 폰트 서브셋 글자 모으기, 서브셋 누락 테스트
   │   ├── ui/                # 공용 UI 컴포넌트의 순수 로직 (탭 키보드 이동, 툴팁 위치, 토스트 목록)
   │   └── {기능명}/          # 예: format/, physics/, motion/

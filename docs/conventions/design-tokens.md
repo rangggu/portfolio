@@ -105,6 +105,7 @@ Pretendard는 **사이트에 쓰는 글자만 남긴 서브셋** 한 파일(`src
 - 결과 woff2와 글자 목록(`pretendard-subset.txt`)을 커밋합니다. 내용에 목록에 없는 글자가 생기면 Vitest(`src/lib/fonts/subsetCoverage.test.ts`)가 실패하므로 `yarn fonts`로 다시 만듭니다.
 - 서브셋에 없는 글자는 아래 대체 폰트가 글자 단위로 그립니다.
 - 새 굵기 토큰이 400~700 밖이면 `scripts/subset-font.mjs`의 굵기 범위도 함께 바꿉니다.
+- OG 이미지용: 같은 글자로 굵기별 정적 원본(otf)에서 woff 2개(`src/styles/fonts/og/pretendard-{400,700}.woff`)도 만듭니다. OG 이미지 엔진(`next/og`)은 woff2·가변 폰트를 읽지 못합니다. 빌드 때만 읽고 브라우저로 보내지 않습니다.
 
 ### 폰트 대체 보정 (CLS 방지)
 

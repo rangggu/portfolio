@@ -21,3 +21,11 @@ export const ALWAYS_INCLUDED_TEXT =
 /** 서브셋 결과 위치 (프로젝트 루트 기준) */
 export const SUBSET_FONT_PATH = 'src/styles/fonts/pretendard-subset.woff2';
 export const SUBSET_GLYPHS_PATH = 'src/styles/fonts/pretendard-subset.txt';
+
+/**
+ * OG 이미지(next/og)용 굵기별 정적 서브셋. OG 엔진은 woff2·가변 폰트를 읽지 못해 정적 원본(otf)에서 woff로 만든다.
+ * 글자 목록은 화면 서브셋과 같다 (빌드 때만 읽고 브라우저로 보내지 않는다)
+ */
+export const OG_FONT_WEIGHTS = [400, 700] as const;
+export const ogFontPath = (weight: (typeof OG_FONT_WEIGHTS)[number]) =>
+  `src/styles/fonts/og/pretendard-${weight}.woff`;

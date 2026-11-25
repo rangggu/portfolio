@@ -1,0 +1,1 @@
+export { siteOgImage } from './renderOgImage';

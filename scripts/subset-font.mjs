@@ -1,11 +1,13 @@
 /**
  * 사이트에 쓰는 글자만 남긴 Pretendard 서브셋을 만든다 (docs/conventions/design-tokens.md 「폰트 서브셋」).
  * 이력서 데이터·프로젝트 글·UI 문자열에서 글자를 모아, 원본 가변 폰트에서 그 글자와 굵기 400~700만 남긴다.
+ * OG 이미지용 굵기별 정적 woff(src/styles/fonts/og/)도 같은 글자로 만든다.
  * 결과 woff2와 글자 목록을 커밋한다. 목록에 없는 글자가 내용에 생기면 Vitest(subsetCoverage)가 알려 준다.
  *
  * 사용법: yarn fonts
  */
-import { globSync, readFileSync, writeFileSync } from 'node:fs';
+import { globSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname } from 'node:path';
 import subsetFont from 'subset-font';
 import {
   textFromMdx,
@@ -16,6 +18,8 @@ import {
   ALWAYS_INCLUDED_TEXT,
   GLYPH_SOURCE_EXCLUDE,
   GLYPH_SOURCE_PATTERNS,
+  OG_FONT_WEIGHTS,
+  ogFontPath,
   SUBSET_FONT_PATH,
   SUBSET_GLYPHS_PATH,
 } from '../src/lib/fonts/glyphSources.ts';
@@ -53,6 +57,25 @@ const subset = await subsetFont(readFileSync(SOURCE_FONT), glyphs.join(''), {
 
 writeFileSync(SUBSET_FONT_PATH, subset);
 writeFileSync(SUBSET_GLYPHS_PATH, `${glyphs.join('')}\n`);
+
+/** OG 이미지용: 굵기별 정적 원본에서 같은 글자만 (next/og는 woff2·가변 폰트를 못 읽는다) */
+const OG_SOURCE = {
+  400: 'node_modules/pretendard/dist/public/static/Pretendard-Regular.otf',
+  700: 'node_modules/pretendard/dist/public/static/Pretendard-Bold.otf',
+};
+for (const weight of OG_FONT_WEIGHTS) {
+  const path = ogFontPath(weight);
+  const ogSubset = await subsetFont(
+    readFileSync(OG_SOURCE[weight]),
+    glyphs.join(''),
+    { targetFormat: 'woff', noLayoutClosure: true },
+  );
+  mkdirSync(dirname(path), { recursive: true });
+  writeFileSync(path, ogSubset);
+  console.log(
+    `OG ${weight} → ${path} ${(ogSubset.length / 1024).toFixed(1)}KB`,
+  );
+}
 
 const hangul = glyphs.filter((glyph) => /\p{Script=Hangul}/u.test(glyph));
 console.log(
