@@ -6,20 +6,20 @@
 
 ## 색
 
-| 용도                   | 시안 값                        | 연결할 토큰                                                        |
-| ---------------------- | ------------------------------ | ------------------------------------------------------------------ |
-| 캔버스 배경            | `#EFEDE8`                      | `--color-bg-canvas`                                                |
-| 캔버스 점              | `#CFCAC0`, 지름 1px, 간격 22px | `--color-bg-canvas-dot` + 캔버스 로컬 변수                         |
-| 프레임 배경            | `#FFFFFF`                      | `--color-bg-elevated` 또는 `--color-bg-base`                       |
-| 프레임 테두리          | `#E2DFD8`, 1px                 | `--color-border-default`                                           |
-| 본문 글자              | `#1B1E23`                      | `--color-text-primary`                                             |
-| 보조 글자              | `#5F6670`                      | `--color-text-secondary`                                           |
-| 약한 글자 (번호, 라벨) | `#6E757F`                      | `--color-text-tertiary`                                            |
-| 메모 본문              | `#3F454D`                      | 보조 글자 계열에서 정하기                                          |
-| 구분선                 | `#E6E3DC`                      | `--color-border-subtle`                                            |
-| 포인트                 | `#2F66DD`                      | `--color-bg-accent`, `--color-text-accent`, `--color-border-focus` |
-| 포인트 옅은 배경       | `#EAF0FD`                      | `--color-bg-accent-subtle`                                         |
-| 사이드 레인 선         | `#9AA0A8`                      | `--color-border-strong`                                            |
+| 용도                   | 시안 값                           | 연결할 토큰                                                        |
+| ---------------------- | --------------------------------- | ------------------------------------------------------------------ |
+| 캔버스 배경            | `#EFEDE8`                         | `--color-bg-canvas`                                                |
+| 캔버스 점              | `#CFCAC0`, 지름 1px, 간격 22px    | `--color-bg-canvas-dot` + 캔버스 로컬 변수                         |
+| 프레임 배경            | `#FFFFFF`                         | `--color-bg-elevated` 또는 `--color-bg-base`                       |
+| 프레임 테두리          | `#E2DFD8`, 1px                    | `--color-border-default`                                           |
+| 본문 글자              | `#1B1E23`                         | `--color-text-primary`                                             |
+| 보조 글자              | `#5F6670`                         | `--color-text-secondary`                                           |
+| 약한 글자 (번호, 라벨) | `#6E757F`                         | `--color-text-tertiary`                                            |
+| 메모 본문              | `#3F454D`                         | 보조 글자 계열에서 정하기                                          |
+| 구분선                 | `#E6E3DC`                         | `--color-border-subtle`                                            |
+| 포인트                 | `#2F66DD` → 코랄 `#C7365F`로 교체 | `--color-bg-accent`, `--color-text-accent`, `--color-border-focus` |
+| 포인트 옅은 배경       | `#EAF0FD` → `#FDECF1`             | `--color-bg-accent-subtle`                                         |
+| 사이드 레인 선         | `#9AA0A8`                         | `--color-border-strong`                                            |
 
 ## 글꼴
 

@@ -8,7 +8,7 @@
 
 | 계층                | 역할                                               | 참조 가능 위치        |
 | ------------------- | -------------------------------------------------- | --------------------- |
-| primitive           | raw 값 (`--color-gray-500`, `--color-blue-500`)    | `tokens.css` 안에서만 |
+| primitive           | raw 값 (`--color-gray-500`, `--color-coral-600`)   | `tokens.css` 안에서만 |
 | semantic            | 의미 부여 (`--color-text-primary`)                 | 모든 컴포넌트         |
 | 수치형·모션·z-index | 단일 계층 (`--spacing-16`, `--motion-press-scale`) | 모든 컴포넌트         |
 
@@ -42,7 +42,8 @@
 | `--color-bg-inverse`               | 반전 영역 (툴팁 등)                                             |
 | `--color-bg-accent` / `-hover`     | 주요 버튼                                                       |
 | `--color-bg-accent-subtle`         | 강조 배경 (선택된 탭 등)                                        |
-| `--color-bg-floating`              | 반투명 플로팅 UI (blur와 함께)                                  |
+| `--color-bg-floating`              | 반투명 플로팅 UI (blur와 함께). 하단 메뉴 바 유리 배경 (56%)    |
+| `--color-border-glass`             | 유리 플로팅 UI 가장자리 빛 테두리                               |
 | `--color-bg-dim`                   | 오버레이 딤                                                     |
 | `--color-bg-code`                  | 코드 블록                                                       |
 | `--color-bg-canvas`                | 캔버스 바탕 (프레임 바깥)                                       |
@@ -59,12 +60,13 @@
 
 추가한 primitive:
 
-| primitive                                          | 값                                            | 시안 용도                            |
-| -------------------------------------------------- | --------------------------------------------- | ------------------------------------ |
-| `--color-warm-gray-100` / `-150` / `-200` / `-300` | `#efede8` / `#e6e3dc` / `#e2dfd8` / `#cfcac0` | 캔버스 / 구분선 / 프레임 테두리 / 점 |
-| `--color-warm-gray-700` / `-800` / `-950`          | `#38352f` / `#2e2b27` / `#0f0e0c`             | 다크: 테두리 / 구분선·점 / 캔버스    |
-| `--color-gray-550`                                 | `#6e757f`                                     | 약한 글자                            |
-| `--color-gray-650`                                 | `#5f6670`                                     | 보조 글자                            |
+| primitive                                              | 값                                                        | 시안 용도                            |
+| ------------------------------------------------------ | --------------------------------------------------------- | ------------------------------------ |
+| `--color-warm-gray-100` / `-150` / `-200` / `-300`     | `#efede8` / `#e6e3dc` / `#e2dfd8` / `#cfcac0`             | 캔버스 / 구분선 / 프레임 테두리 / 점 |
+| `--color-warm-gray-700` / `-800` / `-950`              | `#38352f` / `#2e2b27` / `#0f0e0c`                         | 다크: 테두리 / 구분선·점 / 캔버스    |
+| `--color-gray-550`                                     | `#6e757f`                                                 | 약한 글자                            |
+| `--color-gray-650`                                     | `#5f6670`                                                 | 보조 글자                            |
+| `--color-coral-50` / `-300` / `-400` / `-600` / `-700` | `#fdecf1` / `#ff93b5` / `#f5729c` / `#c7365f` / `#a82a52` | 포인트 (시안의 파랑 대신)            |
 
 따뜻한 회색은 캔버스·테두리에만 씁니다. 글자색은 기존 gray 계열을 유지합니다. 다크 모드는 시안에 없어서 라이트와 같은 대비 관계로 정했습니다(프레임 대 캔버스 약 1.15, 테두리 대 프레임 약 1.35, 점 대 캔버스 약 1.4).
 
@@ -76,12 +78,12 @@
 | `text-secondary` / 프레임               | 5.80   | 7.99  |
 | `text-secondary` / 캔버스               | 4.96   | 9.22  |
 | `text-tertiary` / 프레임                | 4.65   | 5.31  |
-| `text-accent` / 프레임                  | 7.24   | 7.61  |
-| `text-accent` / 캔버스                  | 6.19   | 8.78  |
-| `text-on-accent` / `bg-accent`          | 5.25   | 5.25  |
+| `text-accent` / 프레임                  | 6.74   | 8.03  |
+| `text-accent` / 캔버스                  | 5.76   | 9.27  |
+| `text-on-accent` / `bg-accent`          | 5.10   | 5.10  |
 
 - `text-tertiary`는 캔버스 위(라이트 3.98)에서 AA에 못 미치므로 프레임 안에서만 씁니다. 캔버스 위 글자(프레임 이름표 등)는 `text-secondary` 이상을 씁니다.
-- 포인트는 시안 `#2f66dd`와 가장 가까운 `blue-600`을 배경·포커스에 쓰고, 글자(`text-accent`)는 캔버스 위 대비를 위해 `blue-700`을 씁니다.
+- 포인트는 코랄입니다 (PORTFOLIO-24에서 시안의 파랑 `#2f66dd`를 교체). `coral-600`을 배경·포커스에 쓰고, 글자(`text-accent`)는 캔버스 위 대비를 위해 `coral-700`을 씁니다. 다크는 글자 `coral-300`, 포커스 `coral-400`(프레임 대비 6.18)입니다.
 
 ## 그라데이션
 
@@ -191,8 +193,10 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 | `--shadow-overlay`         | 다이얼로그, 바텀시트                                                                 |
 | `--shadow-frame`           | 캔버스 프레임 (시안 기반 임시 값)                                                    |
 | `--shadow-floating`        | 플로팅 UI: 위치 표시, 모드·테마 버튼 (시안 기반 임시 값)                             |
-| `--shadow-floating-raised` | 하단 메뉴 바 (시안 기반 임시 값)                                                     |
-| `--blur-floating`          | 플로팅 UI `backdrop-filter`                                                          |
+| `--shadow-floating-glass`  | 하단 메뉴 바 (유리: 위쪽 안쪽 하이라이트 + raised 그림자)                            |
+| `--shadow-floating-raised` | 메뉴 바보다 더 뜬 플로팅 UI (시안 기반 임시 값)                                      |
+| `--blur-floating`          | 플로팅 UI `backdrop-filter` (20px)                                                   |
+| `--saturate-floating`      | 플로팅 UI `backdrop-filter`의 채도 (유리 뒤 색을 살림)                               |
 | `--blur-overlay`           | 오버레이 딤 블러                                                                     |
 | `--opacity-disabled`       | 비활성 요소. 비활성 표현은 이 토큰 하나로 통일하고 비활성 전용 색 토큰은 만들지 않음 |
 
@@ -241,18 +245,19 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 
 ### 기본
 
-| 토큰                   | 값           | 용도                     |
-| ---------------------- | ------------ | ------------------------ |
-| `--duration-instant`   | 100ms        | 누름                     |
-| `--duration-fast`      | 150ms        | hover, 색 변화           |
-| `--duration-normal`    | 250ms        | 대부분의 등장·퇴장       |
-| `--duration-slow`      | 400ms        | 스프링 복귀, 페이지 전환 |
-| `--duration-slower`    | 600ms        | 테마 원형 확산           |
-| `--ease-standard`      | cubic-bezier | 일반 전환                |
-| `--ease-out`           | cubic-bezier | 등장                     |
-| `--ease-in`            | cubic-bezier | 퇴장                     |
-| `--ease-spring-gentle` | `linear()`   | 인디케이터, 바텀시트     |
-| `--ease-spring-bounce` | `linear()`   | 누름 후 복귀             |
+| 토큰                   | 값           | 용도                          |
+| ---------------------- | ------------ | ----------------------------- |
+| `--duration-instant`   | 100ms        | 누름                          |
+| `--duration-fast`      | 150ms        | hover, 색 변화                |
+| `--duration-normal`    | 250ms        | 대부분의 등장·퇴장            |
+| `--duration-slow`      | 400ms        | 스프링 복귀, 페이지 전환      |
+| `--duration-slower`    | 600ms        | 테마 원형 확산                |
+| `--ease-standard`      | cubic-bezier | 일반 전환                     |
+| `--ease-out`           | cubic-bezier | 등장                          |
+| `--ease-in`            | cubic-bezier | 퇴장                          |
+| `--ease-in-out`        | cubic-bezier | 자리 옮김 (메뉴 바 현재 표시) |
+| `--ease-spring-gentle` | `linear()`   | 인디케이터, 바텀시트          |
+| `--ease-spring-bounce` | `linear()`   | 누름 후 복귀                  |
 
 ### 애니메이션별
 
@@ -260,6 +265,7 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | 누름 피드백                                                    | `--motion-press-scale`, `--motion-press-duration`, `--motion-release-duration`, `--motion-release-ease` |
 | 카드 hover                                                     | `--motion-hover-lift`, `--motion-hover-duration`                                                        |
+| 목록 행 hover (화살표가 앞으로)                                | `--motion-hover-shift`, `--motion-hover-duration`                                                       |
 | 페이지 전환                                                    | `--motion-page-duration`, `--motion-page-ease`                                                          |
 | 테마 원형 확산                                                 | `--motion-theme-reveal-duration`, `--motion-theme-reveal-ease`                                          |
 | 다이얼로그                                                     | `--motion-dialog-duration`, `--motion-dialog-ease`, `--motion-dialog-scale-from`                        |
@@ -267,10 +273,11 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 | 토스트                                                         | `--motion-toast-duration`                                                                               |
 | 캔버스 카메라 이동 (거리에 따라 최소~최대)                     | `--motion-camera-min-duration`, `--motion-camera-max-duration`                                          |
 | 레이아웃 모핑 인디케이터                                       | `--motion-indicator-duration`, `--motion-indicator-ease`                                                |
+| 위치를 옮겨 가는 인디케이터 (메뉴 바 현재 표시)                | `--motion-indicator-move-duration`, `--motion-indicator-move-ease`                                      |
 
 ### reduced motion
 
-`prefers-reduced-motion: reduce`일 때 `tokens.css`에서 한 번에 재정의합니다. scale·이동 값은 중립(1, 0)으로, 스프링 곡선은 `--ease-standard`로 바뀌고, 테마 확산은 즉시 전환됩니다. 컴포넌트는 따로 분기하지 않습니다.
+`prefers-reduced-motion: reduce`일 때 `tokens.css`에서 한 번에 재정의합니다. scale·이동 값은 중립(1, 0)으로, 스프링 곡선은 `--ease-standard`로 바뀌고, 테마 확산과 인디케이터 이동은 즉시 전환됩니다. 컴포넌트는 따로 분기하지 않습니다.
 
 ## z-index
 
