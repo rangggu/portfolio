@@ -266,9 +266,12 @@
   }
 }
 
+/*
+ * 인쇄: 캔버스는 찍지 않는다. 대신 인쇄 전용 이력서(features/resume PrintResume)가 찍히고,
+ * 케이스 스터디 모달이 열려 있으면 그 글이 찍힌다 (docs/product.md 「인쇄」)
+ */
 @media print {
   .root {
-    padding: 0;
-    background: none;
+    display: none;
   }
 }

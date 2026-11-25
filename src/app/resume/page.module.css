@@ -1,0 +1,48 @@
+/* 화면 미리보기: 인쇄와 같은 글자 크기로 A4 종이 모양 (인쇄 때는 종이 장식 없이 내용만) */
+:global(html:has([data-resume-preview])) {
+  font-size: var(--print-root-font-size);
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-16);
+  min-height: 100dvh;
+  padding: var(--spacing-32) var(--spacing-16);
+  background-color: var(--color-bg-canvas);
+}
+
+.note {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-13);
+}
+
+/* A4 폭 210mm, 여백은 인쇄 @page와 같다 */
+.sheet {
+  width: min(100%, 210mm);
+  min-height: 297mm;
+  padding: var(--print-page-margin);
+  background-color: var(--color-bg-elevated);
+  box-shadow: var(--shadow-lg);
+}
+
+@media print {
+  .root {
+    display: block;
+    min-height: auto;
+    padding: 0;
+    background: none;
+  }
+
+  .note {
+    display: none;
+  }
+
+  .sheet {
+    width: auto;
+    min-height: auto;
+    padding: 0;
+    box-shadow: none;
+  }
+}

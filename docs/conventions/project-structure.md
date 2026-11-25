@@ -39,6 +39,7 @@ src/
   │   │       └── default.tsx
   │   ├── projects/[slug]/page.tsx  # 케이스 스터디 (직접 접근 시 단독 페이지, 캔버스 없음)
   │   ├── dev/design-system/page.tsx  # 디자인 시스템 문서 (공개, noindex·sitemap 제외)
+  │   ├── resume/page.tsx    # 인쇄 이력서 미리보기 (개발 서버 전용, 배포에서는 404)
   │
   ├── components/
   │   ├── ui/                # 디자인 시스템 기초 컴포넌트 (도메인 무관)
@@ -51,6 +52,7 @@ src/
   │
   ├── features/              # 기능 단위 코드
   │   ├── design-system/     # 디자인 시스템 문서 페이지 (토큰 표·견본, 컴포넌트 문서·예시)
+  │   ├── resume/            # A4 인쇄 이력서 (ResumeDocument, 캔버스 인쇄용 PrintResume)
   │   └── {feature}/         # 예: theme, canvas
   │       ├── {Feature}.tsx
   │       ├── {Feature}.module.css

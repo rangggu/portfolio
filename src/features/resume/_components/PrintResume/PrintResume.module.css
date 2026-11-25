@@ -1,0 +1,14 @@
+.root {
+  display: none;
+}
+
+@media print {
+  .root {
+    display: block;
+  }
+
+  /* 케이스 스터디 모달이 열려 있으면 그 글을 찍는다 */
+  :global(html:has(dialog[data-modal][open])) .root {
+    display: none;
+  }
+}
