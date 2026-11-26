@@ -12,15 +12,23 @@
   min-width: 0;
 }
 
-/* 제목: 이름·직무를 작게 (시선은 대표 문구가 받는다) */
+/*
+ * 제목: 「프론트엔드 개발자 김규리」를 작게 (시선은 대표 문구가 받는다).
+ * 구분 기호 없이 직무는 연하게, 이름은 본문색·굵게
+ */
 .name {
   composes: labelMd from '@/styles/typography.module.css';
   margin: 0;
-  color: var(--color-text-secondary);
 }
 
 .jobTitle {
+  color: var(--color-text-secondary);
   font-weight: var(--font-weight-regular);
+}
+
+.personName {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
 }
 
 .tagline {

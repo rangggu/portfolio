@@ -68,7 +68,7 @@ export async function siteOgImage() {
           color: C['--color-text-secondary'],
         }}
       >
-        {`${profile.name} · ${profile.jobTitle}`}
+        {`${profile.jobTitle} ${profile.name}`}
       </div>
     </div>,
     { ...OG_SIZE, fonts: await loadFonts() },

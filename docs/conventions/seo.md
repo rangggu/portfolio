@@ -63,7 +63,7 @@ Next.js 파일 규칙을 사용합니다.
 
 ## OG 이미지
 
-`app/opengraph-image.tsx`에서 `next/og`의 `ImageResponse`로 빌드 때 정적 PNG(1200×630) **하나**를 만들고, 모든 페이지가 이 이미지를 씁니다 (`src/components/seo/og`). 단순하게: 캔버스 색 바탕, 코랄 짧은 선, 대표 문장(한 줄 소개)을 크게, 아래에 「이름 · 직함」만 작게.
+`app/opengraph-image.tsx`에서 `next/og`의 `ImageResponse`로 빌드 때 정적 PNG(1200×630) **하나**를 만들고, 모든 페이지가 이 이미지를 씁니다 (`src/components/seo/og`). 단순하게: 캔버스 색 바탕, 코랄 짧은 선, 대표 문장(한 줄 소개)을 크게, 아래에 「직함 이름」(구분 기호 없이)만 작게.
 
 - 글꼴: Pretendard 굵기별 정적 서브셋(woff 400·700, `src/styles/fonts/og/`, `yarn fonts`가 만듦). 한글이 깨지지 않게 꼭 넣습니다.
 - 색: 이미지 엔진은 CSS 변수를 못 읽어 `src/lib/og/ogTheme.ts`에 토큰과 같은 값을 둡니다. 토큰과 어긋나면 Vitest가 알립니다.
