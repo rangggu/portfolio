@@ -70,13 +70,7 @@ function FrameContent({ frame }: { frame: CanvasFrame }) {
         />
       );
     case 'contact':
-      return (
-        <ContactFrame
-          headingId={headingId}
-          number={frame.number}
-          title={frame.label}
-        />
-      );
+      return <ContactFrame headingId={headingId} title={frame.label} />;
   }
 }
 
@@ -105,7 +99,11 @@ export function Canvas({ children }: CanvasProps) {
               id={frame.id}
               label={getFrameLabel(frame)}
               headingId={getFrameHeadingId(frame.id)}
-              align={frame.id === 'hero' ? 'center' : 'start'}
+              align={
+                frame.id === 'hero' || frame.id === 'contact'
+                  ? 'center'
+                  : 'start'
+              }
             >
               <FrameContent frame={frame} />
             </Frame>

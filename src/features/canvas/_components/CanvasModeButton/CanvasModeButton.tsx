@@ -13,9 +13,15 @@ const NAME: Record<CanvasMode, string> = {
   free: '자유 모드',
 };
 
+/** 툴팁의 모드 설명 (바뀔 모드를 설명한다) */
+const DESCRIPTION: Record<CanvasMode, string> = {
+  read: '프레임을 차례로 넘겨 봐요',
+  free: '끌고 확대하며 둘러봐요',
+};
+
 /**
  * 읽기 모드 ↔ 자유 모드 전환 (마우스 기기 캔버스에서만 보인다, FloatingTop.module.css).
- * 아이콘·툴팁·이름은 바뀔 모드를 보여 준다 (ThemeButton과 같은 규칙).
+ * 아이콘·툴팁·이름은 바뀔 모드를 보여 준다 (ThemeButton과 같은 규칙). 툴팁에는 그 모드 설명을 붙인다.
  * 읽기 모드에서는 아래에 자유 모드 권유 말풍선(ModeHint)을 띄울 수 있다.
  */
 export function CanvasModeButton() {
@@ -28,7 +34,10 @@ export function CanvasModeButton() {
 
   return (
     <span className={styles.anchor}>
-      <Tooltip content={NAME[nextMode]} placement="bottom">
+      <Tooltip
+        content={`${NAME[nextMode]}: ${DESCRIPTION[nextMode]}`}
+        placement="bottom"
+      >
         <IconButton
           aria-label={`${NAME[nextMode]}로 전환`}
           type="button"

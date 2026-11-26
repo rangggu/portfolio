@@ -1,0 +1,76 @@
+/*
+ * 메뉴 상자. popover로 맨 위 레이어에 뜨고, 위치는 오른쪽 위 버튼 상자 아래 오른쪽 정렬 (FloatingTop과 같은 기준).
+ * 브라우저 기본 popover 스타일(가운데 정렬, 테두리)은 덮어쓴다.
+ */
+.menu {
+  /* 메뉴 최소 폭: 이 메뉴에서만 쓰는 값이라 로컬 변수 */
+  --menu-min-width: 220px;
+
+  position: fixed;
+  inset: auto;
+  top: calc(var(--layout-floating-top) + var(--spacing-8));
+  right: calc(var(--spacing-16) + env(safe-area-inset-right, 0px));
+  min-width: var(--menu-min-width);
+  margin: 0;
+  padding: var(--layout-floating-bar-padding);
+  border: none;
+  border-radius: var(--radius-12);
+  background-color: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-floating-raised);
+  opacity: 0;
+  transform: scale(var(--motion-dialog-scale-from));
+  transform-origin: top right;
+  transition:
+    opacity var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-out),
+    overlay var(--duration-fast) allow-discrete,
+    display var(--duration-fast) allow-discrete;
+}
+
+.menu:popover-open {
+  opacity: 1;
+  transform: none;
+}
+
+@starting-style {
+  .menu:popover-open {
+    opacity: 0;
+    transform: scale(var(--motion-dialog-scale-from));
+  }
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  composes: bodySm from '@/styles/typography.module.css';
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  width: 100%;
+  min-height: var(--size-touch-target);
+  padding-inline: var(--spacing-12);
+  border: none;
+  border-radius: var(--radius-8);
+  background: none;
+  color: var(--color-text-primary);
+  text-align: start;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-border-focus);
+    outline-offset: calc(var(--focus-ring-width) * -1);
+  }
+}
+
+@media (hover: hover) {
+  .item:hover {
+    background-color: var(--color-bg-subtle);
+  }
+}

@@ -138,7 +138,7 @@ const { states: streamStates, actions: streamActions } = useStreamDemo();
 - 모든 페이지의 `<main>`에는 `id="main"`과 `tabIndex={-1}`을 붙입니다. `layout.tsx`의 본문 바로가기(`SkipLink`)가 이 요소로 포커스를 옮깁니다.
 - 프레임은 `<section aria-labelledby="{프레임 제목 id}">`로 제목과 연결합니다. 첫 화면 이름만 `h1`, 나머지 프레임 제목은 `h2`입니다.
 - 새 탭으로 열리는 링크는 "(새 탭에서 열림)"을 보조기기에 알립니다 (`Link`가 자동 처리).
-- 캔버스의 `header`(왼쪽 위 위치 표시)와 `nav aria-label="프레임 이동"`(하단 메뉴 바)은 플로팅 UI가 맡습니다. 메뉴 바는 화면 아래에 있어도 DOM에서는 `main` 앞에 둬서 키보드로 본문보다 먼저 닿게 합니다. 현재 프레임 항목에 `aria-current="page"`를 붙입니다.
+- 캔버스의 `header`(위쪽 플로팅: 왼쪽 위 이름, 오른쪽 위 테마 · 모드 · 더보기)와 `nav aria-label="프레임 이동"`(하단 메뉴 바)은 플로팅 UI가 맡습니다. 메뉴 바는 화면 아래에 있어도 DOM에서는 `main` 앞에 둬서 키보드로 본문보다 먼저 닿게 합니다. 현재 프레임 항목에 `aria-current="page"`를 붙입니다.
 - 아직 동작하지 않는 기능의 버튼은 `disabled` 대신 `aria-disabled="true"`로 포커스는 받게 하고, 「준비 중」을 화면과 보조기기에 함께 알립니다 (`Button`이 `aria-disabled` 스타일을 지원).
 - 모든 기능은 키보드만으로 사용할 수 있어야 합니다.
 - 이미지는 의미가 있으면 `alt`를 쓰고, 장식이면 `alt=""`를 씁니다.

@@ -3,42 +3,30 @@ import { ThemeButton } from '@/features/theme';
 import { RESUME } from '@/lib/resume';
 import { CanvasModeButton } from '../CanvasModeButton';
 import { CatIcon } from './_components/CatIcon';
-import { CurrentFrameName } from './_components/CurrentFrameName';
+import { MoreMenu } from './_components/MoreMenu';
 import styles from './FloatingTop.module.css';
 
 /**
- * 위쪽 플로팅 UI. 마우스 기기는 왼쪽 위(위치 표시)·오른쪽 위(모드·테마) 상자 따로,
- * 터치 기기는 한 줄 바 하나로 묶는다 (mockup-spec.md 플로팅 UI).
+ * 위쪽 플로팅 UI (mockup-spec.md 플로팅 UI).
+ * 왼쪽 위: 「고양이 + Myu의 포트폴리오」 (누구의 사이트인지만, 현재 프레임은 하단 메뉴 바가 보여 준다).
+ * 오른쪽 위: 테마 · 읽기/자유 모드(마우스 기기 캔버스에서만) · 더보기(이메일 복사 · GitHub 주소 복사 · 이력서 인쇄).
  */
 export function FloatingTop() {
   return (
-    <div className={styles.root}>
-      <header className={styles.location}>
+    <header className={styles.root}>
+      <div className={styles.location}>
         <CatIcon />
         <Text as="span" variant="labelMd" className={styles.brand}>
-          {RESUME.profile.nickname}
+          {RESUME.profile.nickname}의 포트폴리오
         </Text>
-        <span className={styles.divider} aria-hidden="true" />
-        <Text
-          as="span"
-          variant="bodySm"
-          tone="secondary"
-          className={styles.path}
-        >
-          <span className={styles.site}>포트폴리오 </span>/{' '}
-          <span className={styles.current}>
-            <CurrentFrameName />
-          </span>
-        </Text>
-      </header>
-      <div className={styles.actions}>
-        <div className={styles.surface}>
-          <span className={styles.modeButton}>
-            <CanvasModeButton />
-          </span>
-          <ThemeButton />
-        </div>
       </div>
-    </div>
+      <div className={styles.actions}>
+        <ThemeButton />
+        <span className={styles.modeButton}>
+          <CanvasModeButton />
+        </span>
+        <MoreMenu />
+      </div>
+    </header>
   );
 }

@@ -1,1 +1,0 @@
-export { CopyEmailButton } from './CopyEmailButton';

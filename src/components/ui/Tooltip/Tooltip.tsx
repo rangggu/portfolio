@@ -163,7 +163,11 @@ export function Tooltip({
     const position = placeTooltip(
       anchor.getBoundingClientRect(),
       { width: tooltip.offsetWidth, height: tooltip.offsetHeight },
-      { width: window.innerWidth, height: window.innerHeight },
+      // 스크롤바를 뺀 보이는 영역 (innerWidth는 스크롤바를 포함해 오른쪽 끝에서 툴팁이 가려진다)
+      {
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight,
+      },
       { placement, offset: OFFSET, padding: PADDING },
     );
     tooltip.style.setProperty('--tooltip-top', `${position.top}px`);

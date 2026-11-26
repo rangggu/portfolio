@@ -193,7 +193,7 @@ line-gap-override = 0 (Pretendard lineGap이 0)
 | `--shadow-lg`              | 팝오버                                                                               |
 | `--shadow-overlay`         | 다이얼로그, 바텀시트                                                                 |
 | `--shadow-frame`           | 캔버스 프레임 (시안 기반 임시 값)                                                    |
-| `--shadow-floating`        | 플로팅 UI: 위치 표시, 모드·테마 버튼 (시안 기반 임시 값)                             |
+| `--shadow-floating`        | 플로팅 UI: 왼쪽 위 이름 상자, 오른쪽 위 버튼 상자 (시안 기반 임시 값)                |
 | `--shadow-floating-glass`  | 하단 메뉴 바 (유리: 위쪽 안쪽 하이라이트 + raised 그림자)                            |
 | `--shadow-floating-raised` | 메뉴 바보다 더 뜬 플로팅 UI (시안 기반 임시 값)                                      |
 | `--blur-floating`          | 플로팅 UI `backdrop-filter` (20px)                                                   |

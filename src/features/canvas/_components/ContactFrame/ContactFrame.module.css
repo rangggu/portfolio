@@ -1,23 +1,49 @@
+/*
+ * 마지막 화면: 한 덩어리를 가운데에 (프레임 세로 가운데는 Frame align="center").
+ * 간격: 문장 ↔ 연락처 묶음은 넓게, 묶음 안 줄 사이는 좁게 (두 덩어리로 읽히게)
+ */
 .root {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-32);
+  align-items: center;
+  gap: var(--spacing-48);
 }
 
-/* 시안 26px / 500 → 가장 가까운 문장 토큰 headingMd(20→24px) */
+/* 보조기기용 제목: 내용은 VisuallyHidden, 상자는 흐름에서 빼 간격을 차지하지 않게 */
+.hiddenHeading {
+  position: absolute;
+}
+
 .message {
   max-width: var(--layout-prose-max);
+  text-align: center;
+  text-wrap: balance;
 }
 
-.actions {
-  display: flex;
-  flex-wrap: wrap;
+/* 연락처 묶음: 묶음은 가운데, 안에서는 라벨 열 | 값 열로 왼쪽 정렬 */
+.info {
+  display: grid;
+  grid-template-columns: auto minmax(0, auto);
   align-items: center;
-  gap: var(--spacing-12);
+  gap: var(--spacing-12) var(--spacing-24);
+  max-width: 100%;
+  margin: 0;
 }
 
-@media print {
-  .actions {
-    display: none;
-  }
+.row {
+  display: contents;
+}
+
+.label {
+  composes: bodySm from '@/styles/typography.module.css';
+  color: var(--color-text-tertiary);
+}
+
+.value {
+  composes: bodyLg from '@/styles/typography.module.css';
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
 }
