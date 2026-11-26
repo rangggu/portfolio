@@ -1,61 +1,44 @@
-/*
- * 첫 화면 2열 전환 기준: 프레임 안쪽 폭(Container) 768px (responsive.md 첫 화면).
- * 연락처 폭 280px은 이 프레임에서만 쓰는 시안 값이라 로컬 변수.
- */
+/* 첫 화면 2열 전환 기준: 프레임 안쪽 폭(Container) 960px, 그보다 좁으면 그림 없이 문구만 (responsive.md 첫 화면) */
 .root {
-  --contact-width: 280px;
-
   display: grid;
-  gap: var(--spacing-40);
+  align-items: center;
+  gap: var(--spacing-48);
 }
 
 .main {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-12);
-}
-
-/* 이름 옆 직무: 기준선을 맞추고, 좁으면 아래 줄로 */
-.nameRow {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  column-gap: var(--spacing-16);
-  margin-bottom: var(--spacing-24);
-}
-
-.contact {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-12);
-  padding-top: var(--spacing-16);
-  border-top: var(--border-width-1) solid var(--color-text-primary);
-}
-
-.contactRow {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--spacing-16);
-}
-
-.contactLabel {
-  composes: monoSm from '@/styles/typography.module.css';
-  flex-shrink: 0;
-  color: var(--color-text-tertiary);
-}
-
-.contactValue {
-  composes: bodySm from '@/styles/typography.module.css';
+  gap: var(--spacing-24);
   min-width: 0;
-  text-align: end;
-  overflow-wrap: anywhere;
 }
 
-@container (width >= 768px) {
+/* 제목: 이름·직무를 작게 (시선은 대표 문구가 받는다) */
+.name {
+  composes: labelMd from '@/styles/typography.module.css';
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.jobTitle {
+  font-weight: var(--font-weight-regular);
+}
+
+.tagline {
+  margin: 0;
+  text-wrap: balance;
+}
+
+.subline {
+  /* 보조 문장 한 줄 폭: 이 프레임에서만 쓰는 값이라 로컬 변수 */
+  --subline-max: 32rem;
+
+  max-width: var(--subline-max);
+  margin: 0;
+}
+
+@container (width >= 960px) {
   .root {
-    grid-template-columns: minmax(0, 1fr) var(--contact-width);
-    align-items: end;
-    column-gap: var(--spacing-64);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    column-gap: var(--spacing-48);
   }
 }

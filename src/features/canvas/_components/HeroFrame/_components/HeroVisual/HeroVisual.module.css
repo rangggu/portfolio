@@ -1,0 +1,262 @@
+/*
+ * 첫 화면 그림. 크기·위치는 이 그림에서만 쓰는 값이라 로컬 변수로 둔다.
+ * 색은 토큰만 (카드 안 바탕은 프레임 바탕에 글자색을 섞어 두 모드 모두 자연스럽게).
+ */
+.root {
+  --card-width: 400px;
+  --card-pad: var(--spacing-24);
+  --thumb-height: 150px;
+  --title-height: 14px;
+  --desc-height: 10px;
+  --button-height: 44px;
+  --loupe-size: 204px;
+  --cell: 12px;
+  --handle: 8px;
+
+  position: relative;
+  justify-self: end;
+  width: min(100%, var(--card-width));
+  margin-right: var(--spacing-16);
+}
+
+/* 문구 옆에 돋보기까지 들어갈 폭이 아니면 그림을 숨긴다 (HeroFrame 2열 전환과 같은 기준) */
+@container (width < 960px) {
+  .root {
+    display: none;
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--card-pad);
+  border-radius: var(--radius-24);
+  background-color: var(--color-bg-elevated);
+  box-shadow: var(--shadow-floating-raised);
+}
+
+.thumb {
+  height: var(--thumb-height);
+  border-radius: var(--radius-12);
+  background-color: color-mix(
+    in srgb,
+    var(--color-bg-elevated),
+    var(--color-text-primary) 7%
+  );
+}
+
+.title {
+  width: 72%;
+  height: var(--title-height);
+  margin-top: var(--spacing-20);
+  border-radius: var(--radius-4);
+  background-color: var(--color-text-primary);
+}
+
+.desc {
+  width: 52%;
+  height: var(--desc-height);
+  margin-top: var(--spacing-12);
+  border-radius: var(--radius-4);
+  background-color: color-mix(
+    in srgb,
+    var(--color-bg-elevated),
+    var(--color-text-primary) 25%
+  );
+}
+
+/* 버튼: 왼쪽 끝이 제목보다 1px 안쪽 (돋보기가 보여 주는 어긋남) */
+.button {
+  height: var(--button-height);
+  margin-top: var(--spacing-24);
+  margin-left: var(--border-width-1);
+  border-radius: var(--radius-12);
+  background-color: var(--color-bg-accent);
+}
+
+/* 간격 측정: 점선 + 배지 */
+.gapTop,
+.gapRight {
+  position: absolute;
+  border: 0 dashed var(--color-text-accent);
+}
+
+.gapTop {
+  top: 0;
+  left: var(--card-pad);
+  height: var(--card-pad);
+  border-left-width: var(--border-width-1);
+}
+
+.gapRight {
+  top: 50%;
+  right: 0;
+  width: var(--card-pad);
+  border-top-width: var(--border-width-1);
+}
+
+.badge {
+  composes: monoSm from '@/styles/typography.module.css';
+  position: absolute;
+  padding: 0 var(--spacing-6);
+  border-radius: var(--radius-4);
+  background-color: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+  white-space: nowrap;
+}
+
+.badgeTop {
+  top: var(--spacing-4);
+  left: calc(var(--card-pad) + var(--spacing-4));
+}
+
+.badgeRight {
+  top: calc(50% - var(--spacing-24));
+  right: var(--spacing-4);
+}
+
+.badgeAccent {
+  background-color: var(--color-bg-accent);
+  color: var(--color-text-on-accent);
+}
+
+/* 이름표: 캔버스 프레임 이름표처럼 카드 위 왼쪽 */
+.nameTag {
+  composes: badge;
+  composes: monoSm from '@/styles/typography.module.css';
+  bottom: calc(100% + var(--spacing-12));
+  left: calc(var(--spacing-6) * -1);
+}
+
+/* 선택 표시: 포인트색 테두리 + 네 모서리 핸들 (FrameSelection과 같은 모양) */
+.selection {
+  position: absolute;
+  inset: calc(var(--spacing-6) * -1);
+  border: var(--border-width-1) solid var(--color-text-accent);
+  border-radius: calc(var(--radius-24) + var(--spacing-6));
+  pointer-events: none;
+}
+
+.handle {
+  position: absolute;
+  width: var(--handle);
+  height: var(--handle);
+  outline: var(--border-width-1) solid var(--color-text-accent);
+  background-color: var(--color-bg-elevated);
+}
+
+.handle[data-corner^='top'] {
+  top: calc(var(--spacing-6) * -1 - var(--handle) / 2);
+}
+
+.handle[data-corner^='bottom'] {
+  bottom: calc(var(--spacing-6) * -1 - var(--handle) / 2);
+}
+
+.handle[data-corner$='Left'] {
+  left: calc(var(--spacing-6) * -1 - var(--handle) / 2);
+}
+
+.handle[data-corner$='Right'] {
+  right: calc(var(--spacing-6) * -1 - var(--handle) / 2);
+}
+
+/* 돋보기가 키우는 곳: 버튼 왼쪽 끝 */
+.marker {
+  /* 카드 위에서 버튼 세로 가운데까지 */
+  --marker-top: calc(
+    var(--card-pad) + var(--thumb-height) + var(--spacing-20) +
+      var(--title-height) + var(--spacing-12) + var(--desc-height) +
+      var(--spacing-24) + var(--button-height) / 2
+  );
+
+  position: absolute;
+  top: calc(var(--marker-top) - var(--spacing-6));
+  left: calc(var(--card-pad) - var(--spacing-6));
+  width: var(--spacing-12);
+  height: var(--spacing-12);
+  border: var(--border-width-1) solid var(--color-text-accent);
+  border-radius: var(--radius-round);
+}
+
+/*
+ * 돋보기: 칸 하나가 1px. 제목 줄은 7번째 칸, 버튼은 8번째 칸에서 시작한다.
+ * 가장자리는 바탕색 고리 + 연한 테두리로 카드 위에 떠 보이게.
+ */
+.loupe {
+  position: absolute;
+  bottom: calc(var(--spacing-64) * -1);
+  left: calc(var(--loupe-size) * -0.45);
+  width: var(--loupe-size);
+  height: var(--loupe-size);
+  overflow: hidden;
+  border: var(--spacing-6) solid var(--color-bg-elevated);
+  border-radius: var(--radius-round);
+  outline: var(--border-width-1) solid var(--color-border-default);
+  background-color: var(--color-bg-elevated);
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-text-primary) 10%, transparent)
+        var(--border-width-1),
+      transparent var(--border-width-1)
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-text-primary) 10%, transparent)
+        var(--border-width-1),
+      transparent var(--border-width-1)
+    );
+  background-size: var(--cell) var(--cell);
+  box-shadow: var(--shadow-floating-raised);
+}
+
+.pixelTitle,
+.pixelButton {
+  position: absolute;
+  right: 0;
+}
+
+.pixelTitle {
+  top: calc(var(--cell) * 3);
+  left: calc(var(--cell) * 7);
+  height: calc(var(--cell) * 3);
+  background-color: var(--color-text-primary);
+}
+
+.pixelButton {
+  top: calc(var(--cell) * 9);
+  bottom: 0;
+  left: calc(var(--cell) * 8);
+  background-color: var(--color-bg-accent);
+}
+
+/* 두 왼쪽 끝을 잇는 안내선과 그 사이 1px 표시 */
+.guide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: var(--border-width-1) dashed var(--color-text-accent);
+}
+
+.guide[data-edge='title'] {
+  left: calc(var(--cell) * 7);
+}
+
+.guide[data-edge='button'] {
+  left: calc(var(--cell) * 8);
+}
+
+.gapLine {
+  position: absolute;
+  top: calc(var(--cell) * 7);
+  left: calc(var(--cell) * 7);
+  width: var(--cell);
+  border-top: var(--border-width-1) solid var(--color-text-accent);
+}
+
+.loupe .badgeAccent {
+  top: calc(var(--cell) * 7 - var(--spacing-12));
+  left: calc(var(--cell) * 8 + var(--spacing-6));
+}
