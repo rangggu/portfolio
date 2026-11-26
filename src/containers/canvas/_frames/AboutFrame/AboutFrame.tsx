@@ -21,7 +21,7 @@ export function AboutFrame({ headingId, number, title }: AboutFrameProps) {
     <div className={styles.root}>
       <FrameHeading number={number} title={title} id={headingId} />
       {hasFilledParagraph ? (
-        <Prose>
+        <Prose className={styles.prose}>
           {paragraphs.map((paragraph, index) =>
             isIntroParagraphFilled(paragraph) ? (
               <IntroParagraphBlock key={index} paragraph={paragraph} />

@@ -1,5 +1,49 @@
+/*
+ * 소개도 다른 프레임처럼 제목·본문이 프레임 왼쪽 선에서 시작한다.
+ * 좁은 프레임은 읽기 폭(--layout-prose-max), 넓은 프레임(832px, MarginNote 전환과 같은 기준)에서는
+ * 메모를 프레임 오른쪽 끝에 두고 본문이 나머지 폭을 쓴다 (본문과 메모가 동떨어져 보이지 않게).
+ */
 .root {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-32);
+}
+
+.prose {
+  max-width: var(--layout-prose-max);
+  margin-inline: 0;
+}
+
+@container (width >= 832px) {
+  .root .prose {
+    /*
+     * 소개 메모 폭: 메모가 하나뿐이라 글 메모(--layout-note-width)보다 넓게 두 줄로 납작하게,
+     * 그만큼 본문 줄도 짧아진다. 이 프레임에서만 쓰는 값이라 로컬 변수
+     */
+    --about-note-width: 320px;
+    --note-space: calc(var(--about-note-width) + var(--spacing-48));
+
+    max-width: none;
+
+    & > * {
+      max-width: calc(100% - var(--note-space));
+    }
+
+    & > [data-margin-note-group] {
+      grid-template-columns: minmax(0, 1fr) var(--about-note-width);
+      column-gap: var(--spacing-48);
+      max-width: none;
+    }
+
+    /*
+     * 메모(그룹의 두 번째 자식)는 문단 옆에 띄워 둔다. 메모가 문단보다 길어도
+     * 다음 문단과의 간격을 밀어내지 않게 (소개는 메모가 짧고 하나뿐이라 겹칠 일이 없다)
+     */
+    & > [data-margin-note-group] > :nth-child(2) {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: var(--about-note-width);
+    }
+  }
 }
