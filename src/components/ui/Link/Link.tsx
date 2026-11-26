@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef, Ref } from 'react';
 import NextLink from 'next/link';
 import { resolveLinkAttributes } from '@/lib/link/linkAttributes';
-import { VisuallyHidden } from '../VisuallyHidden';
+import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import styles from './Link.module.css';
 
 interface LinkProps extends ComponentPropsWithoutRef<'a'> {

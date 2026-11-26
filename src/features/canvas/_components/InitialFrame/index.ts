@@ -1,1 +1,0 @@
-export { InitialFrame } from './InitialFrame';

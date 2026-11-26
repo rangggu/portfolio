@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | React 컴포넌트 | PascalCase, 같은 이름의 폴더 안 | `Button/Button.tsx` |
 | 컴포넌트 스타일 | `{Component}.module.css` | `Button.module.css` |
-| 배럴 | `index.ts` (컴포넌트 폴더에만) | `Button/index.ts` |
+| 배럴 | 만들지 않음. 예외: 화면 공개 출입구 `containers/{화면}/index.ts` | `containers/canvas/index.ts` |
 | 커스텀 훅 | `use` + camelCase | `useScrollDirection.ts` |
 | 유틸 | 기능명 camelCase, `utils` 접미사 지양 | `format.ts`, `spring.ts` |
 | Server Actions | 고정명 | `actions.ts` |

@@ -39,7 +39,7 @@ export type StreamStatus = (typeof STREAM_STATUS)[keyof typeof STREAM_STATUS];
 | 상황 | 위치 |
 | --- | --- |
 | 한 컴포넌트에서만 쓰는 타입 | 해당 컴포넌트 파일 |
-| 한 feature 안에서 공유 | `features/{feature}/_lib/types.ts` |
+| 한 화면 안에서 공유 | `containers/{화면}/_lib/types.ts` |
 | 외부 API 요청·응답 (snake_case) | `lib/api/{domain}/{domain}Dto.ts` |
 | 화면에서 쓰는 모델 (camelCase) | 사용하는 feature 또는 `src/types/` |
 | 여러 곳에서 공유 | `src/types/` |
@@ -75,9 +75,9 @@ import Link from 'next/link';
 import { motion } from 'motion/react';
 
 // 3. 전역 컴포넌트
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/Button/Button';
 
-// 4. features, lib, types
+// 4. containers, lib, types
 import { formatDate } from '@/lib/format/date';
 import type { Project } from '@/types/project';
 

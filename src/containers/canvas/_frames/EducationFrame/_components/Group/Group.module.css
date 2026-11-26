@@ -1,0 +1,24 @@
+.group {
+  /* 이 프레임 전용 값: 날짜 열 폭 (기간 「2019.03 – 2023.08」 / 연월 「2022.03」이 한 줄에 들어가는 폭) */
+  --date-width: 9.5rem;
+
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.group[data-date='month'] {
+  --date-width: 4.5rem;
+}
+
+/* 묶음 이름: 굵은 제목 + 아래 진한 선 (목록의 시작 표시) */
+.label {
+  padding-bottom: var(--spacing-8);
+  border-bottom: var(--border-width-1) solid var(--color-text-primary);
+}
+
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

@@ -1,7 +1,7 @@
-import { Heading } from '../Heading';
-import { Icon } from '../Icon';
-import { IconButton } from '../IconButton';
-import { Text } from '../Text';
+import { Heading } from '../Heading/Heading';
+import { Icon } from '../Icon/Icon';
+import { IconButton } from '../IconButton/IconButton';
+import { Text } from '../Text/Text';
 import styles from './ModalContent.module.css';
 
 interface ModalContentProps {

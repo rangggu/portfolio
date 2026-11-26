@@ -1,1 +1,0 @@
-export { CopyValueButton } from './CopyValueButton';

@@ -1,4 +1,4 @@
-import { getFrameMetadata, InitialFrame } from '@/features/canvas';
+import { getFrameMetadata, InitialFrame } from '@/containers/canvas';
 
 export const metadata = getFrameMetadata('skills');
 

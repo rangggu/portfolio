@@ -1,0 +1,13 @@
+.company {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.achievements {
+  display: grid;
+  gap: var(--spacing-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

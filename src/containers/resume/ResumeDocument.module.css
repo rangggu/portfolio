@@ -1,0 +1,326 @@
+/*
+ * A4 이력서. 섹션 이름은 왼쪽 좁은 열(포인트색 작은 글자), 내용은 오른쪽.
+ * 배경·칩 색이 인쇄에서 빠지지 않게 print-color-adjust: exact (브라우저 기본은 배경 그래픽 끔).
+ * 크기는 rem 토큰이라 인쇄(루트 13px, --print-root-font-size)와 미리보기에서 같은 비율이다.
+ * 세로로 쌓는 곳은 flex 대신 블록 + margin: 쪽이 갈릴 때 Chromium이 flex 항목을 겹쳐 그린다.
+ */
+.root {
+  /* 이 문서에서만 쓰는 값: 섹션 이름 열 폭, 기술 분류 이름 폭 */
+  --label-width: 6.5rem;
+  --skill-label-width: 7rem;
+
+  color: var(--color-text-primary);
+  font-size: var(--font-size-15);
+  line-height: var(--line-height-snug);
+  print-color-adjust: exact;
+}
+
+.root > * + * {
+  margin-top: var(--spacing-24);
+}
+
+/* ---------- 머리 ---------- */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  padding-bottom: var(--spacing-20);
+  border-bottom: var(--border-width-2) solid var(--color-text-primary);
+}
+
+.identity {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--spacing-4) var(--spacing-12);
+}
+
+.name {
+  font-size: var(--font-size-28-40);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: var(--line-height-tight);
+}
+
+.jobTitle {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-medium);
+}
+
+.tagline {
+  color: var(--color-text-accent);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+}
+
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  margin: var(--spacing-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--spacing-6);
+  padding: var(--spacing-4) var(--spacing-12);
+  border-radius: var(--radius-round);
+  background-color: var(--color-bg-canvas);
+  font-size: var(--font-size-13);
+}
+
+.contactLabel {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-12);
+}
+
+.contactValue {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+}
+
+/* 소개: 콜아웃 */
+.callout {
+  padding: var(--spacing-12) var(--spacing-16);
+  border-inline-start: var(--border-width-2) solid var(--color-bg-accent);
+  border-radius: 0 var(--radius-8) var(--radius-8) 0;
+  background-color: var(--color-bg-canvas);
+  line-height: var(--line-height-normal);
+
+  & > p + p {
+    margin-top: var(--spacing-8);
+  }
+}
+
+/* ---------- 공통 항목 머리: 제목 | 기간 ---------- */
+.itemHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+}
+
+.itemTitle,
+.cardTitle {
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-bold);
+}
+
+.cardTitle {
+  font-size: var(--font-size-15);
+}
+
+.role {
+  margin-inline-start: var(--spacing-8);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-medium);
+}
+
+.period {
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-13);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.summary {
+  margin-top: var(--spacing-4);
+  color: var(--color-text-secondary);
+}
+
+/* ---------- 경력 ---------- */
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.company {
+  break-inside: avoid;
+}
+
+.company + .company {
+  margin-top: var(--spacing-16);
+  padding-top: var(--spacing-16);
+  border-top: var(--border-width-1) solid var(--color-border-subtle);
+}
+
+.achievements {
+  margin: var(--spacing-8) 0 0;
+  padding: 0;
+  list-style: none;
+
+  & > li {
+    position: relative;
+    padding-inline-start: var(--spacing-16);
+  }
+
+  & > li + li {
+    margin-top: var(--spacing-4);
+  }
+
+  /* 포인트색 점 */
+  & > li::before {
+    position: absolute;
+    top: calc(0.5lh - var(--spacing-2));
+    left: var(--spacing-4);
+    width: var(--spacing-4);
+    height: var(--spacing-4);
+    border-radius: var(--radius-round);
+    background-color: var(--color-bg-accent);
+    content: '';
+  }
+}
+
+.linked {
+  margin-top: var(--spacing-8);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-13);
+}
+
+.linkedLabel {
+  margin-inline-end: var(--spacing-8);
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-12);
+}
+
+/* ---------- 칩 (기술에만: 칩은 곧 기술) ---------- */
+.chip {
+  display: inline-block;
+  padding: var(--spacing-2) var(--spacing-8);
+  border-radius: var(--radius-round);
+  background-color: var(--color-bg-accent-subtle);
+  color: var(--color-text-accent);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ---------- 프로젝트: 2열 카드 ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-12) var(--spacing-16);
+  border: var(--border-width-1) solid var(--color-border-default);
+  border-radius: var(--radius-8);
+  break-inside: avoid;
+}
+
+.card .summary {
+  flex: 1;
+  margin-top: 0;
+  font-size: var(--font-size-14);
+}
+
+.tags {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-12);
+}
+
+.cardFoot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-8);
+  margin-top: var(--spacing-4);
+  padding-top: var(--spacing-6);
+  border-top: var(--border-width-1) solid var(--color-border-subtle);
+}
+
+.cardUrl {
+  min-width: 0;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-12);
+  text-decoration: none;
+
+  /* 주소는 한 줄로 (하이픈에서 끊기면 읽기 어렵다). 아주 긴 slug만 / 뒤에서 접힌다 */
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+/* ---------- 기술 ---------- */
+.skills {
+  margin: 0;
+
+  /* 짧은 묶음이라 첫 줄만 쪽 끝에 남지 않게 통째로 */
+  break-inside: avoid;
+}
+
+.skillRow {
+  display: grid;
+  grid-template-columns: var(--skill-label-width) minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--spacing-12);
+  break-inside: avoid;
+}
+
+.skillRow + .skillRow {
+  margin-top: var(--spacing-8);
+}
+
+.skillLabel {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-13);
+}
+
+.skillChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+  margin: 0;
+}
+
+/* ---------- 학력·자격 ---------- */
+.rows {
+  margin: 0;
+  break-inside: avoid;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+  break-inside: avoid;
+}
+
+.row + .row {
+  margin-top: var(--spacing-6);
+}
+
+.rowMain {
+  color: var(--color-text-secondary);
+
+  & strong {
+    margin-inline-end: var(--spacing-6);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+/* 프로젝트 카드의 부록 번호 (글 주소 옆 텍스트) */
+.appendixRef {
+  flex-shrink: 0;
+  color: var(--color-text-accent);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-semibold);
+}

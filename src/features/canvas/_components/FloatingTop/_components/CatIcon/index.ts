@@ -1,1 +1,0 @@
-export { CatIcon } from './CatIcon';

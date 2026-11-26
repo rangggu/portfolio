@@ -1,1 +1,0 @@
-export { HeroFrame } from './HeroFrame';

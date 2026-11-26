@@ -41,28 +41,31 @@ src/
   │   ├── dev/design-system/page.tsx  # 디자인 시스템 문서 (공개, noindex·sitemap 제외)
   │   ├── resume/page.tsx    # 인쇄 이력서 미리보기 (개발 서버 전용, 배포에서는 404)
   │
-  ├── components/
+  ├── components/            # 여러 화면이 함께 쓰는 부품
   │   ├── ui/                # 디자인 시스템 기초 컴포넌트 (도메인 무관)
   │   │   └── Button/
   │   │       ├── Button.tsx
-  │   │       ├── Button.module.css
-  │   │       └── index.ts
-  │   ├── layout/            # Header, Footer, TableOfContents
-  │   └── mdx/               # MDX 요소 매핑(mdxComponents), CodeBlock, Callout, Figure
+  │   │       ├── ButtonLink.tsx
+  │   │       └── Button.module.css
+  │   ├── layout/            # SkipLink(본문 바로가기) 등 사이트 공통 레이아웃
+  │   ├── mdx/               # MDX 요소 매핑(mdxComponents), CodeBlock, Callout, Figure
+  │   ├── seo/               # JsonLd, ThemeScript, og/(사이트 대표 OG 이미지 그리기, next/og)
+  │   └── theme/             # 테마 전환 버튼과 테마 상태
   │
-  ├── features/              # 기능 단위 코드
-  │   ├── design-system/     # 디자인 시스템 문서 페이지 (토큰 표·견본, 컴포넌트 문서·예시)
-  │   ├── resume/            # A4 인쇄 이력서 (ResumeDocument, 캔버스 인쇄용 PrintResume)
-  │   ├── og/                # 사이트 대표 OG 이미지 (next/og, 빌드 때 정적 생성)
-  │   └── {feature}/         # 예: theme, canvas
-  │       ├── {Feature}.tsx
-  │       ├── {Feature}.module.css
+  ├── containers/            # 화면(라우트) 단위 코드. 라우트는 조합만, 화면을 이루는 코드는 여기
+  │   ├── canvas/            # 7개 프레임 주소가 함께 쓰는 캔버스 화면 (아래 「캔버스 폴더」)
+  │   ├── case-study/        # /projects/[slug] 케이스 스터디 (단독 페이지·캔버스 위 모달 공용)
+  │   ├── design-system/     # /dev/design-system 디자인 시스템 문서 (토큰 표·견본, 컴포넌트 문서·예시)
+  │   └── resume/            # /resume 미리보기와 인쇄 이력서 (ResumeDocument, 캔버스 인쇄용 PrintResume)
+  │       ├── {Screen}.tsx
+  │       ├── {Screen}.module.css
+  │       ├── index.ts       # 화면 밖(라우트)에 내보내는 공개 출입구 (배럴은 이것만)
   │       ├── actions.ts     # Server Actions
   │       ├── _components/
-  │       ├── _shared/       # 이 feature 안 여러 곳에서 공유
+  │       ├── _shared/       # 이 화면 안 여러 곳에서 공유
   │       ├── _hooks/
-  │       ├── _lib/          # 이 feature 전용 유틸·상수
-  │       └── _state/        # 이 feature 전용 클라이언트 상태 (필요할 때만)
+  │       ├── _lib/          # 이 화면 전용 유틸·상수
+  │       └── _state/        # 이 화면 전용 클라이언트 상태 (필요할 때만)
   │
   ├── lib/                   # 전역 순수 로직 (Vitest 대상)
   │   ├── api/{domain}/      # 외부 API 연동 (서버 전용)
@@ -89,21 +92,42 @@ src/
 
 `_components`, `_hooks`, `_lib`, `_state`, `_shared`는 부모 폴더 밖에서 import하지 않습니다. App Router도 `_` 폴더를 라우팅에서 제외하므로 `app/` 안에서도 같은 규칙을 씁니다.
 
+### 배럴(index.ts)을 만들지 않는다
+
+컴포넌트는 파일을 직접 불러옵니다 (`@/components/ui/Button/Button`). 폴더마다 다시 내보내는 `index.ts`를 두지 않습니다. 예외는 `containers/{화면}/index.ts` 하나로, `_` 폴더 안 것(`_floating/FloatingTop` 등)을 화면 밖 라우트에 내보내는 공개 출입구입니다. 코드가 든 모듈 파일(`lib/resume/index.ts`, `styles/fonts/index.ts`)은 배럴이 아니라 그대로 둡니다.
+
+### 왜 주소별 폴더가 아니라 화면별인가
+
+캔버스의 7개 주소(`/`, `/about` …)는 각각 다른 페이지가 아니라 **캔버스 한 장 위의 위치**입니다. 어느 주소로 들어와도 같은 캔버스가 통째로 그려지고 시작 위치만 다르므로, 주소마다 폴더를 만들지 않고 `containers/canvas` 하나로 묶습니다. 주소와 프레임의 연결은 `_components/FrameContent`에서 보입니다.
+
+### 캔버스 폴더
+
+```
+containers/canvas/
+  Canvas.tsx        # 조립만: 프레임을 늘어놓고 이동 장치·떠 있는 UI를 붙인다
+  index.ts          # 라우트에 내보내는 것 (Canvas, FloatingTop, FrameMenu, InitialFrame, FRAMES, getFrameMetadata)
+  _components/      # Canvas가 직접 쓰는 부품: Frame(모든 프레임을 감싸는 틀: 이름표·바탕·선택 테두리) · FrameContent(id → 프레임 고르기)
+  _frames/          # 프레임 내용: Hero · About · Career · Projects · Skills · Education · ContactFrame
+  _navigation/      # 움직임·위치(화면엔 안 보임): CameraController · CameraScript · SwipeController · InitialFrame · FrameAddressSync · CurrentFrameTracker
+  _floating/        # 화면 위에 떠 있는 UI: FloatingTop(+ 모드 버튼) · FrameMenu · FrameEndHint · ZoomControls
+  _shared/ _lib/ _state/
+```
+
 ### 컴포넌트 승격 단계
 
 한 곳에서만 쓰는 것은 옆에 두고, 사용처가 늘어날 때 한 단계씩 올립니다.
 
-| 사용 범위                 | 위치                                                        |
-| ------------------------- | ----------------------------------------------------------- |
-| 부모 컴포넌트 1개         | 부모 폴더의 `_components/` (재귀 중첩 가능, 깊이 제한 없음) |
-| 같은 feature의 여러 곳    | `features/{feature}/_shared/`                               |
-| 여러 feature, 도메인 무관 | `components/ui/`                                            |
+| 사용 범위              | 위치                                                        |
+| ---------------------- | ----------------------------------------------------------- |
+| 부모 컴포넌트 1개      | 부모 폴더의 `_components/` (재귀 중첩 가능, 깊이 제한 없음) |
+| 같은 화면의 여러 곳    | `containers/{화면}/_shared/`                                |
+| 여러 화면, 도메인 무관 | `components/ui/`                                            |
 
 ### 캔버스 라우트 구조
 
 7개 프레임 라우트(`/`, `/about`, `/career`, `/projects`, `/skills`, `/education`, `/contact`)는 route group `app/(canvas)/`에 두고 같은 캔버스 레이아웃(`(canvas)/layout.tsx`)을 공유하며, 초기 프레임만 다르게 시작합니다. 모두 정적 생성됩니다.
 
-- 각 `page.tsx`는 `getFrameMetadata(frameId)`로 메타데이터를 내보내고 `<InitialFrame frameId>`만 렌더합니다 (`features/canvas`).
+- 각 `page.tsx`는 `getFrameMetadata(frameId)`로 메타데이터를 내보내고 `<InitialFrame frameId>`만 렌더합니다 (`containers/canvas`).
 - `InitialFrame`은 프레임들 뒤에 인라인 스크립트로 렌더되어, 주소로 직접 들어오면 첫 페인트 전에 해당 프레임에서 시작하게 합니다 (세로 페이지는 스크롤, 카메라 모드는 카메라 첫 위치, 스와이프 모드는 `stage`를 그 프레임 가운데로 스크롤). 현재 프레임은 하이드레이션 뒤 스크롤 위치로 정해집니다.
 - 스크롤로 현재 프레임이 바뀌면 주소를 교체하고(`replaceState`), 메뉴로 이동하면 기록을 추가합니다(`pushState`). 같은 레이아웃을 공유하므로 page는 다시 렌더되지 않습니다 (`FrameAddressSync`). 메뉴·옆 프레임·뒤로 가기는 `_lib/navigateToFrame`을 거치고, 카메라·스와이프 모드에서는 각 컨트롤러가 등록한 이동 함수(`registerFrameNavigator`)로 옮깁니다.
 - 레이아웃이 유지되므로 프레임 라우트 사이를 클라이언트에서 이동해도 캔버스는 다시 만들어지지 않습니다.
@@ -117,7 +141,7 @@ src/
 
 ### page.tsx는 조합만
 
-`page.tsx`와 `layout.tsx`는 서버에서 데이터를 불러오고 컴포넌트를 조합하는 역할만 합니다. 로직은 `features/`나 `lib/`에 둡니다.
+`page.tsx`와 `layout.tsx`는 서버에서 데이터를 불러오고 컴포넌트를 조합하는 역할만 합니다. 로직은 `containers/`나 `lib/`에 둡니다.
 
 ### 데이터 흐름
 

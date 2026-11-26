@@ -1,1 +1,0 @@
-export { PrintResume } from './PrintResume';

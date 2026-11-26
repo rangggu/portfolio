@@ -1,5 +1,5 @@
-import { Canvas, FloatingTop, FrameMenu } from '@/features/canvas';
-import { PrintResume } from '@/features/resume';
+import { Canvas, FloatingTop, FrameMenu } from '@/containers/canvas';
+import { PrintResume } from '@/containers/resume';
 
 /**
  * 7개 프레임 라우트가 공유하는 캔버스와 플로팅 UI. page는 메타데이터와 초기 프레임만 정한다.

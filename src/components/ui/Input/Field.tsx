@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import { VisuallyHidden } from '../VisuallyHidden';
+import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import styles from './Input.module.css';
 
 export interface FieldProps {

@@ -1,14 +1,12 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
-import { Heading } from '@/components/ui/Heading';
-import { Link } from '@/components/ui/Link';
-import {
-  MarginNote,
-  MarginNoteAnchor,
-  MarginNoteGroup,
-} from '@/components/ui/MarginNote';
+import { Heading } from '@/components/ui/Heading/Heading';
+import { Link } from '@/components/ui/Link/Link';
+import { MarginNote } from '@/components/ui/MarginNote/MarginNote';
+import { MarginNoteAnchor } from '@/components/ui/MarginNote/MarginNoteAnchor';
+import { MarginNoteGroup } from '@/components/ui/MarginNote/MarginNoteGroup';
 
-import { CodeBlock } from './CodeBlock';
+import { CodeBlock } from './CodeBlock/CodeBlock';
 
 /**
  * MDX 요소 → 컴포넌트 매핑. 글 안의 JSX 컴포넌트도 여기 등록한 이름으로만 쓸 수 있다.

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { ResumeDocument } from '@/features/resume';
+import { ResumeDocument } from '@/containers/resume';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {

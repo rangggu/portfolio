@@ -1,9 +1,10 @@
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
 import dynamic from 'next/dynamic';
-import { SkipLink } from '@/components/layout/SkipLink';
-import { LazyToaster } from '@/components/ui/Toast';
-import { JsonLd, ThemeScript } from '@/components/seo';
+import { SkipLink } from '@/components/layout/SkipLink/SkipLink';
+import { LazyToaster } from '@/components/ui/Toast/LazyToaster';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { ThemeScript } from '@/components/seo/ThemeScript';
 import { RESUME } from '@/lib/resume';
 import { toPersonJsonLd } from '@/lib/resume/jsonLd';
 import { SITE } from '@/lib/site';

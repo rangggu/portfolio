@@ -1,5 +1,5 @@
 import { mdxComponents } from '@/components/mdx/mdxComponents';
-import { CaseStudyArticle, ProjectModal } from '@/features/case-study';
+import { CaseStudyArticle, ProjectModal } from '@/containers/case-study';
 import { getProjectContent, getProjectSlugs } from '@/lib/content/projects';
 import { SITE } from '@/lib/site';
 

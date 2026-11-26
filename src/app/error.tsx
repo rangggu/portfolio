@@ -1,6 +1,6 @@
 'use client';
 
-import { Container } from '@/components/ui/Container';
+import { Container } from '@/components/ui/Container/Container';
 import { pageTitle } from '@/lib/siteTitle';
 
 interface ErrorPageProps {

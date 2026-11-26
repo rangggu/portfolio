@@ -1,1 +1,0 @@
-export { FrameHeading } from './FrameHeading';

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-import { FRAMES } from '@/features/canvas';
+import { FRAMES } from '@/containers/canvas';
 import { getProjectSlugs } from '@/lib/content/projects';
 import { SITE } from '@/lib/site';
 

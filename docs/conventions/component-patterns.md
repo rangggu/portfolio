@@ -2,18 +2,19 @@
 
 ## 디렉토리별 역할
 
-| 위치                  | 역할                        | 규칙                                              |
-| --------------------- | --------------------------- | ------------------------------------------------- |
-| `components/ui/`      | 디자인 시스템 기초 컴포넌트 | 도메인 무관, props만으로 동작, 비즈니스 로직 금지 |
-| `components/layout/`  | 사이트 공통 레이아웃        | Header, Footer, TableOfContents                   |
-| `components/mdx/`     | MDX 본문 전용               | CodeBlock, Callout, Figure                        |
-| `features/{feature}/` | 기능 단위                   | 상태, 서버 연동, 로직 포함 가능                   |
+| 위치                 | 역할                        | 규칙                                              |
+| -------------------- | --------------------------- | ------------------------------------------------- |
+| `components/ui/`     | 디자인 시스템 기초 컴포넌트 | 도메인 무관, props만으로 동작, 비즈니스 로직 금지 |
+| `components/layout/` | 사이트 공통 레이아웃        | Header, Footer, TableOfContents                   |
+| `components/mdx/`    | MDX 본문 전용               | CodeBlock, Callout, Figure                        |
+| `containers/{화면}/` | 화면(라우트) 단위           | 상태, 서버 연동, 로직 포함 가능                   |
 
-`components/ui/`에 컴포넌트를 추가하거나 props를 바꾸면 디자인 시스템 문서(`/dev/design-system`, `features/design-system/_lib/componentDocs.tsx`)의 설명·props·예시도 함께 고칩니다.
+`components/ui/`에 컴포넌트를 추가하거나 props를 바꾸면 디자인 시스템 문서(`/dev/design-system`, `containers/design-system/_lib/componentDocs.tsx`)의 설명·props·예시도 함께 고칩니다.
 
 ## 컴포넌트 선언
 
-- 컴포넌트는 `export function`(named export)으로 선언하고 `index.ts`에서 다시 내보냅니다.
+- 컴포넌트는 `export function`(named export)으로 선언하고, 쓰는 쪽은 파일을 직접 불러옵니다 (`@/components/ui/Button/Button`). 다시 내보내는 `index.ts`(배럴)는 만들지 않습니다. 예외는 `containers/{화면}/index.ts`로, `_` 폴더 안 것을 화면 밖(라우트)에 내보내는 공개 출입구입니다.
+- 파일 하나에 컴포넌트 하나만 둡니다. 그 컴포넌트에서만 쓰는 자식(행, 묶음, 아이콘 등)도 같은 파일에 두지 않고 `_components/{Name}/{Name}.tsx`로 빼며, 자식만 쓰는 스타일은 자식의 `{Name}.module.css`로 옮깁니다. 밖에서도 쓰는 형제 부품(`ButtonLink`, `IconLink`, `Tab`)은 같은 폴더의 별도 파일로 둡니다.
 - Next.js가 요구하는 파일(`page.tsx`, `layout.tsx`, `default.tsx`, `error.tsx` 등)만 `export default`를 씁니다.
 - Props 타입은 컴포넌트 바로 위에 선언합니다.
 

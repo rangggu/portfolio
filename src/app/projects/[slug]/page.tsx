@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 import { mdxComponents } from '@/components/mdx/mdxComponents';
-import { Container } from '@/components/ui/Container';
-import { CaseStudyArticle } from '@/features/case-study';
+import { Container } from '@/components/ui/Container/Container';
+import { CaseStudyArticle } from '@/containers/case-study';
 import {
   getProjectContent,
   getProjectMeta,

@@ -1,6 +1,6 @@
 'use client';
 
-import { Icon } from '../Icon';
+import { Icon } from '../Icon/Icon';
 import { useMarginNote } from './MarginNoteContext';
 
 import styles from './MarginNote.module.css';

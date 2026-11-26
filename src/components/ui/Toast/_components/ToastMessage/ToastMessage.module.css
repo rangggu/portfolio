@@ -1,0 +1,62 @@
+/* 알림 한 줄: 반전 배경 카드, 나타날 때·사라질 때 아래에서 살짝 움직인다 */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  width: 100%;
+  padding: var(--spacing-8) var(--spacing-8) var(--spacing-8) var(--spacing-16);
+  border-radius: var(--radius-12);
+  background-color: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+  box-shadow: var(--shadow-floating);
+  pointer-events: auto;
+  transition:
+    opacity var(--motion-toast-duration) var(--ease-standard),
+    transform var(--motion-toast-duration) var(--ease-out);
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(var(--spacing-8));
+  }
+}
+
+.toast[data-leaving] {
+  opacity: 0;
+  transform: translateY(var(--spacing-8));
+}
+
+/* 상태는 색 대신 앞 아이콘 모양(✓, !)으로 구분한다. 반전 배경 위 글자색 그대로라 대비가 유지된다 */
+.toneIcon {
+  flex-shrink: 0;
+}
+
+.message {
+  composes: bodySm from '@/styles/typography.module.css';
+  flex: 1;
+}
+
+/* 반전 배경 위라 닫기 아이콘도 반전색. 올렸을 때 IconButton 기본 배경(bg-subtle)은 다크 모드에서 알림 배경과 같아 아이콘이 묻히므로 뒤집는다 */
+.close {
+  flex-shrink: 0;
+  color: var(--color-text-inverse);
+}
+
+@media (hover: hover) {
+  .close[data-variant]:hover:not(:disabled) {
+    background-color: var(--color-text-inverse);
+    color: var(--color-bg-inverse);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast,
+  .toast[data-leaving] {
+    transform: none;
+  }
+
+  .toast {
+    @starting-style {
+      transform: none;
+    }
+  }
+}

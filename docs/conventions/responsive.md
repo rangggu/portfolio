@@ -218,19 +218,19 @@ CSS가 뷰포트에 반응하면 레이아웃은 자동으로 바뀝니다. JS�
 - 터치 기기(스와이프 모드)는 프레임 높이가 화면 높이로 고정되고 넘치는 내용은 프레임 안에서 스크롤됩니다 (「터치 스와이프 구현」).
 - 최소 높이는 `100svh`를 씁니다 (최소 높이에는 svh, 「100vh 대신 dvh/svh」 참고). 주소창이 접히고 펼쳐져도 프레임 높이가 흔들리지 않습니다.
 - 첫 화면 프레임만 내용을 세로 가운데 정렬하고, 나머지 프레임은 위에서부터 시작합니다 (안쪽 위아래 여백 `--spacing-48`, 폰 가로 모드 `--spacing-24`).
-- 플로팅 UI는 이 영역 안에 그려집니다. 위: 위 `--spacing-12`, 좌우 `--spacing-16` 안쪽 (왼쪽 위 「Myu의 포트폴리오」 상자, 오른쪽 위 테마 · 모드 전환(마우스 기기 캔버스에서만) · 더보기 상자). 아래: 아래 `--spacing-20`, 가운데 메뉴 바 (반투명 블러 캡슐, 넘치면 바 안에서 가로로 밀어서 보기). 높이는 `--layout-floating-bar-height`이고 safe-area를 더합니다 (`features/canvas`의 `FloatingTop`, `FrameMenu`).
+- 플로팅 UI는 이 영역 안에 그려집니다. 위: 위 `--spacing-12`, 좌우 `--spacing-16` 안쪽 (왼쪽 위 「Myu의 포트폴리오」 상자, 오른쪽 위 테마 · 모드 전환(마우스 기기 캔버스에서만) · 더보기 상자). 아래: 아래 `--spacing-20`, 가운데 메뉴 바 (반투명 블러 캡슐, 넘치면 바 안에서 가로로 밀어서 보기). 높이는 `--layout-floating-bar-height`이고 safe-area를 더합니다 (`containers/canvas/_floating`의 `FloatingTop`, `FrameMenu`).
 
 ### 구현 원칙
 
 **스크롤은 진짜, 카메라 이동은 연출.** 실제 문서는 프레임 순서대로 이어지는 일반 페이지이고, 화면의 카메라 이동만 스크롤 위치에 연동된 효과로 처리합니다.
 
-- `prefers-reduced-motion: reduce`에서도 같은 화면(마우스 기기는 카메라, 터치는 스와이프)입니다. 스크롤·스와이프로 사용자가 직접 움직이는 것은 그대로 두고, 이동·확대 연출만 바로 바꿉니다 (`features/canvas/_lib/motion.ts`)
-- 인쇄 시 캔버스 대신 종이용 A4 이력서 (product.md 「인쇄」, `features/resume`). 인쇄물은 세로로 쌓을 때 flex 대신 블록 흐름을 씁니다 (세로 flex는 Chromium에서 쪽이 갈릴 때 넘어간 항목이 뒤 항목과 겹침). 컨테이너 좌우 여백은 0(`@page` 여백 사용)입니다
+- `prefers-reduced-motion: reduce`에서도 같은 화면(마우스 기기는 카메라, 터치는 스와이프)입니다. 스크롤·스와이프로 사용자가 직접 움직이는 것은 그대로 두고, 이동·확대 연출만 바로 바꿉니다 (`containers/canvas/_lib/motion.ts`)
+- 인쇄 시 캔버스 대신 종이용 A4 이력서 (product.md 「인쇄」, `containers/resume`). 인쇄물은 세로로 쌓을 때 flex 대신 블록 흐름을 씁니다 (세로 flex는 Chromium에서 쪽이 갈릴 때 넘어간 항목이 뒤 항목과 겹침). 컨테이너 좌우 여백은 0(`@page` 여백 사용)입니다
 - 접힘 ↔ 펼침으로 뷰포트가 바뀌어도 현재 프레임과 스크롤 위치 유지
 
 ### 데스크톱 카메라 이동 구현
 
-카메라 모드는 `(pointer: fine)`이고 화면(`@media screen`)일 때만 켭니다 (움직임 줄이기와 상관없음). 켜지면 `<html data-camera>`가 붙고(첫 페인트 전 인라인 스크립트), 그 밖(인쇄·JS 전)은 세로 페이지, 터치는 스와이프입니다 (`features/canvas`의 `CameraScript`, `CameraController`).
+카메라 모드는 `(pointer: fine)`이고 화면(`@media screen`)일 때만 켭니다 (움직임 줄이기와 상관없음). 켜지면 `<html data-camera>`가 붙고(첫 페인트 전 인라인 스크립트), 그 밖(인쇄·JS 전)은 세로 페이지, 터치는 스와이프입니다 (`containers/canvas/_navigation`의 `CameraScript`, `CameraController`).
 
 - 구조: `main`(문서 높이 = 카메라 경로 길이 + 한 화면) > `stage`(화면에 고정, 넘침 숨김) > `world`(프레임을 캔버스 지도대로 놓은 grid). DOM 순서는 프레임 순서 그대로입니다.
 - 배치: 첫 화면 위, 소개~학력·자격 한 줄, 연락처는 학력·자격 아래. 열 폭 = 프레임 폭, 열 간격 = `--layout-frame-gap`이라 한 프레임을 가운데 두면 양옆으로 `--layout-frame-peek`만큼 이웃이 보입니다.
@@ -252,7 +252,7 @@ CSS가 뷰포트에 반응하면 레이아웃은 자동으로 바뀝니다. JS�
 
 ### 터치 스와이프 구현
 
-스와이프 모드는 `screen and (pointer: coarse)`입니다. 입력 방식만으로 정하므로 움직임 줄이기와 상관없이 켜지고, 접힘·펼침·회전으로는 바뀌지 않습니다. 속성 없이 CSS 미디어 쿼리만으로 배치가 바뀌어 JS 전에도 같은 화면입니다 (`features/canvas`의 `SwipeController`, `_lib/swipe.ts`).
+스와이프 모드는 `screen and (pointer: coarse)`입니다. 입력 방식만으로 정하므로 움직임 줄이기와 상관없이 켜지고, 접힘·펼침·회전으로는 바뀌지 않습니다. 속성 없이 CSS 미디어 쿼리만으로 배치가 바뀌어 JS 전에도 같은 화면입니다 (`containers/canvas/_navigation`의 `SwipeController`, `_lib/swipe.ts`).
 
 - 구조: 카메라 모드와 같은 `main` > `stage` > `world`이고 `data-camera-*` 속성도 함께 씁니다. 문서는 스크롤하지 않고(`main` 높이 = `100dvh`), `stage`가 가로·세로 스냅 스크롤 영역(`scroll-snap-type: both mandatory`)입니다.
 - 배치: 카메라와 같은 캔버스 지도 grid. 한 행 = 화면 높이(`100cqh`), 행 간격 = `--layout-frame-gap`. 프레임은 화면 높이를 채우고 넘치는 내용은 **프레임 안에서** 세로로 스크롤됩니다. 멈추는 자리는 프레임 가운데(`scroll-snap-align: center`, `scroll-snap-stop: always`)라 양옆으로 이웃 가장자리 12px과 간격 12px이 보입니다.

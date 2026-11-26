@@ -1,1 +1,0 @@
-export { ViewportIndicator } from './ViewportIndicator';

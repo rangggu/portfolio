@@ -39,7 +39,7 @@
 - 네이티브 CSS 중첩은 2단계까지만 씁니다.
 - `transition: all`을 쓰지 않고 속성을 명시합니다.
 - **예외 — size별 텍스트 스타일:** `composes`는 단순 클래스 선택자에서만 쓸 수 있어 `[data-size]` 안에서 텍스트 스타일을 가져올 수 없습니다. size에 따라 텍스트 스타일이 달라질 때만 size별 클래스(`.sizeMd`, `.sizeSm`)를 두고 `composes`로 base와 텍스트 스타일만 가져옵니다. 높이·패딩·라운드 등 나머지는 `[data-size]` 선택자로 처리합니다. (예: `Button`)
-- **예외 — 디자인 시스템 문서의 토큰 견본:** `/dev/design-system`(`features/design-system`의 `TokenPreview`)은 견본마다 토큰 이름을 동적으로 꽂아야 해서 `style={{ '--preview': 'var(--토큰)' }}` 인라인 변수 하나만 씁니다. 나머지 스타일은 CSS Modules와 토큰을 씁니다.
+- **예외 — 디자인 시스템 문서의 토큰 견본:** `/dev/design-system`(`containers/design-system`의 `TokenPreview`)은 견본마다 토큰 이름을 동적으로 꽂아야 해서 `style={{ '--preview': 'var(--토큰)' }}` 인라인 변수 하나만 씁니다. 나머지 스타일은 CSS Modules와 토큰을 씁니다.
 
 ```css
 /* Button.module.css */

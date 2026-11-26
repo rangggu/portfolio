@@ -1,0 +1,29 @@
+/* 날짜 열 폭(--date-width)은 Group이 정한다 */
+
+.row {
+  display: grid;
+  grid-template-columns: var(--date-width) minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--spacing-4) var(--spacing-16);
+  padding-block: var(--spacing-12);
+  border-bottom: var(--border-width-1) solid var(--color-border-subtle);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  min-width: 0;
+}
+
+.date {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* 아주 좁은 프레임(폰): 날짜를 이름 위 한 줄로 */
+@container (width < 480px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

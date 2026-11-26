@@ -33,7 +33,7 @@ lib/api/{domain}/
 
 ## Server Actions
 
-- `features/{feature}/actions.ts`에 두고 파일 상단에 `'use server'`를 씁니다.
+- `containers/{화면}/actions.ts`에 두고 파일 상단에 `'use server'`를 씁니다.
 - 입력값은 서버에서 다시 검증합니다.
 - 즉시 반영이 필요한 UI는 `useOptimistic`으로 먼저 반영하고, 실패하면 되돌린 뒤 토스트로 알립니다.
 - 공개 액션(반응 버튼, AI 채팅)에는 rate limit을 겁니다.

@@ -1,0 +1,79 @@
+.root {
+  padding-block: var(--spacing-48) var(--spacing-120);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  margin-bottom: var(--spacing-80);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+}
+
+.lead {
+  max-width: var(--layout-prose-max);
+}
+
+/* 좁은 화면: 목차가 머리말 아래, 본문이 그 아래 */
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-40);
+}
+
+.aside {
+  padding-bottom: var(--spacing-24);
+  border-bottom: var(--border-width-1) solid var(--color-border-subtle);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-80);
+  min-width: 0;
+}
+
+.part {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+}
+
+.componentGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 넓은 화면: 왼쪽 목차(따라다님), 오른쪽 본문 */
+@media (width >= 1024px) {
+  .layout {
+    /* 목차 폭: 이 페이지에서만 쓰는 값이라 로컬 변수 */
+    --toc-width: 220px;
+
+    display: grid;
+    grid-template-columns: var(--toc-width) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--spacing-48);
+  }
+
+  /*
+   * 목차는 왼쪽에 따라다닌다 (안쪽 스크롤 없이 모두 나열).
+   * 화면보다 짧으면 위 여백에 고정되고, 길면 top이 음수가 되어 목차 끝이 화면 아래 여백에 닿을 때 고정된다.
+   * --aside-height는 StickyAside가 잰다 (JS 전에는 0이라 위에 고정)
+   */
+  .aside {
+    position: sticky;
+    top: min(
+      var(--spacing-24),
+      100dvh - var(--aside-height, 0px) - var(--spacing-24)
+    );
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}
