@@ -15,8 +15,13 @@
 .group {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-8);
   min-width: 0;
+}
+
+/* 분류 이름: 굵은 제목 + 아래 진한 선 (목록의 시작 표시, 학력·자격과 같은 모양) */
+.label {
+  padding-bottom: var(--spacing-8);
+  border-bottom: var(--border-width-1) solid var(--color-text-primary);
 }
 
 .items {

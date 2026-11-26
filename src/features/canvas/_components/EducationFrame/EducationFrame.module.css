@@ -13,10 +13,22 @@
 }
 
 .group {
+  /* 이 프레임 전용 값: 날짜 열 폭 (기간 「2019.03 – 2023.08」 / 연월 「2022.03」이 한 줄에 들어가는 폭) */
+  --date-width: 9.5rem;
+
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-8);
   min-width: 0;
+}
+
+.group[data-date='month'] {
+  --date-width: 4.5rem;
+}
+
+/* 묶음 이름: 굵은 제목 + 아래 진한 선 (목록의 시작 표시, 기술 프레임과 같은 모양) */
+.label {
+  padding-bottom: var(--spacing-8);
+  border-bottom: var(--border-width-1) solid var(--color-text-primary);
 }
 
 .rows {
@@ -26,24 +38,31 @@
 }
 
 .row {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: var(--date-width) minmax(0, 1fr);
   align-items: baseline;
-  gap: var(--spacing-16);
-  padding-block: var(--spacing-16);
+  gap: var(--spacing-4) var(--spacing-16);
+  padding-block: var(--spacing-12);
   border-bottom: var(--border-width-1) solid var(--color-border-subtle);
 }
 
 .main {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-4);
+  gap: var(--spacing-2);
   min-width: 0;
 }
 
 .date {
   flex-shrink: 0;
   white-space: nowrap;
+}
+
+/* 아주 좁은 프레임(폰): 날짜를 이름 위 한 줄로 */
+@container (width < 480px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 /* 넓은 프레임: 학력 | 자격 두 열 */

@@ -54,9 +54,9 @@ export function SkillsFrame({ headingId, number, title }: SkillsFrameProps) {
             >
               <Heading
                 level={3}
-                variant="monoSm"
-                tone="secondary"
+                variant="headingSm"
                 id={`skills-${group.category}`}
+                className={styles.label}
               >
                 {group.label}
               </Heading>

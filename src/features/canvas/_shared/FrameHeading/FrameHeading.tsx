@@ -10,7 +10,7 @@ interface FrameHeadingProps {
   id: string;
 }
 
-/** 프레임 안 섹션 머리: 위쪽 구분선 + 고정폭 번호 + 제목 (mockup-spec.md 프레임 안 공통) */
+/** 프레임 안 섹션 머리: 고정폭 번호 + 제목. 위 선은 없다 (프레임 테두리가 이미 영역을 나눈다) (mockup-spec.md 프레임 안 공통) */
 export function FrameHeading({ number, title, id }: FrameHeadingProps) {
   return (
     <div className={styles.root}>

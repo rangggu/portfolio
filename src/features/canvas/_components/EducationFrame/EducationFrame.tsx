@@ -22,7 +22,7 @@ interface Row {
   name?: string;
   /** 보조 줄 조각 (TODO인 값은 undefined) */
   details: (string | undefined)[];
-  /** 오른쪽 날짜. TODO면 undefined */
+  /** 왼쪽 날짜 열. TODO면 undefined */
   date?: string;
 }
 
@@ -47,6 +47,18 @@ function ItemRow({ row }: { row: Row }) {
 
   return (
     <li className={styles.row}>
+      {row.date ? (
+        <Text
+          as="span"
+          variant="monoSm"
+          tone="tertiary"
+          className={styles.date}
+        >
+          {row.date}
+        </Text>
+      ) : (
+        <DevPlaceholder>날짜</DevPlaceholder>
+      )}
       <div className={styles.main}>
         <Text variant="bodyLg">
           {row.name ?? <DevPlaceholder>이름</DevPlaceholder>}
@@ -68,18 +80,6 @@ function ItemRow({ row }: { row: Row }) {
           </Text>
         )}
       </div>
-      {row.date ? (
-        <Text
-          as="span"
-          variant="monoSm"
-          tone="tertiary"
-          className={styles.date}
-        >
-          {row.date}
-        </Text>
-      ) : (
-        <DevPlaceholder>날짜</DevPlaceholder>
-      )}
     </li>
   );
 }
@@ -87,18 +87,20 @@ function ItemRow({ row }: { row: Row }) {
 interface GroupProps {
   id: string;
   label: string;
+  /** 날짜 열 폭: range(기간 「2019.03 – 2023.08」) · month(연월 「2022.03」) */
+  dateKind: 'range' | 'month';
   rows: Row[];
   source: string;
 }
 
 const hasName = (row: Row) => row.name !== undefined;
 
-function Group({ id, label, rows, source }: GroupProps) {
+function Group({ id, label, dateKind, rows, source }: GroupProps) {
   if (!shouldRenderSlot(rows.some(hasName))) return null;
 
   return (
-    <section className={styles.group} aria-labelledby={id}>
-      <Heading level={3} variant="monoSm" tone="secondary" id={id}>
+    <section className={styles.group} data-date={dateKind} aria-labelledby={id}>
+      <Heading level={3} variant="headingSm" id={id} className={styles.label}>
         {label}
       </Heading>
       {rows.length > 0 ? (
@@ -116,7 +118,10 @@ function Group({ id, label, rows, source }: GroupProps) {
   );
 }
 
-/** 학력·자격 프레임: 학력 / 자격 두 열 (mockup-spec.md 「학력·자격」). 안쪽 폭 768px 미만이면 한 열 */
+/**
+ * 학력·자격 프레임: 학력 / 자격 두 열 (mockup-spec.md 「학력·자격」). 안쪽 폭 768px 미만이면 한 열.
+ * 행은 왼쪽 날짜 열 | 이름·세부 (경력 타임라인의 연도 열처럼, 날짜와 이름이 멀어지지 않게)
+ */
 export function EducationFrame({
   headingId,
   number,
@@ -132,12 +137,14 @@ export function EducationFrame({
           <Group
             id="education-school"
             label="학력"
+            dateKind="range"
             rows={EDUCATION_ROWS}
             source="content/resume/education.ts"
           />
           <Group
             id="education-certification"
             label="자격"
+            dateKind="month"
             rows={CERTIFICATION_ROWS}
             source="content/resume/education.ts"
           />

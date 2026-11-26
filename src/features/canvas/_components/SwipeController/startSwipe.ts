@@ -54,6 +54,12 @@ export function startSwipe(frameIds: readonly FrameId[]): () => void {
   if (!elements) return () => {};
   const { stage, world, frames } = elements;
 
+  // 스와이프 모드에서는 프레임마다 안에서 세로로 스크롤된다. 안에 링크·버튼이 없는 프레임(학력·자격 등)도
+  // 키보드로 스크롤할 수 있게 프레임 자체가 포커스를 받는다 (axe scrollable-region-focusable)
+  frames.forEach((frame) => {
+    frame.tabIndex = 0;
+  });
+
   /** 프레임 안 세로 위치 비율. 크기가 바뀐 뒤 같은 자리로 되돌린다 */
   const ratios = new Map<HTMLElement, number>();
   let size = { width: stage.clientWidth, height: stage.clientHeight };
@@ -243,6 +249,7 @@ export function startSwipe(frameIds: readonly FrameId[]): () => void {
     world.removeEventListener('scroll', handleFrameScroll, { capture: true });
     world.removeEventListener('click', handleClick, { capture: true });
     world.removeAttribute('data-fading');
+    frames.forEach((frame) => frame.removeAttribute('tabindex'));
     setFrameEndHint(undefined);
   };
 }
