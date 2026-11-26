@@ -116,11 +116,6 @@ export function validateResume(resume: Resume): ResumeValidation {
     if (!SKILL_CATEGORIES.includes(skill.category)) {
       check.errors.push(`${at}.category: 알 수 없는 분류 "${skill.category}"`);
     }
-    if (!timelineIds.has(skill.firstUsedIn)) {
-      check.errors.push(
-        `${at}.firstUsedIn: 타임라인에 "${skill.firstUsedIn}" 항목이 없습니다`,
-      );
-    }
   });
 
   education.forEach((item, index) => {

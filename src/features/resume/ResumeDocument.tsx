@@ -76,7 +76,7 @@ export async function ResumeDocument() {
   const { profile, intro, education, certifications } = RESUME;
   const entries = await getTimelineEntries();
   const projects = await getAllProjectMeta();
-  const skillGroups = groupSkills(RESUME.skills, RESUME.timeline);
+  const skillGroups = groupSkills(RESUME.skills);
   /** 부록 번호 = 프로젝트 목록 순서 (1부터) */
   const appendixNumber = (slug: string) =>
     projects.findIndex((project) => project.slug === slug) + 1;
@@ -227,8 +227,8 @@ export async function ResumeDocument() {
                 <dt className={styles.skillLabel}>{group.label}</dt>
                 <dd className={styles.skillChips}>
                   {group.skills.map((skill) => (
-                    <span key={skill.name} className={styles.chip}>
-                      {skill.name}
+                    <span key={skill} className={styles.chip}>
+                      {skill}
                     </span>
                   ))}
                 </dd>

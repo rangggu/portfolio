@@ -76,27 +76,31 @@ export type TimelineLane = TimelineItem['lane'];
 
 export const SKILL_CATEGORIES = [
   'language-framework',
-  'styling',
+  'ui-styling',
   'data-state',
   'testing-quality',
-  'collaboration-tooling',
+  'build-deploy',
+  'analytics',
+  'collaboration',
+  'ai',
 ] as const;
 
 export type SkillCategory = (typeof SKILL_CATEGORIES)[number];
 
 export const SKILL_CATEGORY_LABEL: Record<SkillCategory, string> = {
   'language-framework': '언어·프레임워크',
-  styling: '스타일링',
+  'ui-styling': 'UI·스타일링',
   'data-state': '데이터·상태',
   'testing-quality': '테스트·품질',
-  'collaboration-tooling': '협업·도구',
+  'build-deploy': '빌드·배포',
+  analytics: '분석',
+  collaboration: '협업',
+  ai: 'AI',
 };
 
-export interface Skill<TimelineId extends string = string> {
+export interface Skill {
   name: string;
   category: SkillCategory;
-  /** 처음 사용한 타임라인 항목 id */
-  firstUsedIn: TimelineId;
 }
 
 export interface Education {

@@ -25,7 +25,7 @@
   --date-width: 4.5rem;
 }
 
-/* 묶음 이름: 굵은 제목 + 아래 진한 선 (목록의 시작 표시, 기술 프레임과 같은 모양) */
+/* 묶음 이름: 굵은 제목 + 아래 진한 선 (목록의 시작 표시) */
 .label {
   padding-bottom: var(--spacing-8);
   border-bottom: var(--border-width-1) solid var(--color-text-primary);

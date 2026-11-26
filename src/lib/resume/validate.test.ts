@@ -6,6 +6,7 @@ import {
   type Education,
   type Resume,
   type SideTimelineItem,
+  type SkillCategory,
 } from './types';
 import { validateProjectTimelineIds, validateResume } from './validate';
 
@@ -53,13 +54,7 @@ function sample(): Resume {
     },
     intro: ['소개 문단'],
     timeline: [COMPANY, SIDE],
-    skills: [
-      {
-        name: 'React',
-        category: 'language-framework',
-        firstUsedIn: 'company-a',
-      },
-    ],
+    skills: [{ name: 'React', category: 'language-framework' }],
     education: [EDUCATION],
     certifications: [{ name: '자격', issuer: '기관', date: '2021-05' }],
   };
@@ -138,12 +133,12 @@ describe('validateResume', () => {
       /id "company-a"가 중복/,
     ],
     [
-      '없는 타임라인 항목을 가리키는 기술',
+      '알 수 없는 기술 분류',
       (d) =>
         void (d.skills = [
-          { name: 'Vue', category: 'styling', firstUsedIn: 'nowhere' },
+          { name: 'Vue', category: 'frontend' as SkillCategory },
         ]),
-      /firstUsedIn: 타임라인에 "nowhere"/,
+      /category: 알 수 없는 분류 "frontend"/,
     ],
     [
       '사이드 레인의 성과 요약',

@@ -62,9 +62,7 @@ describe('toPersonJsonLd', () => {
           links: [],
         },
       ],
-      skills: [
-        { name: 'React', category: 'language-framework', firstUsedIn: 'a' },
-      ],
+      skills: [{ name: 'React', category: 'language-framework' }],
       education: [
         {
           school: '학교',

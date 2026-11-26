@@ -38,9 +38,7 @@ describe('toResumePlainText', () => {
           links: [],
         },
       ],
-      skills: [
-        { name: 'React', category: 'language-framework', firstUsedIn: 'c' },
-      ],
+      skills: [{ name: 'React', category: 'language-framework' }],
       education: [],
       certifications: [],
     };
