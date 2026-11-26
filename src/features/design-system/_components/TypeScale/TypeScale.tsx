@@ -29,7 +29,7 @@ export function TypeScale() {
             <span>{usage}</span>
           </span>
           <Text as="span" variant={variant}>
-            작은 불편을 그냥 지나치지 않습니다
+            마지막 1px까지 봅니다
           </Text>
         </li>
       ))}

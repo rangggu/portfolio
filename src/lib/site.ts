@@ -12,7 +12,8 @@ export const SITE = {
   title: HOME_TITLE,
   /** 하위 페이지 제목: 페이지 이름 | 사이트 이름 */
   titleTemplate: TITLE_TEMPLATE,
-  description: `작은 불편을 그냥 지나치지 않는 ${profile.jobTitle} ${profile.name}의 포트폴리오입니다. 화면의 디테일부터 그 뒤의 구조까지, 한 번 더 들여다보고 만든 작업들을 담았습니다.`,
+  /** 검색 설명: 직무·이름만으로 짧게 (대표 문구는 OG·shortDescription이 맡는다) */
+  description: `${profile.jobTitle} ${profile.name}의 포트폴리오입니다.`,
   shortDescription: profile.tagline,
   locale: 'ko_KR',
   themeColor: {

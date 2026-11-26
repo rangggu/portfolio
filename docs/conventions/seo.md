@@ -8,16 +8,16 @@
 
 `app/layout.tsx`에서 `metadata` export로 기본값을 설정합니다.
 
-| 항목                  | 값                                    |
-| --------------------- | ------------------------------------- |
-| metadataBase          | `https://www.myu-developer.me`        |
-| title 기본값          | `김규리 \| 프론트엔드 개발자`         |
-| title 템플릿          | `%s \| 김규리 포트폴리오`             |
-| description           | 포트폴리오 소개 (site.ts 참조)        |
-| openGraph description | `작은 불편을 그냥 지나치지 않습니다.` |
-| openGraph type        | `website`                             |
-| locale                | `ko_KR`                               |
-| twitter card          | `summary_large_image`                 |
+| 항목                  | 값                                                              |
+| --------------------- | --------------------------------------------------------------- |
+| metadataBase          | `https://www.myu-developer.me`                                  |
+| title 기본값          | `김규리 \| 프론트엔드 개발자`                                   |
+| title 템플릿          | `%s \| 김규리 포트폴리오`                                       |
+| description           | `{직무} {이름}의 포트폴리오입니다.` (site.ts, profile에서 만듦) |
+| openGraph description | 대표 문구 `profile.tagline`                                     |
+| openGraph type        | `website`                                                       |
+| locale                | `ko_KR`                                                         |
+| twitter card          | `summary_large_image`                                           |
 
 - 하위 페이지는 `metadata` export에서 `title`만 지정하면 템플릿이 적용됩니다.
 - 제목 규칙은 `src/lib/siteTitle.ts` 한곳에 둡니다 (구분자는 세로선 `|`, 꼬리는 「이름 포트폴리오」). 프로젝트 글은 글 제목, 404는 「페이지를 찾을 수 없어요」, 오류 페이지(`error.tsx`·`global-error.tsx`)는 「문제가 생겼어요」에 같은 꼬리가 붙습니다. 클라이언트 오류 페이지는 metadata를 내보낼 수 없어 `<title>`을 직접 둡니다.
